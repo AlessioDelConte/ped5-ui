@@ -1,0 +1,14 @@
+@import 'variables';
+
+.header-offset {
+  padding-top: 8rem;
+  padding-bottom: 2rem;
+}
+
+.footer {
+  background-color: $dark;
+  color: $light;
+  //position: relative;
+  //margin: -4rem 0 0;
+  //min-height: 6rem;
+}

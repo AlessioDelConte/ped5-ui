@@ -1,0 +1,52 @@
+@import "./node_modules/bootstrap/scss/functions";
+@import "./node_modules/bootstrap/scss/variables";
+
+//$primary: #146C56;
+//$primary-light: #55A630;
+//$primary: #00557C;
+//$primary-light: #3488AD;
+//$primary: #074f57;
+//$primary-light: #73b72a;
+//$primary: #5F4B8B;
+//$primary-light: #7D3F7C;
+$primary: #1D4E89;
+$primary-middle: #3f6ca7;
+$primary-light: #638CC7;
+//$primary: #4B8740;
+//$primary-light: #91B54D;
+//$primary: #7D3C38;
+//$primary-light: #FB9D18;
+
+
+//$primary: #00557C;
+//$primary-light:#55A630;
+// $primary: #BF2315;
+//$primary-light:#D96704;
+$success: #2F8348;
+$danger: #b2252e;
+//#CF2A2D;
+//$info: #2274a5;
+$info: $primary-middle;
+$gray-bs: #6c757d;
+
+//$dark: shade-color($primary, 60);
+
+// Create your own map
+$custom-colors: (
+  "primary-light": $primary-light
+);
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "success": $success,
+  "info": $info,
+  "warning": $warning,
+  "danger": $danger,
+  "light": $light,
+  "dark": $dark
+);
+
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+

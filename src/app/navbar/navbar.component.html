@@ -1,0 +1,82 @@
+<div class="container-fluid">
+<!--  <div class="row">-->
+<!--    <div class="col">-->
+      <nav class="navbar navbar-dark bg-nav navbar-expand-lg fixed-top" id="navbar">
+        <div class="container-xl">
+          <a class="navbar-brand" style="color: #ffffffcc" routerLink="/"><strong style="color: #ffffffee">FuzDB</strong> database of fuzzy interactions</a>
+          <button class="navbar-toggler"
+                  type="button"
+                  (click)="closeMenu()"
+                  aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarText" (click)="closeMenu()">
+            <ul class="navbar-nav ">
+              <li class="nav-item ">
+                <a class="nav-link" [class.active]="url === 'browse'" routerLink="/browse">Browse</a>
+              </li>
+<!--              <li class="nav-item ">-->
+<!--                <a class="nav-link" [class.active]="url === 'statistics'" routerLink="/statistics">Statistics</a>-->
+<!--              </li>-->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle"
+                   [class.active]="url === 'help'" routerLink="/help" id="navbarScrollingDropdownHelp"
+                   role="button" data-bs-toggle="dropdown" aria-expanded="false"
+                   (click)="toggleUserDropDown('navbarScrollingDropdownHelp')">Help</a>
+
+                <ul class="dropdown-menu dropdown-menu-end me-5" aria-labelledby="navbarScrollingDropdownHelp">
+                  <li><span class="dropdown-item"  routerLink="/help" [fragment]="'gui'">
+                     <span style="width: 2rem; display:inline-block"><i class="bi bi-display"></i></span>Web interface</span>
+                  </li>
+                  <li><span class="dropdown-item"  routerLink="/help" [fragment]="'api'">
+                     <span style="width: 2rem; display:inline-block"> <i class="bi bi-code-slash"></i></span>APIs</span>
+                  </li>
+                  <li><span class="dropdown-item"  routerLink="/help" [fragment]="'categories'">
+                      <span style="width: 2rem; display:inline-block"><i class="bi bi-tags"></i></span>Categories</span>
+                  </li>
+                  <li><span class="dropdown-item"  routerLink="/help" [fragment]="'methods'">
+                      <span style="width: 2rem; display:inline-block"><i class="icon icon-common icon-analyse-percent_40" style="width: 2rem"></i></span>Methods</span>
+                  </li>
+                  <li><span class="dropdown-item"  routerLink="/help" [fragment]="'tutorial'">
+
+                    <span style="width: 2rem; display:inline-block"><i class="bi bi-graph-up"></i></span>Tutorial and <br><span style="width: 2rem; display:inline-block"></span>analysis</span>
+                  </li>
+
+                </ul>
+              </li>
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" [class.active]="url === 'about'"
+                   id="navbarScrollingDropdownAbout" role="button"
+                   data-bs-toggle="dropdown" aria-expanded="false" routerLink="/about"
+                   (click)="toggleUserDropDown('navbarScrollingDropdownAbout')">About</a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarScrollingDropdownHelp">
+                  <li><span class="dropdown-item"  routerLink="/about" [fragment]="'citation'">
+                    <span style="width: 2rem; display:inline-block">©</span>How to cite</span>
+                  </li>
+                  <li><span class="dropdown-item"  routerLink="/about" [fragment]="'faq'">
+                     <span style="width: 2rem; display:inline-block">
+                       <i class="bi bi-question-circle me-2"></i> </span>FAQs on fuzziness</span>
+                  </li>
+                  <li><span class="dropdown-item"  routerLink="/about" [fragment]="'licence'">
+                       <span style="width: 2rem; display:inline-block">
+                         <i class="icon icon-common icon-balance-scale me-1"></i> </span>License and <br><span style="width: 2rem; display:inline-block"></span>disclaimer</span>
+                  </li>
+                </ul>
+              </li>
+              <li class="nav-item ">
+                <a class="nav-link disabled" [class.active]="url === 'Feedback'">Feedback</a>
+              </li>
+              <li class="nav-item dropdown ms-3" *ngIf="currentUser['curator_name'] && currentUser['curator_name'].length > 0">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarScrollingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  <i class="bi bi-person-circle"></i> {{currentUser['curator_name']}}
+                </a>
+                <ul class="dropdown-menu" aria-labelledby="navbarScrollingDropdown">
+                  <li><span class="dropdown-item" (click)="logout()" ><i class="bi bi-box-arrow-left me-2"></i> Log-out</span></li>
+                  <li><span class="dropdown-item" *ngIf="'admin' === currentUser['curator_role']"> <i class="bi bi-gear me-2"></i> Settings</span></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+</div>

@@ -1,0 +1,151 @@
+/* Custom */
+@import 'variables';
+
+
+//$navbar-light-active-color: red;
+//$navbar-light-active-color: rgba($white, .4);
+$card-cap-bg: transparent;
+$btn-hover-bg-shade-amount: 0%;
+$nav-pills-link-active-bg: $primary;
+$nav-link-hover-color:  shade-color(  $primary, 20);
+$nav-link-color:   $primary;
+/* Bootstrap */
+@import 'bootstrap';
+
+
+//@each $color, $value in $theme-colors {
+//  .btn-#{$color} {
+//    @include button-variant($value, $value);
+//  }
+//}
+
+.toast-z {
+  z-index: 2000
+}
+
+.bg-second-nav {
+  background-color: rgba(white, 0.95) !important;
+  border-bottom: lightgrey solid 1px;
+  box-shadow: 0 0 6px 3px lightgrey;
+}
+
+.btn:focus, .btn:active, .btn:focus:active {
+  box-shadow: none;
+}
+
+
+.btn:hover {
+  transform: scale(1.03, 1.03);
+  transition: 0.1s;
+}
+
+
+.bg-primary {
+  background-color: $primary !important;
+  color: white !important;
+}
+
+.bg-disabled {
+  border: 1px solid $gray-bs;
+  background-color: transparent !important;
+  color: $gray-bs !important;
+}
+
+.bg-gray {
+  background-color: $gray-bs !important;
+  color: white !important;
+}
+
+
+.bg-orange {
+  background-color: darkorange !important;
+  //border: 0px solid  $primary !important;
+  color: white !important;
+}
+.bg-disprot {
+  background-color: #A7662B !important;
+  //border: 0px solid  $primary !important;
+  color: white !important;
+}
+.bg-elm {
+  background-color: #54212E !important;
+  //border: 0px solid  $primary !important;
+  color: white !important;
+}
+
+.bg-danger {
+  background-color: $danger !important;
+  color: white !important;
+}
+
+.bg-dark {
+  color: white !important;
+}
+
+.bg-info {
+  background-color: $info !important;
+  color: white !important;
+}
+.bg-hover-min:hover {
+  text-decoration: none;
+  transform: scale(1.03, 1.03);
+  transition: 0.1s;
+}
+
+.bg-hover:hover {
+  text-decoration: none;
+  transform: scale(1.1, 1.1);
+  transition: 0.1s;
+}
+
+.form-select:focus {
+  box-shadow: 0 0 0 .25rem rgba($primary, .25);
+  border-color: $primary
+}
+
+html {
+  height: 100%;
+  overflow: -moz-scrollbars-vertical;
+  overflow-y: scroll;
+}
+
+body {
+  height: 100%;
+  //font-family: 'Open Sans', sans-serif !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.text-justify {
+  text-align: justify;
+}
+
+.flex-grow {
+  flex: 1 0 auto;
+}
+
+.btn:focus, .btn:active, .btn:focus:active {
+  box-shadow: none;
+}
+
+
+.msp-plugin {
+  position: relative;
+  height: 350px;
+}
+
+.msp-layout-expanded {
+  //margin-top: 5rem !important;
+  z-index: 10000;
+}
+
+.popover {
+  max-width: 30rem;
+  width: 30rem !important;
+}

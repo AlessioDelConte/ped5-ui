@@ -1,7 +1,7 @@
 @import 'variables';
 
 .bg-nav {
-  background-image: linear-gradient(120deg, map-get($theme-colors, "primary-light"), $primary);
+  background-image: linear-gradient(120deg, $primary, $primary-dark);
   box-shadow:0 0 8px 2px dimgray;
 }
 

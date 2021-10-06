@@ -11,11 +11,13 @@ import {FooterComponent} from './footer/footer.component';
 import {HomeComponent} from './home/home.component';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import { SwaggerUiComponent } from './swagger-ui/swagger-ui.component';
 
 
 
 const appRoutes: Routes = [
 
+  {path: 'api', component: SwaggerUiComponent},
   {path: '', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -28,6 +30,7 @@ const appRoutes: Routes = [
     FooterComponent,
     HomeComponent,
     PageNotFoundComponent,
+    SwaggerUiComponent,
   ],
   imports: [
     RouterModule.forRoot(

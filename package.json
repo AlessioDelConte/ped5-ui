@@ -6,8 +6,7 @@
     "start": "ng serve --port 4205",
     "start-prod": "ng serve --configuration production",
     "build": "rm -rf dist/* && ng build --configuration production --build-optimizer",
-    "deploy-dev": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build ...${colN} && npm run build && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5-dev/ && echo ${colC}Done with deploy-dev!${colC})",
-    "deploy-prod": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build ...${colN} && npm run build && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5/ && echo ${colC}Done with deploy-prod!${colC})"
+    "deploy-dev": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build ...${colN} && npm run build && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5/ && echo ${colC}Done with deploy-dev!${colC})"
   },
   "private": true,
   "dependencies": {
@@ -25,7 +24,7 @@
     "bootstrap": "^5.0.1",
     "bootstrap-icons": "^1.5.0",
     "feature-viewer-typescript": "^2.2.5",
-    "molstar": "^2.0.6",
+    "molstar": "^2.3.3",
     "ngx-bootstrap": "^6.2.0",
     "pdbe-molstar": "^1.1.0-dev.4",
     "proseqviewer": "^1.0.84",

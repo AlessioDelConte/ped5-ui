@@ -1,0 +1,1148 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://proteinensemble.org/{base_path}",
+      "description": "PED REST API",
+      "variables": {
+        "base_path": {
+          "default": "api"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/{identifier}": {
+      "parameters": [
+        {
+          "name": "identifier",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}(e\\d{3})?",
+            "example": "PED00001"
+          },
+          "description": "Experiment Entry or Ensemble ID"
+        }
+      ],
+      "get": {
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "entry_id": {
+                      "type": "string"
+                    },
+                    "authors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Author"
+                      }
+                    },
+                    "construct": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Construct"
+                      }
+                    },
+                    "construct_version": {
+                      "type": "string",
+                      "nullable": true
+                    },
+                    "data_residue": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ResidueData"
+                      }
+                    },
+                    "description_version": {},
+                    "ensembles": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Ensemble"
+                      }
+                    },
+                    "entry_cross_reference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CrossReference"
+                      }
+                    },
+                    "experimental_cross_reference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CrossReference"
+                      }
+                    },
+                    "experimental_procedure": {
+                      "type": "string"
+                    },
+                    "md_calculation": {
+                      "type": "string"
+                    },
+                    "pdf_report_filesize": {
+                      "type": "number"
+                    },
+                    "publication_html": {
+                      "type": "string"
+                    },
+                    "publication_identifier": {
+                      "type": "string"
+                    },
+                    "publication_source": {
+                      "type": "string"
+                    },
+                    "publication_status": {
+                      "type": "string"
+                    },
+                    "structural_ensembles_calculation": {
+                      "type": "string"
+                    },
+                    "term_experimental_procedure": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ExperimentalTag"
+                      }
+                    },
+                    "term_md_calculation": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ExperimentalTag"
+                      }
+                    },
+                    "term_structural_ensembles_calculation": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ExperimentalTag"
+                      }
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "unpublished": {
+                      "type": "boolean"
+                    }
+                  },
+                  "required": [
+                    "entry_id",
+                    "authors",
+                    "construct",
+                    "construct_version",
+                    "data_residue",
+                    "ensembles",
+                    "entry_cross_reference",
+                    "experimental_cross_reference",
+                    "experimental_procedure",
+                    "md_calculation",
+                    "pdf_report_filesize",
+                    "publication_html",
+                    "publication_identifier",
+                    "publication_source",
+                    "publication_status",
+                    "structural_ensembles_calculation",
+                    "term_experimental_procedure",
+                    "term_md_calculation",
+                    "term_structural_ensembles_calculation",
+                    "title",
+                    "unpublished"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "entry_id": "string",
+                      "authors": [
+                        {
+                          "name": "string",
+                          "orcid_id": "string",
+                          "role": "biocurator",
+                          "corresponding_author": true
+                        }
+                      ],
+                      "construct": [
+                        {
+                          "chain_name": "string",
+                          "sequence": "string",
+                          "chain_type": "string",
+                          "description": "string",
+                          "modifications": [
+                            {
+                              "chain": "string",
+                              "fragment": 0,
+                              "start_position_unip": 0,
+                              "uniprot": "string",
+                              "start_position_alig": 0,
+                              "start_position_pdb": 0,
+                              "aa": "string",
+                              "modification_code": "string"
+                            }
+                          ],
+                          "fragments": [
+                            {
+                              "organism_name": "string",
+                              "organism_taxon": 0,
+                              "description": "string",
+                              "uniprot_acc": "string",
+                              "uniprot_start_position": 0,
+                              "uniprot_end_position": 0,
+                              "pdb_start_position": 0,
+                              "pdb_end_position": 0,
+                              "aligment_start_position": 0,
+                              "aligment_end_position": 0,
+                              "sequence": "string",
+                              "uniprot_sequence_coverage": 0,
+                              "fragment_length_pdb": 0
+                            }
+                          ]
+                        }
+                      ],
+                      "construct_version": "string",
+                      "data_residue": [
+                        {
+                          "fragment": "string",
+                          "pdb_position": "string",
+                          "uniprot_acc": "string",
+                          "uniprot_position": "string",
+                          "alignment_position": "string",
+                          "ensemble_id": "string",
+                          "chain": "string",
+                          "residue_number": "string",
+                          "helix_dssp_percent": "string",
+                          "beta_dssp_percent": "string",
+                          "coil_dssp_percent": "string",
+                          "entropy_dssp": "string",
+                          "mean_relative_ASA": "string"
+                        }
+                      ],
+                      "description_version": null,
+                      "ensembles": [
+                        {
+                          "ensemble_id": "string",
+                          "status": "string",
+                          "weight": "string",
+                          "description": "string",
+                          "models": 0,
+                          "only_CA": true,
+                          "calculated_values": [
+                            {
+                              "chain": "string",
+                              "entropy_dssp_mean": "string",
+                              "relative_asa_mean": "string",
+                              "rg_mean": "string"
+                            }
+                          ],
+                          "conformations_filesize": 0,
+                          "conformations_sample_filesize": 0
+                        }
+                      ],
+                      "entry_cross_reference": [
+                        {
+                          "db": "string",
+                          "id": "string"
+                        }
+                      ],
+                      "experimental_cross_reference": [
+                        {
+                          "db": "string",
+                          "id": "string"
+                        }
+                      ],
+                      "experimental_procedure": "string",
+                      "md_calculation": "string",
+                      "pdf_report_filesize": 0,
+                      "publication_html": "string",
+                      "publication_identifier": "string",
+                      "publication_source": "string",
+                      "publication_status": "string",
+                      "structural_ensembles_calculation": "string",
+                      "term_experimental_procedure": [
+                        {
+                          "name": "string",
+                          "namespace": "string",
+                          "is_a": [
+                            "string"
+                          ],
+                          "id": "string",
+                          "def": "string"
+                        }
+                      ],
+                      "term_md_calculation": [
+                        {
+                          "name": "string",
+                          "namespace": "string",
+                          "is_a": [
+                            "string"
+                          ],
+                          "id": "string",
+                          "def": "string"
+                        }
+                      ],
+                      "term_structural_ensembles_calculation": [
+                        {
+                          "name": "string",
+                          "namespace": "string",
+                          "is_a": [
+                            "string"
+                          ],
+                          "id": "string",
+                          "def": "string"
+                        }
+                      ],
+                      "title": "string",
+                      "unpublished": true
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Metadata of experimental entries can be retrieved by using their corresponding PED identifiers. Giving a Entry ID will give you all the related ensembles.",
+        "operationId": "get-identifier",
+        "summary": "Get single entry"
+      }
+    },
+    "/report/{entry_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/entry_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Report",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-report-entry_id",
+        "description": "Download PDF validation entry report that PED provides to all fully processed experimental entries with completed manual curation pipeline."
+      }
+    },
+    "/ensemble/{ensemble_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ensemble_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Ensemble",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ensemble-ensemble_id",
+        "description": "Download the deposited ensemble in compressed file."
+      }
+    },
+    "/ensemble_sample/{ensemble_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ensemble_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Ensemble Sample",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ensemble_sample-ensemble_id",
+        "description": "Download an sample file formed by representative 10 conformers."
+      }
+    },
+    "/weights/{ensemble_id}": {
+      "parameters": [
+        {
+          "name": "ensemble_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}e\\d{3}",
+            "example": "PED00001e001"
+          },
+          "description": "Experiment Ensemble ID"
+        }
+      ],
+      "get": {
+        "summary": "Download Weights",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-weights-ensemble_id",
+        "description": "Download a deposited weights file."
+      }
+    },
+    "/ensemble_animation/{ensemble_id}/{chain_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ensemble_id"
+        },
+        {
+          "$ref": "#/components/parameters/chain_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Ensemble Animation",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ensemble_animation-ensemble_id-chain_id",
+        "description": "Download an animated GIF from representative 10 conformers, where selected chain are colored in blue, the rest chains are colored in gray."
+      }
+    },
+    "/ramachandran_plot/{ensemble_id}/{chain_id}": {
+      "parameters": [
+        {
+          "name": "ensemble_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}e\\d{3}",
+            "example": "PED00001e001"
+          },
+          "description": "Experiment Ensemble ID"
+        },
+        {
+          "name": "chain_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "A"
+          },
+          "description": "Protein Chain ID"
+        }
+      ],
+      "get": {
+        "summary": "Download Ramachandran Plot",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ramachandran_plot-ensemble_id-chain_id",
+        "description": "Download a calculated ramachandran plot for the given chain."
+      }
+    },
+    "/rg_boxplot/{ensemble_id}/{chain_id}": {
+      "parameters": [
+        {
+          "name": "ensemble_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}e\\d{3}",
+            "example": "PED00001e001"
+          },
+          "description": "Experiment Ensemble ID"
+        },
+        {
+          "name": "chain_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "A"
+          },
+          "description": "Protein Chain ID"
+        }
+      ],
+      "get": {
+        "summary": "Download RG Boxplot",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-rg_boxplot-ensemble_id-chain_id",
+        "description": "Download a calculated Rg box-plot for the given chain."
+      }
+    },
+    "/browse": {
+      "get": {
+        "summary": "Browse",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cross_references": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/CrossReference"
+                        }
+                      },
+                      "terms": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ExperimentalTag"
+                        }
+                      },
+                      "number_of_ensembles": {
+                        "type": "number"
+                      },
+                      "uniprot_acc": {
+                        "type": "string"
+                      },
+                      "entry_id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "publication_identifier": {
+                        "type": "string"
+                      },
+                      "publication_html": {
+                        "type": "string"
+                      },
+                      "number_of_conformers": {
+                        "type": "number"
+                      },
+                      "uniprot_sequence_coverage": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "chain_name": {
+                              "type": "string"
+                            },
+                            "coverage": {
+                              "type": "number"
+                            },
+                            "uniprot_acc": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "chain_name",
+                            "coverage",
+                            "uniprot_acc"
+                          ]
+                        }
+                      },
+                      "protein_name": {
+                        "type": "string"
+                      },
+                      "unpublished": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "cross_references",
+                      "terms",
+                      "number_of_ensembles",
+                      "uniprot_acc",
+                      "entry_id",
+                      "title",
+                      "publication_identifier",
+                      "publication_html",
+                      "number_of_conformers",
+                      "uniprot_sequence_coverage",
+                      "protein_name",
+                      "unpublished"
+                    ]
+                  }
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-browse",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "P04637"
+            },
+            "in": "query",
+            "name": "acc",
+            "description": "UniProt Accession number"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "NMR"
+            },
+            "in": "query",
+            "name": "term",
+            "description": "Terms are automatically extracted with the use of a pre-compiled controlled vocabulary from manually curated entry description."
+          }
+        ],
+        "description": "Simple search"
+      },
+      "parameters": []
+    },
+    "/download": {
+      "get": {
+        "summary": "Download multiple ensembles",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "description": "Download link"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-download",
+        "description": "Download multiple ensemble in one .tar archive.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ensemble_id",
+            "description": "Experiment Ensemble IDs"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Author": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "Federica Quaglia",
+            "orcid_id": "0000-0002-0341-4888",
+            "role": "biocurator",
+            "corresponding_author": false
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "orcid_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "biocurator",
+              "data_owner"
+            ]
+          },
+          "corresponding_author": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "orcid_id",
+          "role",
+          "corresponding_author"
+        ]
+      },
+      "ResidueData": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "fragment": "2",
+            "pdb_position": "1",
+            "uniprot_acc": "P38634",
+            "uniprot_position": "1",
+            "alignment_position": "2",
+            "ensemble_id": "PED00001e001",
+            "chain": "A",
+            "residue_number": "1",
+            "helix_dssp_percent": "0.0",
+            "beta_dssp_percent": "0.0",
+            "coil_dssp_percent": "1.0",
+            "entropy_dssp": "0.0",
+            "mean_relative_ASA": "0.7306576402321082"
+          }
+        },
+        "title": "ResidueData",
+        "properties": {
+          "fragment": {
+            "type": "string"
+          },
+          "pdb_position": {
+            "type": "string"
+          },
+          "uniprot_acc": {
+            "type": "string"
+          },
+          "uniprot_position": {
+            "type": "string"
+          },
+          "alignment_position": {
+            "type": "string"
+          },
+          "ensemble_id": {
+            "type": "string"
+          },
+          "chain": {
+            "type": "string"
+          },
+          "residue_number": {
+            "type": "string"
+          },
+          "helix_dssp_percent": {
+            "type": "string"
+          },
+          "beta_dssp_percent": {
+            "type": "string"
+          },
+          "coil_dssp_percent": {
+            "type": "string"
+          },
+          "entropy_dssp": {
+            "type": "string"
+          },
+          "mean_relative_ASA": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "fragment",
+          "pdb_position",
+          "uniprot_acc",
+          "uniprot_position",
+          "alignment_position",
+          "ensemble_id",
+          "chain",
+          "residue_number",
+          "helix_dssp_percent",
+          "beta_dssp_percent",
+          "coil_dssp_percent",
+          "entropy_dssp",
+          "mean_relative_ASA"
+        ]
+      },
+      "Construct": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "chain_name": "A",
+            "sequence": "GSMTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT",
+            "chain_type": "protein",
+            "description": "p-Sic1",
+            "modifications": [
+              {
+                "chain": "string",
+                "fragment": 0,
+                "start_position_unip": 0,
+                "uniprot": "string",
+                "start_position_alig": 0,
+                "start_position_pdb": 0,
+                "aa": "string",
+                "modification_code": "string"
+              }
+            ],
+            "fragments": [
+              {
+                "organism_name": "string",
+                "organism_taxon": 0,
+                "description": "string",
+                "uniprot_acc": "string",
+                "uniprot_start_position": 0,
+                "uniprot_end_position": 0,
+                "pdb_start_position": 0,
+                "pdb_end_position": 0,
+                "aligment_start_position": 0,
+                "aligment_end_position": 0,
+                "sequence": "string",
+                "uniprot_sequence_coverage": 0,
+                "fragment_length_pdb": 0
+              }
+            ]
+          }
+        },
+        "properties": {
+          "chain_name": {
+            "type": "string"
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "chain_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "modifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstructModification"
+            }
+          },
+          "fragments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstructFragment"
+            }
+          }
+        },
+        "required": [
+          "chain_name",
+          "sequence",
+          "chain_type",
+          "description",
+          "modifications",
+          "fragments"
+        ]
+      },
+      "ConstructModification": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "chain": {
+            "type": "string"
+          },
+          "fragment": {
+            "type": "number"
+          },
+          "start_position_unip": {
+            "type": "number"
+          },
+          "uniprot": {
+            "type": "string"
+          },
+          "start_position_alig": {
+            "type": "number"
+          },
+          "start_position_pdb": {
+            "type": "number"
+          },
+          "aa": {
+            "type": "string"
+          },
+          "modification_code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "chain",
+          "fragment",
+          "start_position_unip",
+          "uniprot",
+          "start_position_alig",
+          "start_position_pdb",
+          "aa",
+          "modification_code"
+        ],
+        "x-examples": {
+          "example-1": {
+            "chain": "A",
+            "fragment": 2,
+            "start_position_unip": 5,
+            "uniprot": "P38634",
+            "start_position_alig": 6,
+            "start_position_pdb": 5,
+            "aa": "T",
+            "modification_code": "TPO"
+          }
+        }
+      },
+      "ConstructFragment": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "description": "Protein SIC1",
+            "uniprot_acc": "P38634",
+            "uniprot_start_position": 1,
+            "uniprot_end_position": 90,
+            "pdb_start_position": 1,
+            "pdb_end_position": 90,
+            "aligment_start_position": 2,
+            "aligment_end_position": 91,
+            "sequence": "MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT",
+            "uniprot_sequence_coverage": 0.31690140845070425,
+            "fragment_length_pdb": 90
+          }
+        },
+        "properties": {
+          "organism_name": {
+            "type": "string"
+          },
+          "organism_taxon": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "uniprot_acc": {
+            "type": "string"
+          },
+          "uniprot_start_position": {
+            "type": "number"
+          },
+          "uniprot_end_position": {
+            "type": "number"
+          },
+          "pdb_start_position": {
+            "type": "number"
+          },
+          "pdb_end_position": {
+            "type": "number"
+          },
+          "aligment_start_position": {
+            "type": "number"
+          },
+          "aligment_end_position": {
+            "type": "number"
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "uniprot_sequence_coverage": {
+            "type": "number"
+          },
+          "fragment_length_pdb": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "uniprot_start_position",
+          "uniprot_end_position",
+          "pdb_start_position",
+          "pdb_end_position",
+          "aligment_start_position",
+          "aligment_end_position",
+          "sequence",
+          "uniprot_sequence_coverage",
+          "fragment_length_pdb"
+        ]
+      },
+      "Ensemble": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "ensemble_id": "PED00001e001",
+            "status": "ensemble_completed",
+            "weight": "null",
+            "description": "null",
+            "models": 11,
+            "only_CA": false,
+            "calculated_values": [
+              {
+                "chain": "A",
+                "entropy_dssp_mean": "0.40239642805185555",
+                "relative_asa_mean": "0.6879983571819465",
+                "rg_mean": "26.743900586350666"
+              }
+            ],
+            "conformations_filesize": 254526,
+            "conformations_sample_filesize": 1481071
+          }
+        },
+        "properties": {
+          "ensemble_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string"
+          },
+          "weight": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "models": {
+            "type": "number"
+          },
+          "only_CA": {
+            "type": "boolean"
+          },
+          "calculated_values": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "chain": {
+                  "type": "string"
+                },
+                "entropy_dssp_mean": {
+                  "type": "string"
+                },
+                "relative_asa_mean": {
+                  "type": "string"
+                },
+                "rg_mean": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "chain",
+                "entropy_dssp_mean",
+                "relative_asa_mean",
+                "rg_mean"
+              ]
+            }
+          },
+          "conformations_filesize": {
+            "type": "number"
+          },
+          "conformations_sample_filesize": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ensemble_id",
+          "status",
+          "weight",
+          "description",
+          "models",
+          "only_CA",
+          "calculated_values",
+          "conformations_filesize",
+          "conformations_sample_filesize"
+        ]
+      },
+      "CrossReference": {
+        "type": "object",
+        "properties": {
+          "db": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "db",
+          "id"
+        ],
+        "x-examples": {
+          "example-1": {
+            "db": "disprot",
+            "id": "DP00631"
+          }
+        }
+      },
+      "ExperimentalTag": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "TraDES",
+            "namespace": "Ensemble generation method",
+            "is_a": [
+              "00184"
+            ],
+            "id": "00186",
+            "def": "initial pool generation"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "is_a": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "def": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "namespace"
+        ]
+      }
+    },
+    "parameters": {
+      "ensemble_id": {
+        "name": "ensemble_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "pattern": "PED\\d{5}e\\d{3}",
+          "example": "PED00001e001"
+        },
+        "description": "Experiment Ensemble ID"
+      },
+      "entry_id": {
+        "name": "entry_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PED00001",
+          "pattern": "PED\\d{5}"
+        },
+        "description": "Experiment Entry ID"
+      },
+      "chain_id": {
+        "name": "chain_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "A"
+        },
+        "description": "Protein Chain ID"
+      }
+    }
+  },
+  "info": {
+    "description": "PED API",
+    "title": "PED API",
+    "version": "5.0",
+    "contact": {
+      "email": "biocomp@bio.unipd.it"
+    }
+  }
+}

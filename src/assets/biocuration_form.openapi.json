@@ -1,0 +1,148 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://proteinensemble.org/",
+      "description": "PED REST API",
+      "base_path": "api"
+    }
+  ],
+  "components": {
+    "schemas": {
+      "Author": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "Federica Quaglia",
+            "orcid_id": "0000-0002-0341-4888",
+            "role": "biocurator",
+            "corresponding_author": false
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "orcid_id": {
+            "type": "string",
+            "nullable": true
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "biocurator",
+              "data_owner"
+            ]
+          },
+          "corresponding_author": {
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "name",
+          "orcid_id",
+          "role",
+          "corresponding_author"
+        ]
+      },
+      "Construct": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "chain_name": {
+            "type": "string"
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "chain_type": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "fragments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstructFragment"
+            }
+          }
+        },
+        "required": [
+          "chain_name",
+          "sequence",
+          "chain_type",
+          "description",
+          "fragments"
+        ]
+      },
+      "ConstructFragment": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "organism_name": {
+            "type": "string"
+          },
+          "organism_taxon": {
+            "type": "number"
+          },
+          "description": {
+            "type": "string"
+          },
+          "uniprot_acc": {
+            "type": "string"
+          },
+          "uniprot_start_position": {
+            "type": "number"
+          },
+          "uniprot_end_position": {
+            "type": "number"
+          },
+          "sequence": {
+            "type": "string"
+          }
+        },
+        "required": []
+      },
+      "Ensemble": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "ensemble_id": {
+            "type": "string"
+          },
+          "weight_file_path": {
+            "type": "string"
+          },
+          "ensemble_file_path": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "ensemble_id",
+          "status",
+          "weight",
+          "description",
+          "models",
+          "only_CA",
+          "calculated_values",
+          "conformations_filesize",
+          "conformations_sample_filesize"
+        ]
+      },
+    }
+
+  },
+  "info": {
+    "description": "PED API",
+    "title": "PED API",
+    "version": "5.0",
+    "contact": {
+      "email": "biocomp@bio.unipd.it"
+    }
+  }
+}

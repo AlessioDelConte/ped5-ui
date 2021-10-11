@@ -12,12 +12,14 @@ import {HomeComponent} from './home/home.component';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import { SwaggerUiComponent } from './swagger-ui/swagger-ui.component';
+import { SwaggerInternalComponent } from './swagger-internal/swagger-internal.component';
 
 
 
 const appRoutes: Routes = [
 
   {path: 'api', component: SwaggerUiComponent},
+  {path: 'api-form', component: SwaggerInternalComponent},
   {path: '', component: HomeComponent},
   {path: '**', component: PageNotFoundComponent}
 ];
@@ -31,6 +33,7 @@ const appRoutes: Routes = [
     HomeComponent,
     PageNotFoundComponent,
     SwaggerUiComponent,
+    SwaggerInternalComponent,
   ],
   imports: [
     RouterModule.forRoot(

@@ -2,13 +2,9 @@
   "openapi": "3.0.0",
   "servers": [
     {
-      "url": "https://proteinensemble.org/{base_path}",
+      "url": "https://proteinensemble.org/",
       "description": "PED REST API",
-      "variables": {
-        "base_path": {
-          "default": "api"
-        }
-      }
+      "base_path": "api"
     }
   ],
   "paths": {

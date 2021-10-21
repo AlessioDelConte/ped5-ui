@@ -1,22 +1,18 @@
 @import "./node_modules/bootstrap/scss/functions";
 @import "./node_modules/bootstrap/scss/variables";
 
-//$primary: #146C56;
-//$primary-light: #55A630;
-//$primary: #00557C;
-//$primary-light: #3488AD;
-//$primary: #074f57;
-//$primary-light: #73b72a;
-//$primary: #5F4B8B;
-//$primary-light: #7D3F7C;
-$primary: #2274a5;
-$primary-middle: #2274a5;
-$primary-light: #638CC7;
-$primary-dark: #0A202D;
-//$primary: #4B8740;
-//$primary-light: #91B54D;
-//$primary: #7D3C38;
-//$primary-light: #FB9D18;
+
+$primary-light: #87AF64;
+$primary: #326951;
+$primary-middle: $primary;
+$primary-dark: #003C40;
+
+//$primary-light: #6B3C77;
+//$primary-dark: #420E2C;
+
+//https://coolors.co/4c243b-67516d-817e9f-f8f9f7-899d78-466d5c-023c40
+
+
 
 
 //$primary: #00557C;
@@ -34,7 +30,8 @@ $gray-bs: #6c757d;
 
 // Create your own map
 $custom-colors: (
-  "primary-light": $primary-light
+  "primary-light": $primary-light,
+  "primary-dark": $primary-dark
 );
 
 $theme-colors: (

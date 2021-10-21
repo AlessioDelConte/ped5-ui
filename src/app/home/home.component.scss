@@ -1,3 +1,4 @@
+@import 'variables';
 
 dt {
   float: left;
@@ -14,5 +15,10 @@ dd {
 }
 .card-header {
   text-align: center !important;
-  font-weight: bold;
 }
+
+
+//.card:hover {
+//  box-shadow: 0px 0px 7px 0px gray;
+//  transition-duration: 250ms;
+//}

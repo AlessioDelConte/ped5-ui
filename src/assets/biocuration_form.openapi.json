@@ -53,12 +53,6 @@
           "chain_name": {
             "type": "string"
           },
-          "sequence": {
-            "type": "string"
-          },
-          "chain_type": {
-            "type": "string"
-          },
           "description": {
             "type": "string"
           },
@@ -112,7 +106,7 @@
           "ensemble_id": {
             "type": "string"
           },
-          "weight_file_path": {
+          "weights_file_path": {
             "type": "string"
           },
           "ensemble_file_path": {
@@ -124,16 +118,9 @@
         },
         "required": [
           "ensemble_id",
-          "status",
-          "weight",
-          "description",
-          "models",
-          "only_CA",
-          "calculated_values",
-          "conformations_filesize",
-          "conformations_sample_filesize"
+        "ensemble_file_path"
         ]
-      },
+      }
     }
 
   },

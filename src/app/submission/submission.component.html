@@ -1,0 +1,73 @@
+<div class="container-xl">
+<!--    <p>bla bla bla</p>-->
+    <div class="row">
+        <div class="col">
+            <h4>Form</h4>
+            <div class="card" [class.card-active]="activeComponent === 'description'">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            Description <span style="font-weight: lighter">(optional)</span>
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('description')"><i class="bi bi-view-list"></i> Toggle</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="activeComponent === 'description'">
+                    <app-form-description></app-form-description>
+                </div>
+            </div>
+            <div class="card" [class.card-active]="activeComponent === 'construct'">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            Ensemble construct
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('construct')"><i class="bi bi-view-list"></i> Toggle</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-body" *ngIf="activeComponent === 'construct'">
+                    <app-form-construct></app-form-construct>
+
+                </div>
+            </div>
+            <div class="card" [class.card-active]="activeComponent === 'upload'">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col">
+                            Ensemble upload
+                        </div>
+                        <div class="col-auto">
+                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('upload')"><i class="bi bi-view-list"></i> Toggle</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" *ngIf="activeComponent === 'upload'">
+                    <app-form-files></app-form-files>
+
+                </div>
+            </div>
+            <h4>Assessment</h4>
+            <div class="row align-items-center">
+                <div class="col-auto">
+                    <div class="mt-2"
+                         appRecaptcha
+                         key="6Le1i-UcAAAAAMWDPoVAYpodXF6lgN3u9D2CpZhD"
+                         formControlName="captcha"></div>
+                </div>
+                <div class="col">
+                    <button class="btn btn-sm btn-primary-dark">Run assessment</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-auto" style="width: 8rem">
+
+        </div>
+    </div>
+
+</div>

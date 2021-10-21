@@ -13,11 +13,11 @@ $nav-link-color:   $primary;
 @import 'bootstrap';
 
 
-//@each $color, $value in $theme-colors {
-//  .btn-#{$color} {
-//    @include button-variant($value, $value);
-//  }
-//}
+@each $color, $value in $theme-colors {
+  .btn-#{$color} {
+    @include button-variant($value, $value);
+  }
+}
 
 .toast-z {
   z-index: 2000
@@ -116,10 +116,12 @@ body {
 
 a {
   text-decoration: none;
+  color: $primary-dark;
 }
 
 a:hover {
   text-decoration: none;
+  color: $primary;
 }
 
 .text-justify {
@@ -148,4 +150,9 @@ a:hover {
 .popover {
   max-width: 30rem;
   width: 30rem !important;
+}
+
+.card-header {
+  font-weight: bold;
+  color: $primary-dark;
 }

@@ -13,11 +13,18 @@ import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import { SwaggerUiComponent } from './swagger-ui/swagger-ui.component';
 import { SwaggerInternalComponent } from './swagger-internal/swagger-internal.component';
+import { RecaptchaDirective } from './recaptcha.directive';
+import { SubmissionComponent } from './submission/submission.component';
+import { FormDescriptionComponent } from './form-description/form-description.component';
+import { FormConstructComponent } from './form-construct/form-construct.component';
+import { FormFilesComponent } from './form-files/form-files.component';
+import { LoginComponent } from './login/login.component';
 
 
 
 const appRoutes: Routes = [
 
+  {path: 'submission', component: SubmissionComponent},
   {path: 'api', component: SwaggerUiComponent},
   {path: 'api-form', component: SwaggerInternalComponent},
   {path: '', component: HomeComponent},
@@ -34,6 +41,12 @@ const appRoutes: Routes = [
     PageNotFoundComponent,
     SwaggerUiComponent,
     SwaggerInternalComponent,
+    RecaptchaDirective,
+    SubmissionComponent,
+    FormDescriptionComponent,
+    FormConstructComponent,
+    FormFilesComponent,
+    LoginComponent,
   ],
   imports: [
     RouterModule.forRoot(

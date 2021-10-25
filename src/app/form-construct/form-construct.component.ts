@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SubmissionService } from '../services/submission.service';
 
 @Component({
   selector: 'app-form-construct',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormConstructComponent implements OnInit {
 
-  constructor() { }
+  constructor(public submissionService: SubmissionService) { }
 
   ngOnInit(): void {
   }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SubmissionService } from '../services/submission.service';
 
 @Component({
   selector: 'app-form-files',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormFilesComponent implements OnInit {
 
-  constructor() { }
+  constructor(public submissionService: SubmissionService) { }
 
   ngOnInit(): void {
+    // console.log(this.submissionService.form['controls']['ensembles']['controls'])
   }
 
 }

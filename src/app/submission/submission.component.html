@@ -52,6 +52,7 @@
                 </div>
             </div>
             <h4>Assessment</h4>
+            <form [formGroup]="submissionService.form">
             <div class="row align-items-center">
                 <div class="col-auto">
                     <div class="mt-2"
@@ -63,10 +64,7 @@
                     <button class="btn btn-sm btn-primary-dark">Run assessment</button>
                 </div>
             </div>
-
-        </div>
-        <div class="col-auto" style="width: 8rem">
-
+            </form>
         </div>
     </div>
 

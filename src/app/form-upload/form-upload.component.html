@@ -1,0 +1,41 @@
+<input #fileW
+       type="file"
+       style="display: none"
+       (change)="onFilesAddedW()">
+
+<input #fileC
+       type="file"
+       style="display: none"
+       (change)="onFilesAddedC()">
+
+<div class="row">
+    <div class="col">
+        <button class="btn btn-sm btn-success" (click)="addFilesW()">
+            <span *ngIf="file_nameW">Select an other file for weights</span>
+            <span *ngIf="!file_nameW"> Select file for weights</span>
+        </button>
+
+    </div>
+    <div class="col text-end">
+        <button class="btn btn-sm btn-success" (click)="addFilesC()">
+            <span *ngIf="file_nameC">Select an other file for conformations</span>
+            <span *ngIf="!file_nameC"> Select file for conformations</span>
+        </button>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+            <span   *ngIf="file_nameW" tooltip="Selected filename for weights">
+            <i class="bi bi-paperclip"></i> {{file_nameW}}
+            </span>
+
+    </div>
+
+    <div class="col text-end">
+            <span  *ngIf="file_nameC" tooltip="Selected filename for conformations">
+              <i class="bi bi-paperclip"></i> {{file_nameC}}
+            </span>
+
+    </div>
+</div>
+

@@ -19,12 +19,17 @@ import { FormDescriptionComponent } from './form-description/form-description.co
 import { FormConstructComponent } from './form-construct/form-construct.component';
 import { FormFilesComponent } from './form-files/form-files.component';
 import { LoginComponent } from './login/login.component';
+import {SubmissionResolver} from './submission.resolver';
+import { FormUploadComponent } from './form-upload/form-upload.component';
 
 
 
 const appRoutes: Routes = [
 
-  {path: 'submission', component: SubmissionComponent},
+  { path: 'submission',
+    component: SubmissionComponent,
+    resolve: {entry: SubmissionResolver}
+  },
   {path: 'api', component: SwaggerUiComponent},
   {path: 'api-form', component: SwaggerInternalComponent},
   {path: '', component: HomeComponent},
@@ -47,6 +52,7 @@ const appRoutes: Routes = [
     FormConstructComponent,
     FormFilesComponent,
     LoginComponent,
+    FormUploadComponent,
   ],
   imports: [
     RouterModule.forRoot(

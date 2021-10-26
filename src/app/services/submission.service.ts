@@ -1,26 +1,28 @@
 import { Injectable } from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, FormArray} from '@angular/forms';
-import {BehaviorSubject} from 'rxjs';
+import {HttpEvent, HttpEventType} from '@angular/common/http';
+import { InternalService } from './internal.service';
+import {Router} from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SubmissionService {
 
+  progress = 0;
   form: FormGroup;
-
   formData = new FormData();
-
   ensembleCount = 0;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder,
+              private internalService: InternalService,
+              private router: Router) { }
 
   FormParser(entrtyData: object): void {
     this.form = this.fb.group({
       protein_chains: this.fb.array([]),
       ensembles: this.fb.array([]),
       captcha: new FormControl()
-
     });
 
     if (Array.isArray(entrtyData['protein_chains'])) {
@@ -30,15 +32,7 @@ export class SubmissionService {
     } else {
       this.addFormArrayElement('protein_chains', false);
     }
-    // if (Array.isArray(entrtyData['ensembles'])) {
-    //   const rows = this.form.get('ensembles') as FormArray;
-    //   entrtyData['ensembles'].forEach(currChain => {
-    //   });
-    // } else {
       this.addFormArrayElement('ensembles', false);
-    // }
-
-
   }
 
   addFormArrayElement(field, emitEvent: boolean): void {
@@ -136,5 +130,43 @@ export class SubmissionService {
       this.addFormArrayElement_nested(field, index, nestedField, false);
     }
   }
+
+  submission(): void {
+    this.formData.append('form', JSON.stringify(this.form.value));
+    this.internalService.postSubmission(this.formData).subscribe((event: HttpEvent<any>) => {
+      switch (event.type) {
+        case HttpEventType.Sent:
+          console.log('Request has been made!');
+          break;
+        case HttpEventType.ResponseHeader:
+          console.log('Response header has been received!');
+          break;
+        case HttpEventType.UploadProgress:
+          this.progress = Math.round(event.loaded / event.total * 100);
+          console.log(`Uploaded! ${this.progress}%`);
+          break;
+        case HttpEventType.Response:
+          console.log('User successfully created!', event.body);
+          setTimeout(() => {
+            let url = '';
+            if (event.body.submission_id) {
+              url = 'results/' + event.body.submission_id;
+            }
+            this.reset();
+            this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+              this.router.navigate([ url]);
+            });
+          }, 500);
+      }
+    });
+  }
+
+  reset(): void {
+    this.form = null;
+    this.formData = new FormData();
+    this.progress = 0;
+    this.ensembleCount = 0;
+  }
+
 
 }

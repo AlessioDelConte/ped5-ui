@@ -52,7 +52,7 @@
                 </div>
             </div>
             <h4>Assessment</h4>
-            <form [formGroup]="submissionService.form">
+            <form [formGroup]="submissionService.form" *ngIf="submissionService.progress == 0">
             <div class="row align-items-center">
                 <div class="col-auto">
                     <div class="mt-2"
@@ -61,10 +61,16 @@
                          formControlName="captcha"></div>
                 </div>
                 <div class="col">
-                    <button class="btn btn-sm btn-primary-dark">Run assessment</button>
+                    <button class="btn btn-sm btn-primary-dark" (click)="submissionService.submission()">Run assessment</button>
                 </div>
             </div>
             </form>
+
+            <div class="row" *ngIf="submissionService.progress > 0">
+                <div class="col">
+                    Uploading...({{submissionService.progress}}%)
+                </div>
+            </div>
         </div>
     </div>
 

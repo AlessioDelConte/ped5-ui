@@ -14,4 +14,15 @@ export class InternalService {
     const url = environment.ws;
     return this.http.get(url);
   }
+
+  postSubmission(files): Observable<any> {
+    const url = environment.ws + 'submission';
+    return this.http.post(url, files,
+        {
+          reportProgress: true,
+          observe: 'events'
+        });
+  }
+
+
 }

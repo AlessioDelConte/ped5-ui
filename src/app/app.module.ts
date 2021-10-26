@@ -21,6 +21,7 @@ import { FormFilesComponent } from './form-files/form-files.component';
 import { LoginComponent } from './login/login.component';
 import {SubmissionResolver} from './submission.resolver';
 import { FormUploadComponent } from './form-upload/form-upload.component';
+import { ResultPageComponent } from './result-page/result-page.component';
 
 
 
@@ -29,6 +30,10 @@ const appRoutes: Routes = [
   { path: 'submission',
     component: SubmissionComponent,
     resolve: {entry: SubmissionResolver}
+  },
+  {
+    path: 'results/:identifier',
+    component: ResultPageComponent
   },
   {path: 'api', component: SwaggerUiComponent},
   {path: 'api-form', component: SwaggerInternalComponent},
@@ -53,6 +58,7 @@ const appRoutes: Routes = [
     FormFilesComponent,
     LoginComponent,
     FormUploadComponent,
+    ResultPageComponent,
   ],
   imports: [
     RouterModule.forRoot(

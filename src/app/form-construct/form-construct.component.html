@@ -1,6 +1,6 @@
 <form [formGroup]="submissionService.form">
-    <div formArrayName="protein_chains">
-        <div *ngFor="let address of submissionService.form['controls']['protein_chains']['controls']; let i=index; let last=last">
+    <div formArrayName="construct">
+        <div *ngFor="let address of submissionService.form['controls']['construct']['controls']; let i=index; let last=last">
             <div [formGroupName]="i">
                 <div class="row">
                     <div class="col">
@@ -20,30 +20,25 @@
                         </div>
 
                         <div class="row">
-                            <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">
-                                <input type="checkbox" class="custom-control-input" id="is_fixed{{i}}"
-                                       formControlName="is_fixed">
-                                <label class="custom-control-label" for="is_fixed{{i}}">The structure is fixed</label>
-                            </div>
-                            <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">
-                                <input type="checkbox" class="custom-control-input" id="id_disordered{{i}}"
-                                       formControlName="id_disordered">
-                                <label class="custom-control-label" for="id_disordered{{i}}">This is disordered</label>
-                            </div>
-                            <!--                  <div class="input-group mb-3 col-lg-6">-->
-                            <!--                  <div class="input-group-prepend">-->
-                            <!--                    <span class="input-group-text">DisProt evidence ID</span>-->
-                            <!--                  </div>-->
-                            <!--                  <input type="text" class="form-control" formControlName="disprot_region">-->
-                            <!--                </div>-->
+<!--                            <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="is_fixed{{i}}"-->
+<!--                                       formControlName="is_fixed">-->
+<!--                                <label class="custom-control-label" for="is_fixed{{i}}">The structure is fixed</label>-->
+<!--                            </div>-->
+<!--                            <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">-->
+<!--                                <input type="checkbox" class="custom-control-input" id="is_disordered{{i}}"-->
+<!--                                       formControlName="is_disordered">-->
+<!--                                <label class="custom-control-label" for="is_disordered{{i}}">This is disordered</label>-->
+<!--                            </div>-->
+
 
                         </div>
 
                         <div class="alert">
                             <h5>Protein chain is constructed:</h5>
-                            <div formArrayName="construct">
+                            <div formArrayName="fragments">
                                 <div
-                                        *ngFor="let address of submissionService.form['controls']['protein_chains']['controls'][i]['controls']['construct']['controls']; let j=index">
+                                        *ngFor="let address of submissionService.form['controls']['construct']['controls'][i]['controls']['fragments']['controls']; let j=index">
                                     <div [formGroupName]="j">
                                         <hr>
                                         #{{j + 1}} fragment:
@@ -71,13 +66,13 @@
                                                         <textarea rows="1" class="form-control" formControlName="sequence"></textarea>
                                                     </div>
                                                 </div>
-                                                <div class="row">
-                                                    <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">
-                                                        <input type="checkbox" class="custom-control-input" id="part_of_ensemble"
-                                                               formControlName="part_of_ensemble">
-                                                        <label class="custom-control-label" for="part_of_ensemble">Part of ensemble</label>
-                                                    </div>
-                                                </div>
+<!--                                                <div class="row">-->
+<!--                                                    <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">-->
+<!--                                                        <input type="checkbox" class="custom-control-input" id="part_of_ensemble"-->
+<!--                                                               formControlName="part_of_ensemble">-->
+<!--                                                        <label class="custom-control-label" for="part_of_ensemble">Part of ensemble</label>-->
+<!--                                                    </div>-->
+<!--                                                </div>-->
                                                 <div class="row">
 
                                                     <div class="input-group mb-3 col-lg-4">

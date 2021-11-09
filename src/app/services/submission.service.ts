@@ -20,24 +20,64 @@ export class SubmissionService {
 
   FormParser(entrtyData: object): void {
     this.form = this.fb.group({
-      protein_chains: this.fb.array([]),
+      submission_id: entrtyData['submission_id'] ? entrtyData['submission_id'] : null,
+      entry_id: entrtyData['entry_id'] ? entrtyData['entry_id'] : null,
+      construct: this.fb.array([]),
       ensembles: this.fb.array([]),
       captcha: new FormControl()
     });
+    console.log('entrtyData', entrtyData);
 
-    if (Array.isArray(entrtyData['protein_chains'])) {
-      const rows = this.form.get('protein_chains') as FormArray;
-      entrtyData['protein_chains'].forEach(currChain => {
+    if (Array.isArray(entrtyData['construct'])) {
+      const rows = this.form.get('construct') as FormArray;
+      entrtyData['construct'].forEach(currChain => {
+        const currChainObj = {
+          chain_name: typeof currChain.chain_name === 'string' ? currChain.chain_name : null,
+          description: typeof currChain.description === 'string' ? currChain.description : null,
+          is_fixed: null,
+          is_disordered: null,
+          fragments: this.fb.array([])
+        };
+
+        const arrayOfFragments = this.fb.array([]);
+
+        if (Array.isArray(currChain.fragments) && currChain.fragments.length > 0) {
+          currChain.fragments.forEach(currFragment => {
+            arrayOfFragments.push(
+                this.fb.group({
+                  description: typeof currFragment.description === 'string' ? currFragment.description : null,
+                  uniprot_acc: typeof currFragment.uniprot_acc === 'string' ? currFragment.uniprot_acc : null,
+                  uniprot_start_position:  typeof currFragment.uniprot_start_position === 'number' ? currFragment.uniprot_start_position : null,
+                  uniprot_end_position:  typeof currFragment.uniprot_end_position === 'number' ? currFragment.uniprot_end_position : null,
+                  sequence: typeof currFragment.sequence === 'string' ? currFragment.sequence : null,
+                  part_of_ensemble: null
+                })
+            );
+          });
+        }
+        if (arrayOfFragments.length === 0) {
+          arrayOfFragments.push(
+              this.fb.group({
+                description: null,
+                uniprot_acc: null,
+                uniprot_start_position: null,
+                uniprot_end_position: null,
+                sequence: null
+              })
+          );
+        }
+        currChainObj['fragments'] = arrayOfFragments;
+        rows.push(this.fb.group(currChainObj));
       });
     } else {
-      this.addFormArrayElement('protein_chains', false);
+      this.addFormArrayElement('construct', false);
     }
       this.addFormArrayElement('ensembles', false);
   }
 
   addFormArrayElement(field, emitEvent: boolean): void {
     const rows = this.form.get(field) as FormArray;
-    if (field === 'protein_chains') {
+    if (field === 'construct') {
       rows.push(this.fb.group({
         description: '',
         chain_name: '',

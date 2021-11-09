@@ -19,9 +19,10 @@ import { FormDescriptionComponent } from './form-description/form-description.co
 import { FormConstructComponent } from './form-construct/form-construct.component';
 import { FormFilesComponent } from './form-files/form-files.component';
 import { LoginComponent } from './login/login.component';
-import {SubmissionResolver} from './submission.resolver';
+import { SubmissionResolver } from './submission.resolver';
 import { FormUploadComponent } from './form-upload/form-upload.component';
 import { ResultPageComponent } from './result-page/result-page.component';
+import { BrowseComponent} from './browse/browse.component';
 
 
 
@@ -35,6 +36,14 @@ const appRoutes: Routes = [
     path: 'results/:identifier',
     component: ResultPageComponent
   },
+  {
+    path: 'browse',
+    component: BrowseComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
+  },
   {path: 'api', component: SwaggerUiComponent},
   {path: 'api-form', component: SwaggerInternalComponent},
   {path: '', component: HomeComponent},
@@ -42,6 +51,7 @@ const appRoutes: Routes = [
 ];
 
 
+// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,

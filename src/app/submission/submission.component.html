@@ -1,5 +1,32 @@
 <div class="container-xl">
-<!--    <p>bla bla bla</p>-->
+    <!--    <p>bla bla bla</p>-->
+    <div class="row" *ngIf="submissionService.form.value['submission_id']">
+        <div class="col">
+            <h3 class="mb-4" >
+                You are editing the submission:
+                <span class="badge bg-primary-dark">
+                    {{submissionService.form.value['submission_id']}}
+                </span>
+            </h3>
+        </div>
+        <div class="col-auto ms-auto">
+
+        </div>
+    </div>
+    <div class="row align-items-center " *ngIf="submissionService.form.value['entry_id']">
+        <div class="col">
+            <h3>
+                You are editing the entry:
+                <span class="badge bg-primary">
+                    {{submissionService.form.value['entry_id']}}
+                </span>
+            </h3>
+        </div>
+        <div class="col-auto ms-auto">
+            <span class="badge bg-primary-dark bg-hover-min"><i class="bi bi-share"></i> Get publication access code</span>
+        </div>
+    </div>
+
     <div class="row">
         <div class="col">
             <h4>Form</h4>
@@ -10,7 +37,8 @@
                             Description <span style="font-weight: lighter">(optional)</span>
                         </div>
                         <div class="col-auto">
-                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('description')"><i class="bi bi-view-list"></i> Toggle</span>
+                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('description')"><i
+                                    class="bi bi-view-list"></i> Toggle</span>
                         </div>
                     </div>
                 </div>
@@ -25,7 +53,8 @@
                             Ensemble construct
                         </div>
                         <div class="col-auto">
-                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('construct')"><i class="bi bi-view-list"></i> Toggle</span>
+                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('construct')"><i
+                                    class="bi bi-view-list"></i> Toggle</span>
                         </div>
                     </div>
 
@@ -42,7 +71,8 @@
                             Ensemble upload
                         </div>
                         <div class="col-auto">
-                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('upload')"><i class="bi bi-view-list"></i> Toggle</span>
+                            <span class="badge bg-primary-dark bg-hover" (click)="toggle('upload')"><i
+                                    class="bi bi-view-list"></i> Toggle</span>
                         </div>
                     </div>
                 </div>
@@ -53,17 +83,19 @@
             </div>
             <h4>Assessment</h4>
             <form [formGroup]="submissionService.form" *ngIf="submissionService.progress == 0">
-            <div class="row align-items-center">
-                <div class="col-auto">
-                    <div class="mt-2"
-                         appRecaptcha
-                         key="6Le1i-UcAAAAAMWDPoVAYpodXF6lgN3u9D2CpZhD"
-                         formControlName="captcha"></div>
+                <div class="row align-items-center">
+                    <div class="col-auto">
+                        <div class="mt-2"
+                             appRecaptcha
+                             key="6Le1i-UcAAAAAMWDPoVAYpodXF6lgN3u9D2CpZhD"
+                             formControlName="captcha"></div>
+                    </div>
+                    <div class="col">
+                        <button class="btn btn-sm btn-primary-dark" (click)="submissionService.submission()">Run
+                            assessment
+                        </button>
+                    </div>
                 </div>
-                <div class="col">
-                    <button class="btn btn-sm btn-primary-dark" (click)="submissionService.submission()">Run assessment</button>
-                </div>
-            </div>
             </form>
 
             <div class="row" *ngIf="submissionService.progress > 0">

@@ -18,16 +18,17 @@ export class SubmissionResolver implements Resolve<any> {
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
         if (/PED\d{5}/.test(route.queryParams.entry_id)) {
-            return this.internalService.getServerName().pipe(
+            return this.internalService.getPublicEntry(route.queryParams.entry_id).pipe(
                 catchError((error) => {
-                    // console.log('error', error);
                     return of({
                         no_valid_entry_id: true
                     });
                 })
         );
-        } else if (/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/.test(route.queryParams.submission_id)) {
-            return this.internalService.getServerName().pipe(
+        } else if (/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(route.queryParams.submission_id)) {
+            return this.internalService.getEntry({
+                submission_id: route.queryParams.submission_id
+            }).pipe(
                 catchError((error) => {
                     return of({
                         no_valid_submission_id: true

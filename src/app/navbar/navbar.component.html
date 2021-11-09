@@ -17,8 +17,11 @@
               <li class="nav-item">
                 <a class="nav-link" [class.active]="url === 'help'" routerLink="/help">Help</a>
               </li>
-              <li class="nav-item">
+              <li class="nav-item" *ngIf="!profileObj.authorized">
                 <a class="nav-link" [class.active]="url === 'login'" routerLink="/login">Login</a>
+              </li>
+              <li class="nav-item" *ngIf="profileObj.authorized">
+                <span class="nav-link" >{{profileObj.displayedName}}</span>
               </li>
 
             </ul>

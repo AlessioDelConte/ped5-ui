@@ -9,12 +9,14 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
   env;
+  profileObj;
 
-  constructor() { }
+  constructor(private authService: AuthService) { }
 
   ngOnInit(): void {
     this.env = environment;
-
+    this.authService.authentication();
+    this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
   }
 
 }

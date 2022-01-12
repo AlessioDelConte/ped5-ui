@@ -202,7 +202,9 @@ export class SubmissionService {
     }
 
     submission(): void {
-        this.formData.append('form', JSON.stringify(this.form.value));
+        const blob = new Blob([JSON.stringify(this.form.value)], {type : 'text/plain'});
+        this.formData.append('form', blob, 'form.txt');
+        this.formData.append('form', blob, 'form.txt');
         this.internalService.postSubmission(this.formData).subscribe((event: HttpEvent<any>) => {
             switch (event.type) {
                 case HttpEventType.Sent:

@@ -24,9 +24,6 @@ export class SubmissionComponent implements OnInit {
 
       }
     });
-
-
-
   }
 
   toggle(activeComponent): void {

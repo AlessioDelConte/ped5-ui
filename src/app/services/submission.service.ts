@@ -9,7 +9,7 @@ import {Router} from '@angular/router';
 })
 export class SubmissionService {
 
-    entry_id = ''
+    entry_id = '';
     progress = 0;
     form: FormGroup;
     formData = new FormData();
@@ -31,7 +31,6 @@ export class SubmissionService {
         this.entry_id =  entrtyData['entry_id'] || '';
 
 
-        console.log('entrtyData', entrtyData);
 
         if (Array.isArray(entrtyData['construct'])) {
             const rows = this.form.get('construct') as FormArray;

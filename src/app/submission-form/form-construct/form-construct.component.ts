@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SubmissionService } from '../services/submission.service';
+import { SubmissionService } from '../../services/submission.service';
 
 @Component({
   selector: 'app-form-construct',

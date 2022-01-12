@@ -36,7 +36,6 @@ export class SubmissionResolver implements Resolve<any> {
                 })
             );
         }
-
         return of({});
     }
 }

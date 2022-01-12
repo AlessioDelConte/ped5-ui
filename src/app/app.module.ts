@@ -15,12 +15,12 @@ import { SwaggerUiComponent } from './swagger-ui/swagger-ui.component';
 import { SwaggerInternalComponent } from './swagger-internal/swagger-internal.component';
 import { RecaptchaDirective } from './recaptcha.directive';
 import { SubmissionComponent } from './submission/submission.component';
-import { FormDescriptionComponent } from './form-description/form-description.component';
-import { FormConstructComponent } from './form-construct/form-construct.component';
-import { FormFilesComponent } from './form-files/form-files.component';
+import { FormDescriptionComponent } from './submission-form/form-description/form-description.component';
+import { FormConstructComponent } from './submission-form/form-construct/form-construct.component';
+import { FormFilesComponent } from './submission-form/form-files/form-files.component';
 import { LoginComponent } from './login/login.component';
 import { SubmissionResolver } from './submission.resolver';
-import { FormUploadComponent } from './form-upload/form-upload.component';
+import { FormUploadComponent } from './submission-form/form-upload/form-upload.component';
 import { ResultPageComponent } from './result-page/result-page.component';
 import { BrowseComponent} from './browse/browse.component';
 

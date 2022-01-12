@@ -84,12 +84,6 @@
             <h4>Assessment</h4>
             <form [formGroup]="submissionService.form" *ngIf="submissionService.progress == 0">
                 <div class="row align-items-center">
-                    <div class="col-auto">
-                        <div class="mt-2"
-                             appRecaptcha
-                             key="6Le1i-UcAAAAAMWDPoVAYpodXF6lgN3u9D2CpZhD"
-                             formControlName="captcha"></div>
-                    </div>
                     <div class="col">
                         <button class="btn btn-sm btn-primary-dark" (click)="submissionService.submission()">Run
                             assessment

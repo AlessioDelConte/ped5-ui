@@ -8,6 +8,7 @@ import { SubmissionService } from '../../services/submission.service';
 })
 export class FormUploadComponent implements OnInit {
   @Input() indexEnsemble;
+  @Input() ensembleObj;
   @ViewChild('fileW') fileW;
   @ViewChild('fileC') fileC;
 
@@ -16,6 +17,7 @@ export class FormUploadComponent implements OnInit {
   constructor(public submissionService: SubmissionService) { }
 
   ngOnInit(): void {
+    console.log('this.ensembleObj', this.ensembleObj);
   }
   addFilesW(): void {
     this.fileW.nativeElement.click();

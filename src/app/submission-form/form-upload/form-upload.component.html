@@ -10,16 +10,21 @@
 
 <div class="row">
     <div class="col">
-        <button class="btn btn-sm btn-success" (click)="addFilesW()">
+        <button *ngIf="ensembleObj.weights_filesize === 0"  class="btn btn-sm btn-success" (click)="addFilesW()">
             <span *ngIf="file_nameW">Select an other file for weights</span>
             <span *ngIf="!file_nameW"> Select file for weights</span>
         </button>
-
+        <button *ngIf="ensembleObj.weights_filesize > 0" class="btn btn-sm btn-warning" (click)="addFilesC()">
+            <span>Replace current file of weights</span>
+        </button>
     </div>
     <div class="col text-end">
-        <button class="btn btn-sm btn-success" (click)="addFilesC()">
+        <button *ngIf="ensembleObj.conformations_filesize === 0" class="btn btn-sm btn-success" (click)="addFilesC()">
             <span *ngIf="file_nameC">Select an other file for conformations</span>
             <span *ngIf="!file_nameC"> Select file for conformations</span>
+        </button>
+        <button *ngIf="ensembleObj.conformations_filesize > 0" class="btn btn-sm btn-warning" (click)="addFilesC()">
+            <span>Replace current file of conformations</span>
         </button>
     </div>
 </div>

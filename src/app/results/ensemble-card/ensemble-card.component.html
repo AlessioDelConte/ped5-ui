@@ -15,16 +15,56 @@
                     </p>
                 </div>
                 <div class="col-auto me-0">
-                    <span *ngFor="let currChain of currConstructs"
-              class="badge bg-secondary me-1"
-              [class.bg-primary]="currChain['chain_name'] === currChainName.value"
-              [class.bg-hover]="currChain['chain_name'] !== currChainName.value"
-              (click)="currChainName.next(currChain['chain_name'])">
+                    <span *ngFor="let currChain of resultsService.entryObj.constructs"
+                          class="badge bg-secondary me-1"
+                          [class.bg-primary]="currChain['chain_name'] === currChainName.value"
+                          [class.bg-hover]="currChain['chain_name'] !== currChainName.value"
+                          (click)="currChainName.next(currChain['chain_name'])">
           Chain: {{currChain['chain_name']}}
-            <!--            <i class="material-icons" [class.showFresh]="currChain['chain_name'] === currCainName.value">find_replace</i>-->
+                        <!--            <i class="material-icons" [class.showFresh]="currChain['chain_name'] === currCainName.value">find_replace</i>-->
           </span>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-md"><span>
+                    <strong>Secondary structure entropy </strong>
+                    {{currStatData['entropy_dssp_mean'] | number:'1.2-2'}}</span></div>
+                <div class="col-md"><span>
+                    <strong>Relative solvent accessibility </strong>
+                    {{currStatData['relative_asa_mean'] | number:'1.2-2'}} </span></div>
+                <div class="col-md"><span>
+                    <strong>Radius of gyration </strong>
+                    {{currStatData['rg_mean'] | number:'1.2-2'}} </span></div>
+                <div class="col-lg-3"></div>
+            </div>
+            <div class="row">
+
+
+                                <div class="col-lg-4">
+                <!--                    <div id="molstar{{model['ensemble_id']}}" style="overflow: hidden">-->
+                <!--                    </div>-->
+                                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <img
+                                    src="{{currLinks.ramachandran_plot}}"
+                                    width="100%">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="row">
+                        <div class="col">
+                            <img
+                                    src="{{currLinks.rg_boxplot}}"
+                                    width="100%">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
         </div>
     </div>
 </div>

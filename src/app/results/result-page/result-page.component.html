@@ -53,7 +53,7 @@
 <!--    <hr tyle="border-color: #2274a5">-->
 
     <div class="row" *ngFor="let currEnsmeble of entryObj['ensembles']; last as isLast">
-        <app-ensemble-card [currEnsmeble]="currEnsmeble" [currConstructs]="entryObj['constructs']"></app-ensemble-card>
+        <app-ensemble-card [currEnsmeble]="currEnsmeble"></app-ensemble-card>
         <hr *ngIf="!isLast" style="border-color: #2274a5">
     </div>
 <!--    <hr style="border-color: #2274a5">-->

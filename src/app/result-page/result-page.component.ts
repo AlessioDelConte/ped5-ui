@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { InternalService } from '../services/internal.service';
+import {ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-result-page',
@@ -6,10 +8,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./result-page.component.scss']
 })
 export class ResultPageComponent implements OnInit {
+  entryObj = {};
 
-  constructor() { }
+  constructor(private internalService: InternalService,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    const currentUUID = this.route.snapshot.paramMap.get('identifier');
+ console.log(currentUUID);
+    this.internalService.getFile(currentUUID, 'metadata.json').subscribe(currObj => {
+      this.entryObj = currObj;
+      console.log(this.entryObj);
+
+    });
+
   }
 
 }

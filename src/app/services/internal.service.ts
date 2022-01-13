@@ -50,8 +50,6 @@ export class InternalService {
         });
     }
 
-
-
     sendTask(formData): Observable<any> {
         const url = environment.submission_server + 'task/';
         return this.http.post(url, formData,
@@ -60,5 +58,11 @@ export class InternalService {
                 observe: 'events'
             });
     }
+
+    getFile(submissionID, fileName): Observable<any> {
+        const url = environment.submission_server + 'task/' + submissionID + '/file/' + fileName;
+        return this.http.get(url, {responseType: 'json'});
+    }
+
 
 }

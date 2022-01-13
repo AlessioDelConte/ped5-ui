@@ -19,7 +19,7 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
   };
   currLinks = {
     ramachandran_plot: '',
-    rg_boxplot: ''
+    rg_boxplot: '',
     mmcif: ''
   };
   viewerInstance = null;
@@ -80,10 +80,10 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
           this.viewerInstance.render(viewerContainer, options);
           this.viewerInstance.events.loadComplete.subscribe(() => {
             if (this.currChainName.value) {
-              this.viewerInstance.visual.select({data: [ {auth_asym_id: this.currChainName.value, color: { r: 34, g: 116, b: 165}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
+              this.viewerInstance.visual.select({data: [ {auth_asym_id: this.currChainName.value, color: { r: 50, g: 105, b: 81}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
               this.currChainName.subscribe(currCainName => {
                 if (currCainName) {
-                  this.viewerInstance.visual.select({data: [ {auth_asym_id: currCainName, color: { r: 34, g: 116, b: 165}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
+                  this.viewerInstance.visual.select({data: [ {auth_asym_id: currCainName, color: { r: 50, g: 105, b: 81}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
                 }
               });
             }
@@ -95,7 +95,6 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
               document.getElementById('ped_logo_nav').style['max-height'] = '35px';
               document.getElementById('ped_logo_nav').style['margin'] = '0rem 0rem';
             }
-
           });
 
           window.matchMedia('(prefers-color-scheme: dark)')

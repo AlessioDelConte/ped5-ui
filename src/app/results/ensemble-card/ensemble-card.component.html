@@ -1,0 +1,31 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <div class="row">
+                <div class="col-md">
+                    <p>
+                        <strong>Ensemble ID</strong> {{currEnsmeble['ensemble_id']}}
+
+                    </p>
+                </div>
+                <div class="col-md">
+                    <p>
+                        <strong class="pl-5 me-2">Number of models </strong> {{currEnsmeble['models']}}
+
+                    </p>
+                </div>
+                <div class="col-auto me-0">
+                    <span *ngFor="let currChain of currConstructs"
+              class="badge bg-secondary me-1"
+              [class.bg-primary]="currChain['chain_name'] === currChainName.value"
+              [class.bg-hover]="currChain['chain_name'] !== currChainName.value"
+              (click)="currChainName.next(currChain['chain_name'])">
+          Chain: {{currChain['chain_name']}}
+            <!--            <i class="material-icons" [class.showFresh]="currChain['chain_name'] === currCainName.value">find_replace</i>-->
+          </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

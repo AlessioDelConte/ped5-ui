@@ -21,8 +21,9 @@ import { FormFilesComponent } from './submission-form/form-files/form-files.comp
 import { LoginComponent } from './login/login.component';
 import { SubmissionResolver } from './submission.resolver';
 import { FormUploadComponent } from './submission-form/form-upload/form-upload.component';
-import { ResultPageComponent } from './result-page/result-page.component';
+import { ResultPageComponent } from './results/result-page/result-page.component';
 import { BrowseComponent} from './browse/browse.component';
+import { EnsembleCardComponent } from './results/ensemble-card/ensemble-card.component';
 
 
 
@@ -69,6 +70,7 @@ const appRoutes: Routes = [
     LoginComponent,
     FormUploadComponent,
     ResultPageComponent,
+    EnsembleCardComponent,
   ],
   imports: [
     RouterModule.forRoot(

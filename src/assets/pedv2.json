@@ -1,0 +1,1470 @@
+{
+  "openapi": "3.0.0",
+  "servers": [
+    {
+      "url": "https://proteinensemble.org/{base_path}",
+      "description": "PED REST API",
+      "variables": {
+        "base_path": {
+          "default": "api"
+        }
+      }
+    }
+  ],
+  "paths": {
+    "/{identifier}": {
+      "parameters": [
+        {
+          "name": "identifier",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}(e\\d{3})?",
+            "example": "PED00001"
+          },
+          "description": "Experiment Entry or Ensemble ID"
+        }
+      ],
+      "get": {
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "description": "",
+                  "type": "object",
+                  "properties": {
+                    "entry_id": {
+                      "type": "string",
+                      "example": "PED00054"
+                    },
+                    "submission_path": {
+                      "type": "string",
+                      "example": "./projects/ped5-py/tmp/PED00054/"
+                    },
+                    "description_version": {
+                      "$ref": "#/components/schemas/VersionStamp"
+                    },
+                    "ensembles": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Ensemble"
+                      }
+                    },
+                    "constructs": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Construct"
+                      }
+                    },
+                    "construct_version": {
+                      "$ref": "#/components/schemas/VersionStamp"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "authors": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/Author"
+                      }
+                    },
+                    "release": {
+                      "type": "string"
+                    },
+                    "publication_status": {
+                      "type": "string"
+                    },
+                    "publication_source": {
+                      "type": "string"
+                    },
+                    "publication_identifier": {
+                      "type": "string"
+                    },
+                    "publication_html": {
+                      "type": "string"
+                    },
+                    "entry_cross_reference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CrossReference"
+                      }
+                    },
+                    "experimental_cross_reference": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/CrossReference"
+                      }
+                    },
+                    "expression_organism": {
+                      "type": "string"
+                    },
+                    "experimental_procedure": {
+                      "type": "string"
+                    },
+                    "structural_ensembles_calculation": {
+                      "type": "string"
+                    },
+                    "md_calculation": {
+                      "type": "string"
+                    },
+                    "term_experimental_procedure": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ExperimentalTag"
+                      }
+                    },
+                    "term_md_calculation": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ExperimentalTag"
+                      }
+                    },
+                    "term_structural_ensembles_calculation": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ExperimentalTag"
+                      }
+                    },
+                    "global_asa_var": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/GlobalASAVar"
+                      }
+                    },
+                    "data_per_chain": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/DataPerChain"
+                      }
+                    },
+                    "data_residue": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/ResidueData"
+                      }
+                    },
+                    "errors": {
+                      "type": "array",
+                      "items": {}
+                    }
+                  },
+                  "required": [
+                    "entry_id",
+                    "description_version",
+                    "ensembles",
+                    "constructs",
+                    "construct_version",
+                    "authors"
+                  ]
+                },
+                "examples": {
+                  "example-1": {
+                    "value": {
+                      "entry_id": "PED00054",
+                      "submission_path": "./projects/ped5-py/tmp/PED00054/",
+                      "description_version": {
+                        "timestamp": "2021-04-26T14:50:43.889000+00:00",
+                        "curator_id": "lazta",
+                        "curator_orcid": "0000-0001-7496-6711",
+                        "curator_name": "Lazar Tames",
+                        "version": 5
+                      },
+                      "ensembles": [
+                        {
+                          "ensemble_id": "PED00054e000",
+                          "description": "2n3a",
+                          "weight_file_path": "string",
+                          "weight_uploaded": {
+                            "timestamp": "2021-04-26T14:50:43.889000+00:00",
+                            "curator_id": "lazta",
+                            "curator_orcid": "0000-0001-7496-6711",
+                            "curator_name": "Lazar Tames",
+                            "version": 5
+                          },
+                          "conformations_file_path": "string",
+                          "conformations_uploaded": {
+                            "timestamp": "2021-04-26T14:50:43.889000+00:00",
+                            "curator_id": "lazta",
+                            "curator_orcid": "0000-0001-7496-6711",
+                            "curator_name": "Lazar Tames",
+                            "version": 5
+                          },
+                          "ped_last_update": "2019-08-24T14:15:22Z",
+                          "ped_last_status": "ensemble_uploaded",
+                          "models": 0,
+                          "only_CA": true,
+                          "errors": [
+                            null
+                          ]
+                        }
+                      ],
+                      "constructs": [
+                        {
+                          "chain_name": "A",
+                          "description": "POGZ",
+                          "is_fixed": true,
+                          "is_disordered": true,
+                          "fragments": [
+                            {
+                              "description": "PC4 and SFRS1-interacting protein",
+                              "part_of_ensemble": true,
+                              "sequence": "MTRDFKPGDLIFAKMKGYPHWPARVDEVPDGAVKPPTNKLPIFFFGTHETAFLGPKDIFPYSENKEKYGKPNKRKGFNEGLWEIDNNPKVKFSSQQAATKQSNASSDVEVEEKETSVSKEDTDHEEKASNEDVTKAVDITTPKAARRGRKRKAEKQVETEEAGVVTTATASVNLKVSPKRGRPAATEVKIPKPRGRPKMVKQPCPSESDIITEEDKSKKKGQEEKQPKKQPKKDEEGQKEEDKPRKEPDKKEGKKEVESKRKNLAKTGVTSTSDSEEEGDDQEGEKKRKGGRNFQTAHRRNMLKGQHEKEAADRKRKQEEQMETEQQNKDEGKKPEVKKVEKKRETSMDSRLQRIHAEIKNSLKIDNLDVNRCIEALDELASLQVTMQQAQKHTEMITTLKKIRRFKVSQVIMEKSTMLYNKFKNMFLVGEGDSVITQVLNKSLAEQRQHEEANKTKDQGKKGPNKKLEKEQTGSKTLNGGSDAQDGNQPQHNGESNEDSKDNHEASTKKKPSSEERETEISLKDSTLDN",
+                              "uniprot_acc": "O75475",
+                              "uniprot_start_position": 348,
+                              "uniprot_end_position": 426,
+                              "uniprot_sequence_version": 1,
+                              "uniprot_sequence_last_update": "1998-11-01",
+                              "uniprot_entry_version": 192,
+                              "uniprot_entry_last_update": "2021-09-29",
+                              "uniprot_organism_name": "Homo sapiens",
+                              "uniprot_organism_taxon": "9606",
+                              "pdb_start_position": 2,
+                              "pdb_end_position": 104,
+                              "aligment_start_position": 0,
+                              "aligment_end_position": 0,
+                              "uniprot_sequence_coverage": 0.46,
+                              "fragment_length_pdb": 0,
+                              "fragment_sequence": {
+                                "sequence": "string",
+                                "uniprot": "string",
+                                "length_total_uniprot": 0,
+                                "length_total_pdb": 0,
+                                "length_frag_total_uniprot": 0,
+                                "start_position_alig": 0,
+                                "end_position_alig": 0,
+                                "start_position_pdb": 0,
+                                "end_position_pdb": 0,
+                                "length_frag_total_pdb": 0,
+                                "length_frag_nogaps_alig": 0,
+                                "cov_total_frag_pdb": 0,
+                                "cov_nogaps_frag_pdb": 0,
+                                "cov_total_frag_unip": 0,
+                                "cov_nogaps_frag_unip": 0
+                              }
+                            }
+                          ],
+                          "chain_type": "protein",
+                          "sequence": "string",
+                          "modifications": [
+                            {
+                              "chain": "string",
+                              "fragment": 0,
+                              "start_position_unip": 0,
+                              "uniprot": "string",
+                              "start_position_alig": 0,
+                              "start_position_pdb": 0,
+                              "aa": "string",
+                              "modification_code": "string"
+                            }
+                          ],
+                          "missings": [
+                            null
+                          ],
+                          "mutations": [
+                            null
+                          ],
+                          "molecules": [
+                            null
+                          ]
+                        }
+                      ],
+                      "construct_version": {
+                        "timestamp": "2021-04-26T14:50:43.889000+00:00",
+                        "curator_id": "lazta",
+                        "curator_orcid": "0000-0001-7496-6711",
+                        "curator_name": "Lazar Tames",
+                        "version": 5
+                      },
+                      "title": "string",
+                      "authors": [
+                        {
+                          "name": "Tamas Lazar",
+                          "orcid_id": "0000-0001-7496-6711",
+                          "role": "biocurator",
+                          "corresponding_author": true,
+                          "email": "tamas.lazar@vub.be"
+                        }
+                      ],
+                      "release": "string",
+                      "publication_status": "string",
+                      "publication_source": "string",
+                      "publication_identifier": "string",
+                      "publication_html": "string",
+                      "entry_cross_reference": [
+                        {
+                          "db": "string",
+                          "id": "string"
+                        }
+                      ],
+                      "experimental_cross_reference": [
+                        {
+                          "db": "string",
+                          "id": "string"
+                        }
+                      ],
+                      "expression_organism": "string",
+                      "experimental_procedure": "string",
+                      "structural_ensembles_calculation": "string",
+                      "md_calculation": "string",
+                      "term_experimental_procedure": [
+                        {
+                          "name": "string",
+                          "namespace": "string",
+                          "is_a": [
+                            "string"
+                          ],
+                          "id": "string",
+                          "def": "string"
+                        }
+                      ],
+                      "term_md_calculation": [
+                        {
+                          "name": "string",
+                          "namespace": "string",
+                          "is_a": [
+                            "string"
+                          ],
+                          "id": "string",
+                          "def": "string"
+                        }
+                      ],
+                      "term_structural_ensembles_calculation": [
+                        {
+                          "name": "string",
+                          "namespace": "string",
+                          "is_a": [
+                            "string"
+                          ],
+                          "id": "string",
+                          "def": "string"
+                        }
+                      ],
+                      "global_asa_var": [
+                        {
+                          "ensemble_id": "string",
+                          "asa_var": 0
+                        }
+                      ],
+                      "data_per_chain": [
+                        {
+                          "ensemble_id": "string",
+                          "chain": "string",
+                          "relative_asa_mean": 0,
+                          "entropy_dssp_mean": 0,
+                          "rg_mean": 0
+                        }
+                      ],
+                      "data_residue": [
+                        {
+                          "fragment": 0,
+                          "pdb_position": 0,
+                          "uniprot_acc": "string",
+                          "uniprot_position": 0,
+                          "alignment_position": 0,
+                          "ensemble_id": "string",
+                          "chain": "string",
+                          "residue_number": 0,
+                          "helix_dssp_percent": 0,
+                          "beta_dssp_percent": 0,
+                          "coil_dssp_percent": 0,
+                          "entropy_dssp": 0,
+                          "mean_relative_ASA": 0
+                        }
+                      ],
+                      "errors": [
+                        null
+                      ]
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "description": "Metadata of experimental entries can be retrieved by using their corresponding PED identifiers. Giving a Entry ID will give you all the related ensembles.",
+        "operationId": "get-identifier",
+        "summary": "Get single entry"
+      }
+    },
+    "/report/{entry_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/entry_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Report",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-report-entry_id",
+        "description": "Download PDF validation entry report that PED provides to all fully processed experimental entries with completed manual curation pipeline."
+      }
+    },
+    "/ensemble/{ensemble_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ensemble_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Ensemble",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ensemble-ensemble_id",
+        "description": "Download the deposited ensemble in compressed file."
+      }
+    },
+    "/ensemble_sample/{ensemble_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ensemble_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Ensemble Sample",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ensemble_sample-ensemble_id",
+        "description": "Download an sample file formed by representative 10 conformers."
+      }
+    },
+    "/weights/{ensemble_id}": {
+      "parameters": [
+        {
+          "name": "ensemble_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}e\\d{3}",
+            "example": "PED00001e001"
+          },
+          "description": "Experiment Ensemble ID"
+        }
+      ],
+      "get": {
+        "summary": "Download Weights",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-weights-ensemble_id",
+        "description": "Download a deposited weights file."
+      }
+    },
+    "/ensemble_animation/{ensemble_id}/{chain_id}": {
+      "parameters": [
+        {
+          "$ref": "#/components/parameters/ensemble_id"
+        },
+        {
+          "$ref": "#/components/parameters/chain_id"
+        }
+      ],
+      "get": {
+        "summary": "Download Ensemble Animation",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ensemble_animation-ensemble_id-chain_id",
+        "description": "Download an animated GIF from representative 10 conformers, where selected chain are colored in blue, the rest chains are colored in gray."
+      }
+    },
+    "/ramachandran_plot/{ensemble_id}/{chain_id}": {
+      "parameters": [
+        {
+          "name": "ensemble_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}e\\d{3}",
+            "example": "PED00001e001"
+          },
+          "description": "Experiment Ensemble ID"
+        },
+        {
+          "name": "chain_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "A"
+          },
+          "description": "Protein Chain ID"
+        }
+      ],
+      "get": {
+        "summary": "Download Ramachandran Plot",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-ramachandran_plot-ensemble_id-chain_id",
+        "description": "Download a calculated ramachandran plot for the given chain."
+      }
+    },
+    "/rg_boxplot/{ensemble_id}/{chain_id}": {
+      "parameters": [
+        {
+          "name": "ensemble_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "pattern": "PED\\d{5}e\\d{3}",
+            "example": "PED00001e001"
+          },
+          "description": "Experiment Ensemble ID"
+        },
+        {
+          "name": "chain_id",
+          "in": "path",
+          "required": true,
+          "schema": {
+            "type": "string",
+            "example": "A"
+          },
+          "description": "Protein Chain ID"
+        }
+      ],
+      "get": {
+        "summary": "Download RG Boxplot",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        },
+        "operationId": "get-rg_boxplot-ensemble_id-chain_id",
+        "description": "Download a calculated Rg box-plot for the given chain."
+      }
+    },
+    "/browse": {
+      "get": {
+        "summary": "Browse",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "",
+                  "minItems": 1,
+                  "uniqueItems": true,
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "cross_references": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/CrossReference"
+                        }
+                      },
+                      "terms": {
+                        "type": "array",
+                        "items": {
+                          "$ref": "#/components/schemas/ExperimentalTag"
+                        }
+                      },
+                      "number_of_ensembles": {
+                        "type": "number"
+                      },
+                      "uniprot_acc": {
+                        "type": "string"
+                      },
+                      "entry_id": {
+                        "type": "string"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "publication_identifier": {
+                        "type": "string"
+                      },
+                      "publication_html": {
+                        "type": "string"
+                      },
+                      "number_of_conformers": {
+                        "type": "number"
+                      },
+                      "uniprot_sequence_coverage": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "properties": {
+                            "chain_name": {
+                              "type": "string"
+                            },
+                            "coverage": {
+                              "type": "number"
+                            },
+                            "uniprot_acc": {
+                              "type": "string"
+                            }
+                          },
+                          "required": [
+                            "chain_name",
+                            "coverage",
+                            "uniprot_acc"
+                          ]
+                        }
+                      },
+                      "protein_name": {
+                        "type": "string"
+                      },
+                      "unpublished": {
+                        "type": "boolean"
+                      }
+                    },
+                    "required": [
+                      "cross_references",
+                      "terms",
+                      "number_of_ensembles",
+                      "uniprot_acc",
+                      "entry_id",
+                      "title",
+                      "publication_identifier",
+                      "publication_html",
+                      "number_of_conformers",
+                      "uniprot_sequence_coverage",
+                      "protein_name",
+                      "unpublished"
+                    ]
+                  }
+                },
+                "examples": {}
+              }
+            }
+          }
+        },
+        "operationId": "get-browse",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string",
+              "example": "P04637"
+            },
+            "in": "query",
+            "name": "acc",
+            "description": "UniProt Accession number"
+          },
+          {
+            "schema": {
+              "type": "string",
+              "example": "NMR"
+            },
+            "in": "query",
+            "name": "term",
+            "description": "Terms are automatically extracted with the use of a pre-compiled controlled vocabulary from manually curated entry description."
+          }
+        ],
+        "description": "Simple search"
+      },
+      "parameters": []
+    },
+    "/download": {
+      "get": {
+        "summary": "Download multiple ensembles",
+        "tags": [],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string",
+                  "description": "Download link"
+                }
+              }
+            }
+          }
+        },
+        "operationId": "get-download",
+        "description": "Download multiple ensemble in one .tar archive.",
+        "parameters": [
+          {
+            "schema": {
+              "type": "string"
+            },
+            "in": "query",
+            "name": "ensemble_id",
+            "description": "Experiment Ensemble IDs"
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Author": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "Tamas Lazar",
+            "orcid_id": "0000-0001-7496-6711",
+            "role": "biocurator",
+            "corresponding_author": true,
+            "email": "tamas.lazar@vub.be"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string",
+            "example": "Tamas Lazar"
+          },
+          "orcid_id": {
+            "type": "string",
+            "example": "0000-0001-7496-6711"
+          },
+          "role": {
+            "type": "string",
+            "enum": [
+              "biocurator",
+              "data_owner"
+            ]
+          },
+          "corresponding_author": {
+            "type": "boolean"
+          },
+          "email": {
+            "type": "string",
+            "example": "tamas.lazar@vub.be"
+          }
+        },
+        "required": [
+          "role",
+          "corresponding_author"
+        ]
+      },
+      "ResidueData": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "fragment": 1,
+            "pdb_position": 1389,
+            "uniprot_acc": "Q7Z3K3",
+            "uniprot_position": 1389,
+            "alignment_position": 0,
+            "ensemble_id": "PED00054e000",
+            "chain": "A",
+            "residue_number": 1389,
+            "helix_dssp_percent": 0,
+            "beta_dssp_percent": 0,
+            "coil_dssp_percent": 1,
+            "entropy_dssp": 0,
+            "mean_relative_ASA": 1
+          }
+        },
+        "properties": {
+          "fragment": {
+            "type": "number"
+          },
+          "pdb_position": {
+            "type": "number"
+          },
+          "uniprot_acc": {
+            "type": "string"
+          },
+          "uniprot_position": {
+            "type": "number"
+          },
+          "alignment_position": {
+            "type": "number"
+          },
+          "ensemble_id": {
+            "type": "string"
+          },
+          "chain": {
+            "type": "string"
+          },
+          "residue_number": {
+            "type": "number"
+          },
+          "helix_dssp_percent": {
+            "type": "number"
+          },
+          "beta_dssp_percent": {
+            "type": "number"
+          },
+          "coil_dssp_percent": {
+            "type": "number"
+          },
+          "entropy_dssp": {
+            "type": "number"
+          },
+          "mean_relative_ASA": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "fragment",
+          "pdb_position",
+          "uniprot_position",
+          "alignment_position",
+          "ensemble_id",
+          "chain",
+          "residue_number",
+          "helix_dssp_percent",
+          "beta_dssp_percent",
+          "coil_dssp_percent",
+          "entropy_dssp",
+          "mean_relative_ASA"
+        ]
+      },
+      "Construct": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "chain_name": "A",
+            "description": "POGZ",
+            "is_fixed": true,
+            "is_disordered": true,
+            "fragments": [
+              {
+                "description": "PC4 and SFRS1-interacting protein",
+                "part_of_ensemble": true,
+                "sequence": "MTRDFKPGDLIFAKMKGYPHWPARVDEVPDGAVKPPTNKLPIFFFGTHETAFLGPKDIFPYSENKEKYGKPNKRKGFNEGLWEIDNNPKVKFSSQQAATKQSNASSDVEVEEKETSVSKEDTDHEEKASNEDVTKAVDITTPKAARRGRKRKAEKQVETEEAGVVTTATASVNLKVSPKRGRPAATEVKIPKPRGRPKMVKQPCPSESDIITEEDKSKKKGQEEKQPKKQPKKDEEGQKEEDKPRKEPDKKEGKKEVESKRKNLAKTGVTSTSDSEEEGDDQEGEKKRKGGRNFQTAHRRNMLKGQHEKEAADRKRKQEEQMETEQQNKDEGKKPEVKKVEKKRETSMDSRLQRIHAEIKNSLKIDNLDVNRCIEALDELASLQVTMQQAQKHTEMITTLKKIRRFKVSQVIMEKSTMLYNKFKNMFLVGEGDSVITQVLNKSLAEQRQHEEANKTKDQGKKGPNKKLEKEQTGSKTLNGGSDAQDGNQPQHNGESNEDSKDNHEASTKKKPSSEERETEISLKDSTLDN",
+                "uniprot_acc": "O75475",
+                "uniprot_start_position": 348,
+                "uniprot_end_position": 426,
+                "uniprot_sequence_version": "1",
+                "uniprot_sequence_last_update": "1998-11-01",
+                "uniprot_entry_version": 192,
+                "uniprot_entry_last_update": "2021-09-29",
+                "uniprot_organism_name": "Homo sapiens",
+                "uniprot_organism_taxon": 9606,
+                "pdb_start_position": 2,
+                "pdb_end_position": 104,
+                "aligment_start_position": 0,
+                "aligment_end_position": 0,
+                "uniprot_sequence_coverage": 0.46,
+                "fragment_length_pdb": 0,
+                "fragment_sequence": "string"
+              }
+            ],
+            "chain_type": "protein",
+            "sequence": "string",
+            "modifications": [
+              {
+                "chain": "string",
+                "fragment": 0,
+                "start_position_unip": 0,
+                "uniprot": "string",
+                "start_position_alig": 0,
+                "start_position_pdb": 0,
+                "aa": "string",
+                "modification_code": "string"
+              }
+            ],
+            "missings": [
+              null
+            ],
+            "mutations": [
+              null
+            ],
+            "molecules": [
+              null
+            ]
+          }
+        },
+        "properties": {
+          "chain_name": {
+            "type": "string",
+            "example": "A"
+          },
+          "description": {
+            "type": "string",
+            "example": "POGZ"
+          },
+          "is_fixed": {
+            "type": "boolean"
+          },
+          "is_disordered": {
+            "type": "boolean"
+          },
+          "fragments": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstructFragment"
+            }
+          },
+          "chain_type": {
+            "type": "string",
+            "enum": [
+              "protein",
+              "nucleotide"
+            ]
+          },
+          "sequence": {
+            "type": "string"
+          },
+          "modifications": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ConstructModification"
+            }
+          },
+          "missings": {
+            "type": "array",
+            "items": {}
+          },
+          "mutations": {
+            "type": "array",
+            "items": {}
+          },
+          "molecules": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": [
+          "chain_name",
+          "description",
+          "fragments",
+          "modifications"
+        ]
+      },
+      "ConstructModification": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "chain": {
+            "type": "string"
+          },
+          "fragment": {
+            "type": "number"
+          },
+          "start_position_unip": {
+            "type": "number"
+          },
+          "uniprot": {
+            "type": "string"
+          },
+          "start_position_alig": {
+            "type": "number"
+          },
+          "start_position_pdb": {
+            "type": "number"
+          },
+          "aa": {
+            "type": "string"
+          },
+          "modification_code": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "chain",
+          "fragment",
+          "start_position_unip",
+          "uniprot",
+          "start_position_alig",
+          "start_position_pdb",
+          "aa",
+          "modification_code"
+        ],
+        "x-examples": {
+          "example-1": {
+            "chain": "string",
+            "fragment": 0,
+            "start_position_unip": 0,
+            "uniprot": "string",
+            "start_position_alig": 0,
+            "start_position_pdb": 0,
+            "aa": "string",
+            "modification_code": "string"
+          }
+        }
+      },
+      "ConstructFragment": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "description": "PC4 and SFRS1-interacting protein",
+            "part_of_ensemble": true,
+            "sequence": "MTRDFKPGDLIFAKMKGYPHWPARVDEVPDGAVKPPTNKLPIFFFGTHETAFLGPKDIFPYSENKEKYGKPNKRKGFNEGLWEIDNNPKVKFSSQQAATKQSNASSDVEVEEKETSVSKEDTDHEEKASNEDVTKAVDITTPKAARRGRKRKAEKQVETEEAGVVTTATASVNLKVSPKRGRPAATEVKIPKPRGRPKMVKQPCPSESDIITEEDKSKKKGQEEKQPKKQPKKDEEGQKEEDKPRKEPDKKEGKKEVESKRKNLAKTGVTSTSDSEEEGDDQEGEKKRKGGRNFQTAHRRNMLKGQHEKEAADRKRKQEEQMETEQQNKDEGKKPEVKKVEKKRETSMDSRLQRIHAEIKNSLKIDNLDVNRCIEALDELASLQVTMQQAQKHTEMITTLKKIRRFKVSQVIMEKSTMLYNKFKNMFLVGEGDSVITQVLNKSLAEQRQHEEANKTKDQGKKGPNKKLEKEQTGSKTLNGGSDAQDGNQPQHNGESNEDSKDNHEASTKKKPSSEERETEISLKDSTLDN",
+            "uniprot_acc": "O75475",
+            "uniprot_start_position": 348,
+            "uniprot_end_position": 426,
+            "uniprot_sequence_version": "1",
+            "uniprot_sequence_last_update": "1998-11-01",
+            "uniprot_entry_version": 192,
+            "uniprot_entry_last_update": "2021-09-29",
+            "uniprot_organism_name": "Homo sapiens",
+            "uniprot_organism_taxon": 9606,
+            "pdb_start_position": 2,
+            "pdb_end_position": 104,
+            "aligment_start_position": 0,
+            "aligment_end_position": 0,
+            "uniprot_sequence_coverage": 0.46,
+            "fragment_length_pdb": 0,
+            "fragment_sequence": "string"
+          }
+        },
+        "properties": {
+          "description": {
+            "type": "string",
+            "example": "PC4 and SFRS1-interacting protein"
+          },
+          "part_of_ensemble": {
+            "type": "boolean"
+          },
+          "sequence": {
+            "type": "string",
+            "example": "MTRDFKPGDLIFAKMKGYPHWPARVDEVPDGAVKPPTNKLPIFFFGTHETAFLGPKDIFPYSENKEKYGKPNKRKGFNEGLWEIDNNPKVKFSSQQAATKQSNASSDVEVEEKETSVSKEDTDHEEKASNEDVTKAVDITTPKAARRGRKRKAEKQVETEEAGVVTTATASVNLKVSPKRGRPAATEVKIPKPRGRPKMVKQPCPSESDIITEEDKSKKKGQEEKQPKKQPKKDEEGQKEEDKPRKEPDKKEGKKEVESKRKNLAKTGVTSTSDSEEEGDDQEGEKKRKGGRNFQTAHRRNMLKGQHEKEAADRKRKQEEQMETEQQNKDEGKKPEVKKVEKKRETSMDSRLQRIHAEIKNSLKIDNLDVNRCIEALDELASLQVTMQQAQKHTEMITTLKKIRRFKVSQVIMEKSTMLYNKFKNMFLVGEGDSVITQVLNKSLAEQRQHEEANKTKDQGKKGPNKKLEKEQTGSKTLNGGSDAQDGNQPQHNGESNEDSKDNHEASTKKKPSSEERETEISLKDSTLDN"
+          },
+          "uniprot_acc": {
+            "type": "string",
+            "example": "O75475"
+          },
+          "uniprot_start_position": {
+            "type": "number",
+            "example": 348
+          },
+          "uniprot_end_position": {
+            "type": "number",
+            "example": 426
+          },
+          "uniprot_sequence_version": {
+            "example": 1,
+            "type": "number"
+          },
+          "uniprot_sequence_last_update": {
+            "type": "string",
+            "example": "1998-11-01"
+          },
+          "uniprot_entry_version": {
+            "type": "number",
+            "example": 192
+          },
+          "uniprot_entry_last_update": {
+            "type": "string",
+            "example": "2021-09-29"
+          },
+          "uniprot_organism_name": {
+            "type": "string",
+            "example": "Homo sapiens"
+          },
+          "uniprot_organism_taxon": {
+            "type": "string",
+            "example": "9606"
+          },
+          "pdb_start_position": {
+            "type": "number",
+            "example": 2
+          },
+          "pdb_end_position": {
+            "type": "number",
+            "example": 104
+          },
+          "aligment_start_position": {
+            "type": "number"
+          },
+          "aligment_end_position": {
+            "type": "number"
+          },
+          "uniprot_sequence_coverage": {
+            "type": "number",
+            "example": 0.46
+          },
+          "fragment_length_pdb": {
+            "type": "number"
+          },
+          "fragment_sequence": {
+            "$ref": "#/components/schemas/ConstructFragmentSequence"
+          }
+        },
+        "required": [
+          "description",
+          "part_of_ensemble"
+        ]
+      },
+      "Ensemble": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "ensemble_id": "PED00054e000",
+            "description": "2n3a",
+            "weight_file_path": "string",
+            "weight_uploaded": {
+              "timestamp": "2021-04-26T14:50:43.889000+00:00",
+              "curator_id": "lazta",
+              "curator_orcid": "0000-0001-7496-6711",
+              "curator_name": "Lazar Tames",
+              "version": 5
+            },
+            "conformations_file_path": "string",
+            "conformations_uploaded": {
+              "timestamp": "2021-04-26T14:50:43.889000+00:00",
+              "curator_id": "lazta",
+              "curator_orcid": "0000-0001-7496-6711",
+              "curator_name": "Lazar Tames",
+              "version": 5
+            },
+            "ped_last_update": "2019-08-24T14:15:22Z",
+            "ped_last_status": "ensemble_uploaded",
+            "models": 0,
+            "only_CA": true,
+            "errors": [
+              null
+            ]
+          }
+        },
+        "title": "",
+        "properties": {
+          "ensemble_id": {
+            "type": "string",
+            "example": "PED00054e000"
+          },
+          "description": {
+            "type": "string",
+            "example": "2n3a"
+          },
+          "weight_file_path": {
+            "type": "string"
+          },
+          "weight_uploaded": {
+            "$ref": "#/components/schemas/VersionStamp"
+          },
+          "conformations_file_path": {
+            "type": "string"
+          },
+          "conformations_uploaded": {
+            "$ref": "#/components/schemas/VersionStamp"
+          },
+          "ped_last_update": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "ped_last_status": {
+            "type": "string",
+            "enum": [
+              "ensemble_uploaded",
+              "ensemble_rejected",
+              "ensemble_validated",
+              "ensemble_processed",
+              "ensemble_completed"
+            ]
+          },
+          "models": {
+            "type": "number"
+          },
+          "only_CA": {
+            "type": "boolean"
+          },
+          "errors": {
+            "type": "array",
+            "items": {}
+          }
+        },
+        "required": [
+          "ensemble_id",
+          "conformations_file_path",
+          "conformations_uploaded"
+        ]
+      },
+      "CrossReference": {
+        "type": "object",
+        "properties": {
+          "db": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "db",
+          "id"
+        ],
+        "x-examples": {
+          "example-1": {
+            "db": "string",
+            "id": "string"
+          }
+        }
+      },
+      "ExperimentalTag": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "name": "TraDES",
+            "namespace": "Ensemble generation method",
+            "is_a": [
+              "00184"
+            ],
+            "id": "00186",
+            "def": "initial pool generation"
+          }
+        },
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "namespace": {
+            "type": "string"
+          },
+          "is_a": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "def": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "name",
+          "namespace"
+        ]
+      },
+      "VersionStamp": {
+        "title": "VersionStamp",
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "example": "2021-04-26T14:50:43.889000+00:00"
+          },
+          "curator_id": {
+            "type": "string",
+            "example": "lazta"
+          },
+          "curator_orcid": {
+            "type": "string",
+            "example": "0000-0001-7496-6711"
+          },
+          "curator_name": {
+            "type": "string",
+            "example": "Lazar Tames"
+          },
+          "version": {
+            "type": "number",
+            "example": 5
+          }
+        },
+        "required": [
+          "timestamp",
+          "curator_id",
+          "curator_orcid",
+          "version"
+        ]
+      },
+      "ConstructFragmentSequence": {
+        "description": "",
+        "type": "object",
+        "x-examples": {
+          "example-1": {
+            "sequence": "MDSRLQRIHAEIKNSLKIDNLDVNRCIEALDELASLQVTMQQAQKHTEMITTLKKIRRFKVSQVIMEKSTMLYNKFKNM",
+            "uniprot": "O75475",
+            "length_total_uniprot": 530,
+            "length_total_pdb": 79,
+            "length_frag_total_uniprot": 79,
+            "start_position_alig": 0,
+            "end_position_alig": 78,
+            "start_position_pdb": 348,
+            "end_position_pdb": 426,
+            "length_frag_total_pdb": 79,
+            "length_frag_nogaps_alig": 79,
+            "cov_total_frag_pdb": 1,
+            "cov_nogaps_frag_pdb": 1,
+            "cov_total_frag_unip": 0.1490566037735849,
+            "cov_nogaps_frag_unip": 0.1490566037735849
+          }
+        },
+        "properties": {
+          "sequence": {
+            "type": "string"
+          },
+          "uniprot": {
+            "type": "string"
+          },
+          "length_total_uniprot": {
+            "type": "number"
+          },
+          "length_total_pdb": {
+            "type": "number"
+          },
+          "length_frag_total_uniprot": {
+            "type": "number"
+          },
+          "start_position_alig": {
+            "type": "number"
+          },
+          "end_position_alig": {
+            "type": "number"
+          },
+          "start_position_pdb": {
+            "type": "number"
+          },
+          "end_position_pdb": {
+            "type": "number"
+          },
+          "length_frag_total_pdb": {
+            "type": "number"
+          },
+          "length_frag_nogaps_alig": {
+            "type": "number"
+          },
+          "cov_total_frag_pdb": {
+            "type": "number"
+          },
+          "cov_nogaps_frag_pdb": {
+            "type": "number"
+          },
+          "cov_total_frag_unip": {
+            "type": "number"
+          },
+          "cov_nogaps_frag_unip": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "sequence",
+          "length_total_uniprot",
+          "length_total_pdb",
+          "length_frag_total_uniprot"
+        ]
+      },
+      "GlobalASAVar": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "ensemble_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "asa_var": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ensemble_id",
+          "asa_var"
+        ],
+        "x-examples": {
+          "example-1": {
+            "ensemble_id": "PED00054e000",
+            "asa_var": 25905.04173602852
+          }
+        }
+      },
+      "DataPerChain": {
+        "description": "",
+        "type": "object",
+        "properties": {
+          "ensemble_id": {
+            "type": "string"
+          },
+          "chain": {
+            "type": "string"
+          },
+          "relative_asa_mean": {
+            "type": "number"
+          },
+          "entropy_dssp_mean": {
+            "type": "number"
+          },
+          "rg_mean": {
+            "type": "number"
+          }
+        },
+        "required": [
+          "ensemble_id",
+          "chain",
+          "relative_asa_mean",
+          "entropy_dssp_mean",
+          "rg_mean"
+        ],
+        "x-examples": {
+          "example-1": {
+            "ensemble_id": "PED00054e000",
+            "chain": "A",
+            "relative_asa_mean": 0.6187469539687679,
+            "entropy_dssp_mean": 0.3346240306739811,
+            "rg_mean": 10.105034672101027
+          }
+        },
+        "title": "DataPerChain"
+      }
+    },
+    "parameters": {
+      "ensemble_id": {
+        "name": "ensemble_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "pattern": "PED\\d{5}e\\d{3}",
+          "example": "PED00001e001"
+        },
+        "description": "Experiment Ensemble ID"
+      },
+      "entry_id": {
+        "name": "entry_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "PED00001",
+          "pattern": "PED\\d{5}"
+        },
+        "description": "Experiment Entry ID"
+      },
+      "chain_id": {
+        "name": "chain_id",
+        "in": "path",
+        "required": true,
+        "schema": {
+          "type": "string",
+          "example": "A"
+        },
+        "description": "Protein Chain ID"
+      }
+    }
+  },
+  "info": {
+    "description": "PED API",
+    "title": "PED API",
+    "version": "5.0",
+    "contact": {
+      "email": "biocomp@bio.unipd.it"
+    }
+  }
+}

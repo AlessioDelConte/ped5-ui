@@ -13,7 +13,7 @@ export class SwaggerUiComponent implements OnInit {
   ngOnInit(): void {
     SwaggerUI({
       domNode: document.getElementById('swagger-ui-item'),
-      url: '../assets/openapi.json'
+      url: '../assets/pedv2.json'
     });
   }
 

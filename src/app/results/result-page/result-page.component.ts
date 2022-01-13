@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { InternalService } from '../services/internal.service';
+import { InternalService } from '../../services/internal.service';
 import {ActivatedRoute} from '@angular/router';
 
 @Component({
@@ -15,11 +15,10 @@ export class ResultPageComponent implements OnInit {
 
   ngOnInit(): void {
     const currentUUID = this.route.snapshot.paramMap.get('identifier');
- console.log(currentUUID);
-    this.internalService.getFile(currentUUID, 'metadata.json').subscribe(currObj => {
+ // console.log(currentUUID);
+    this.internalService.getFile(currentUUID, 'output_metadata.json').subscribe(currObj => {
       this.entryObj = currObj;
-      console.log(this.entryObj);
-
+      // console.log(this.entryObj);
     });
 
   }

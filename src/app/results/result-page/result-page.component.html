@@ -1,0 +1,61 @@
+<div class="container-xl">
+    <h3>
+        <span class="badge bg-primary">
+            {{entryObj['entry_id']}}
+        </span>
+        {{entryObj['title']}}
+    </h3>
+    <div class="row mt-3">
+        <div class="col-lg">
+            <p class="mb-1"><strong>Experimental procedure</strong>
+                <span class="badge bg-experiment ms-2"
+                      *ngFor="let currTerm of entryObj['term_experimental_procedure']">
+            {{currTerm['name']}}
+        </span>
+            </p>
+            <p class="text-justify small">{{entryObj['experimental_procedure']}}</p>
+            <p class="mb-1"><strong>Structural ensemble calculation</strong>
+                <span class="badge bg-ensemble ms-2"
+                      *ngFor="let currTerm of entryObj['term_structural_ensembles_calculation']">
+            {{currTerm['name']}}
+        </span>
+            </p>
+            <p class="text-justify small">{{entryObj['structural_ensembles_calculation']}}</p>
+            <p class="mb-1"><strong>Molecular Dynamics</strong>
+                <span class="badge bg-md ms-2"
+                      *ngFor="let currTerm of entryObj['term_md_calculation']">
+            {{currTerm['name']}}
+        </span>
+            </p>
+            <p class="text-justify small">{{entryObj['md_calculation']}}</p>
+        </div>
+        <!--<div class="col-lg-auto">-->
+        <!--    <p><strong>Experiments' raw data</strong>-->
+        <!--        <span-->
+        <!--                *ngFor="let currRef of entryObj['experimental_cross_reference']">-->
+        <!--       <a  *ngIf="currRef['db'] !== 'bmrb'"class="badge bg-info ml-1"-->
+        <!--           href="https://identifiers.org/{{currRef['db']}}:{{currRef['id']}}"-->
+        <!--           target="_blank">-->
+        <!--          {{currRef['db']}}:{{currRef['id']}} <i class="material-icons" style="font-size: small">link</i>-->
+        <!--        </a>-->
+        <!--    <a *ngIf="currRef['db'] === 'bmrb'" class="badge badge-external-link ml-1"-->
+        <!--       href="https://bmrb.io/data_library/summary/index.php?bmrbId={{currRef['id']}}"-->
+        <!--       target="_blank">-->
+        <!--          {{currRef['db']}}:{{currRef['id']}} <i class="material-icons" style="font-size: small">link</i>-->
+        <!--        </a>-->
+        <!--    </span>-->
+        <!--    </p>-->
+        <!--</div>-->
+    </div>
+    <h5>
+        Ensembles
+    </h5>
+<!--    <hr tyle="border-color: #2274a5">-->
+
+    <div class="row" *ngFor="let currEnsmeble of entryObj['ensembles']; last as isLast">
+        <app-ensemble-card [currEnsmeble]="currEnsmeble" [currConstructs]="entryObj['constructs']"></app-ensemble-card>
+        <hr *ngIf="!isLast" style="border-color: #2274a5">
+    </div>
+<!--    <hr style="border-color: #2274a5">-->
+
+</div>

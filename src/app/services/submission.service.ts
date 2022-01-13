@@ -201,10 +201,41 @@ export class SubmissionService {
         }
     }
 
+    // submission(): void {
+    //     const blob = new Blob([JSON.stringify(this.form.value)], {type : 'text/plain'});
+    //     this.formData.append('form', blob, 'form.txt');
+    //     this.internalService.postSubmission(this.formData).subscribe((event: HttpEvent<any>) => {
+    //         switch (event.type) {
+    //             case HttpEventType.Sent:
+    //                 console.log('Request has been made!');
+    //                 break;
+    //             case HttpEventType.ResponseHeader:
+    //                 console.log('Response header has been received!');
+    //                 break;
+    //             case HttpEventType.UploadProgress:
+    //                 this.progress = Math.round(event.loaded / event.total * 100);
+    //                 console.log(`Uploaded! ${this.progress}%`);
+    //                 break;
+    //             case HttpEventType.Response:
+    //                 console.log('User successfully created!', event.body);
+    //                 setTimeout(() => {
+    //                     let url = '';
+    //                     if (event.body.submission_id) {
+    //                         url = 'results/' + event.body.submission_id;
+    //                     }
+    //                     this.reset();
+    //                     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
+    //                         this.router.navigate([url]);
+    //                     });
+    //                 }, 500);
+    //         }
+    //     });
+    // }
     submission(): void {
         const blob = new Blob([JSON.stringify(this.form.value)], {type : 'text/plain'});
-        this.formData.append('form', blob, 'form.txt');
-        this.internalService.postSubmission(this.formData).subscribe((event: HttpEvent<any>) => {
+        this.formData.append('task_name', 'ped');
+        this.formData.append('metadata', blob, 'form.txt');
+        this.internalService.sendTask(this.formData).subscribe((event: HttpEvent<any>) => {
             switch (event.type) {
                 case HttpEventType.Sent:
                     console.log('Request has been made!');
@@ -220,8 +251,8 @@ export class SubmissionService {
                     console.log('User successfully created!', event.body);
                     setTimeout(() => {
                         let url = '';
-                        if (event.body.submission_id) {
-                            url = 'results/' + event.body.submission_id;
+                        if (event.body.uuid) {
+                            url = 'results/' + event.body.uuid;
                         }
                         this.reset();
                         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

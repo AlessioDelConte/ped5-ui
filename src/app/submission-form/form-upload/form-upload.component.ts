@@ -25,14 +25,14 @@ export class FormUploadComponent implements OnInit {
     this.fileC.nativeElement.click();
   }
   onFilesAddedW(): void {
-    console.log(this.fileW.nativeElement.files[0].name);
-    this.submissionService.formData.append('weights_' + this.indexEnsemble.toString(), this.fileW.nativeElement.files[0], this.fileW.nativeElement.files[0].name);
+    const filenameFormData = 'weights_' + this.ensembleObj.ensemble_id + '_' + this.fileC.nativeElement.files[0].name.substr(this.fileC.nativeElement.files[0].name.indexOf('.'));
+    this.submissionService.formData.append('weights_file', this.fileW.nativeElement.files[0], filenameFormData);
     this.file_nameW = this.fileW.nativeElement.files[0].name;
   }
 
   onFilesAddedC(): void {
-    console.log(this.fileC.nativeElement.files[0].name);
-    this.submissionService.formData.append( 'conformations_' + this.indexEnsemble.toString(), this.fileC.nativeElement.files[0], this.fileC.nativeElement.files[0].name);
+    const filenameFormData = 'conformations_' + this.ensembleObj.ensemble_id + '_' + this.fileC.nativeElement.files[0].name.substr(this.fileC.nativeElement.files[0].name.indexOf('.'));
+    this.submissionService.formData.append( 'conformations_file', this.fileC.nativeElement.files[0], filenameFormData);
     this.file_nameC = this.fileC.nativeElement.files[0].name;
   }
 

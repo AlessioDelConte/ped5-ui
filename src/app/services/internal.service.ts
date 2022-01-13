@@ -21,7 +21,6 @@ export class InternalService {
         return this.http.get(url, {responseType: 'json'});
     }
 
-
     getServerName(): Observable<any> {
         const url = environment.ws;
         return this.http.get(url);
@@ -49,6 +48,17 @@ export class InternalService {
         return this.http.get(url, {
             responseType: 'json'
         });
+    }
+
+
+
+    sendTask(formData): Observable<any> {
+        const url = environment.submission_server + 'task/';
+        return this.http.post(url, formData,
+            {
+                reportProgress: true,
+                observe: 'events'
+            });
     }
 
 }

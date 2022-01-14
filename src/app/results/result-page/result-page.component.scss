@@ -1,0 +1,11 @@
+.collapsing {
+  height: 2.5rem;
+}
+
+.collapse-min {
+  &:not(.show) {
+    display: block;
+    height: 2.5rem;
+    overflow: hidden;
+  }
+}

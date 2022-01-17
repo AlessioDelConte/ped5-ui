@@ -80,10 +80,10 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
           this.viewerInstance.render(viewerContainer, options);
           this.viewerInstance.events.loadComplete.subscribe(() => {
             if (this.currChainName.value) {
-              this.viewerInstance.visual.select({data: [ {auth_asym_id: this.currChainName.value, color: { r: 50, g: 105, b: 81}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
+              this.viewerInstance.visual.select({data: [ {auth_asym_id: this.currChainName.value, color: { r: 66, g: 14, b: 44}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
               this.currChainName.subscribe(currCainName => {
                 if (currCainName) {
-                  this.viewerInstance.visual.select({data: [ {auth_asym_id: currCainName, color: { r: 50, g: 105, b: 81}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
+                  this.viewerInstance.visual.select({data: [ {auth_asym_id: currCainName, color: { r: 66, g: 14, b: 44}}], nonSelectedColor: {r: 240, g: 240 , b: 240}});
                 }
               });
             }

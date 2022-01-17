@@ -24,7 +24,7 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
   };
   viewerInstance = null;
 
-  show_struct_viewer = new BehaviorSubject<string>('');
+  showStructViewer = new BehaviorSubject<string>('');
 
   constructor(public resultsService: ResultsService) { }
 
@@ -50,7 +50,7 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
 
 
-    this.show_struct_viewer.subscribe(showStructViewer => {
+    this.showStructViewer.subscribe(showStructViewer => {
       if (showStructViewer) {
         if (this.viewerInstance) {
 
@@ -108,7 +108,7 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
         }
       }
     });
-    this.show_struct_viewer.next('representatives');
+    this.showStructViewer.next('representatives');
   }
 
 

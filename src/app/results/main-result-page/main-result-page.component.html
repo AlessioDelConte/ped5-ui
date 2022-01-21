@@ -13,12 +13,9 @@
                 <p>
                     Your message
                 </p>
-
-
                 <div class="row">
                     <div class="col text-end">
                         <button class="btn btn-sm btn-primary">Submit</button>
-
                     </div>
                 </div>
             </form>
@@ -35,13 +32,9 @@
                     <span class="btn btn-sm btn-danger">Publish</span>
                 </div>
             </div>
-
         </div>
-
     </div>
 </div>
-
-
 <div class="container-xl">
     <h2>Results</h2>
     <div class="alert alert-success">
@@ -69,11 +62,8 @@
                     </div>
                     <div class="col-auto">
                         <app-login></app-login>
-
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
@@ -81,11 +71,9 @@
     <p class="mb-4"></p>
     <div class="row mb-3" *ngFor="let currError of entryObj['errors'] ">
         <div class="col">
-
             <p class="text-danger mb-0"><strong>Type of error: </strong> {{currError['title']}}</p>
             <p><strong>Message: </strong> <br>
                 <span [innerHTML]="currError['message']"></span></p>
-
         </div>
     </div>
     <div class="row" *ngIf="!entryObj['entry_id'] && !entryObj['errors']">

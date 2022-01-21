@@ -24,6 +24,7 @@ import { FormUploadComponent } from './submission-form/form-upload/form-upload.c
 import { ResultPageComponent } from './results/result-page/result-page.component';
 import { BrowseComponent} from './browse/browse.component';
 import { EnsembleCardComponent } from './results/ensemble-card/ensemble-card.component';
+import { MainResultPageComponent } from './results/main-result-page/main-result-page.component';
 
 
 
@@ -35,7 +36,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'results/:identifier',
-    component: ResultPageComponent
+    component: MainResultPageComponent
   },
   {
     path: 'browse',
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
     FormUploadComponent,
     ResultPageComponent,
     EnsembleCardComponent,
+    MainResultPageComponent,
   ],
   imports: [
     RouterModule.forRoot(

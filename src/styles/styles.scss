@@ -10,8 +10,25 @@ $nav-pills-link-active-bg: $primary;
 $nav-link-hover-color:  shade-color(  $primary, 20);
 $nav-link-color:   $primary;
 /* Bootstrap */
+
+[data-theme="dark"] {
+  --font-color: #c1bfbd;
+  --bg-color: #333;
+}
+//[data-theme="light"] {
+//  --font-color: #000;
+//  --bg-color: #ffffff;
+//}
+
 @import 'bootstrap';
 
+body
+{
+  color:#000;
+  color:var(--font-color);
+  background:rgb(243,243,243);
+  background:var(--bg-color);
+}
 
 @each $color, $value in $theme-colors {
   .btn-#{$color} {

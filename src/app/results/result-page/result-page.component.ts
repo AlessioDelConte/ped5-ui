@@ -1,6 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { InternalService } from '../../services/internal.service';
-import {ActivatedRoute} from '@angular/router';
+import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
 import {ResultsService} from '../../services/results.service';
 import { Collapse } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js';
 
@@ -10,22 +8,12 @@ import { Collapse } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js';
   styleUrls: ['./result-page.component.scss']
 })
 export class ResultPageComponent implements OnInit, AfterViewInit {
-  entryObj = {};
+  @Input() entryObj: object;
 
+  constructor(private resultsService: ResultsService) { }
 
-  constructor(private internalService: InternalService,
-              private resultsService: ResultsService,
-              private route: ActivatedRoute) { }
+  ngOnInit(): void {}
 
-  ngOnInit(): void {
-    this.resultsService.currentUUID = this.route.snapshot.paramMap.get('identifier');
-    this.internalService.getFile(this.resultsService.currentUUID, 'submission/metadata.json').subscribe(currObj => {
-      this.resultsService.parse(currObj);
-      this.entryObj = currObj;
-      this.resultsService.currViewMode = 'scheduler';
-
-    });
-  }
   ngAfterViewInit(): void {
     const textExperimentalProcedure = document.getElementById('textExperimentalProcedure');
     const buttonExperimentalProcedure = document.getElementById('buttonExperimentalProcedure');
@@ -66,8 +54,5 @@ export class ResultPageComponent implements OnInit, AfterViewInit {
     const myCollapse = document.getElementById(id);
     const bsCollapse = new Collapse(myCollapse , {toggle: false});
     bsCollapse.toggle();
-
-
   }
-
 }

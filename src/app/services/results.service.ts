@@ -19,6 +19,4 @@ export class ResultsService {
     this.entryObj = currEntryObj;
 
   }
-
-  get
 }

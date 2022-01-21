@@ -29,7 +29,7 @@
 
     <div class="row">
         <div class="col">
-            <h4>Form</h4>
+            <h4>Submission form</h4>
             <div class="card" [class.card-active]="activeComponent === 'description'">
                 <div class="card-header">
                     <div class="row">
@@ -50,7 +50,7 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col">
-                            Ensemble construct
+                            Ensemble construct <span style="font-weight: lighter">(optional)</span>
                         </div>
                         <div class="col-auto">
                             <span class="badge bg-primary-dark bg-hover" (click)="toggle('construct')"><i
@@ -81,7 +81,7 @@
 
                 </div>
             </div>
-            <h4>Assessment</h4>
+<!--            <h4>Assessment</h4>-->
             <form [formGroup]="submissionService.form" *ngIf="submissionService.progress == 0">
                 <div class="row align-items-center">
                     <div class="col">

@@ -1,0 +1,97 @@
+<div class="offcanvas offcanvas-top"
+     style="min-height: 40vh"
+     tabindex="-1" id="offcanvasColumns" aria-labelledby="offcanvasExampleLabel"
+     xmlns="http://www.w3.org/1999/html">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Manage submission</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+        <div *ngIf="profileObj['role'] === 'data owner'">
+            <h3>Submit to PEDarchive</h3>
+            <form>
+                <p>
+                    Your message
+                </p>
+
+
+                <div class="row">
+                    <div class="col text-end">
+                        <button class="btn btn-sm btn-primary">Submit</button>
+
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div *ngIf="['biocurator', 'reviewer', 'admin'].includes(profileObj['role'])">
+            <p>
+                <strong>Depositor </strong> <br>
+                <strong>PED identifier </strong> <span *ngIf="entryObj['entry_id']">{{entryObj['entry_id']}}</span>
+                <button *ngIf="!entryObj['entry_id']" class="btn btn-sm btn-primary">Create</button>
+            </p>
+            <div class="row" *ngIf="entryObj['entry_id']">
+                <div class="col">
+                    <span class="badge bg-primary-dark bg-hover-min"><i class="bi bi-share"></i> Get publication access code</span>
+                    <span class="btn btn-sm btn-danger">Publish</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+<div class="container-xl">
+    <h2>Results</h2>
+    <div class="alert alert-success">
+        <div class="row align-items-center">
+            <div class="col-md-auto">
+                <p class="mb-0">
+                    <strong>Job identifier </strong>
+                    <span class="badge bg-primary-dark">
+                        {{resultsService.currentUUID}}
+                    </span>
+                </p>
+            </div>
+            <div class="col text-end">
+                <div *ngIf="profileObj['authorized']">
+                    <button class="btn btn-sm btn-warning me-3" (click)="openOffcanvas('offcanvasColumns')">Update the
+                        draft
+                    </button>
+                    <button class="btn btn-sm btn-primary" (click)="openOffcanvas('offcanvasColumns')">Manage
+                        submission
+                    </button>
+                </div>
+                <div class="row align-items-center" *ngIf="!profileObj['authorized']">
+                    <div class="col">
+                        To deposit this ensemble, please log-in
+                    </div>
+                    <div class="col-auto">
+                        <app-login></app-login>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    <app-result-page *ngIf="entryObj['entry_id']" [entryObj]="entryObj"></app-result-page>
+    <p class="mb-4"></p>
+    <div class="row mb-3" *ngFor="let currError of entryObj['errors'] ">
+        <div class="col">
+
+            <p class="text-danger mb-0"><strong>Type of error: </strong> {{currError['title']}}</p>
+            <p><strong>Message: </strong> <br>
+                <span [innerHTML]="currError['message']"></span></p>
+
+        </div>
+    </div>
+    <div class="row" *ngIf="!entryObj['entry_id'] && !entryObj['errors']">
+        <div class="col-8 mx-auto text-center">
+            <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+            Running...
+        </div>
+    </div>
+</div>

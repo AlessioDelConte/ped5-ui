@@ -14,6 +14,9 @@ export class NavbarComponent implements OnInit {
   currentUser = {};
   previousPosition = 0;
 
+
+  darkMode = false;
+
   constructor(private router: Router, private authService: AuthService) {
   }
 
@@ -32,6 +35,19 @@ export class NavbarComponent implements OnInit {
     const myDropdown = new Dropdown( document.getElementById(menuID));
     myDropdown.toggle();
   }
+
+   switchDarkMode(): void{
+       if (this.darkMode) {
+         document.documentElement.setAttribute('data-theme', 'light');
+         this.darkMode = false;
+       } else {
+         document.documentElement.setAttribute('data-theme', 'dark');
+         this.darkMode = true;
+         window.matchMedia("(prefers-color-scheme: dark)").media
+       }
+     }
+
+
 
 
 }

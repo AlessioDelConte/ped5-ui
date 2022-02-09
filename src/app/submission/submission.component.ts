@@ -24,6 +24,7 @@ export class SubmissionComponent implements OnInit {
 
       }
     });
+    this.toggle('upload')
   }
 
   toggle(activeComponent): void {

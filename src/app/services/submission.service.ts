@@ -251,8 +251,8 @@ export class SubmissionService {
                     console.log('User successfully created!', event.body);
                     setTimeout(() => {
                         let url = '';
-                        if (event.body.uuid) {
-                            url = 'results/' + event.body.uuid;
+                        if (event.body.job_id) {
+                            url = 'results/' + event.body.job_id;
                         }
                         this.reset();
                         this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {

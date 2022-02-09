@@ -51,12 +51,17 @@ export class InternalService {
     }
 
     sendTask(formData): Observable<any> {
-        const url = environment.submission_server + 'task/';
+        const url = environment.ws + 'jobs/';
         return this.http.post(url, formData,
             {
                 reportProgress: true,
                 observe: 'events'
             });
+    }
+
+    getJobs(): Observable<any> {
+        const url = environment.ws + 'jobs/';
+        return this.http.get(url, {responseType: 'json'});
     }
 
     getFile(submissionID, fileName): Observable<any> {

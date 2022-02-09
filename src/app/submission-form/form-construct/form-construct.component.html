@@ -1,138 +1,130 @@
 <form [formGroup]="submissionService.form">
+    <div class="row mb-2">
+        <h5 class="col">Chains:</h5>
+        <button type="button" class="mx-3 col-auto btn btn-success btn-sm"
+            (click)="submissionService.addFormArrayElement('protein_chains', true)"><i class="bi bi-plus-lg"></i> Add
+            Chain</button>
+    </div>
     <div formArrayName="construct">
-        <div *ngFor="let address of submissionService.form['controls']['construct']['controls']; let i=index; let last=last">
-            <div [formGroupName]="i">
-                <div class="row">
+        <div
+            *ngFor="let address of submissionService.form['controls']['construct']['controls']; let i=index; let last=last">
+            <div [formGroupName]="i" class="card p-3">
+                <div class="row mb-3">
                     <div class="col">
-                        <div class="row">
-                            <div class="input-group mb-3 col-lg-3">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Chain name</span>
+                        <div class="row mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text">Chain name</div>
+                                <input type="text" class="form-control" formControlName="chain_name" placeholder="Chain name">
+                                <label class="input-group-text">Is fixed?</label>
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" id="is_fixed{{i}}"
+                                        formControlName="is_fixed">
                                 </div>
-                                <input type="text" class="form-control" formControlName="chain_name">
-                            </div>
-                            <div class="input-group mb-3 col-lg-7">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">Chain description</span>
+                                <label class="input-group-text">Is disordered?</label>
+                                <div class="input-group-text">
+                                    <input class="form-check-input mt-0" type="checkbox" id="is_disordered{{i}}"
+                                        formControlName="is_disordered">
                                 </div>
-                                <input type="text" class="form-control" formControlName="description">
                             </div>
                         </div>
 
-                        <div class="row">
-<!--                            <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">-->
-<!--                                <input type="checkbox" class="custom-control-input" id="is_fixed{{i}}"-->
-<!--                                       formControlName="is_fixed">-->
-<!--                                <label class="custom-control-label" for="is_fixed{{i}}">The structure is fixed</label>-->
-<!--                            </div>-->
-<!--                            <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">-->
-<!--                                <input type="checkbox" class="custom-control-input" id="is_disordered{{i}}"-->
-<!--                                       formControlName="is_disordered">-->
-<!--                                <label class="custom-control-label" for="is_disordered{{i}}">This is disordered</label>-->
-<!--                            </div>-->
+                        <div class="row mb-2">
+                            <div class="input-group">
+                                <div class="input-group-text">Chain description</div>
+                                <input type="text" class="form-control" formControlName="description" placeholder="Chain description">
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="col-auto ps-0">
+                        <button type="button" class="btn btn-danger btn-sm" title="Delete chain"
+                            (click)="submissionService.removeFormArrayElement('protein_chains', i, true)"><i
+                                class="bi bi-trash-fill"></i></button>
+                    </div>
+                </div>
 
+                <div class="row px-2" formArrayName="fragments">
+                    <div class="col">
+                        <div class="row mb-2">
+                            <h5 class="col">Protein chain fragments:</h5>
+                            <button type="button" class="mx-3 col-auto btn btn-success btn-sm"
+                                (click)="submissionService.addFormArrayElement_nested('protein_chains', i,'construct', true)"><i
+                                    class="bi bi-plus-lg"></i> Add
+                                Fragment</button>
                         </div>
 
-                        <div class="alert">
-                            <h5>Protein chain is constructed:</h5>
-                            <div formArrayName="fragments">
-                                <div
-                                        *ngFor="let address of submissionService.form['controls']['construct']['controls'][i]['controls']['fragments']['controls']; let j=index">
-                                    <div [formGroupName]="j">
-                                        <hr>
-                                        #{{j + 1}} fragment:
-                                        <div class="row">
-                                            <div class="col mr-auto">
-                                                <div class="row">
-                                                    <div class="input-group mb-3 col-lg-5">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">UniProt ACC</span>
-                                                        </div>
-                                                        <input type="text" class="form-control" formControlName="uniprot_acc">
-                                                    </div>
-                                                    <div class="input-group mb-3 col-lg-7">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">name</span>
-                                                        </div>
-                                                        <input type="text" class="form-control" formControlName="description">
-                                                    </div>
+                        <!-- <div *ngFor="let address of submissionService.form['controls']['construct']['controls'][i]['controls']['fragments']['controls']; let j=index"> -->
+                        <div class="card p-3 pb-2" >
+                            <div [formGroupName]="j">
+                                #{{j + 1}} fragment:
+                                <div class="row">
+                                    <div class="col">
+                                        <div class="row mb-2">
+                                            <div class="input-group">
+                                                <div class="input-group-text">Name</div>
+                                                <input type="text" class="form-control" formControlName="description" placeholder="Fragment name">
+                                                <label class="input-group-text">Part of ensemble</label>
+                                                <div class="input-group-text">
+                                                    <input class="form-check-input mt-0" type="checkbox"
+                                                        id="part_of_ensemble" formControlName="part_of_ensemble">
                                                 </div>
-                                                <div class="row">
-                                                    <div class="input-group mb-3 col">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">sequence</span>
-                                                        </div>
-                                                        <textarea rows="1" class="form-control" formControlName="sequence"></textarea>
-                                                    </div>
-                                                </div>
-<!--                                                <div class="row">-->
-<!--                                                    <div class="custom-control custom-checkbox ml-3 pt-1 pb-3 col-auto">-->
-<!--                                                        <input type="checkbox" class="custom-control-input" id="part_of_ensemble"-->
-<!--                                                               formControlName="part_of_ensemble">-->
-<!--                                                        <label class="custom-control-label" for="part_of_ensemble">Part of ensemble</label>-->
-<!--                                                    </div>-->
-<!--                                                </div>-->
-                                                <div class="row">
-
-                                                    <div class="input-group mb-3 col-lg-4">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">Start_position</span>
-                                                        </div>
-                                                        <input type="number" class="form-control" formControlName="uniprot_start_position">
-                                                    </div>
-                                                    <div class="input-group mb-3 col-lg-4">
-                                                        <div class="input-group-prepend">
-                                                            <span class="input-group-text">End_position</span>
-                                                        </div>
-                                                        <input type="number" class="form-control" formControlName="uniprot_end_position">
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-auto">
-                                                <button class="btn btn-outline-primary ml-2"
-                                                        (click)="submissionService.addFormArrayElement_nested('protein_chains', i,'construct', true)">Add
-                                                </button>
-                                                <button class="btn btn-outline-danger ml-2"
-                                                        (click)="submissionService.removeFormArrayElement_nested('protein_chains', i, 'construct', j, true)">Remove
-                                                </button>
                                             </div>
                                         </div>
+
+                                        <div class="row mb-2">
+                                            <div class="col input-group">
+                                                <label class="input-group-text">Definition type</label>
+                                                <select class="form-select" id="inputGroupSelect01">
+                                                    <option selected>Choose...</option>
+                                                    <option value="Uniprot ACC">By Uniprot ACC</option>
+                                                    <option value="Sequence">By Sequence</option>
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2">
+                                            <div class="input-group">
+                                                <div class="input-group-text">Sequence</div>
+                                                <textarea rows="2" class="form-control"
+                                                    formControlName="sequence" placeholder="Fragment sequence"></textarea>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2" *ngIf="true">
+                                            <div class="input-group">
+                                                <div class="input-group-text">UniProt ACC</div>
+                                                <input type="text" class="form-control" formControlName="uniprot_acc" placeholder="Uniprot acc">
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-2" *ngIf="true">
+                                            <div class="input-group">
+                                                <div class="input-group-text">Position from</div>
+                                                <input type="number" class="form-control"
+                                                    formControlName="uniprot_start_position"
+                                                    placeholder="Start position">
+                                                <div class="input-group-text">to</div>
+                                                <input type="number" class="form-control"
+                                                    formControlName="uniprot_end_position" placeholder="End position">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto ps-0">
+                                        <button type="button" class="btn btn-danger btn-sm" title="Delete fragment"
+                                            (click)="submissionService.removeFormArrayElement_nested('protein_chains', i, 'construct', j, true)"><i
+                                                class="bi bi-trash-fill"></i></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-lg-auto">
-                        <button class="btn btn-outline-primary ml-2" (click)="submissionService.addFormArrayElement('protein_chains', true)">
-                            Add
-                        </button>
-                        <button class="btn btn-outline-danger ml-2" (click)="submissionService.removeFormArrayElement('protein_chains', i, true)">
-                            Remove
-                        </button>
-                    </div>
+
+
                 </div>
+
             </div>
-            <hr *ngIf="!last">
         </div>
     </div>
 
-<!--    <div class="row my-3">-->
-<!--        <div class="col-auto">-->
-<!--            <span class="btn btn-outline-primary " (click)="submit()">Update metadata</span>-->
-<!--        </div>-->
-<!--        <div class="col mt-2" *ngIf="errorAtUpdate">-->
-<!--            <span class="alert alert-danger">{{errorAtUpdate}}</span>-->
-<!--        </div>-->
-<!--        <div class="col mt-2" *ngIf="updateDone">-->
-<!--        <span class="alert alert-info">-->
-<!--          Your update has been saved! Please run again the validation pipeline!-->
-<!--          <a class="badge badge-pill badge-ped" (click)="navigateToRunPipeline()">-->
-<!--            Navigate to validation pipeline <i class="material-icons">near_me</i>-->
-<!--          </a>-->
-<!--        </span>-->
-<!--        </div>-->
-<!--    </div>-->
 
 </form>

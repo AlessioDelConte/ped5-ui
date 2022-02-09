@@ -43,9 +43,11 @@
               ]
             },
             "scripts": [
+              "./node_modules/jquery/dist/jquery.min.js", 
               "./node_modules/pdbe-molstar/build/pdbe-molstar-plugin-1.2.1.js",
               "./node_modules/@popperjs/core/dist/umd/popper.js",
-              "./node_modules/bootstrap/dist/js/bootstrap.js"
+              "./node_modules/bootstrap/dist/js/bootstrap.js",
+              "./node_modules/bootstrap/dist/js/bootstrap.bundle.js"
             ],
             "vendorChunk": true,
             "extractLicenses": false,

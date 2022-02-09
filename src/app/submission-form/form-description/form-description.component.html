@@ -1,1 +1,184 @@
-<p>form-description works!</p>
+<form class="container px-0">
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">Title</div>
+            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Title">
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">Comment</div>
+            <textarea rows="2" class="form-control" formControlName="internal_comment" placeholder="Insert your comment"></textarea>
+        </div>
+        <div class="col-2 me-2 px-0">
+            <p class="text-danger"><i class="bi bi-exclamation-circle"></i> Only for internal usage to inform other
+                biocurators</p>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <label class="input-group-text">Publication Status</label>
+            <select class="form-select" id="inputGroupSelect01">
+                <option selected>Choose...</option>
+                <option value="In preparation">In preparation</option>
+                <option value="Pre-print">Pre-print</option>
+                <option value="Submitted">Submitted</option>
+                <option value="Accepted">Accepted</option>
+                <option value="Published">Published</option>
+            </select>
+            <label class="input-group-text">Publication ID</label>
+            <input type="text" class="form-control" placeholder="Pubmed or DOI" disabled>
+        </div>
+    </div>
+
+    <!-- Authors section -->
+    <div class="row mb-2 mt-4">
+        <h5 class="col">Authors:</h5>
+        <button type="button" class="mx-3 col-auto btn btn-success btn-sm"><i class="bi bi-plus-lg"></i> Add
+            Author</button>
+    </div>
+    <div class="card pt-2 px-2 container">
+        <div class="row px-3 align-items-center">
+            <div class="col-1 px-0">
+                <h1 style="text-align:center"><i class="bi bi-person-fill"></i> #1</h1>
+            </div>
+            <div class="col">
+                <div class="row mb-2">
+                    <div class="col input-group">
+                        <label class="input-group-text">Name</label>
+                        <input type="text" class="form-control" placeholder="Author's name">
+                        <label class="input-group-text">ORCID</label>
+                        <input type="text" class="form-control" placeholder="Author's ORCID">
+                    </div>
+                </div>
+                <div class="row mb-2">
+                    <div class="col input-group">
+                        <label class="input-group-text">Role</label>
+                        <select class="form-select" id="in">
+                            <option selected>Choose...</option>
+                            <option value="biocurator">Biocurator</option>
+                            <option value="data_owner">Data owner</option>
+                        </select>
+                        <label class="input-group-text">Email</label>
+                        <input type="text" class="form-control" placeholder="Author's email">
+                        <label class="input-group-text">Corresponding Author</label>
+                        <div class="input-group-text">
+                            <input class="form-check-input mt-0" type="checkbox" value="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto">
+                <div class="row justify-content-center mb-2">
+                    <button type="button" class="btn btn-danger btn-sm" title="Delete"><i
+                            class="bi bi-trash-fill"></i></button>
+                </div>
+                <div class="row mb-2">
+                    <div class="btn-group px-0" role="group">
+                        <button type="button" class="btn btn-light border btn-sm" disabled title="Move up"><i
+                                class="bi bi-arrow-up"></i></button>
+                        <button type="button" class="btn btn-light border btn-sm" disabled title="Move down"><i
+                                class="bi bi-arrow-down"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Experimental procedure section -->
+    <div class="row mb-2 mt-4">
+        <h5 class="col">Experimental Procedure:</h5>
+    </div>
+    <div class="alert alert-primary text-justify pt-2 pb-0">
+        <i class="bi bi-exclamation-circle"></i> Please pay attention to the term names (incl. alternative names). The
+        term-names can be detected, if:
+        <ul>
+            <li>they are in parentheses / round brackets</li>
+            <li>they are directly preceded and/or followed by a space or one of the following characters: <b>. , ; : -</b></li>
+        </ul>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">Experimental procedure</div>
+            <textarea rows="3" class="form-control" formControlName="experimental_procedure" placeholder="Explain the experimental procedure"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3 mx-0">
+        <div class="col"><strong>Found terms: </strong>
+            <span class="badge bg-success mx-1">NMR</span>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">Structural ensembles calculation</div>
+            <textarea rows="3" class="form-control" formControlName="structural_ensembles_calculation"
+                placeholder="Explain the structural ensemble calculation"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3 mx-0" *ngIf="false">
+        <div class="col"><strong>Found terms: </strong>
+            <span class="badge bg-success mx-1">TraDES</span>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">MD calculation</div>
+            <textarea rows="3" class="form-control" formControlName="md_calculation" placeholder="Explain the MD calculation"></textarea>
+        </div>
+    </div>
+    <div class="row mb-3 mx-0" *ngIf="false">
+        <div class="col"><strong>Found terms: </strong>
+            <span class="badge bg-success mx-1">Molecular dynamics</span>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="input-group col">
+            <div class="input-group-text">Expression organism (NCBI Taxon ID)</div>
+            <input type="number" class="form-control" formControlName="expression_organism" placeholder="Organism ID">
+        </div>
+        <div class="input-group col">
+            <div class="input-group-text">Expression organism's name</div>
+            <input type="text" class="form-control" formControlName="expression_organism_name" placeholder="Organism Name">
+        </div>
+    </div>
+
+    <!-- Cross references -->
+    <div class="row mb-2 mt-4">
+        <h5 class="col">Cross-reference to other database entry:</h5>
+        <button type="button" class="mx-3 col-auto btn btn-success btn-sm"><i class="bi bi-plus-lg"></i> Add
+            Cross-reference</button>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">Cross-reference</div>
+            <select class="form-select" id="inputGroupSelectre">
+                <option selected [ngValue]="null">Choose database...</option>
+                <option value="pdb">PDB</option>
+                <option value="disprot">DisProt</option>
+                <option value="disprot.region">DisProt evidence</option>
+                <option value="intact">IntAct</option>
+            </select>
+            <input type="text" class="form-control" formControlName="id" placeholder="DB identifier">
+            <button type="button" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash-fill"></i></button>
+        </div>
+    </div>
+
+    <div class="row mb-2 mt-4">
+        <h5 class="col">Cross-reference to raw experimental data:</h5>
+        <button type="button" class="mx-3 col-auto btn btn-success btn-sm"><i class="bi bi-plus-lg"></i> Add
+            Cross-reference</button>
+    </div>
+    <div class="row mb-2">
+        <div class="col input-group">
+            <div class="input-group-text">Cross-reference</div>
+            <select class="form-select" id="inputGroupSelectrefr">
+                <option selected>Choose database...</option>
+                <option value="bmrb">BMRB</option>
+                <option value="sasbdb">SASBDB</option>
+            </select>
+            <input type="text" class="form-control" formControlName="id" placeholder="Experimental identifier">
+            <button type="button" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash-fill"></i></button>
+        </div>
+    </div>
+
+</form>

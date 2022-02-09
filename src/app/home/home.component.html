@@ -80,4 +80,16 @@
         </div>
     </div>
 
+    <table>
+        <tr>
+          <th>Id</th>
+          <th>Creation Date</th>
+          <th>Status</th>
+        </tr>
+        <tr *ngFor="let job of jobsData">
+            <td>{{job.job_id}}</td>
+            <td>{{job.creation_date}}</td>
+            <td>{{job.status}}</td>
+        </tr>
+      </table>
 </div>

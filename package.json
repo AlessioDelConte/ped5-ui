@@ -27,6 +27,8 @@
     "feature-viewer-typescript": "^2.2.5",
     "jquery": "^3.6.0",
     "molstar": "^2.3.3",
+    "moment": "^2.29.1",
+    "moment-timezone": "^0.5.34",
     "ngx-bootstrap": "^6.2.0",
     "pdbe-molstar": "^1.2.1",
     "proseqviewer": "^1.0.84",

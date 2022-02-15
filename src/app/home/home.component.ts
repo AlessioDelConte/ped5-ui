@@ -10,7 +10,6 @@ import {InternalService} from '../services/internal.service';
 export class HomeComponent implements OnInit, AfterViewInit {
 
   serverName = null;
-  jobsData = []
 
   constructor(private router: Router, private internalService: InternalService
   ) {
@@ -25,16 +24,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       },
       () => {
       });
-
-      this.internalService.getJobs().subscribe(
-        responseData => {
-          console.log(responseData)
-          this.jobsData = responseData
-        },
-        e => {
-        },
-        () => {
-        });
+ 
   }
 
   ngAfterViewInit(): void {

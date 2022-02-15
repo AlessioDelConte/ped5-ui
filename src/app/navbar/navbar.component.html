@@ -22,9 +22,15 @@
               <li class="nav-item" *ngIf="!profileObj.displayedName">
                 <a class="nav-link" [class.active]="url === 'login'" routerLink="/login">Login</a>
               </li>
-              <li class="nav-item" *ngIf="profileObj.displayedName">
-                <span class="nav-link" >{{profileObj.displayedName}}</span>
-              </li>
+              <ng-container *ngIf="profileObj.displayedName">
+                <li class="nav-item" >
+                  <span class="nav-link" routerLink="/jobs/browse">My Jobs</span>
+                </li>
+                <li class="nav-item" >
+                  <span class="nav-link" >{{profileObj.displayedName}}</span>
+                </li>
+              </ng-container>
+              
 <!--              <li class="nav-item">-->
 <!--                <span class="nav-link" (click)="switchDarkMode()">night mode</span>-->
 <!--              </li>-->

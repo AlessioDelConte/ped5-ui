@@ -10,6 +10,8 @@ import { SubmissionService } from '../services/submission.service';
 export class SubmissionComponent implements OnInit {
   activeComponent = '';
 
+  aux = ""
+
   constructor(private route: ActivatedRoute, public submissionService: SubmissionService) { }
 
   ngOnInit(): void {
@@ -17,17 +19,22 @@ export class SubmissionComponent implements OnInit {
       entry: any
     }) => {
       if (Array.isArray(data.entry) && data.entry.length > 0) {
-        this.submissionService.FormParser(data.entry[0]);
+        // this.submissionService.FormParser(data.entry[0]);
 
       } else {
-        this.submissionService.FormParser(data.entry);
+        // this.submissionService.FormParser(data.entry);
 
       }
     });
-    this.toggle('upload')
+    this.toggle('description')
+    console.log(this.submissionService.form.value)
   }
 
   toggle(activeComponent): void {
     this.activeComponent = activeComponent !== this.activeComponent ? activeComponent : '';
+  }
+
+  auxFun(){
+    this.aux = this.submissionService.getInputMetadata()
   }
 }

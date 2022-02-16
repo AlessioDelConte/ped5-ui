@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SubmissionService } from 'src/app/services/submission.service';
 
 
 @Component({
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FormDescriptionComponent implements OnInit {
 
-  constructor() { }
+  constructor(public submissionService: SubmissionService) { }
 
   ngOnInit(): void {
   }

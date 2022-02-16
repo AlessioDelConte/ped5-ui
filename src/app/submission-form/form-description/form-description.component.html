@@ -1,11 +1,11 @@
-<form class="container px-0">
+<form [formGroup]="submissionService.form" class="container px-0">
     <div class="row mb-2">
         <div class="col input-group">
             <div class="input-group-text">Title</div>
-            <input type="text" class="form-control" id="inlineFormInputGroupUsername" placeholder="Title">
+            <input formControlName="title" type="text" class="form-control" placeholder="Title">
         </div>
     </div>
-    <div class="row mb-2">
+    <!-- <div class="row mb-2">
         <div class="col input-group">
             <div class="input-group-text">Comment</div>
             <textarea rows="2" class="form-control" formControlName="internal_comment" placeholder="Insert your comment"></textarea>
@@ -14,12 +14,12 @@
             <p class="text-danger"><i class="bi bi-exclamation-circle"></i> Only for internal usage to inform other
                 biocurators</p>
         </div>
-    </div>
+    </div> -->
     <div class="row mb-2">
         <div class="col input-group">
             <label class="input-group-text">Publication Status</label>
-            <select class="form-select" id="inputGroupSelect01">
-                <option selected>Choose...</option>
+            <select class="form-select" formControlName="publication_status">
+                <option selected disabled [ngValue]="null">Choose...</option>
                 <option value="In preparation">In preparation</option>
                 <option value="Pre-print">Pre-print</option>
                 <option value="Submitted">Submitted</option>
@@ -27,51 +27,59 @@
                 <option value="Published">Published</option>
             </select>
             <label class="input-group-text">Publication ID</label>
-            <input type="text" class="form-control" placeholder="Pubmed or DOI" disabled>
+            <input [attr.disabled]="submissionService.form.get('publication_status').value !== 'Published'?true:null"
+                formControlName="publication_identifier" type="text" class="form-control" placeholder="Pubmed or DOI">
         </div>
     </div>
 
     <!-- Authors section -->
     <div class="row mb-2 mt-4">
         <h5 class="col">Authors:</h5>
-        <button type="button" class="mx-3 col-auto btn btn-success btn-sm"><i class="bi bi-plus-lg"></i> Add
+        <button type="button" class="mx-3 col-auto btn btn-success btn-sm"
+            (click)="submissionService.addFormArrayElement('authors',false)"><i class="bi bi-plus-lg"></i> Add
             Author</button>
     </div>
-    <div class="card pt-2 px-2 container">
-        <div class="row px-3 align-items-center">
+    <div *ngIf="submissionService.form.get('authors').length<=0" class="row mb-2 justify-content-center fw-bold"
+        style="color:gray">
+        No authors
+    </div>
+    <div class="card mb-2 pt-2 px-2 container"
+        *ngFor="let author of submissionService.form.get('authors').controls; let i=index;">
+        <div [formGroup]="author" class="row px-3 align-items-center">
             <div class="col-1 px-0">
-                <h1 style="text-align:center"><i class="bi bi-person-fill"></i> #1</h1>
+                <h1 style="text-align:center"><i class="bi bi-person-fill"></i> #{{i+1}}</h1>
             </div>
             <div class="col">
                 <div class="row mb-2">
                     <div class="col input-group">
                         <label class="input-group-text">Name</label>
-                        <input type="text" class="form-control" placeholder="Author's name">
+                        <input formControlName="name" type="text" class="form-control" placeholder="Author's name">
                         <label class="input-group-text">ORCID</label>
-                        <input type="text" class="form-control" placeholder="Author's ORCID">
+                        <input formControlName="orcid_id" type="text" class="form-control" placeholder="Author's ORCID">
                     </div>
                 </div>
                 <div class="row mb-2">
                     <div class="col input-group">
                         <label class="input-group-text">Role</label>
-                        <select class="form-select" id="in">
-                            <option selected>Choose...</option>
+                        <select formControlName="role" class="form-select">
+                            <option selected disabled [ngValue]="null">Choose...</option>
                             <option value="biocurator">Biocurator</option>
                             <option value="data_owner">Data owner</option>
                         </select>
                         <label class="input-group-text">Email</label>
-                        <input type="text" class="form-control" placeholder="Author's email">
+                        <input formControlName="email" type="text" class="form-control" placeholder="Author's email">
                         <label class="input-group-text">Corresponding Author</label>
                         <div class="input-group-text">
-                            <input class="form-check-input mt-0" type="checkbox" value="">
+                            <input formControlName="corresponding_author" class="form-check-input mt-0" type="checkbox"
+                                value="">
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-auto">
                 <div class="row justify-content-center mb-2">
-                    <button type="button" class="btn btn-danger btn-sm" title="Delete"><i
-                            class="bi bi-trash-fill"></i></button>
+                    <button (click)="submissionService.removeFormArrayElement('authors',i,false)" type="button"
+                        class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash-fill"></i></button>
                 </div>
                 <div class="row mb-2">
                     <div class="btn-group px-0" role="group">
@@ -86,7 +94,7 @@
     </div>
 
     <!-- Experimental procedure section -->
-    <div class="row mb-2 mt-4">
+    <div class="row mb-2 mt-3">
         <h5 class="col">Experimental Procedure:</h5>
     </div>
     <div class="alert alert-primary text-justify pt-2 pb-0">
@@ -94,13 +102,15 @@
         term-names can be detected, if:
         <ul>
             <li>they are in parentheses / round brackets</li>
-            <li>they are directly preceded and/or followed by a space or one of the following characters: <b>. , ; : -</b></li>
+            <li>they are directly preceded and/or followed by a space or one of the following characters: <b>. , ; :
+                    -</b></li>
         </ul>
     </div>
     <div class="row mb-2">
         <div class="col input-group">
             <div class="input-group-text">Experimental procedure</div>
-            <textarea rows="3" class="form-control" formControlName="experimental_procedure" placeholder="Explain the experimental procedure"></textarea>
+            <textarea rows="3" class="form-control" formControlName="experimental_procedure"
+                placeholder="Explain the experimental procedure"></textarea>
         </div>
     </div>
     <div class="row mb-3 mx-0">
@@ -123,7 +133,8 @@
     <div class="row mb-2">
         <div class="col input-group">
             <div class="input-group-text">MD calculation</div>
-            <textarea rows="3" class="form-control" formControlName="md_calculation" placeholder="Explain the MD calculation"></textarea>
+            <textarea rows="3" class="form-control" formControlName="md_calculation"
+                placeholder="Explain the MD calculation"></textarea>
         </div>
     </div>
     <div class="row mb-3 mx-0" *ngIf="false">
@@ -138,7 +149,8 @@
         </div>
         <div class="input-group col">
             <div class="input-group-text">Expression organism's name</div>
-            <input type="text" class="form-control" formControlName="expression_organism_name" placeholder="Organism Name">
+            <input type="text" class="form-control" formControlName="expression_organism_name"
+                placeholder="Organism Name">
         </div>
     </div>
 

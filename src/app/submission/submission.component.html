@@ -89,7 +89,7 @@
             <form [formGroup]="submissionService.form" *ngIf="submissionService.progress == 0">
                 <div class="row justify-content-center">
                     <div class="col-auto">
-                        <button class="btn btn-primary-dark" (click)="submissionService.submission()">Run
+                        <button class="btn btn-primary-dark" (click)="auxFun()">Run
                             assessment
                         </button>
                     </div>
@@ -102,6 +102,10 @@
                 </div>
             </div>
         </div>
+    </div>
+
+    <div>
+        {{aux}}
     </div>
 
 </div>

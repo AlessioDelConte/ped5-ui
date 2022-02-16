@@ -67,7 +67,7 @@
             </div>
         </div>
     </div>
-    <app-result-page *ngIf="entryObj['entry_id']" [entryObj]="entryObj"></app-result-page>
+    <app-result-page [entryObj]="entryObj"></app-result-page>
     <p class="mb-4"></p>
     <div class="row mb-3" *ngFor="let currError of entryObj['errors'] ">
         <div class="col">

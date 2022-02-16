@@ -64,6 +64,13 @@ export class InternalService {
         return this.http.get(url, {responseType: 'json'});
     }
 
+    getJob(entryIdentifier): Observable<any> {
+        const url = environment.ws + entryIdentifier;
+        return this.http.get(url, {
+            responseType: 'json'
+        });
+    }
+
     getFile(submissionID, fileName): Observable<any> {
         const url = environment.submission_server + 'task/' + submissionID + '/file/' + fileName;
         return this.http.get(url, {responseType: 'json'});

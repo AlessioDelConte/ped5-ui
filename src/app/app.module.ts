@@ -26,6 +26,7 @@ import { BrowseComponent} from './browse/browse.component';
 import { EnsembleCardComponent } from './results/ensemble-card/ensemble-card.component';
 import { MainResultPageComponent } from './results/main-result-page/main-result-page.component';
 import { JobsBrowseComponent } from './views/jobs-browse/jobs-browse.component';
+import { ResultViewComponent } from './views/result-view/result-view.component';
 
 
 
@@ -79,6 +80,7 @@ const appRoutes: Routes = [
     EnsembleCardComponent,
     MainResultPageComponent,
     JobsBrowseComponent,
+    ResultViewComponent,
   ],
   imports: [
     RouterModule.forRoot(

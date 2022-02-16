@@ -23,7 +23,7 @@ export class MainResultPageComponent implements OnInit {
     this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
 
     this.resultsService.currentUUID = this.route.snapshot.paramMap.get('identifier');
-    this.internalService.getFile(this.resultsService.currentUUID, 'submission/metadata.json').subscribe(currObj => {
+    this.internalService.getFile(this.resultsService.currentUUID, 'data/metadata.json').subscribe(currObj => {
       this.resultsService.parse(currObj);
       this.entryObj = currObj;
       this.entryObj['errors'] = this.entryObj['errors'].map(currObj => {
@@ -31,6 +31,7 @@ export class MainResultPageComponent implements OnInit {
         return currObj;
       });
       this.resultsService.currViewMode = 'scheduler';
+      console.log(this.entryObj)
     },
         err => {
       console.log('err', err);

@@ -26,6 +26,13 @@ export class InternalService {
         return this.http.get(url);
     }
 
+    getOntology(): Observable<any> {
+        const url = environment.ws + 'get_ontology';
+        return this.http.get(url, {
+            responseType: 'json'
+        });
+    }
+
     postSubmission(files): Observable<any> {
         const url = environment.ws + 'submission';
         return this.http.post(url, files,

@@ -6,6 +6,11 @@
             Ensemble</button>
     </div>
 
+    <div *ngIf="submissionService.form.get('ensembles').controls.length<=0"
+        class="row mb-2 justify-content-center fw-bold" style="color:gray">
+        No ensembles
+    </div>
+
     <div formArrayName="ensembles">
         <div class="card p-3 mb-2" *ngFor="let address of submissionService.form['controls']['ensembles']['controls']; let i=index; let last=last">
             <div [formGroupName]="i">
@@ -27,7 +32,7 @@
                         </div>
                         <div class="row">
                             <div class="col">
-                                <app-form-upload [indexEnsemble]="address.value['ensemble_id']" [ensembleObj]="address.value"></app-form-upload>
+                                <app-form-upload [indexEnsemble]="address.value['ensemble_id']" [ensembleCtrl]="address"></app-form-upload>
                             </div>
                         </div>
 

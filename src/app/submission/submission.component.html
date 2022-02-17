@@ -89,7 +89,7 @@
             <form [formGroup]="submissionService.form" *ngIf="submissionService.progress == 0">
                 <div class="row justify-content-center">
                     <div class="col-auto">
-                        <button class="btn btn-primary-dark" (click)="auxFun()">Run
+                        <button class="btn btn-primary-dark" (click)="submissionService.submission()">Run
                             assessment
                         </button>
                     </div>
@@ -99,6 +99,13 @@
             <div class="row justify-content-center" *ngIf="submissionService.progress > 0">
                 <div class="col-auto">
                     Uploading...({{submissionService.progress}}%)
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <button class="btn btn-primary-dark" (click)="auxFun()">Debug
+                    </button>
                 </div>
             </div>
         </div>

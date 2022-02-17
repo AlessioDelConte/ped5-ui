@@ -26,7 +26,7 @@ export class SubmissionComponent implements OnInit {
 
       }
     });
-    this.toggle('description')
+    this.toggle('upload')
     console.log(this.submissionService.form.value)
   }
 

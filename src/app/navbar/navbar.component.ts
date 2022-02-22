@@ -17,7 +17,7 @@ export class NavbarComponent implements OnInit {
 
   darkMode = false;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(public router: Router, private authService: AuthService) {
   }
 
   ngOnInit(): void {

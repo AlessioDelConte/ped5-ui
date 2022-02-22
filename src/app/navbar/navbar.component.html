@@ -1,42 +1,62 @@
 <div class="container-fluid">
-<!--  <div class="row">-->
-<!--    <div class="col">-->
-      <nav class="navbar navbar-dark bg-nav navbar-expand-lg fixed-top" id="navbar">
-        <div class="container-xl">
-          <a class="navbar-brand"
-             [class.]="url === 'about'"
-             style="color: #ffffffcc" routerLink="/">
-            <strong style="color: #ffffffee">PED</strong><span style="font-weight: lighter">deposition</span>
-          </a>
-          <button class="navbar-toggler"
-                  type="button"
-                  (click)="closeMenu()"
-                  aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarText" (click)="closeMenu()">
-            <ul class="navbar-nav ">
-              <li class="nav-item">
-                <a class="nav-link" [class.active]="url === 'help'" routerLink="/help">Help</a>
-              </li>
-              <li class="nav-item" *ngIf="!profileObj.displayedName">
-                <a class="nav-link" [class.active]="url === 'login'" routerLink="/login">Login</a>
-              </li>
-              <ng-container *ngIf="profileObj.displayedName">
-                <li class="nav-item" >
-                  <a class="nav-link" routerLink="/jobs/browse">My Jobs</a>
-                </li>
-                <li class="nav-item" >
-                  <a class="nav-link" >{{profileObj.displayedName}}</a>
-                </li>
-              </ng-container>
-              
-<!--              <li class="nav-item">-->
-<!--                <span class="nav-link" (click)="switchDarkMode()">night mode</span>-->
-<!--              </li>-->
+  <!--  <div class="row">-->
+  <!--    <div class="col">-->
+  <nav class="navbar navbar-dark bg-nav navbar-expand-lg fixed-top" id="navbar">
+    <div class="container-xl">
+      <a class="navbar-brand" style="color: #ffffffcc" routerLink="/">
+        <strong style="color: #ffffffee">PED</strong><span style="font-weight: lighter">deposition</span>
+      </a>
+      <button class="navbar-toggler" type="button" (click)="closeMenu()" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText" (click)="closeMenu()">
+        <ul class="navbar-nav ">
 
+          <!-- Always accesible -->
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url === '/help'" routerLink="/help">Help</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url === '/submission'" routerLink="/submission">Submit</a>
+          </li>
+
+          <!-- Login -->
+          <li class="nav-item" *ngIf="!profileObj.displayedName">
+            <a class="nav-link" [class.active]="router.url === '/login'" routerLink="/login">Login</a>
+          </li>
+
+          <!-- Authorized -->
+          <!-- <ng-container *ngIf="profileObj.displayedName">
+            <li class="nav-item">
+              <a class="nav-link" [class.active]="url === 'jobs/browse'" routerLink="/jobs/browse">My Jobs</a>
+            </li>
+            <li class="nav-item dropdowm">
+              <a class="nav-link">{{profileObj.displayedName}}</a>
+            </li>
+          </ng-container> -->
+          <li class="nav-item dropdowm" *ngIf="profileObj.displayedName">
+            <div class="nav-link dropdown-toggle">{{profileObj.displayedName}}</div>
+            <ul class="dropdown-menu">
+              <li>
+                <a class="dropdown-item" [ngClass]="{'active': (router.url === '/profile')}" routerLink="/profile"><i class="bi bi-person-fill me-2"></i>Profile</a>
+              </li>
+              <li>
+                <a class="dropdown-item" [ngClass]="{'active': (router.url === '/jobs/browse')}"
+                  routerLink="/jobs/browse"><i class="bi bi-list-task me-2"></i>My Jobs</a>
+              </li>
+              <li>
+                <a class="dropdown-item text-danger" routerLink="/logout"><i class="bi bi-box-arrow-left me-2"></i>Log
+                  out</a>
+              </li>
             </ul>
-          </div>
-        </div>
-      </nav>
+          </li>
+
+          <!--              <li class="nav-item">-->
+          <!--                <span class="nav-link" (click)="switchDarkMode()">night mode</span>-->
+          <!--              </li>-->
+
+        </ul>
+      </div>
+    </div>
+  </nav>
 </div>

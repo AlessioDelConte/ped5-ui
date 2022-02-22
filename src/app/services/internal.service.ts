@@ -72,7 +72,7 @@ export class InternalService {
     }
 
     getJob(entryIdentifier): Observable<any> {
-        const url = environment.ws + entryIdentifier;
+        const url = environment.ws + 'jobs/' + entryIdentifier;
         return this.http.get(url, {
             responseType: 'json'
         });
@@ -83,5 +83,8 @@ export class InternalService {
         return this.http.get(url, {responseType: 'json'});
     }
 
+    searchPMC(query): Observable<any> {
+        return this.http.get(environment.pmcURL + query, {responseType: 'json'});
+      }
 
 }

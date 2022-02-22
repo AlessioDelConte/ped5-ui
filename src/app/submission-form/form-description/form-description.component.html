@@ -19,7 +19,7 @@
     <div class="row mb-2">
         <div class="col input-group">
             <label class="input-group-text">Publication Status</label>
-            <select class="form-select" formControlName="publication_status">
+            <select class="form-select" formControlName="publication_status" (change)="onChangePubDetails()">
                 <option selected disabled [ngValue]="null">Choose...</option>
                 <option value="In preparation">In preparation</option>
                 <option value="Pre-print">Pre-print</option>
@@ -27,10 +27,23 @@
                 <option value="Accepted">Accepted</option>
                 <option value="Published">Published</option>
             </select>
+            <label class="input-group-text">Publication Source</label>
+            <select [attr.disabled]="submissionService.form.get('publication_status').value !== 'Published'?true:null"
+                class="form-select" formControlName="publication_source" (change)="onChangePubDetails()">
+                <option selected disabled [ngValue]="null">Choose...</option>
+                <option value="pubmed">Pubmed</option>
+                <option value="doi">DOI</option>
+            </select>
             <label class="input-group-text">Publication ID</label>
-            <input [attr.disabled]="submissionService.form.get('publication_status').value !== 'Published'?true:null"
+            <input
+                [attr.disabled]="((submissionService.form.get('publication_status').value !== 'Published') || (!submissionService.form.get('publication_source').value))?true:null"
                 formControlName="publication_identifier" type="text" class="form-control" placeholder="Pubmed or DOI">
         </div>
+    </div>
+
+    <div class="row mb-2" *ngIf="submissionService.form.value['publication_html']">
+            <div class="col-auto"><b>Publication: </b></div>
+            <div class="col" [innerHTML]="submissionService.form.value['publication_html']"></div>
     </div>
 
     <!-- Authors section -->
@@ -127,7 +140,8 @@
                 placeholder="Explain the structural ensemble calculation"></textarea>
         </div>
     </div>
-    <div class="row mb-3 mx-0" *ngIf="submissionService.form.get('term_structural_ensembles_calculation').value.length>0">
+    <div class="row mb-3 mx-0"
+        *ngIf="submissionService.form.get('term_structural_ensembles_calculation').value.length>0">
         <div class="col"><strong>Found terms: </strong>
             <span *ngFor="let term of submissionService.form.get('term_structural_ensembles_calculation').value"
                 class="badge bg-success mx-1">{{term["name"]}}</span>

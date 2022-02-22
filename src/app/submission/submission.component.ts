@@ -18,13 +18,15 @@ export class SubmissionComponent implements OnInit {
     this.route.data.subscribe((data: {
       entry: any
     }) => {
-      if (Array.isArray(data.entry) && data.entry.length > 0) {
-        // this.submissionService.FormParser(data.entry[0]);
-
-      } else {
-        // this.submissionService.FormParser(data.entry);
-
+      console.log(data.entry.metadata)
+      if(data.entry.metadata){
+        this.submissionService.parseForm(data.entry.metadata);
       }
+      // if (Array.isArray(data.entry) && data.entry.length > 0) {
+      //   this.submissionService.parseForm(data.entry[0]);
+      // } else {
+      //   this.submissionService.parseForm(data.entry.metadata); 
+      // }
     });
     this.toggle('upload')
     console.log(this.submissionService.form.value)

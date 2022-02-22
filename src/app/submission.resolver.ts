@@ -1,12 +1,12 @@
-import {Injectable} from '@angular/core';
+import { Injectable } from '@angular/core';
 import {
     Router, Resolve,
     RouterStateSnapshot,
     ActivatedRouteSnapshot
 } from '@angular/router';
-import {Observable, of} from 'rxjs';
-import {InternalService} from './services/internal.service';
-import {catchError} from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { InternalService } from './services/internal.service';
+import { catchError } from 'rxjs/operators';
 
 
 @Injectable({
@@ -17,14 +17,23 @@ export class SubmissionResolver implements Resolve<any> {
     }
 
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-        if (/PED\d{5}/.test(route.queryParams.entry_id)) {
+        if (route.queryParams.job_id) {
+            return this.internalService.getJob(route.queryParams.job_id).pipe(
+                catchError((error) => {
+                    console.log(error)
+                    return of({
+                        no_valid_job_id: true
+                    });
+                })
+            )
+        }else if (/PED\d{5}/.test(route.queryParams.entry_id)) {
             return this.internalService.getPublicEntry(route.queryParams.entry_id).pipe(
                 catchError((error) => {
                     return of({
                         no_valid_entry_id: true
                     });
                 })
-        );
+            );
         } else if (/^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i.test(route.queryParams.submission_id)) {
             return this.internalService.getEntry({
                 submission_id: route.queryParams.submission_id

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit , TemplateRef, ViewChild} from '@angular/core';
+import { Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { SubmissionService } from '../../services/submission.service';
 
 @Component({
@@ -25,18 +25,23 @@ export class FormUploadComponent implements OnInit {
     this.fileC.nativeElement.click();
   }
   onFilesAddedW(): void {
-    const filenameFormData = 'weights_' + this.ensembleCtrl.get("ensemble_id").value + '_' + this.fileC.nativeElement.files[0].name.substr(this.fileC.nativeElement.files[0].name.indexOf('.'));
-    this.submissionService.formData.append('weights_file', this.fileW.nativeElement.files[0], filenameFormData);
-    this.file_nameW = this.fileW.nativeElement.files[0].name;
+    // const filenameFormData = 'weights_' + this.ensembleCtrl.get("ensemble_id").value + '_' + this.fileC.nativeElement.files[0].name.substr(this.fileC.nativeElement.files[0].name.indexOf('.'));
+    // this.submissionService.formData.append('weights_file', this.fileW.nativeElement.files[0], filenameFormData);
+    // this.file_nameW = this.fileW.nativeElement.files[0].name;
+
+    this.ensembleCtrl.get("weights_file_strategy").setValue("direct");
+    this.submissionService.formData.append('weights_file', this.fileW.nativeElement.files[0], this.fileW.nativeElement.files[0].name);
+    this.ensembleCtrl.get("weights_file_name").setValue(this.fileW.nativeElement.files[0].name);
   }
 
   onFilesAddedC(): void {
-    const filenameFormData = 'conformations_' + this.ensembleCtrl.get("ensemble_id").value  + '_' + this.fileC.nativeElement.files[0].name.substr(this.fileC.nativeElement.files[0].name.indexOf('.'));
-    this.submissionService.formData.append( 'conformations_file', this.fileC.nativeElement.files[0], filenameFormData);
-    this.file_nameC = this.fileC.nativeElement.files[0].name;
+    // const filenameFormData = 'conformations_' + this.ensembleCtrl.get("ensemble_id").value  + '_' + this.fileC.nativeElement.files[0].name.substr(this.fileC.nativeElement.files[0].name.indexOf('.'));
+    // this.submissionService.formData.append( 'conformations_file', this.fileC.nativeElement.files[0], filenameFormData);
+    // this.file_nameC = this.fileC.nativeElement.files[0].name;
 
     this.ensembleCtrl.get("conformations_file_strategy").setValue("direct");
-    this.ensembleCtrl.get("conformations_file_name").setValue(filenameFormData);
+    this.submissionService.formData.append('conformations_file', this.fileC.nativeElement.files[0], this.fileC.nativeElement.files[0].name);
+    this.ensembleCtrl.get("conformations_file_name").setValue(this.fileC.nativeElement.files[0].name);
   }
 
 }

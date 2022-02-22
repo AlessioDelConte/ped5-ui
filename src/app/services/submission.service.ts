@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormArray, AbstractControl } from '@angular/forms';
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { InternalService } from './internal.service';
 import { Router } from '@angular/router';
@@ -11,12 +11,9 @@ export class SubmissionService {
 
     public form;
     public method_ontology;
-
-    entry_id = '';
-    progress = 0;
-    // form: FormGroup;
-    formData = new FormData();
-    ensembleCount = 0;
+    public formData;
+    public progress = 0;
+    public ensembleCount = 0;
 
     constructor(private fb: FormBuilder,
         private internalService: InternalService,
@@ -46,7 +43,262 @@ export class SubmissionService {
             "ensembles": this.fb.array([]),
             "constructs": this.fb.array([])
         })
+        this.formData = new FormData();
+        this.progress = 0;
+        this.ensembleCount = 0;
         return this.form;
+    }
+
+    public addFormArrayElement(field, emitEvent: boolean = false): void {
+        const rows = this.form.get(field) as FormArray;
+        if (field === 'constructs') {
+            rows.push(this.fb.group({
+                description: null,
+                chain_name: null,
+                is_fixed: false,
+                is_disordered: false,
+                fragments: this.fb.array([]),
+            }, {
+                emitEvent: emitEvent
+            }));
+        } else if (field === 'ensembles') {
+            this.ensembleCount += 1;
+            const currEnsembleID = /*this.entry_id +*/ 'e' + ('000' + this.ensembleCount.toString()).substr(-3);;
+            rows.push(this.fb.group({
+                ensemble_id: currEnsembleID,
+                description: null,
+                conformations_filesize: 0,
+                weights_filesize: 0,
+                conformations_file_strategy: "direct",
+                conformations_file_name: null,
+                conformations_file_loc: null,
+                weights_file_strategy: "direct",
+                weights_file_name: null,
+                weights_file_loc: null
+            }, {
+                emitEvent: emitEvent
+            }));
+        } else if (field === 'authors') {
+            rows.push(this.fb.group({
+                "name": null,
+                "orcid_id": null,
+                "role": null,
+                "email": null,
+                "corresponding_author": false
+            }, { emitEvent: emitEvent }))
+        } else if (field === 'entry_cross_reference' || field === 'experimental_cross_reference') {
+            rows.push(this.fb.group({
+                "db": null,
+                "id": null
+            }, { emitEvent: emitEvent }))
+        }
+    }
+
+    public removeFormArrayElement(field, index, emitEvent: boolean = false): void {
+        const rows = this.form.get(field) as FormArray;
+        rows.removeAt(index, {
+            emitEvent: emitEvent
+        });
+    }
+
+    public addFormArrayElement_nested(field, index, nestedField, emitEvent: boolean = false): void {
+        const rows = this.form.get(field)['controls'][index].get(nestedField) as FormArray;
+        if (field === 'constructs' && nestedField === 'fragments') {
+            rows.push(this.fb.group({
+                description: null,
+                part_of_ensemble: true,
+                sequence: null,
+                uniprot_acc: null,
+                uniprot_start_position: null,
+                uniprot_end_position: null,
+                definition_type: "Uniprot ACC" // Or "Sequence"
+            }), { emitEvent: emitEvent });
+        }
+    }
+
+    public removeFormArrayElement_nested(field, index, nestedField, nestedIndex, emitEvent: boolean = false): void {
+        const rows = this.form.get(field)['controls'][index].get(nestedField) as FormArray;
+        rows.removeAt(nestedIndex, {
+            emitEvent: emitEvent
+        });
+    }
+
+    private parseConstructs(rawConstructs: Array<object>): void {
+        let constructs = this.form.get('constructs') as FormArray;
+        if (Array.isArray(rawConstructs)) {
+            rawConstructs.forEach(constructData => {
+                // Add default element
+                this.addFormArrayElement('constructs', false);
+
+                // Get last added element
+                let curConstructIdx: number = constructs.length - 1;
+                let curConstruct: AbstractControl = constructs.controls[curConstructIdx];
+
+                // Modify if is ok
+                if (typeof constructData["description"] === 'string') curConstruct.get("description").setValue(constructData["description"]);
+                if (typeof constructData["chain_name"] === 'string') curConstruct.get("chain_name").setValue(constructData["chain_name"]);
+                if (typeof constructData["is_fixed"] === 'boolean') curConstruct.get("is_fixed").setValue(constructData["is_fixed"]);
+                if (typeof constructData["is_disordered"] === 'boolean') curConstruct.get("is_disordered").setValue(constructData["is_disordered"]);
+
+                // Check fragments
+                let fragments = curConstruct.get('fragments') as FormArray;
+                if (Array.isArray(constructData["fragments"])) {
+                    constructData["fragments"].forEach(fragmentData => {
+                        // Add default elemente
+                        this.addFormArrayElement_nested('constructs', curConstructIdx, 'fragments');
+
+                        // Get last element
+                        let curFragIdx = fragments.length - 1;
+                        let curFrag = fragments.controls[curFragIdx];
+
+                        // Modify if is ok
+                        if (typeof fragmentData["description"] === 'string') curFrag.get("description").setValue(fragmentData["description"]);
+                        if (typeof fragmentData["part_of_ensemble"] === 'boolean') curFrag.get("part_of_ensemble").setValue(fragmentData["part_of_ensemble"]);
+
+                        // Check definition type
+                        if (typeof fragmentData["uniprot_acc"] === 'string' && fragmentData["uniprot_acc"].length > 0) {
+                            curFrag.get("definition_type").setValue("Uniprot ACC");
+
+                            curFrag.get("uniprot_acc").setValue(fragmentData["uniprot_acc"]);
+                            curFrag.get("uniprot_start_position").setValue(fragmentData["uniprot_start_position"]);
+                            curFrag.get("uniprot_end_position").setValue(fragmentData["uniprot_end_position"]);
+                        } else {
+                            curFrag.get("definition_type").setValue("Sequence");
+
+                            curFrag.get("sequence").setValue(fragmentData["sequence"]);
+                        }
+                    })
+                }
+            });
+        }
+    }
+
+    private parseEnsembles(rawEnsembles: Array<object>):void{
+        let ensembles = this.form.get('ensembles') as FormArray;
+        if(Array.isArray(rawEnsembles)){
+            rawEnsembles.forEach( ensembleData => {
+                const currEnsembleCount = parseInt(ensembleData["ensemble_id"].substr(-3));
+                if (currEnsembleCount > this.ensembleCount) {
+                    this.ensembleCount = currEnsembleCount;
+                }
+                ensembles.push(this.fb.group({
+                    ensemble_id: ensembleData["ensemble_id"] || null,
+                    description: ensembleData["description"] || null,
+                    conformations_filesize: ensembleData["conformations_filesize"] || 0,
+                    weights_filesize: ensembleData["weights_filesize"] || 0,
+                    conformations_file_strategy: ensembleData["conformations_file_strategy"] || "direct",
+                    conformations_file_name: ensembleData["conformations_file_name"] || null,
+                    conformations_file_loc: ensembleData["conformations_file_loc"] || null,
+                    weights_file_strategy: ensembleData["weights_file_strategy"] || "direct",
+                    weights_file_name: ensembleData["weights_file_name"] || null,
+                    weights_file_loc: ensembleData["weights_file_loc"] || null
+                }), {emitEvent: false});
+            });
+        }
+    }
+
+    public parseForm(rawMetadata: object): void {
+        this.initForm();
+
+        // Parse description
+        let curForm = this.form as FormGroup;
+        curForm.get("title").setValue(rawMetadata["title"]);
+        curForm.get("publication_status").setValue(rawMetadata["publication_status"]);
+        curForm.get("publication_source").setValue(rawMetadata["publication_source"]);
+        curForm.get("publication_identifier").setValue(rawMetadata["publication_identifier"]);
+        curForm.get("publication_html").setValue(rawMetadata["publication_html"]);
+
+        curForm.get("expression_organism").setValue(rawMetadata["expression_organism"]);
+        curForm.get("expression_organism_name").setValue(rawMetadata["expression_organism_name"]);
+
+        curForm.get("experimental_procedure").setValue(rawMetadata["experimental_procedure"]);
+        curForm.get("structural_ensembles_calculation").setValue(rawMetadata["structural_ensembles_calculation"]);
+        curForm.get("md_calculation").setValue(rawMetadata["md_calculation"]);
+        this.findTerms();
+
+        if(Array.isArray(rawMetadata["authors"])){
+            let authors = curForm.get("authors") as FormArray
+            rawMetadata["authors"].forEach( authorData => {
+                // Add default element
+                this.addFormArrayElement('authors');
+
+                let curAuthorIdx: number = authors.length - 1;
+                let curAuthor: AbstractControl = authors.controls[curAuthorIdx];
+
+                curAuthor.get("name").setValue(authorData["name"])
+                curAuthor.get("orcid_id").setValue(authorData["orcid_id"])
+                curAuthor.get("role").setValue(authorData["role"])
+                curAuthor.get("email").setValue(authorData["email"])
+                curAuthor.get("corresponding_author").setValue(authorData["corresponding_author"])
+            })
+        }
+
+        if(Array.isArray(rawMetadata["entry_cross_reference"])){
+            let entryXRefs = curForm.get("entry_cross_reference") as FormArray
+            rawMetadata["entry_cross_reference"].forEach( xRefData => {
+                // Add default element
+                this.addFormArrayElement('entry_cross_reference');
+
+                let curXRefIdx: number = entryXRefs.length - 1;
+                let curXref: AbstractControl = entryXRefs.controls[curXRefIdx];
+
+                curXref.get("db").setValue(xRefData["db"])
+                curXref.get("id").setValue(xRefData["id"])
+            })
+        }
+
+        if(Array.isArray(rawMetadata["experimental_cross_reference"])){
+            let experXRefs = curForm.get("experimental_cross_reference") as FormArray
+            rawMetadata["experimental_cross_reference"].forEach( xRefData => {
+                // Add default element
+                this.addFormArrayElement('experimental_cross_reference');
+
+                let curXRefIdx: number = experXRefs.length - 1;
+                let curXref: AbstractControl = experXRefs.controls[curXRefIdx];
+
+                curXref.get("db").setValue(xRefData["db"])
+                curXref.get("id").setValue(xRefData["id"])
+            })
+        }
+        
+        // Parse constructs
+        this.parseConstructs(rawMetadata["constructs"]);
+
+        // Parse ensembles
+        this.parseEnsembles(rawMetadata["ensembles"]);
+    }
+
+
+    public submission(): void {
+        const blob = new Blob([JSON.stringify(this.form.value)], { type: 'text/plain' });
+        // this.formData.append('task_name', 'ped');
+        this.formData.append('metadata', blob, 'metadata.json');
+        this.internalService.sendTask(this.formData).subscribe((event: HttpEvent<any>) => {
+            switch (event.type) {
+                case HttpEventType.Sent:
+                    console.log('Request has been made!');
+                    break;
+                case HttpEventType.ResponseHeader:
+                    console.log('Response header has been received!');
+                    break;
+                case HttpEventType.UploadProgress:
+                    this.progress = Math.round(event.loaded / event.total * 100);
+                    console.log(`Uploaded! ${this.progress}%`);
+                    break;
+                case HttpEventType.Response:
+                    console.log('User successfully created!', event.body);
+                    setTimeout(() => {
+                        let url = '';
+                        if (event.body.job_id) {
+                            url = 'results/' + event.body.job_id;
+                        }
+                        this.initForm();
+                        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+                            this.router.navigate([url]);
+                        });
+                    }, 500);
+            }
+        });
     }
 
     public getInputMetadata(): string {
@@ -58,6 +310,7 @@ export class SubmissionService {
             return reg.test(this.form.get('experimental_procedure').value) || reg.test(this.form.get('structural_ensembles_calculation').value) || reg.test(this.form.get('md_calculation').value);
         }
 
+        // Wait for ontology
         if (!this.method_ontology) {
             this.method_ontology = await this.internalService.getOntology().toPromise();
         }
@@ -97,237 +350,5 @@ export class SubmissionService {
         this.form.get('term_md_calculation').setValue(terms["term_md_calculation"]);
 
     }
-
-    FormParser(entrtyData: object): void {
-        // this.form = this.fb.group({
-        //     submission_id: entrtyData['submission_id'] ? entrtyData['submission_id'] : null,
-        //     entry_id: entrtyData['entry_id'] ? entrtyData['entry_id'] : null,
-        //     construct: this.fb.array([]),
-        //     ensembles: this.fb.array([]),
-        //     captcha: new FormControl()
-        // });
-        // this.entry_id =  entrtyData['entry_id'] || '';
-
-
-
-        // if (Array.isArray(entrtyData['construct'])) {
-        //     const rows = this.form.get('construct') as FormArray;
-        //     entrtyData['construct'].forEach(currChain => {
-        //         const currChainObj = {
-        //             chain_name: typeof currChain.chain_name === 'string' ? currChain.chain_name : null,
-        //             description: typeof currChain.description === 'string' ? currChain.description : null,
-        //             is_fixed: null,
-        //             is_disordered: null,
-        //             fragments: this.fb.array([])
-        //         };
-
-        //         const arrayOfFragments = this.fb.array([]);
-
-        //         if (Array.isArray(currChain.fragments) && currChain.fragments.length > 0) {
-        //             currChain.fragments.forEach(currFragment => {
-        //                 arrayOfFragments.push(
-        //                     this.fb.group({
-        //                         description: typeof currFragment.description === 'string' ? currFragment.description : null,
-        //                         uniprot_acc: typeof currFragment.uniprot_acc === 'string' ? currFragment.uniprot_acc : null,
-        //                         uniprot_start_position: typeof currFragment.uniprot_start_position === 'number' ? currFragment.uniprot_start_position : null,
-        //                         uniprot_end_position: typeof currFragment.uniprot_end_position === 'number' ? currFragment.uniprot_end_position : null,
-        //                         sequence: typeof currFragment.sequence === 'string' ? currFragment.sequence : null,
-        //                         part_of_ensemble: null
-        //                     })
-        //                 );
-        //             });
-        //         }
-        //         if (arrayOfFragments.length === 0) {
-        //             arrayOfFragments.push(
-        //                 this.fb.group({
-        //                     description: null,
-        //                     uniprot_acc: null,
-        //                     uniprot_start_position: null,
-        //                     uniprot_end_position: null,
-        //                     sequence: null
-        //                 })
-        //             );
-        //         }
-        //         currChainObj['fragments'] = arrayOfFragments;
-        //         rows.push(this.fb.group(currChainObj));
-        //     });
-        // } else {
-        //     this.addFormArrayElement('construct', false);
-        // }
-
-        // if (Array.isArray(entrtyData['ensembles'])) {
-        //     const rows = this.form.get('ensembles') as FormArray;
-        //     entrtyData['ensembles'].forEach(currEnsemble => {
-        //         const currEnsembleCount = parseInt(currEnsemble.ensemble_id.substr(-3));
-        //         if (currEnsembleCount > this.ensembleCount) {
-        //             this.ensembleCount = currEnsembleCount;
-        //         }
-        //         const currEnsembleObj = {
-        //             ensemble_id: currEnsemble.ensemble_id || '',
-        //             description: currEnsemble.description || '',
-        //             conformations_filesize: currEnsemble.conformations_filesize || 0,
-        //             weights_filesize: currEnsemble.weights_filesize || 0,
-        //             conformations_path: '',
-        //             weights_path: '',
-        //             status: currEnsemble.status || '',
-        //         };
-
-        //         rows.push(this.fb.group(currEnsembleObj));
-        //     });
-        // } else {
-
-        //     this.addFormArrayElement('ensembles', false);
-        // }
-    }
-
-    public addFormArrayElement(field, emitEvent: boolean): void {
-        const rows = this.form.get(field) as FormArray;
-        if (field === 'constructs') {
-            rows.push(this.fb.group({
-                description: null,
-                chain_name: null,
-                is_fixed: false,
-                is_disordered: false,
-                fragments: this.fb.array([]),
-            }, {
-                emitEvent: emitEvent
-            }));
-        } else if (field === 'ensembles') {
-            this.ensembleCount += 1;
-            const currEnsembleID = this.entry_id + 'e' + ('000' + this.ensembleCount.toString()).substr(-3);;
-            rows.push(this.fb.group({
-                ensemble_id: currEnsembleID,
-                description: null,
-                conformations_filesize: 0,
-                weights_filesize: 0,
-                conformations_file_strategy: "direct",
-                conformations_file_name: null,
-                conformations_file_loc: null,
-                weights_file_strategy: "direct",
-                weights_file_name: null,
-                weights_file_loc: null
-            }, {
-                emitEvent: emitEvent
-            }));
-        } else if (field === 'authors') {
-            rows.push(this.fb.group({
-                "name": null,
-                "orcid_id": null,
-                "role": null,
-                "email": null,
-                "corresponding_author": false
-            }, { emitEvent: emitEvent }))
-        } else if (field === 'entry_cross_reference' || field === 'experimental_cross_reference') {
-            rows.push(this.fb.group({
-                "db": null,
-                "id": null
-            }, { emitEvent: emitEvent }))
-        }
-    }
-
-    public removeFormArrayElement(field, index, emitEvent: boolean): void {
-        const rows = this.form.get(field) as FormArray;
-        rows.removeAt(index, {
-            emitEvent: emitEvent
-        });
-        // if (rows.length === 0) {
-        //     this.addFormArrayElement(field, false);
-        // }
-    }
-
-    public addFormArrayElement_nested(field, index, nestedField, emitEvent: boolean): void {
-        const rows = this.form.get(field)['controls'][index].get(nestedField) as FormArray;
-        if (field === 'constructs' && nestedField === 'fragments') {
-            rows.push(this.fb.group({
-                description: null,
-                part_of_ensemble: true,
-                sequence: null,
-                uniprot_acc: null,
-                uniprot_start_position: null,
-                uniprot_end_position: null,
-                definition_type: "Uniprot ACC"
-            }), { emitEvent: emitEvent });
-        }
-    }
-
-    public removeFormArrayElement_nested(field, index, nestedField, nestedIndex, emitEvent: boolean): void {
-        const rows = this.form.get(field)['controls'][index].get(nestedField) as FormArray;
-        rows.removeAt(nestedIndex, {
-            emitEvent: emitEvent
-        });
-        // if (rows.length === 0) {
-        //     this.addFormArrayElement_nested(field, index, nestedField, false);
-        // }
-    }
-
-    // submission(): void {
-    //     const blob = new Blob([JSON.stringify(this.form.value)], {type : 'text/plain'});
-    //     this.formData.append('form', blob, 'form.txt');
-    //     this.internalService.postSubmission(this.formData).subscribe((event: HttpEvent<any>) => {
-    //         switch (event.type) {
-    //             case HttpEventType.Sent:
-    //                 console.log('Request has been made!');
-    //                 break;
-    //             case HttpEventType.ResponseHeader:
-    //                 console.log('Response header has been received!');
-    //                 break;
-    //             case HttpEventType.UploadProgress:
-    //                 this.progress = Math.round(event.loaded / event.total * 100);
-    //                 console.log(`Uploaded! ${this.progress}%`);
-    //                 break;
-    //             case HttpEventType.Response:
-    //                 console.log('User successfully created!', event.body);
-    //                 setTimeout(() => {
-    //                     let url = '';
-    //                     if (event.body.submission_id) {
-    //                         url = 'results/' + event.body.submission_id;
-    //                     }
-    //                     this.reset();
-    //                     this.router.navigateByUrl('/', {skipLocationChange: true}).then(() => {
-    //                         this.router.navigate([url]);
-    //                     });
-    //                 }, 500);
-    //         }
-    //     });
-    // }
-    submission(): void {
-        const blob = new Blob([JSON.stringify(this.form.value)], { type: 'text/plain' });
-        this.formData.append('task_name', 'ped');
-        this.formData.append('metadata', blob, 'metadata.json');
-        this.internalService.sendTask(this.formData).subscribe((event: HttpEvent<any>) => {
-            switch (event.type) {
-                case HttpEventType.Sent:
-                    console.log('Request has been made!');
-                    break;
-                case HttpEventType.ResponseHeader:
-                    console.log('Response header has been received!');
-                    break;
-                case HttpEventType.UploadProgress:
-                    this.progress = Math.round(event.loaded / event.total * 100);
-                    console.log(`Uploaded! ${this.progress}%`);
-                    break;
-                case HttpEventType.Response:
-                    console.log('User successfully created!', event.body);
-                    setTimeout(() => {
-                        let url = '';
-                        if (event.body.job_id) {
-                            url = 'results/' + event.body.job_id;
-                        }
-                        this.reset();
-                        this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-                            this.router.navigate([url]);
-                        });
-                    }, 500);
-            }
-        });
-    }
-
-    reset(): void {
-        // this.form = null;
-        this.formData = new FormData();
-        this.progress = 0;
-        this.ensembleCount = 0;
-    }
-
 
 }

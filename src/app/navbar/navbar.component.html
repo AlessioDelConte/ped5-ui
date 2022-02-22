@@ -6,7 +6,7 @@
           <a class="navbar-brand"
              [class.]="url === 'about'"
              style="color: #ffffffcc" routerLink="/">
-            <strong style="color: #ffffffee">PED</strong><span style="font-weight: lighter">assessment</span>
+            <strong style="color: #ffffffee">PED</strong><span style="font-weight: lighter">deposition</span>
           </a>
           <button class="navbar-toggler"
                   type="button"
@@ -24,10 +24,10 @@
               </li>
               <ng-container *ngIf="profileObj.displayedName">
                 <li class="nav-item" >
-                  <span class="nav-link" routerLink="/jobs/browse">My Jobs</span>
+                  <a class="nav-link" routerLink="/jobs/browse">My Jobs</a>
                 </li>
                 <li class="nav-item" >
-                  <span class="nav-link" >{{profileObj.displayedName}}</span>
+                  <a class="nav-link" >{{profileObj.displayedName}}</a>
                 </li>
               </ng-container>
               

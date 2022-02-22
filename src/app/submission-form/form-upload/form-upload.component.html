@@ -1,46 +1,76 @@
-<input #fileW
-       type="file"
-       style="display: none"
-       (change)="onFilesAddedW()">
+<input #fileW type="file" style="display: none" (change)="onFilesAddedW()">
+<input #fileC type="file" style="display: none" (change)="onFilesAddedC()">
 
-<input #fileC
-       type="file"
-       style="display: none"
-       (change)="onFilesAddedC()">
+<div class="row mb-2">
+    <div class="col-auto"><b>Conformation File:</b></div>
+    <span class="col-auto" *ngIf="ensembleCtrl.get('conformations_file_name').value">
+        <i class="bi bi-paperclip"></i> {{ensembleCtrl.get('conformations_file_name').value }}
+    </span>
+    <div class="col">
+        <button *ngIf="ensembleCtrl.get('conformations_file_strategy').value === 'direct'"
+            class="btn btn-sm btn-success" (click)="addFilesC()">
+            <span *ngIf="ensembleCtrl.get('conformations_file_name').value">Change</span>
+            <span *ngIf="!ensembleCtrl.get('conformations_file_name').value">Upload</span>
+        </button>
+        <button *ngIf="ensembleCtrl.get('conformations_file_strategy').value !== 'direct'"
+            class="btn btn-sm btn-warning" (click)="addFilesC()">
+            <span>Replace</span>
+        </button>
+    </div>
+</div>
 
 <div class="row">
+    <div class="col-auto"><b>Weights File:</b></div>
+    <span class="col-auto" *ngIf="ensembleCtrl.get('weights_file_name').value">
+        <i class="bi bi-paperclip"></i> {{ensembleCtrl.get('weights_file_name').value }}
+    </span>
     <div class="col">
-        <button *ngIf="ensembleCtrl.get('weights_filesize').value === 0"  class="btn btn-sm btn-success" (click)="addFilesW()">
+        <button *ngIf="ensembleCtrl.get('weights_file_strategy').value === 'direct'"
+            class="btn btn-sm btn-success" (click)="addFilesW()">
+            <span *ngIf="ensembleCtrl.get('weights_file_name').value">Change</span>
+            <span *ngIf="!ensembleCtrl.get('weights_file_name').value">Upload</span>
+        </button>
+        <button *ngIf="ensembleCtrl.get('weights_file_strategy').value !== 'direct'"
+            class="btn btn-sm btn-warning" (click)="addFilesW()">
+            <span>Replace</span>
+        </button>
+    </div>
+</div>
+
+<!-- <div class="row">
+    <div class="col">
+        <button *ngIf="ensembleCtrl.get('weights_file_strategy').value === 'direct'" class="btn btn-sm btn-success"
+            (click)="addFilesW()">
             <span *ngIf="file_nameW">Select another file for weights</span>
             <span *ngIf="!file_nameW"> Select file for weights</span>
         </button>
-        <button *ngIf="ensembleCtrl.get('weights_filesize').value  > 0" class="btn btn-sm btn-warning" (click)="addFilesC()">
+        <button *ngIf="ensembleCtrl.get('weights_file_strategy').value !== 'direct'" class="btn btn-sm btn-warning"
+            (click)="addFilesC()">
             <span>Replace current file of weights</span>
         </button>
     </div>
     <div class="col text-end">
-        <button *ngIf="ensembleCtrl.get('conformations_file_strategy').value === 'direct'" class="btn btn-sm btn-success" (click)="addFilesC()">
-            <span *ngIf="file_nameC">Select another file for conformations</span>
-            <span *ngIf="!file_nameC"> Select file for conformations</span>
+        <button *ngIf="ensembleCtrl.get('conformations_file_strategy').value === 'direct'"
+            class="btn btn-sm btn-success" (click)="addFilesC()">
+            <span *ngIf="ensembleCtrl.get('conformations_file_name').value">Select another file for conformations</span>
+            <span *ngIf="!ensembleCtrl.get('conformations_file_name').value"> Select file for conformations</span>
         </button>
-        <button *ngIf="ensembleCtrl.get('conformations_file_strategy').value !== 'direct'" class="btn btn-sm btn-warning" (click)="addFilesC()">
+        <button *ngIf="ensembleCtrl.get('conformations_file_strategy').value !== 'direct'"
+            class="btn btn-sm btn-warning" (click)="addFilesC()">
             <span>Replace current file of conformations</span>
         </button>
     </div>
 </div>
 <div class="row">
     <div class="col">
-            <span   *ngIf="file_nameW" tooltip="Selected filename for weights">
+        <span *ngIf="file_nameW" tooltip="Selected filename for weights">
             <i class="bi bi-paperclip"></i> {{file_nameW}}
-            </span>
-
+        </span>
     </div>
 
     <div class="col text-end">
-            <span  *ngIf="file_nameC" tooltip="Selected filename for conformations">
-              <i class="bi bi-paperclip"></i> {{file_nameC}}
-            </span>
-
+        <span *ngIf="ensembleCtrl.get('conformations_file_name').value" tooltip="Selected filename for conformations">
+            <i class="bi bi-paperclip"></i> {{ensembleCtrl.get('conformations_file_name').value }}
+        </span>
     </div>
-</div>
-
+</div> -->

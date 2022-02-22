@@ -15,6 +15,8 @@ export class ResultViewComponent implements OnInit {
 
   ngOnInit(): void {
     let identifier = this.route.snapshot.paramMap.get('identifier');
+    console.log("identifier")
+    console.log(identifier)
     this.internalService.getJob(identifier).subscribe(responseData => {
       this.metadata = responseData.metadata;
       this.job_data = {

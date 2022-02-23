@@ -2,13 +2,18 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {InternalService} from './internal.service';
 
+interface UserProfile {
+    orcid?: string,
+    displayedName?: string,
+    role?: string
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class AuthService {
 
-    profileObj = new BehaviorSubject<object>({
-        authorized: false
+    profileObj = new BehaviorSubject<UserProfile>({
     });
 
     constructor(private internalService: InternalService) {
@@ -23,7 +28,6 @@ export class AuthService {
             },
             error => {
                 this.profileObj.next({
-                    authorized: false
                 });
             },
             () => {
@@ -34,7 +38,6 @@ export class AuthService {
     logout(): void {
         this.internalService.GetLogOut().subscribe(result => {
             this.profileObj.next({
-                authorized: false
             });
         }, error => {
         }, () => {

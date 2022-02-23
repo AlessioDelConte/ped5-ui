@@ -19,7 +19,7 @@
                     <span class="badge" [ngClass]="{'bg-danger': job.status === 'failed', 'bg-success': job.status === 'done', 'bg-warning': job.status === 'running' }">{{job.status}}</span>
                 </td>
                 <td>
-                    <a  target="_blank" routerLink="/results/{{job.job_id}}"> <i class="bi bi-eye-fill"></i></a>
+                    <a  target="_blank" routerLink="/job/{{job.job_id}}"> <i class="bi bi-eye-fill"></i></a>
                 </td>
             </tr>
         </tbody>

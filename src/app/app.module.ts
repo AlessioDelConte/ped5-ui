@@ -6,27 +6,25 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {NavbarComponent} from './navbar/navbar.component';
-import {FooterComponent} from './footer/footer.component';
-import {HomeComponent} from './home/home.component';
+import {NavbarComponent} from './core/navbar/navbar.component';
+import {FooterComponent} from './core/footer/footer.component';
+import {HomeComponent} from './views/home/home.component';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
-import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
-import { SwaggerUiComponent } from './swagger-ui/swagger-ui.component';
-import { SwaggerInternalComponent } from './swagger-internal/swagger-internal.component';
+import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
+import { SwaggerUiComponent } from './views/swagger-ui/swagger-ui.component';
+import { SwaggerInternalComponent } from './views/swagger-internal/swagger-internal.component';
 import { RecaptchaDirective } from './recaptcha.directive';
-import { SubmissionComponent } from './submission/submission.component';
+import { SubmissionComponent } from './views/submission/submission.component';
 import { FormDescriptionComponent } from './submission-form/form-description/form-description.component';
 import { FormConstructComponent } from './submission-form/form-construct/form-construct.component';
 import { FormFilesComponent } from './submission-form/form-files/form-files.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './views/login/login.component';
 import { SubmissionResolver } from './submission.resolver';
 import { FormUploadComponent } from './submission-form/form-upload/form-upload.component';
 import { ResultPageComponent } from './results/result-page/result-page.component';
-import { BrowseComponent} from './browse/browse.component';
 import { EnsembleCardComponent } from './results/ensemble-card/ensemble-card.component';
-import { MainResultPageComponent } from './results/main-result-page/main-result-page.component';
 import { JobsBrowseComponent } from './views/jobs-browse/jobs-browse.component';
-import { ResultViewComponent } from './views/result-view/result-view.component';
+import { JobResultViewComponent } from './views/job-result-view/job-result-view.component';
 
 
 
@@ -37,16 +35,12 @@ const appRoutes: Routes = [
     resolve: {entry: SubmissionResolver}
   },
   {
-    path: 'results/:identifier',
-    component: MainResultPageComponent
-  },
-  {
-    path: 'browse',
-    component: BrowseComponent
-  },
-  {
     path: 'jobs/browse',
     component: JobsBrowseComponent
+  },
+  {
+    path: 'job/:identifier',
+    component: JobResultViewComponent
   },
   {
     path: 'login',
@@ -78,9 +72,8 @@ const appRoutes: Routes = [
     FormUploadComponent,
     ResultPageComponent,
     EnsembleCardComponent,
-    MainResultPageComponent,
     JobsBrowseComponent,
-    ResultViewComponent,
+    JobResultViewComponent,
   ],
   imports: [
     RouterModule.forRoot(

@@ -13,29 +13,34 @@
                 {{currTerm['name']}}
             </span>
         </p>
-        <p id="textExperimentalProcedure" class="text-justify small mb-0">
-            {{entryObj['experimental_procedure']}}
-        </p>
-        <span id="buttonExperimentalProcedure"
-            *ngIf="entryObj['experimental_procedure'] && entryObj['experimental_procedure'].length > 0"
-            class="text-primary" (click)="toogleCollapse('textExperimentalProcedure')">Read more</span>
+        <ng-container *ngIf="entryObj['experimental_procedure'] && entryObj['experimental_procedure'].length > 0">
+            <p id="textExperimentalProcedure" class="collapse-min text-justify small mb-0">
+                {{entryObj['experimental_procedure']}}
+            </p>
+            <span id="buttonExperimentalProcedure" class="text-primary" style="cursor: pointer;"
+                (click)="toogleCollapse('textExperimentalProcedure')">Read more</span>
+        </ng-container>
     </div>
 
     <div>
-        <p class="my-1" *ngIf="entryObj['term_structural_ensembles_calculation'] && entryObj['term_structural_ensembles_calculation'].length > 0">
+        <p class="my-1"
+            *ngIf="entryObj['term_structural_ensembles_calculation'] && entryObj['term_structural_ensembles_calculation'].length > 0">
             <strong>Structural ensemble calculation</strong>
             <span class="badge bg-ensemble ms-2"
                 *ngFor="let currTerm of entryObj['term_structural_ensembles_calculation']">
                 {{currTerm['name']}}
             </span>
         </p>
-        <p id="textStructuralEnsembles" class="text-justify small mb-0">
-            {{entryObj['structural_ensembles_calculation']}}</p>
-        <span id="buttonStructuralEnsembles"
-            *ngIf="entryObj['structural_ensembles_calculation'] && entryObj['structural_ensembles_calculation'].length > 0"
-            class="text-primary" (click)="toogleCollapse('textStructuralEnsembles')">
-            Read more
-        </span>
+        <ng-container
+            *ngIf="entryObj['structural_ensembles_calculation'] && entryObj['structural_ensembles_calculation'].length > 0">
+            <p id="textStructuralEnsembles" class="collapse-min text-justify small mb-0">
+                {{entryObj['structural_ensembles_calculation']}}</p>
+            <span id="buttonStructuralEnsembles" class="text-primary" style="cursor: pointer;"
+                (click)="toogleCollapse('textStructuralEnsembles')">
+                Read more
+            </span>
+        </ng-container>
+
     </div>
 
     <div>
@@ -45,33 +50,35 @@
                 {{currTerm['name']}}
             </span>
         </p>
-        <p id="textMolecularDynamics" class="text-justify small mb-0">{{entryObj['md_calculation']}}</p>
-        <span id="buttonMolecularDynamics"
-            *ngIf="entryObj['md_calculation'] && entryObj['md_calculation'].length > 0" class="text-primary"
-            (click)="toogleCollapse('textMolecularDynamics')">
-            Read more
-        </span>
+        <ng-container *ngIf="entryObj['md_calculation'] && entryObj['md_calculation'].length > 0">
+            <p id="textMolecularDynamics" class="collapse-min text-justify small mb-0">{{entryObj['md_calculation']}}
+            </p>
+            <span id="buttonMolecularDynamics" class="text-primary" style="cursor: pointer;"
+                (click)="toogleCollapse('textMolecularDynamics')">
+                Read more
+            </span>
+        </ng-container>
     </div>
 
 
 
-        <!--<div class="col-lg-auto">-->
-        <!--    <p><strong>Experiments' raw data</strong>-->
-        <!--        <span-->
-        <!--                *ngFor="let currRef of entryObj['experimental_cross_reference']">-->
-        <!--       <a  *ngIf="currRef['db'] !== 'bmrb'"class="badge bg-info ml-1"-->
-        <!--           href="https://identifiers.org/{{currRef['db']}}:{{currRef['id']}}"-->
-        <!--           target="_blank">-->
-        <!--          {{currRef['db']}}:{{currRef['id']}} <i class="material-icons" style="font-size: small">link</i>-->
-        <!--        </a>-->
-        <!--    <a *ngIf="currRef['db'] === 'bmrb'" class="badge badge-external-link ml-1"-->
-        <!--       href="https://bmrb.io/data_library/summary/index.php?bmrbId={{currRef['id']}}"-->
-        <!--       target="_blank">-->
-        <!--          {{currRef['db']}}:{{currRef['id']}} <i class="material-icons" style="font-size: small">link</i>-->
-        <!--        </a>-->
-        <!--    </span>-->
-        <!--    </p>-->
-        <!--</div>-->
+    <!--<div class="col-lg-auto">-->
+    <!--    <p><strong>Experiments' raw data</strong>-->
+    <!--        <span-->
+    <!--                *ngFor="let currRef of entryObj['experimental_cross_reference']">-->
+    <!--       <a  *ngIf="currRef['db'] !== 'bmrb'"class="badge bg-info ml-1"-->
+    <!--           href="https://identifiers.org/{{currRef['db']}}:{{currRef['id']}}"-->
+    <!--           target="_blank">-->
+    <!--          {{currRef['db']}}:{{currRef['id']}} <i class="material-icons" style="font-size: small">link</i>-->
+    <!--        </a>-->
+    <!--    <a *ngIf="currRef['db'] === 'bmrb'" class="badge badge-external-link ml-1"-->
+    <!--       href="https://bmrb.io/data_library/summary/index.php?bmrbId={{currRef['id']}}"-->
+    <!--       target="_blank">-->
+    <!--          {{currRef['db']}}:{{currRef['id']}} <i class="material-icons" style="font-size: small">link</i>-->
+    <!--        </a>-->
+    <!--    </span>-->
+    <!--    </p>-->
+    <!--</div>-->
     <h5 class="mt-3">
         Ensembles
     </h5>

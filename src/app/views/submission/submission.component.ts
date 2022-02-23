@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { SubmissionService } from '../services/submission.service';
+import { SubmissionService } from '../../services/submission.service';
 
 @Component({
   selector: 'app-submission',

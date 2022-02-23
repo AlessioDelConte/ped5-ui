@@ -21,7 +21,7 @@
           </li>
 
           <!-- Login -->
-          <li class="nav-item" *ngIf="!profileObj.displayedName">
+          <li class="nav-item" *ngIf="!profileObj.role">
             <a class="nav-link" [class.active]="router.url === '/login'" routerLink="/login">Login</a>
           </li>
 
@@ -34,7 +34,7 @@
               <a class="nav-link">{{profileObj.displayedName}}</a>
             </li>
           </ng-container> -->
-          <li class="nav-item dropdowm" *ngIf="profileObj.displayedName">
+          <li class="nav-item dropdowm" *ngIf="profileObj.role">
             <div class="nav-link dropdown-toggle">{{profileObj.displayedName}}</div>
             <ul class="dropdown-menu">
               <li>

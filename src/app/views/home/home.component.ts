@@ -1,6 +1,6 @@
 import {Component, OnInit, AfterViewInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {InternalService} from '../services/internal.service';
+import {InternalService} from '../../services/internal.service';
 
 @Component({
   selector: 'app-home',

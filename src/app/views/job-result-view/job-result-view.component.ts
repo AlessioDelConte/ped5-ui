@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import {InternalService} from '../../services/internal.service';
-import {ResultsService} from '../../services/results.service';
-import {ActivatedRoute} from '@angular/router';
-import { Offcanvas } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js'
-import { AuthService} from '../../services/auth.service';
+import { ActivatedRoute } from '@angular/router';
+import { AuthService } from 'src/app/services/auth.service';
+import { InternalService } from 'src/app/services/internal.service';
+import { ResultsService } from 'src/app/services/results.service';
+import { Offcanvas, Modal } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js'
 
 @Component({
-  selector: 'app-main-result-page',
-  templateUrl: './main-result-page.component.html',
-  styleUrls: ['./main-result-page.component.scss']
+  selector: 'app-job-result-view',
+  templateUrl: './job-result-view.component.html',
+  styleUrls: ['./job-result-view.component.scss']
 })
-export class MainResultPageComponent implements OnInit {
+export class JobResultViewComponent implements OnInit {
+  jobObj;
   entryObj = {};
   profileObj;
 
@@ -20,15 +21,18 @@ export class MainResultPageComponent implements OnInit {
               private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    console.log(this.route.snapshot.url)
     this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
 
     this.resultsService.currentUUID = this.route.snapshot.paramMap.get('identifier');
-    this.internalService.getFile(this.resultsService.currentUUID, 'data/metadata.json').subscribe(currObj => {
+    this.internalService.getJob(this.resultsService.currentUUID).subscribe(currJob => {
+      this.jobObj = currJob;
+      let currObj = currJob.metadata;
       this.resultsService.parse(currObj);
       this.entryObj = currObj;
-      this.entryObj['errors'] = this.entryObj['errors'].map(currObj => {
-        currObj['message'] = currObj['message'].replaceAll('\n', '<br>');
-        return currObj;
+      this.entryObj['errors'] = this.entryObj['errors'].map(currErr => {
+        currErr['message'] = currErr['message'].replaceAll('\n', '<br>');
+        return currErr;
       });
       this.resultsService.currViewMode = 'scheduler';
       console.log(this.entryObj)

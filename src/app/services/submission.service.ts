@@ -290,7 +290,7 @@ export class SubmissionService {
                     setTimeout(() => {
                         let url = '';
                         if (event.body.job_id) {
-                            url = 'results/' + event.body.job_id;
+                            url = 'job/' + event.body.job_id;
                         }
                         this.initForm();
                         this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {

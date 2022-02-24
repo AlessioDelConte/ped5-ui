@@ -1,0 +1,31 @@
+<!-- Main container -->
+<div class="container-xl">
+    <h2>Results</h2>
+    <div class="alert alert-success">
+        <div class="row align-items-center">
+            <div class="col-md-auto">
+                <p class="mb-0">
+                    <strong>Draft identifier</strong>
+                    <span class="mx-2 badge bg-primary-dark">
+                        {{resultsService.currentUUID}}
+                    </span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <app-result-page [entryObj]="entryObj"></app-result-page>
+
+    <p class="mb-4"></p>
+
+    <ng-container *ngIf="entryObj && entryObj['errors']">
+        <div class="row mb-3" *ngFor="let currError of entryObj['errors'] ">
+            <div class="col">
+                <p class="text-danger mb-0"><strong>Type of error: </strong> {{currError['title']}}</p>
+                <p><strong>Message: </strong> <br>
+                    <span [innerHTML]="currError['message']"></span>
+                </p>
+            </div>
+        </div>
+    </ng-container>
+</div>

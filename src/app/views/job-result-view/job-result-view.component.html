@@ -61,9 +61,9 @@
                     </button>
                     <p *ngIf="jobObj.draft_id" class="mb-0">
                         <strong>Job already submitted! Draft id:</strong>
-                        <span class="mx-2 badge bg-primary" style="cursor: pointer;">
+                        <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank" routerLink="/draft/{{jobObj.draft_id}}">
                             {{jobObj.draft_id}}
-                        </span>
+                        </a>
                     </p>
                 </ng-container>
                 <div class="row align-items-center" *ngIf="!profileObj['role']">

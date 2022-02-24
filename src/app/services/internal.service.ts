@@ -83,6 +83,13 @@ export class InternalService {
         return this.http.get(url, {responseType: 'json'});
     }
 
+    getDraft(entryIdentifier): Observable<any> {
+        const url = environment.ws + 'drafts/' + entryIdentifier;
+        return this.http.get(url, {
+            responseType: 'json'
+        });
+    }
+
     upgradeToDraft(job_id:string, cover_letter: string): Observable<any> {
         const url = environment.ws + 'drafts/';
         return this.http.post(url, {

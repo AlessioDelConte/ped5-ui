@@ -26,6 +26,7 @@ import { EnsembleCardComponent } from './results/ensemble-card/ensemble-card.com
 import { JobsBrowseComponent } from './views/jobs-browse/jobs-browse.component';
 import { JobResultViewComponent } from './views/job-result-view/job-result-view.component';
 import { DraftsBrowseComponent } from './views/drafts-browse/drafts-browse.component';
+import { DraftResultViewComponent } from './views/draft-result-view/draft-result-view.component';
 
 
 
@@ -46,6 +47,10 @@ const appRoutes: Routes = [
   {
     path: 'drafts/browse',
     component: DraftsBrowseComponent
+  },
+  {
+    path: 'draft/:identifier',
+    component: DraftResultViewComponent
   },
   {
     path: 'login',
@@ -80,6 +85,7 @@ const appRoutes: Routes = [
     JobsBrowseComponent,
     JobResultViewComponent,
     DraftsBrowseComponent,
+    DraftResultViewComponent,
   ],
   imports: [
     RouterModule.forRoot(

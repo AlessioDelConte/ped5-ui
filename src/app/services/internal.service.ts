@@ -78,6 +78,19 @@ export class InternalService {
         });
     }
 
+    getDrafts(): Observable<any> {
+        const url = environment.ws + 'drafts/';
+        return this.http.get(url, {responseType: 'json'});
+    }
+
+    upgradeToDraft(job_id:string, cover_letter: string): Observable<any> {
+        const url = environment.ws + 'drafts/';
+        return this.http.post(url, {
+            job_id: job_id,
+            cover_letter: cover_letter
+        },{responseType: 'json'});
+    }
+
     getFile(submissionID, fileName): Observable<any> {
         const url = environment.submission_server + 'task/' + submissionID + '/file/' + fileName;
         return this.http.get(url, {responseType: 'json'});

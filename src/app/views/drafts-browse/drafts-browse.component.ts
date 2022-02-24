@@ -3,23 +3,22 @@ import moment from 'moment';
 import { InternalService } from 'src/app/services/internal.service';
 
 @Component({
-  selector: 'app-jobs-browse',
-  templateUrl: './jobs-browse.component.html',
-  styleUrls: ['./jobs-browse.component.scss']
+  selector: 'app-drafts-browse',
+  templateUrl: './drafts-browse.component.html',
+  styleUrls: ['./drafts-browse.component.scss']
 })
-export class JobsBrowseComponent implements OnInit {
-  jobsData = []
+export class DraftsBrowseComponent implements OnInit {
+  draftsData = []
 
   constructor(private internalService: InternalService) { }
 
   ngOnInit(): void {
-    this.internalService.getJobs().subscribe(
+    this.internalService.getDrafts().subscribe(
       responseData => {
         console.log(responseData)
-        this.jobsData = responseData
+        this.draftsData = responseData
       });
   }
-
 
   formatTimestamp(tmstmp: string): string{
     return moment(tmstmp).calendar()

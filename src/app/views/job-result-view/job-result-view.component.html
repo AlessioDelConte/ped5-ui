@@ -1,36 +1,31 @@
 <!-- Modal -->
-<div class="offcanvas offcanvas-top" style="min-height: 40vh" tabindex="-1" id="offcanvasColumns"
-    aria-labelledby="offcanvasExampleLabel" xmlns="http://www.w3.org/1999/html">
-    <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Manage submission</h5>
-        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-        <div *ngIf="profileObj['role'] === 'data owner'">
-            <h3>Submit to PEDarchive</h3>
-            <form>
-                <p>
-                    Your message
-                </p>
+<div class="modal fade" id="firstSubmitModal" tabindex="-1" aria-labelledby="firstSubmitModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content px-2">
+            <div class="modal-header">
+                <h5 class="modal-title" id="firstSubmitModalLabel">Submit as a draft</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" [formGroup]="firstSubmitForm">
+                <div class="row mb-4">
+                    <strong class="col-auto ms-2">Job identifier:</strong>
+                    <span class="col-auto mx-2 badge bg-primary-dark">
+                        {{firstSubmitForm.value["job_id"]}}
+                    </span>
+                </div>
+                <div class="row mb-1">
+                    <strong class="col-auto ms-2">Cover Letter:</strong>
+                </div>
                 <div class="row">
-                    <div class="col text-end">
-                        <button class="btn btn-sm btn-primary">Submit</button>
+                    <div class="col input-group">
+                        <textarea rows="4" class="form-control" formControlName="cover_letter"
+                            placeholder="Insert your comment. Only for internal usage to inform biocurators."></textarea>
                     </div>
                 </div>
-            </form>
-        </div>
-        <div *ngIf="['biocurator', 'reviewer', 'admin'].includes(profileObj['role'])">
-            <p>
-                <strong>Depositor </strong> <br>
-                <strong>PED identifier </strong> <span *ngIf="entryObj['entry_id']">{{entryObj['entry_id']}}</span>
-                <button *ngIf="!entryObj['entry_id']" class="btn btn-sm btn-primary">Create</button>
-            </p>
-            <div class="row" *ngIf="entryObj['entry_id']">
-                <div class="col">
-                    <span class="badge bg-primary-dark bg-hover-min"><i class="bi bi-share"></i> Get publication access
-                        code</span>
-                    <span class="btn btn-sm btn-danger">Publish</span>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button [attr.disabled]="isSubmitting?true:null" type="button" class="btn btn-primary" (click)="submitFirst()">Submit</button>
             </div>
         </div>
     </div>
@@ -53,18 +48,24 @@
                 <p class="mb-0">
                     <strong>Status</strong>
                     <span class="mx-2 badge"
-                        [ngClass]="{'bg-danger': jobObj.status === 'failed', 'bg-success': jobObj.status === 'done', 'bg-warning': jobObj.status === 'running' }">{{jobObj.status}}</span>
+                        [ngClass]="{'bg-danger': jobObj.status === 'failed', 'bg-success': jobObj.status === 'done', 'bg-warning': jobObj.status === 'running' }">
+                        {{jobObj.status}}
+                    </span>
                 </p>
             </div>
             <div class="col text-end">
-                <div *ngIf="profileObj['role']">
-                    <button class="btn btn-sm btn-warning me-3" (click)="openOffcanvas('offcanvasColumns')">Update the
-                        draft
+                <ng-container *ngIf="profileObj['role']">
+                    <button *ngIf="!jobObj.draft_id" type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                        data-bs-target="#firstSubmitModal">
+                        Submit as draft
                     </button>
-                    <button class="btn btn-sm btn-primary" (click)="openOffcanvas('offcanvasColumns')">Manage
-                        submission
-                    </button>
-                </div>
+                    <p *ngIf="jobObj.draft_id" class="mb-0">
+                        <strong>Job already submitted! Draft id:</strong>
+                        <span class="mx-2 badge bg-primary" style="cursor: pointer;">
+                            {{jobObj.draft_id}}
+                        </span>
+                    </p>
+                </ng-container>
                 <div class="row align-items-center" *ngIf="!profileObj['role']">
                     <div class="col">
                         To deposit this ensemble, please log-in

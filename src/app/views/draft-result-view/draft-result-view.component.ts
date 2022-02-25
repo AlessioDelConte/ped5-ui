@@ -35,7 +35,7 @@ export class DraftResultViewComponent implements OnInit {
         currErr['message'] = currErr['message'].replaceAll('\n', '<br>');
         return currErr;
       });
-      this.resultsService.currViewMode = 'scheduler';
+      this.resultsService.currViewMode = 'drafts';
       console.log(this.entryObj)
     },
       err => {

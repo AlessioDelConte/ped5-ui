@@ -32,7 +32,13 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
     this.currChainName.next(this.resultsService.entryObj.constructs.sort((a, b) => a.chain_name > b.chain_name ? 1 : -1)[0]['chain_name']);
     this.currChainName.subscribe(currChainName => {
       this.currStatData = this.resultsService.entryObj['data_per_chain'].filter(x => x.ensemble_id === this.currEnsmeble['ensemble_id'] && x.chain === currChainName)[0] || this.currStatData;
-      if (this.resultsService.currViewMode === 'scheduler') {
+      if (this.resultsService.currViewMode === 'drafts') {
+        this.currLinks.ramachandran_plot =  environment.ws + 'drafts/' +this.resultsService.currentUUID + '/ensemble/' + this.currEnsmeble['ensemble_id'] + '/chain/' +  currChainName + '/ramachandran_plot/';
+        this.currLinks.rg_boxplot =  environment.ws + 'drafts/' +this.resultsService.currentUUID + '/ensemble/' + this.currEnsmeble['ensemble_id'] + '/chain/' +  currChainName + '/rg_boxplot/';
+        this.currLinks.mmcif = environment.ws + 'drafts/' +this.resultsService.currentUUID + '/ensemble/' + this.currEnsmeble['ensemble_id'] + '/ensemble_sample/';
+        
+        console.log(this.currLinks)
+      } else if (this.resultsService.currViewMode === 'scheduler') {
         this.currLinks.ramachandran_plot =  environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/figure/' + this.currEnsmeble['ensemble_id'] + '_' +  currChainName + '_rama_angles.svg';
         this.currLinks.rg_boxplot =  environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/figure/' + this.currEnsmeble['ensemble_id'] + '_' +  currChainName + '_rg_boxplot_NG.svg';
         this.currLinks.mmcif =  environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/cif_files/' + this.currEnsmeble['ensemble_id'] + '_rep10_MC_Rg.cif';
@@ -41,6 +47,9 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
         this.currLinks.rg_boxplot =  environment.ws + 'rg_boxplot/' + this.currEnsmeble['ensemble_id'] + '/' + currChainName;
         this.currLinks.mmcif =  environment.ws + 'ensemble_sample/' + this.currEnsmeble['ensemble_id'];
 
+        
+        // this.currLinks.rg_boxplot =  environment.ws + 'rg_boxplot/' + this.currEnsmeble['ensemble_id'] + '/' + currChainName;
+        // this.currLinks.mmcif =  environment.ws + 'ensemble_sample/' + this.currEnsmeble['ensemble_id'];
       }
 
 

@@ -1,7 +1,7 @@
-import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
-import {environment} from '../../environments/environment';
-import {Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { environment } from '../../environments/environment';
+import { Observable } from 'rxjs';
 
 @Injectable({
     providedIn: 'root'
@@ -13,12 +13,12 @@ export class InternalService {
 
     GetLogOut(): Observable<any> {
         const url = environment.ws + 'logout';
-        return this.http.get(url, {responseType: 'json'});
+        return this.http.get(url, { responseType: 'json' });
     }
 
     GetAuth(): Observable<any> {
         const url = environment.ws + 'profile';
-        return this.http.get(url, {responseType: 'json'});
+        return this.http.get(url, { responseType: 'json' });
     }
 
     getServerName(): Observable<any> {
@@ -68,7 +68,7 @@ export class InternalService {
 
     getJobs(): Observable<any> {
         const url = environment.ws + 'jobs/';
-        return this.http.get(url, {responseType: 'json'});
+        return this.http.get(url, { responseType: 'json' });
     }
 
     getJob(entryIdentifier): Observable<any> {
@@ -80,7 +80,7 @@ export class InternalService {
 
     getDrafts(): Observable<any> {
         const url = environment.ws + 'drafts/';
-        return this.http.get(url, {responseType: 'json'});
+        return this.http.get(url, { responseType: 'json' });
     }
 
     getDraft(entryIdentifier): Observable<any> {
@@ -90,21 +90,24 @@ export class InternalService {
         });
     }
 
-    upgradeToDraft(job_id:string, cover_letter: string): Observable<any> {
+    upgradeToDraft(job_id: string, cover_letter: string): Observable<any> {
         const url = environment.ws + 'drafts/';
         return this.http.post(url, {
             job_id: job_id,
             cover_letter: cover_letter
-        },{responseType: 'json'});
+        }, { responseType: 'json' });
     }
 
     getFile(submissionID, fileName): Observable<any> {
         const url = environment.submission_server + 'task/' + submissionID + '/file/' + fileName;
-        return this.http.get(url, {responseType: 'json'});
+        return this.http.get(url, { responseType: 'json' });
     }
 
     searchPMC(query): Observable<any> {
-        return this.http.get(environment.pmcURL + query, {responseType: 'json'});
-      }
+        return this.http.get(environment.pmcURL + query, { responseType: 'json' });
+    }
 
+    searchTaxonomy(tax_id): Observable<any> {
+        return this.http.get(environment.enaTaxonomy + tax_id, { responseType: 'json' });
+    }
 }

@@ -11,9 +11,13 @@ export class SubmissionService {
 
     public form;
     public method_ontology;
-    public formData;
+    public formData: FormData;
     public progress = 0;
     public ensembleCount = 0;
+    public options = {
+        linked_draft_id: null,
+        parent_job_id: null
+    }
 
     constructor(private fb: FormBuilder,
         private internalService: InternalService,
@@ -270,9 +274,12 @@ export class SubmissionService {
 
 
     public submission(): void {
-        const blob = new Blob([JSON.stringify(this.form.value)], { type: 'text/plain' });
-        // this.formData.append('task_name', 'ped');
+        let blob = new Blob([JSON.stringify(this.form.value)], { type: 'text/plain' });
         this.formData.append('metadata', blob, 'metadata.json');
+
+        let  optionsBlob = new Blob([JSON.stringify(this.options)], { type: 'text/plain' });
+        this.formData.append('options', optionsBlob, 'options.json' )
+        
         this.internalService.sendTask(this.formData).subscribe((event: HttpEvent<any>) => {
             switch (event.type) {
                 case HttpEventType.Sent:

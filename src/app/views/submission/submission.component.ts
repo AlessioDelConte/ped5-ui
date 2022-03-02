@@ -20,6 +20,13 @@ export class SubmissionComponent implements OnInit {
     }) => {
       console.log(data.entry.metadata)
       if(data.entry.metadata){
+        // For jobs
+        if (data.entry.job_id) this.submissionService.options.parent_job_id = data.entry.job_id;
+        if (data.entry.linked_draft_id) this.submissionService.options.linked_draft_id = data.entry.linked_draft_id;
+
+        // For drafts
+        if (data.entry.draft_id) this.submissionService.options.linked_draft_id = data.entry.draft_id;
+
         this.submissionService.parseForm(data.entry.metadata);
       }
       // if (Array.isArray(data.entry) && data.entry.length > 0) {

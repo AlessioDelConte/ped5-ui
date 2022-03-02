@@ -1,10 +1,33 @@
 <div class="container-xl">
     <h3 class="mb-3" *ngIf="entryObj['entry_id'] || entryObj['title']">
-        <span class="badge bg-primary">
+        <span *ngIf="entryObj['entry_id']" class="badge bg-primary">
             {{entryObj['entry_id']}}
         </span>
         {{entryObj['title']}}
     </h3>
+
+    <div class="row mb-2">
+        <div class="col">
+            <strong class="col-auto">Data owner</strong>
+            <div class="col-auto ps-0" *ngFor="let author of entryObj['authors']">
+                <a *ngIf="author['role'] !== 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}"
+                    target="_blank" style="white-space: nowrap">{{author['name']}}</a>
+            </div>
+        </div>
+        <div class="col-auto">
+            <a role="button" href="{{currLinks.report}}" target="_blank" class="badge bg-primary" style="cursor: pointer;">
+                <i class="bi bi-download me-1"></i>Validation report
+            </a>
+        </div>
+    </div>
+
+    <div class="row mb-2">
+        <strong class="col-auto">Biocurated by</strong>
+        <div class="col-auto ps-0" *ngFor="let author of entryObj['authors']">
+            <a *ngIf="author['role'] === 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}" target="_blank"
+                style="white-space: nowrap">{{author['name']}}</a>
+        </div>
+    </div>
 
     <div>
         <p class="mb-1" *ngIf="entryObj['experimental_procedure'] && entryObj['experimental_procedure'].length > 0">

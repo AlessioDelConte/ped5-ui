@@ -1,6 +1,7 @@
 import {Component, OnInit, AfterViewInit, Input} from '@angular/core';
-import {ResultsService} from '../../services/results.service';
+import {ResultsService, ResultsServiceMode} from '../../services/results.service';
 import { Collapse } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-result-page',
@@ -10,9 +11,19 @@ import { Collapse } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js';
 export class ResultPageComponent implements OnInit, AfterViewInit {
   @Input() entryObj: object;
 
+  currLinks = {
+    report: ""
+  }
+
   constructor(private resultsService: ResultsService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if (this.resultsService.currViewMode === ResultsServiceMode.DRAFT) {
+      this.currLinks.report = environment.ws + 'drafts/' + this.resultsService.currentUUID + '/report/';
+    } else if (this.resultsService.currViewMode === ResultsServiceMode.JOB) {
+      this.currLinks.report = environment.ws + 'jobs/' + this.resultsService.currentUUID + '/report/';
+    }
+  }
 
   ngAfterViewInit(): void {
     const textExperimentalProcedure = document.getElementById('textExperimentalProcedure');
@@ -44,10 +55,6 @@ export class ResultPageComponent implements OnInit, AfterViewInit {
     textMolecularDynamics.addEventListener('shown.bs.collapse', function () {
       buttonMolecularDynamics.textContent = 'Read less';
     });
-
-
-
-
   }
 
   toogleCollapse(id): void {

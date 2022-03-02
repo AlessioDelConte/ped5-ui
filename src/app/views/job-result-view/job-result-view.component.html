@@ -25,7 +25,8 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button [attr.disabled]="isSubmitting?true:null" type="button" class="btn btn-primary" (click)="submitFirst()">Submit</button>
+                <button [attr.disabled]="isSubmitting?true:null" type="button" class="btn btn-primary"
+                    (click)="submitFirst()">Submit</button>
             </div>
         </div>
     </div>
@@ -35,58 +36,70 @@
 <div class="container-xl">
     <h2>Results</h2>
     <div class="alert alert-success">
-        <div class="row align-items-center">
-            <div class="col-md-auto">
-                <p class="mb-0">
-                    <strong>Job identifier</strong>
-                    <span class="mx-2 badge bg-primary-dark">
-                        {{resultsService.currentUUID}}
-                    </span>
-                </p>
-            </div>
-            <div class="col-md-auto" *ngIf="jobObj">
-                <p class="mb-0">
-                    <strong>Status</strong>
-                    <span class="mx-2 badge"
-                        [ngClass]="{'bg-danger': jobObj.status === 'failed', 'bg-success': jobObj.status === 'done', 'bg-warning': jobObj.status === 'running' }">
-                        {{jobObj.status}}
-                    </span>
-                </p>
-            </div>
-            <div class="col text-end">
-                <ng-container *ngIf="profileObj['role']">
-                    <button *ngIf="!jobObj.draft_id" type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
-                        data-bs-target="#firstSubmitModal">
-                        Submit as draft
-                    </button>
-                    <p *ngIf="jobObj.draft_id" class="mb-0">
-                        <strong>Job already submitted! Draft id:</strong>
-                        <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank" routerLink="/draft/{{jobObj.draft_id}}">
-                            {{jobObj.draft_id}}
+        <div class="row px-2">
+            <div class="col">
+                <div class="row">
+                    <p>
+                        <strong>Job id:</strong>
+                        <span class="mx-2 badge bg-primary-dark">
+                            {{resultsService.currentUUID}}
+                        </span>
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="mx-2 badge"
+                            [ngClass]="{'bg-danger': jobObj.status === 'failed', 'bg-success': jobObj.status === 'done', 'bg-warning': jobObj.status === 'running' }">
+                            {{jobObj.status}}
+                        </span>
+                    </p>
+                    <p *ngIf="jobObj.parent_job_id">
+                        <strong>Parent job:</strong>
+                        <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank"
+                            routerLink="/job/{{jobObj.parent_job_id}}">
+                            {{jobObj.parent_job_id}}
                         </a>
                     </p>
-                </ng-container>
-                <div class="row align-items-center" *ngIf="!profileObj['role']">
-                    <div class="col">
-                        To deposit this ensemble, please log-in
-                    </div>
-                    <div class="col-auto">
-                        <app-login></app-login>
-                    </div>
+                    <p *ngIf="jobObj.linked_draft_id">
+                        <strong>Draft id:</strong>
+                        <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank"
+                            routerLink="/draft/{{jobObj.linked_draft_id}}">
+                            {{jobObj.linked_draft_id}}
+                        </a>
+                        <strong>(Job already submitted!)</strong>
+                    </p>
+                </div>
+            </div>
+            <div class="col-auto text-end me-2">
+                <div class="row">
+                    <button type="button" class="btn btn-sm btn-primary mb-2" [routerLink]="['/submission']"
+                        [queryParams]="{job_id: resultsService.currentUUID}">
+                        <i class="bi bi-arrow-clockwise"></i> Resubmit from this
+                    </button>
+                </div>
+
+                <div class="row" *ngIf="profileObj['role']">
+                    <button *ngIf="!jobObj.linked_draft_id" type="button" class="btn btn-sm btn-primary"
+                        data-bs-toggle="modal" data-bs-target="#firstSubmitModal">
+                        Upgrade to draft
+                    </button>
+                </div>
+
+                <div class="row" *ngIf="!profileObj['role']">
+                    <app-login></app-login>
                 </div>
             </div>
         </div>
+
     </div>
 
+    <!-- Once it is done -->
     <ng-container *ngIf="jobObj && (['done','failed'].includes(jobObj.status))">
-        <app-result-page [entryObj]="entryObj"></app-result-page>
+        <app-result-page [entryObj]="resultsService.entryObj"></app-result-page>
     </ng-container>
 
-
-    <p class="mb-4"></p>
-
-    <ng-container *ngIf="entryObj && entryObj['errors']">
-        <div class="row mb-3" *ngFor="let currError of entryObj['errors'] ">
+    <!-- If have errors -->
+    <ng-container *ngIf="resultsService.entryObj && resultsService.entryObj['errors']">
+        <div class="row mb-3" *ngFor="let currError of resultsService.entryObj['errors'] ">
             <div class="col">
                 <p class="text-danger mb-0"><strong>Type of error: </strong> {{currError['title']}}</p>
                 <p><strong>Message: </strong> <br>
@@ -96,7 +109,7 @@
         </div>
     </ng-container>
 
-
+    <!-- While running -->
     <div class="row" *ngIf="jobObj && (['running'].includes(jobObj.status))">
         <div class="col-8 mx-auto text-center">
             <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>

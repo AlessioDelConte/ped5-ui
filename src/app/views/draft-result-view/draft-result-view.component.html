@@ -2,30 +2,38 @@
 <div class="container-xl">
     <h2>Results</h2>
     <div class="alert alert-success">
-        <div class="row align-items-center">
-            <div class="col-md-auto">
-                <p class="mb-0">
-                    <strong>Draft identifier</strong>
-                    <span class="mx-2 badge bg-primary-dark">
-                        {{resultsService.currentUUID}}
-                    </span>
-                </p>
+        <div class="row px-2">
+            <div class="col">
+                <div class="row">
+                    <p>
+                        <strong>Draft id:</strong>
+                        <span class="mx-2 badge bg-primary-dark">
+                            {{resultsService.currentUUID}}
+                        </span>
+                    </p>
+                    <p>
+                        <strong>Status:</strong>
+                        <span class="mx-2 badge bg-warning">
+                            Not published yet
+                        </span>
+                    </p>
+
+                </div>
+            </div>
+            <div class="col-auto text-end me-2">
+                <div class="row">
+                    <button type="button" class="btn btn-sm btn-primary mb-2" [routerLink]="['/submission']"
+                        [queryParams]="{draft_id: resultsService.currentUUID}">
+                        <i class="bi bi-arrow-clockwise"></i> Resubmit from this
+                    </button>
+                </div>
+
             </div>
         </div>
+
     </div>
 
-    <app-result-page [entryObj]="entryObj"></app-result-page>
 
-    <p class="mb-4"></p>
+    <app-result-page [entryObj]="resultsService.entryObj"></app-result-page>
 
-    <ng-container *ngIf="entryObj && entryObj['errors']">
-        <div class="row mb-3" *ngFor="let currError of entryObj['errors'] ">
-            <div class="col">
-                <p class="text-danger mb-0"><strong>Type of error: </strong> {{currError['title']}}</p>
-                <p><strong>Message: </strong> <br>
-                    <span [innerHTML]="currError['message']"></span>
-                </p>
-            </div>
-        </div>
-    </ng-container>
 </div>

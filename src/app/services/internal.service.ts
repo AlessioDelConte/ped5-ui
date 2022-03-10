@@ -107,7 +107,7 @@ export class InternalService {
         return this.http.get(environment.pmcURL + query, { responseType: 'json' });
     }
 
-    searchTaxonomy(tax_id): Observable<any> {
+    searchTaxonomyById(tax_id): Observable<any> {
         return this.http.get(environment.enaTaxonomy + tax_id, { responseType: 'json' });
     }
 }

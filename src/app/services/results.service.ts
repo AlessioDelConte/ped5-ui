@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { BehaviorSubject } from 'rxjs';
 import { InternalService } from './internal.service';
 
@@ -23,7 +24,7 @@ export class ResultsService {
 
   public errors = [];
 
-  constructor(private internalService: InternalService) { }
+  constructor(private internalService: InternalService, private router: Router) { }
 
   public getMetadata() {
     if (this.currViewMode === ResultsServiceMode.JOB) {
@@ -38,6 +39,9 @@ export class ResultsService {
       },
         err => {
           console.log('err', err);
+          if (err.status === 401) this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(["/unauthorized"]);
+          });
         }, () => { });
     } else if (this.currViewMode === ResultsServiceMode.DRAFT) {
       return this.internalService.getDraft(this.currentUUID).subscribe(currDraft => {
@@ -50,8 +54,11 @@ export class ResultsService {
       },
         err => {
           console.log('err', err);
+          if (err.status === 401) this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+            this.router.navigate(["/unauthorized"]);
+          });
         }, () => { });
-    }else{
+    } else {
       this.errors.push({
         "message": "Result type (Job, Draft or Public) need to be specified"
       })

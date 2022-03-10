@@ -14,7 +14,11 @@
                     <p>
                         <strong>Status:</strong>
                         <span class="mx-2 badge bg-warning">
-                            Not published yet
+                            Not published
+                        </span>
+                        <strong class="ms-4">Creation Date:</strong>
+                        <span class="mx-2">
+                            {{formatTimestamp(draftObj.creation_date)}}
                         </span>
                     </p>
 
@@ -24,10 +28,21 @@
                 <div class="row">
                     <button type="button" class="btn btn-sm btn-primary mb-2" [routerLink]="['/submission']"
                         [queryParams]="{draft_id: resultsService.currentUUID}">
-                        <i class="bi bi-arrow-clockwise"></i> Resubmit from this
+                        <i class="bi bi-arrow-clockwise"></i> Run job from this
                     </button>
                 </div>
 
+                <div class="row">
+                    <button type="button" class="btn btn-sm btn-primary mb-2">
+                        <i class="bi bi-pencil-square"></i> Assign Entry ID
+                    </button>
+                </div>
+
+                <div class="row">
+                    <button type="button" class="btn btn-sm btn-primary mb-2">
+                        <i class="bi bi-send-check"></i> Request publication
+                    </button>
+                </div>
             </div>
         </div>
 

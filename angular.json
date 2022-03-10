@@ -27,14 +27,14 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/feature-viewer-typescript/assets/fv.scss",
               "./node_modules/pdbe-molstar/build/pdbe-molstar-1.2.1.css",
               "./node_modules/bootstrap/scss/bootstrap.scss",
               "./node_modules/EBI-Icon-fonts/fonts.css",
               "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "./node_modules/proseqviewer/dist/assets/proseqviewer.css",
               "./node_modules/swagger-ui/dist/swagger-ui.css",
-              "src/styles/styles.scss",
-              "./node_modules/feature-viewer-typescript/assets/fv.scss"
+              "src/styles/styles.scss"
             ],
             "stylePreprocessorOptions": {
               "includePaths": [

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import moment from 'moment';
 import { AuthService } from 'src/app/services/auth.service';
 import { InternalService } from 'src/app/services/internal.service';
 import { ResultsService, ResultsServiceMode } from 'src/app/services/results.service';
@@ -28,5 +29,9 @@ export class DraftResultViewComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  formatTimestamp(tmstmp: string): string{
+    return moment(tmstmp).format("dddd, MMMM Do YYYY, h:mm:ss a [GMT]Z")
   }
 }

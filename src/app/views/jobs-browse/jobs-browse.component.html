@@ -16,7 +16,9 @@
                 <td>{{job.job_id}}</td>
                 <td>{{formatTimestamp(job.creation_date)}}</td>
                 <td>
-                    <span class="badge" [ngClass]="{'bg-danger': job.status === 'failed', 'bg-success': job.status === 'done', 'bg-warning': job.status === 'running' }">{{job.status}}</span>
+                    <span class="badge" [ngClass]="{'bg-danger': job.status === 'failed', 'bg-success': job.status === 'done', 'bg-warning': job.status === 'running', 'bg-dark': job.status === 'expired'}">
+                        {{job.status}}
+                    </span>
                 </td>
                 <td>
                     <a  target="_blank" routerLink="/job/{{job.job_id}}"> <i class="bi bi-eye-fill"></i></a>

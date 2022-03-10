@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, FormArray, AbstractControl } from 
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { InternalService } from './internal.service';
 import { Router } from '@angular/router';
+import { ThisReceiver } from '@angular/compiler';
 
 @Injectable({
     providedIn: 'root'
@@ -50,6 +51,7 @@ export class SubmissionService {
         this.formData = new FormData();
         this.progress = 0;
         this.ensembleCount = 0;
+        console.log(Object.keys(this.form.value))
         return this.form;
     }
 
@@ -358,4 +360,11 @@ export class SubmissionService {
 
     }
 
+    public getTaxonName(){
+        this.internalService.searchTaxonomyById(this.form.get('expression_organism').value).subscribe( response => {
+            this.form.get('expression_organism_name').setValue(response["scientificName"]);
+        }, error => {
+            this.form.get('expression_organism_name').reset()
+        })
+    }
 }

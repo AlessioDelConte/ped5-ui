@@ -27,6 +27,8 @@ import { JobsBrowseComponent } from './views/jobs-browse/jobs-browse.component';
 import { JobResultViewComponent } from './views/job-result-view/job-result-view.component';
 import { DraftsBrowseComponent } from './views/drafts-browse/drafts-browse.component';
 import { DraftResultViewComponent } from './views/draft-result-view/draft-result-view.component';
+import { FeatureViewerEnsembleComponent } from './shared/feature-viewer-ensemble/feature-viewer-ensemble.component';
+import { UnauthorizedComponent } from './views/unauthorized/unauthorized.component';
 
 
 
@@ -55,6 +57,10 @@ const appRoutes: Routes = [
   {
     path: 'login',
     component: LoginComponent
+  },
+  {
+    path: 'unauthorized',
+    component: UnauthorizedComponent
   },
   {path: 'api', component: SwaggerUiComponent},
   {path: 'api-form', component: SwaggerInternalComponent},
@@ -86,6 +92,8 @@ const appRoutes: Routes = [
     JobResultViewComponent,
     DraftsBrowseComponent,
     DraftResultViewComponent,
+    FeatureViewerEnsembleComponent,
+    UnauthorizedComponent,
   ],
   imports: [
     RouterModule.forRoot(

@@ -32,8 +32,8 @@
     </div>
 
     <div class="row mb-2" *ngIf="submissionService.form.value['publication_html']">
-            <div class="col-auto"><b>Publication: </b></div>
-            <div class="col" [innerHTML]="submissionService.form.value['publication_html']"></div>
+        <div class="col-auto"><b>Publication: </b></div>
+        <div class="col" [innerHTML]="submissionService.form.value['publication_html']"></div>
     </div>
 
     <!-- Authors section -->
@@ -153,11 +153,12 @@
     <div class="row mb-2">
         <div class="input-group col">
             <div class="input-group-text">Expression organism (NCBI Taxon ID)</div>
-            <input formControlName="expression_organism" type="number" class="form-control" placeholder="Organism ID">
+            <input formControlName="expression_organism" type="number" class="form-control" placeholder="Organism ID"
+                (change)="submissionService.getTaxonName()">
         </div>
         <div class="input-group col">
             <div class="input-group-text">Expression organism's name</div>
-            <input formControlName="expression_organism_name" type="text" class="form-control"
+            <input disabled formControlName="expression_organism_name" type="text" class="form-control"
                 placeholder="Organism Name">
         </div>
     </div>

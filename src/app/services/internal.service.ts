@@ -90,6 +90,11 @@ export class InternalService {
         });
     }
 
+    patchDraft(entryIdentifier, patchValues): Observable<any> {
+        const url = environment.ws + 'drafts/' + entryIdentifier + "/";
+        return this.http.patch(url, patchValues, { responseType: 'json' });
+    }
+
     upgradeToDraft(job_id: string, cover_letter: string): Observable<any> {
         const url = environment.ws + 'drafts/';
         return this.http.post(url, {

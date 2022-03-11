@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {InternalService} from './internal.service';
 
-interface UserProfile {
+export interface UserProfile {
     orcid?: string,
     displayedName?: string,
     role?: string

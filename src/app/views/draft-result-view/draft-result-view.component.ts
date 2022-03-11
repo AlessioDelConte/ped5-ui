@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import moment from 'moment';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService, UserProfile } from 'src/app/services/auth.service';
 import { InternalService } from 'src/app/services/internal.service';
 import { ResultsService, ResultsServiceMode } from 'src/app/services/results.service';
 
@@ -12,7 +13,11 @@ import { ResultsService, ResultsServiceMode } from 'src/app/services/results.ser
 })
 export class DraftResultViewComponent implements OnInit {
   public draftObj;
-  public profileObj;
+  public profileObj: UserProfile;
+
+  public draftForm = new FormGroup({
+    assigned_entry_id: new FormControl(null, [Validators.required])
+  })
 
 
   constructor(private internalService: InternalService,
@@ -31,7 +36,13 @@ export class DraftResultViewComponent implements OnInit {
 
   }
 
-  formatTimestamp(tmstmp: string): string{
+  assignEntryID() {
+    this.internalService.patchDraft(this.resultsService.currentUUID, this.draftForm.value).subscribe(data => {
+      window.location.reload()
+    })
+  }
+
+  formatTimestamp(tmstmp: string): string {
     return moment(tmstmp).format("dddd, MMMM Do YYYY, h:mm:ss a [GMT]Z")
   }
 }

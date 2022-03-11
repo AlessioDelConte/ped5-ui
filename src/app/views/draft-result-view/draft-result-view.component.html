@@ -1,3 +1,28 @@
+<!-- Modal -->
+<div class="modal fade" id="assignEntryIDModal" tabindex="-1" aria-labelledby="assignEntryIDModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content px-2">
+            <div class="modal-header">
+                <h5 class="modal-title" id="assignEntryIDModalLabel">Assign Entry ID</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" [formGroup]="draftForm">
+                <div class="col-auto">
+                    <label class="col-form-label">New Entry ID:</label>
+                </div>
+                <div class="col-auto">
+                    <input formControlName="assigned_entry_id" class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="assignEntryID()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Main container -->
 <div class="container-xl">
     <h2>Results</h2>
@@ -14,33 +39,39 @@
                     <p>
                         <strong>Status:</strong>
                         <span class="mx-2 badge bg-warning">
-                            Not published
+                            Under Review
                         </span>
                         <strong class="ms-4">Creation Date:</strong>
                         <span class="mx-2">
                             {{formatTimestamp(draftObj.creation_date)}}
                         </span>
                     </p>
-
+                    <p *ngIf="draftObj.assigned_entry_id">
+                        <strong>Entry id:</strong>
+                        <span class="mx-2 badge bg-primary">
+                            {{draftObj.assigned_entry_id}}
+                        </span>
+                    </p>
                 </div>
             </div>
             <div class="col-auto text-end me-2">
                 <div class="row">
-                    <button type="button" class="btn btn-sm btn-primary mb-2" [routerLink]="['/submission']"
+                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start" [routerLink]="['/submission']"
                         [queryParams]="{draft_id: resultsService.currentUUID}">
-                        <i class="bi bi-arrow-clockwise"></i> Run job from this
+                        <i class="bi bi-arrow-clockwise me-2"></i> Run job from this
+                    </button>
+                </div>
+
+                <div class="row" *ngIf="['admin','editor'].includes(profileObj['role']) && !draftObj.assigned_entry_id">
+                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start" data-bs-toggle="modal"
+                        data-bs-target="#assignEntryIDModal">
+                        <i class="bi bi-pencil-square me-2"></i> Assign Entry ID
                     </button>
                 </div>
 
                 <div class="row">
-                    <button type="button" class="btn btn-sm btn-primary mb-2">
-                        <i class="bi bi-pencil-square"></i> Assign Entry ID
-                    </button>
-                </div>
-
-                <div class="row">
-                    <button type="button" class="btn btn-sm btn-primary mb-2">
-                        <i class="bi bi-send-check"></i> Request publication
+                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start">
+                        <i class="bi bi-send-check me-2"></i> Request publication
                     </button>
                 </div>
             </div>

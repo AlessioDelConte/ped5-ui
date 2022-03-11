@@ -97,13 +97,13 @@
     </div>
 
     <!-- Once it is done -->
-    <ng-container *ngIf="jobObj && (['done','failed'].includes(jobObj.status))">
+    <ng-container *ngIf="jobObj && (['done'].includes(jobObj.status))">
         <app-result-page [entryObj]="resultsService.entryObj"></app-result-page>
     </ng-container>
 
     <!-- If have errors -->
-    <ng-container *ngIf="resultsService.entryObj && resultsService.entryObj['errors']">
-        <div class="row mb-3" *ngFor="let currError of resultsService.entryObj['errors'] ">
+    <ng-container *ngIf="jobObj && (['failed'].includes(jobObj.status)) && resultsService.errors">
+        <div class="row mb-3" *ngFor="let currError of resultsService.errors">
             <div class="col">
                 <p class="text-danger mb-0"><strong>Type of error: </strong> {{currError['title']}}</p>
                 <p><strong>Message: </strong> <br>

@@ -5,8 +5,8 @@
     "ng": "ng",
     "start": "ng serve --port 4205",
     "start-prod": "ng serve --configuration production",
-    "build": "rm -rf dist/* && ng build --configuration production --build-optimizer",
-    "deploy-dev": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build ...${colN} && npm run build && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5-assessment/ && echo ${colC}Done with deploy-dev!${colC})"
+    "build-prod": "rm -rf dist/* && ng build --configuration production --build-optimizer",
+    "deploy-prod": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build-prod ...${colN} && npm run build-prod && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5-deposition/ && echo ${colC}Done with deploy-prod!${colC})"
   },
   "private": true,
   "dependencies": {

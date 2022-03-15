@@ -52,6 +52,12 @@
                             {{draftObj.assigned_entry_id}}
                         </span>
                     </p>
+                    <p *ngIf="draftObj.cover_letter">
+                        <strong>Cover Letter:</strong>
+                        <span class="mx-2">
+                            {{draftObj.cover_letter}}
+                        </span>
+                    </p>
                 </div>
             </div>
             <div class="col-auto text-end me-2">

@@ -18,8 +18,8 @@ export class SubmissionComponent implements OnInit {
     this.route.data.subscribe((data: {
       entry: any
     }) => {
-      console.log(data.entry.metadata)
-      if(data.entry.metadata){
+      console.log(data.entry.input_metadata)
+      if(data.entry.input_metadata){
         // For jobs
         if (data.entry.job_id) this.submissionService.options.parent_job_id = data.entry.job_id;
         if (data.entry.linked_draft_id) this.submissionService.options.linked_draft_id = data.entry.linked_draft_id;
@@ -27,13 +27,8 @@ export class SubmissionComponent implements OnInit {
         // For drafts
         if (data.entry.draft_id) this.submissionService.options.linked_draft_id = data.entry.draft_id;
 
-        this.submissionService.parseForm(data.entry.metadata);
+        this.submissionService.parseForm(data.entry.input_metadata);
       }
-      // if (Array.isArray(data.entry) && data.entry.length > 0) {
-      //   this.submissionService.parseForm(data.entry[0]);
-      // } else {
-      //   this.submissionService.parseForm(data.entry.metadata); 
-      // }
     });
     this.toggle('upload')
     console.log(this.submissionService.form.value)

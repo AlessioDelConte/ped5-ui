@@ -54,11 +54,8 @@ export class ResultsService {
       // Case Job
       return this.internalService.getJob(this.currentUUID).subscribe(currJob => {
         this.resultSubj.next(currJob);
-        this.entryObj = currJob.metadata
-        this.errors = this.entryObj['errors'].map(currErr => {
-          currErr['message'] = currErr['message'].replaceAll('\n', '<br>');
-          return currErr;
-        });
+        this.entryObj = currJob.output_metadata
+        
         if (this.entryObj["status"] === "failed" || this.entryObj["status"] === undefined) {
           if (Array.isArray(this.entryObj['ensembles']) && this.entryObj['ensembles'].length > 0) {
             this.entryObj['ensembles'].forEach(ensemble => {
@@ -87,12 +84,17 @@ export class ResultsService {
                   break;
               }
             })
-          } else {
+          } 
+          if(!this.entryObj['errors']) {
             this.errors.push({
               "message": "Fatal error. Please contact us."
             })
           }
         }
+        this.errors = this.entryObj['errors'].map(currErr => {
+          currErr['message'] = currErr['message'].replaceAll('\n', '<br>');
+          return currErr;
+        });
         console.log(this.resultSubj.value)
         console.log(this.entryObj)
         console.log(this.errors)

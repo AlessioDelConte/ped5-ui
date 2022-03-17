@@ -39,9 +39,14 @@ export class EnsembleCardComponent implements OnInit, AfterViewInit {
 
         console.log(this.currLinks)
       } else if (this.resultsService.currViewMode === ResultsServiceMode.JOB) {
-        this.currLinks.ramachandran_plot = environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/figure/' + this.currEnsmeble['ensemble_id'] + '_' + currChainName + '_rama_angles.svg';
-        this.currLinks.rg_boxplot = environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/figure/' + this.currEnsmeble['ensemble_id'] + '_' + currChainName + '_rg_boxplot_NG.svg';
-        this.currLinks.mmcif = environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/cif_files/' + this.currEnsmeble['ensemble_id'] + '_rep10_MC_Rg.cif';
+        this.currLinks.ramachandran_plot = environment.ws + 'jobs/' + this.resultsService.currentUUID + '/ensemble/' + this.currEnsmeble['ensemble_id'] + '/chain/' + currChainName + '/ramachandran_plot/';
+        this.currLinks.rg_boxplot = environment.ws + 'jobs/' + this.resultsService.currentUUID + '/ensemble/' + this.currEnsmeble['ensemble_id'] + '/chain/' + currChainName + '/rg_boxplot/';
+        this.currLinks.mmcif = environment.ws + 'jobs/' + this.resultsService.currentUUID + '/ensemble/' + this.currEnsmeble['ensemble_id'] + '/ensemble_sample/';
+
+        console.log(this.currLinks)
+        // this.currLinks.ramachandran_plot = environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/figure/' + this.currEnsmeble['ensemble_id'] + '_' + currChainName + '_rama_angles.svg';
+        // this.currLinks.rg_boxplot = environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/figure/' + this.currEnsmeble['ensemble_id'] + '_' + currChainName + '_rg_boxplot_NG.svg';
+        // this.currLinks.mmcif = environment.submission_server + '/task/' + this.resultsService.currentUUID + '/file/data/cif_files/' + this.currEnsmeble['ensemble_id'] + '_rep10_MC_Rg.cif';
       } else {
         this.currLinks.ramachandran_plot = environment.ws + 'ramachandran_plot/' + this.currEnsmeble['ensemble_id'] + '/' + currChainName;
         this.currLinks.rg_boxplot = environment.ws + 'rg_boxplot/' + this.currEnsmeble['ensemble_id'] + '/' + currChainName;

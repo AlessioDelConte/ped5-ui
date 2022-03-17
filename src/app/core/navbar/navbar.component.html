@@ -13,9 +13,9 @@
         <ul class="navbar-nav ">
 
           <!-- Always accesible -->
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" [class.active]="router.url === '/help'" routerLink="/help">Help</a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a class="nav-link" [class.active]="router.url === '/submission'" routerLink="/submission">Submit</a>
           </li>
@@ -26,20 +26,13 @@
           </li>
 
           <!-- Authorized -->
-          <!-- <ng-container *ngIf="profileObj.displayedName">
-            <li class="nav-item">
-              <a class="nav-link" [class.active]="url === 'jobs/browse'" routerLink="/jobs/browse">My Jobs</a>
-            </li>
-            <li class="nav-item dropdowm">
-              <a class="nav-link">{{profileObj.displayedName}}</a>
-            </li>
-          </ng-container> -->
+
           <li class="nav-item dropdowm" *ngIf="profileObj.role">
             <div class="nav-link dropdown-toggle">{{profileObj.displayedName}}</div>
             <ul class="dropdown-menu">
-              <li>
+              <!-- <li>
                 <a class="dropdown-item" [ngClass]="{'active': (router.url === '/profile')}" routerLink="/profile"><i class="bi bi-person-fill me-2"></i>Profile</a>
-              </li>
+              </li> -->
               <li>
                 <a class="dropdown-item" [ngClass]="{'active': (router.url === '/jobs/browse')}"
                   routerLink="/jobs/browse"><i class="bi bi-list-task me-2"></i>My Jobs</a>
@@ -54,11 +47,6 @@
               </li>
             </ul>
           </li>
-
-          <!--              <li class="nav-item">-->
-          <!--                <span class="nav-link" (click)="switchDarkMode()">night mode</span>-->
-          <!--              </li>-->
-
         </ul>
       </div>
     </div>

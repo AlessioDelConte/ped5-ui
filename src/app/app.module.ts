@@ -4,6 +4,7 @@ import {RouterModule, UrlMatchResult, Routes} from '@angular/router';
 import {ReactiveFormsModule, FormsModule} from '@angular/forms';
 import {CdkTableModule} from '@angular/cdk/table';
 import {HttpClientModule} from '@angular/common/http';
+import { ClipboardModule } from 'ngx-clipboard';
 
 import {AppComponent} from './app.component';
 import {NavbarComponent} from './core/navbar/navbar.component';
@@ -109,7 +110,8 @@ const appRoutes: Routes = [
     CdkTableModule,
     HttpClientModule,
     PaginationModule.forRoot(),
-    BrowserModule
+    BrowserModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]

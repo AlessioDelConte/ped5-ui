@@ -83,10 +83,11 @@ export class InternalService {
         return this.http.get(url, { responseType: 'json' });
     }
 
-    getDraft(entryIdentifier): Observable<any> {
+    getDraft(entryIdentifier, params = {}): Observable<any> {
         const url = environment.ws + 'drafts/' + entryIdentifier;
         return this.http.get(url, {
-            responseType: 'json'
+            responseType: 'json',
+            params: params
         });
     }
 
@@ -101,6 +102,13 @@ export class InternalService {
             job_id: job_id,
             cover_letter: cover_letter
         }, { responseType: 'json' });
+    }
+
+    generateDraftAccessToken(entryIdentifier): Observable<any> {
+        const url = environment.ws + 'drafts/' + entryIdentifier + "/generate-token/";;
+        return this.http.get(url, {
+            responseType: 'json'
+        });
     }
 
     getFile(submissionID, fileName): Observable<any> {

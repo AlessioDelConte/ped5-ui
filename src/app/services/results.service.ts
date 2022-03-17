@@ -24,6 +24,9 @@ export class ResultsService {
   public currViewMode: ResultsServiceMode;
   public currentUUID: string;
 
+  public isLoading: boolean = true;
+  public prepublicationAccess: string;
+
   public entryObj = {
     constructs: []
   };
@@ -36,10 +39,10 @@ export class ResultsService {
 
   private basicErrorHandler = (err) => {
     console.log('err', err);
-    if (err.status === 401) this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    if (err.status === 401) this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
       this.router.navigate(["/unauthorized"]);
     });
-    if (err.status === 404) this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+    if (err.status === 404) this.router.navigateByUrl('/', { skipLocationChange: false }).then(() => {
       this.router.navigate(["/notfound"]);
     });
     if (err.status === 500) {
@@ -54,7 +57,8 @@ export class ResultsService {
       // Case Job
       return this.internalService.getJob(this.currentUUID).subscribe(currJob => {
         this.resultSubj.next(currJob);
-        this.entryObj = currJob.output_metadata
+        this.entryObj = currJob.output_metadata;
+        this.isLoading = false;
         
         if (this.entryObj["status"] === "failed" || this.entryObj["status"] === undefined) {
           if (Array.isArray(this.entryObj['ensembles']) && this.entryObj['ensembles'].length > 0) {
@@ -101,9 +105,12 @@ export class ResultsService {
       }, this.basicErrorHandler);
     } else if (this.currViewMode === ResultsServiceMode.DRAFT) {
       // Case Draft
-      return this.internalService.getDraft(this.currentUUID).subscribe(currDraft => {
+      let params = {}
+      if(this.prepublicationAccess) params["prepublication_access"] = this.prepublicationAccess
+      return this.internalService.getDraft(this.currentUUID, params).subscribe(currDraft => {
         this.resultSubj.next(currDraft);
-        this.entryObj = currDraft.metadata;
+        this.entryObj = currDraft.output_metadata;
+        this.isLoading = false;
       }, this.basicErrorHandler);
     } else {
       this.errors.push({

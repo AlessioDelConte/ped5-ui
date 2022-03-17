@@ -1,4 +1,4 @@
-<!-- Modal -->
+<!-- Modal Assign Entry -->
 <div class="modal fade" id="assignEntryIDModal" tabindex="-1" aria-labelledby="assignEntryIDModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -18,6 +18,45 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" (click)="assignEntryID()">Submit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="getShareLinkModal" tabindex="-1" aria-labelledby="getShareLinkModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content px-2" *ngIf="!shareLink">
+            <div class="modal-header">
+                <h5 class="modal-title" id="getShareLinkModalLabel">Are you sure?</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="col-auto">
+                    <label class="col-form-label">Once generated, a share link for external review cannot be revoked and
+                        will have access to this draft for 500 days.</label>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal"><i
+                        class="bi bi-x-lg me-2"></i>No</button>
+                <button type="button" class="btn btn-success" (click)="generateToken()"><i
+                        class="bi bi-check-lg me-2"></i>Yes</button>
+            </div>
+        </div>
+        <div class="modal-content px-2" *ngIf="shareLink">
+            <div class="modal-header">
+                <h5 class="modal-title" id="getShareLinkModalLabel">Share Link:</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="input-group">
+                    <input class="form-control" type="text" value="{{shareLink}}" readonly #shareTarget/>
+                    <button class="btn btn-outline-secondary" type="button" [ngxClipboard]="shareTarget"><i class="bi bi-clipboard"></i></button>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             </div>
         </div>
     </div>
@@ -60,7 +99,7 @@
                     </p>
                 </div>
             </div>
-            <div class="col-auto text-end me-2">
+            <div class="col-auto text-end me-2" *ngIf="!resultsService.isLoading">
                 <div class="row">
                     <button type="button" class="btn btn-sm btn-primary mb-2 text-start" [routerLink]="['/submission']"
                         [queryParams]="{draft_id: resultsService.currentUUID}">
@@ -72,6 +111,13 @@
                     <button type="button" class="btn btn-sm btn-primary mb-2 text-start" data-bs-toggle="modal"
                         data-bs-target="#assignEntryIDModal">
                         <i class="bi bi-pencil-square me-2"></i> Assign Entry ID
+                    </button>
+                </div>
+
+                <div class="row">
+                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start" data-bs-toggle="modal"
+                        data-bs-target="#getShareLinkModal">
+                        <i class="bi bi-link-45deg me-2"></i> Get share link
                     </button>
                 </div>
 

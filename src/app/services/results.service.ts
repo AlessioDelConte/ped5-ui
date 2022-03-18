@@ -59,7 +59,7 @@ export class ResultsService {
         this.resultSubj.next(currJob);
         this.entryObj = currJob.output_metadata;
         this.isLoading = false;
-        
+
         if (this.entryObj["status"] === "failed" || this.entryObj["status"] === undefined) {
           if (Array.isArray(this.entryObj['ensembles']) && this.entryObj['ensembles'].length > 0) {
             this.entryObj['ensembles'].forEach(ensemble => {
@@ -88,8 +88,8 @@ export class ResultsService {
                   break;
               }
             })
-          } 
-          if(!this.entryObj['errors']) {
+          }
+          if (!this.entryObj['errors']) {
             this.errors.push({
               "message": "Fatal error. Please contact us."
             })
@@ -106,7 +106,7 @@ export class ResultsService {
     } else if (this.currViewMode === ResultsServiceMode.DRAFT) {
       // Case Draft
       let params = {}
-      if(this.prepublicationAccess) params["prepublication_access"] = this.prepublicationAccess
+      if (this.prepublicationAccess) params["prepublication_access"] = this.prepublicationAccess
       return this.internalService.getDraft(this.currentUUID, params).subscribe(currDraft => {
         this.resultSubj.next(currDraft);
         this.entryObj = currDraft.output_metadata;
@@ -117,5 +117,15 @@ export class ResultsService {
         "message": "Result type (Job, Draft or Public) need to be specified"
       })
     }
+  }
+
+  public parseDraftStatus(key: string) {
+    let STATUS = {
+      under_review: "Under Review",
+      approved: "Approved",
+      rejected: "Rejected",
+      published: "Published"
+    }
+    return STATUS[key] || key;
   }
 }

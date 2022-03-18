@@ -23,6 +23,7 @@
     </div>
 </div>
 
+<!-- Modal for share link -->
 <div class="modal fade" id="getShareLinkModal" tabindex="-1" aria-labelledby="getShareLinkModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg">
@@ -78,7 +79,7 @@
                     <p>
                         <strong>Status:</strong>
                         <span class="mx-2 badge bg-warning">
-                            Under Review
+                            {{resultsService.parseDraftStatus(draftObj.status)}}
                         </span>
                         <strong class="ms-4">Creation Date:</strong>
                         <span class="mx-2">
@@ -99,34 +100,45 @@
                     </p>
                 </div>
             </div>
-            <div class="col-auto text-end me-2" *ngIf="!resultsService.isLoading">
-                <div class="row">
-                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start" [routerLink]="['/submission']"
+
+            <!-- Action buttons -->
+            <div class="col-auto text-end me-2" *ngIf="!resultsService.prepublicationAccess && !resultsService.isLoading">
+
+                <div class="row mb-2" *ngIf="draftObj.status!=='rejected'">
+                    <button type="button" class="btn btn-sm btn-primary text-start" [routerLink]="['/submission']"
                         [queryParams]="{draft_id: resultsService.currentUUID}">
                         <i class="bi bi-arrow-clockwise me-2"></i> Run job from this
                     </button>
                 </div>
 
-                <div class="row" *ngIf="['admin','editor'].includes(profileObj['role']) && !draftObj.assigned_entry_id">
-                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start" data-bs-toggle="modal"
-                        data-bs-target="#assignEntryIDModal">
-                        <i class="bi bi-pencil-square me-2"></i> Assign Entry ID
-                    </button>
-                </div>
-
-                <div class="row">
-                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start" data-bs-toggle="modal"
+                <div class="row mb-2">
+                    <button type="button" class="btn btn-sm btn-primary text-start" data-bs-toggle="modal"
                         data-bs-target="#getShareLinkModal">
                         <i class="bi bi-link-45deg me-2"></i> Get share link
                     </button>
                 </div>
 
-                <div class="row">
-                    <button type="button" class="btn btn-sm btn-primary mb-2 text-start">
-                        <i class="bi bi-send-check me-2"></i> Request publication
+                <div class="row mb-2" *ngIf="['admin','editor'].includes(profileObj['role']) && !draftObj.assigned_entry_id">
+                    <button type="button" class="btn btn-sm btn-primary text-start" data-bs-toggle="modal"
+                        data-bs-target="#assignEntryIDModal">
+                        <i class="bi bi-pencil-square me-2"></i> Assign Entry ID
                     </button>
                 </div>
+
+                <div class="row mb-2" *ngIf="['admin','editor'].includes(profileObj['role']) && draftObj.status==='under_review'">
+                    <button type="button" class="col btn btn-sm btn-success text-start">
+                        <i class="bi bi-check-lg me-2"></i> Approve draft
+                    </button>
+                </div>
+
+                <div class="row mb-2" *ngIf="['admin','editor'].includes(profileObj['role']) && draftObj.status==='under_review'">
+                    <button type="button" class="col btn btn-sm btn-danger text-start">
+                        <i class="bi bi-x-lg me-2"></i> Reject draft
+                    </button>
+                </div>
+
             </div>
+
         </div>
 
     </div>

@@ -12,12 +12,12 @@ export class InternalService {
     }
 
     GetLogOut(): Observable<any> {
-        const url = environment.ws + 'logout';
+        const url = environment.ws + 'logout/';
         return this.http.get(url, { responseType: 'json' });
     }
 
     GetAuth(): Observable<any> {
-        const url = environment.ws + 'profile';
+        const url = environment.ws + 'profile/';
         return this.http.get(url, { responseType: 'json' });
     }
 
@@ -27,14 +27,14 @@ export class InternalService {
     }
 
     getOntology(): Observable<any> {
-        const url = environment.ws + 'get_ontology';
+        const url = environment.ws + 'get_ontology/';
         return this.http.get(url, {
             responseType: 'json'
         });
     }
 
     postSubmission(files): Observable<any> {
-        const url = environment.ws + 'submission';
+        const url = environment.ws + 'submission/';
         return this.http.post(url, files,
             {
                 reportProgress: true,
@@ -43,7 +43,7 @@ export class InternalService {
     }
 
     getEntry(params): Observable<any> {
-        const url = environment.ws + 'entries';
+        const url = environment.ws + 'entries/';
         return this.http.get(url, {
             responseType: 'json',
             params: params
@@ -72,7 +72,7 @@ export class InternalService {
     }
 
     getJob(entryIdentifier): Observable<any> {
-        const url = environment.ws + 'jobs/' + entryIdentifier;
+        const url = environment.ws + 'jobs/' + entryIdentifier + "/";
         return this.http.get(url, {
             responseType: 'json'
         });
@@ -84,7 +84,7 @@ export class InternalService {
     }
 
     getDraft(entryIdentifier, params = {}): Observable<any> {
-        const url = environment.ws + 'drafts/' + entryIdentifier;
+        const url = environment.ws + 'drafts/' + entryIdentifier + "/";
         return this.http.get(url, {
             responseType: 'json',
             params: params

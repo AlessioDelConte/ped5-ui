@@ -38,7 +38,7 @@ export class JobResultViewComponent implements OnInit {
     this.resultsService.currentUUID = this.route.snapshot.paramMap.get('identifier');
 
     // Invoke reload sub
-    this.reloadSub = interval(5000).subscribe(val => this.resultsService.getMetadata());
+    this.reloadSub = interval(10000).subscribe(val => this.resultsService.getMetadata());
     this.jobStatus.subscribe(val => {
       if(["done","failed"].includes(this.jobStatus.value)){
         this.reloadSub.unsubscribe();

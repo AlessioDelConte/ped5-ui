@@ -1,6 +1,7 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject} from 'rxjs';
-import {InternalService} from './internal.service';
+import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
+import { InternalService } from './internal.service';
 
 export interface UserProfile {
     orcid?: string,
@@ -16,7 +17,7 @@ export class AuthService {
     profileObj = new BehaviorSubject<UserProfile>({
     });
 
-    constructor(private internalService: InternalService) {
+    constructor(private internalService: InternalService, private router: Router) {
     }
 
     authentication(): void {
@@ -39,8 +40,15 @@ export class AuthService {
         this.internalService.GetLogOut().subscribe(result => {
             this.profileObj.next({
             });
+            this.router.navigateByUrl('/').then(() => {
+                this.router.navigate(['/']);
+            });
         }, error => {
-        }, () => {
+            this.profileObj.next({
+            });
+            this.router.navigateByUrl('/').then(() => {
+                this.router.navigate(['/']);
+            });
         });
     }
 }

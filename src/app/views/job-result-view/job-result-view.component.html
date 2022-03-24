@@ -18,8 +18,10 @@
                 </div>
                 <div class="row">
                     <div class="col input-group">
-                        <textarea rows="4" class="form-control" formControlName="cover_letter"
-                            placeholder="Insert your comment. Only for internal usage to inform biocurators."></textarea>
+                        <textarea rows="4" class="form-control" [ngClass]="{'is-invalid': firstSubmitFormError}"
+                            formControlName="cover_letter"
+                            placeholder="Insert your comment (Minimum 50 characters long). Only for internal usage to inform biocurators."></textarea>
+                        <div *ngIf="firstSubmitFormError" class="invalid-feedback">{{firstSubmitFormError}}</div>
                     </div>
                 </div>
             </div>

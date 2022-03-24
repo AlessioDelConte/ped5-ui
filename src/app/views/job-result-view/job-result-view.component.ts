@@ -27,12 +27,14 @@ export class JobResultViewComponent implements OnInit {
     cover_letter: new FormControl(null)
   })
 
+  public firstSubmitFormError: string;
+
   constructor(private internalService: InternalService,
     public resultsService: ResultsService,
     private authService: AuthService,
     private route: ActivatedRoute) {
     this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
-    
+
 
     this.resultsService.currViewMode = ResultsServiceMode.JOB;
     this.resultsService.currentUUID = this.route.snapshot.paramMap.get('identifier');
@@ -40,38 +42,40 @@ export class JobResultViewComponent implements OnInit {
     // Invoke reload sub
     this.reloadSub = interval(10000).subscribe(val => this.resultsService.getMetadata());
     this.jobStatus.subscribe(val => {
-      if(["done","failed"].includes(this.jobStatus.value)){
+      if (["done", "failed"].includes(this.jobStatus.value)) {
         this.reloadSub.unsubscribe();
       }
     })
 
     // Init first time
     this.resultsService.getMetadata()
-    this.resultsService.resultSubj.subscribe( result => {
-      this.jobObj=result;
+    this.resultsService.resultSubj.subscribe(result => {
+      this.jobObj = result;
       this.jobStatus.next(this.jobObj["status"])
     });
 
     this.firstSubmitForm.get("job_id").setValue(this.resultsService.currentUUID);
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   public submitFirst(): void {
     // Disable button of submission
     this.isSubmitting = true;
+    this.firstSubmitFormError = undefined;
     this.internalService.upgradeToDraft(this.firstSubmitForm.value["job_id"], this.firstSubmitForm.value["cover_letter"]).subscribe((data) => {
       window.location.reload();
-    }, err => { this.isSubmitting = false })
+    }, err => {
+      this.isSubmitting = false;
+      this.firstSubmitFormError = err["error"]["message"]
+    })
   }
 
-  formatTimestamp(tmstmp: string): string{
+  public formatTimestamp(tmstmp: string): string {
     return moment(tmstmp).format("dddd, MMMM Do YYYY, h:mm:ss a [GMT]Z")
   }
 
-  ngOnDestroy(){
+  ngOnDestroy() {
     this.reloadSub.unsubscribe();
   }
 }

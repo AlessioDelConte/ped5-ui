@@ -307,6 +307,11 @@ export class SubmissionService {
                         });
                     }, 500);
             }
+        }, err => {
+            this.progress=0
+            this.formData.delete('metadata');
+            this.formData.delete('options')
+            alert("error")
         });
     }
 

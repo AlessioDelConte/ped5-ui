@@ -11,9 +11,9 @@
         <div class="col">
             <div class="row">
                 <strong class="col-auto">Data owner</strong>
-                <div class="col-auto m-0 p-0" *ngFor="let author of entryObj['authors']">
+                <div class="col-auto m-0 p-0 me-3" *ngFor="let author of entryObj['authors']">
                     <a *ngIf="author['role'] !== 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}"
-                        target="_blank" style="white-space: nowrap">{{author['name']}}</a>
+                        target="_blank" style="white-space: nowrap">{{author['name']}} <i *ngIf="author['corresponding_author']" class="bi bi-envelope-check-fill"></i></a>
                 </div>
             </div>
         </div>
@@ -43,7 +43,7 @@
     <div class="row mb-2"
         *ngIf="entryObj['experimental_cross_reference'] && entryObj['experimental_cross_reference'][0] && entryObj['experimental_cross_reference'][0]['id']">
         <div class="col">
-            <strong>Experiments' raw data</strong>
+            <strong>Experiment's raw data</strong>
             <span *ngFor="let currRef of entryObj['experimental_cross_reference']">
                 <a *ngIf="currRef['db'] !== 'bmrb'" class="badge bg-dark ms-2"
                     href="https://identifiers.org/{{currRef['db']}}:{{currRef['id']}}" target="_blank">
@@ -60,7 +60,7 @@
     <!-- Biocurators -->
     <div class="row mb-2">
         <strong class="col-auto">Biocurated by</strong>
-        <div class="col-auto m-0 p-0" *ngFor="let author of entryObj['authors']">
+        <div class="col-auto m-0 p-0 me-3" *ngFor="let author of entryObj['authors']">
             <a *ngIf="author['role'] === 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}" target="_blank"
                 style="white-space: nowrap">{{author['name']}}</a>
         </div>

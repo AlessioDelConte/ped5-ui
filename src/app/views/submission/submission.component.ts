@@ -10,8 +10,6 @@ import { SubmissionService } from '../../services/submission.service';
 export class SubmissionComponent implements OnInit {
   activeComponent = '';
 
-  aux = ""
-
   constructor(private route: ActivatedRoute, public submissionService: SubmissionService) { }
 
   ngOnInit(): void {
@@ -38,6 +36,8 @@ export class SubmissionComponent implements OnInit {
     this.activeComponent = activeComponent !== this.activeComponent ? activeComponent : '';
   }
 
+  
+  aux = ""
   auxFun(){
     this.aux = this.submissionService.getInputMetadata()
   }

@@ -20,6 +20,8 @@ export class SubmissionService {
         parent_job_id: null
     }
 
+    public errors = []
+
     constructor(private fb: FormBuilder,
         private internalService: InternalService,
         private router: Router) {
@@ -276,6 +278,8 @@ export class SubmissionService {
 
 
     public submission(): void {
+        this.errors = []
+
         let blob = new Blob([JSON.stringify(this.form.value)], { type: 'text/plain' });
         this.formData.append('metadata', blob, 'metadata.json');
 
@@ -311,7 +315,22 @@ export class SubmissionService {
             this.progress=0
             this.formData.delete('metadata');
             this.formData.delete('options')
-            alert("error")
+            
+            if(err.status != 400) {
+                this.errors.push({
+                    "message": "Fatal error." + (err.error.message || '')
+                })
+            }else{
+                if( err.error.errors && err.error.errors.length>0){
+                    err.error.errors.forEach(curError => {
+                        this.errors.push({
+                            message: curError.msg + ' in ' + curError.loc.toString()
+                        })
+                    })
+                }else{
+                    this.errors.push(err.error)
+                }
+            }
         });
     }
 

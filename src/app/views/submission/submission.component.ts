@@ -22,7 +22,7 @@ export class SubmissionComponent implements OnInit {
       if(data.entry.input_metadata){
         // For jobs
         if (data.entry.job_id) this.submissionService.options.parent_job_id = data.entry.job_id;
-        if (data.entry.linked_draft_id) this.submissionService.options.linked_draft_id = data.entry.linked_draft_id;
+        // if (data.entry.linked_draft_id) this.submissionService.options.linked_draft_id = data.entry.linked_draft_id;
 
         // For drafts
         if (data.entry.draft_id) this.submissionService.options.linked_draft_id = data.entry.draft_id;

@@ -96,11 +96,18 @@ export class InternalService {
         return this.http.patch(url, patchValues, { responseType: 'json' });
     }
 
-    upgradeToDraft(job_id: string, cover_letter: string): Observable<any> {
+    postOverwriteDraft(draftID, jobID): Observable<any> {
+        const url = environment.ws + 'drafts/' + draftID + "/";
+        return this.http.post(url, {
+            job_id: jobID
+        }, { responseType: 'json' });
+    }
+
+    upgradeToDraft(jobID: string, coverLetter: string): Observable<any> {
         const url = environment.ws + 'drafts/';
         return this.http.post(url, {
-            job_id: job_id,
-            cover_letter: cover_letter
+            job_id: jobID,
+            cover_letter: coverLetter
         }, { responseType: 'json' });
     }
 

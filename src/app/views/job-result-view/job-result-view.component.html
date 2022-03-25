@@ -83,10 +83,16 @@
                     </button>
                 </div>
 
-                <div class="row" *ngIf="profileObj['role'] && jobObj.status==='done'">
-                    <button *ngIf="!jobObj.linked_draft_id" type="button" class="btn btn-sm btn-primary"
+                <div class="row" *ngIf="profileObj['role'] && jobObj.status==='done' && !jobObj.linked_draft_id">
+                    <button  type="button" class="btn btn-sm btn-primary"
                         data-bs-toggle="modal" data-bs-target="#firstSubmitModal">
                         Upgrade to draft
+                    </button>
+                </div>
+
+                <div class="row" *ngIf="profileObj['role'] && jobObj.status==='done' && jobObj.linked_draft_id">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="overwriteDraft()">
+                        Overwrite draft
                     </button>
                 </div>
 

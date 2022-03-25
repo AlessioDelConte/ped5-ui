@@ -34,6 +34,11 @@
                 <a class="dropdown-item" [ngClass]="{'active': (router.url === '/profile')}" routerLink="/profile"><i class="bi bi-person-fill me-2"></i>Profile</a>
               </li> -->
               <li>
+                <span class="dropdown-item-text">
+                  Role: <span class="badge bg-primary-dark">{{profileObj.role}}</span>
+                </span>
+              </li>
+              <li>
                 <a class="dropdown-item" [ngClass]="{'active': (router.url === '/jobs/browse')}"
                   routerLink="/jobs/browse"><i class="bi bi-list-task me-2"></i>My Jobs</a>
               </li>

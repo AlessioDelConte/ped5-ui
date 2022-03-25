@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { InternalService } from 'src/app/services/internal.service';
 import { ResultsService, ResultsServiceMode } from 'src/app/services/results.service';
@@ -32,7 +32,8 @@ export class JobResultViewComponent implements OnInit {
   constructor(private internalService: InternalService,
     public resultsService: ResultsService,
     private authService: AuthService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    private router: Router) {
     this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
 
 
@@ -65,6 +66,15 @@ export class JobResultViewComponent implements OnInit {
     this.firstSubmitFormError = undefined;
     this.internalService.upgradeToDraft(this.firstSubmitForm.value["job_id"], this.firstSubmitForm.value["cover_letter"]).subscribe((data) => {
       window.location.reload();
+    }, err => {
+      this.isSubmitting = false;
+      this.firstSubmitFormError = err["error"]["message"]
+    })
+  }
+
+  public overwriteDraft(): void {
+    this.internalService.postOverwriteDraft(this.jobObj["linked_draft_id"], this.jobObj["job_id"]).subscribe((data) => {
+      this.router.navigate(['/draft/' + this.jobObj["linked_draft_id"]])
     }, err => {
       this.isSubmitting = false;
       this.firstSubmitFormError = err["error"]["message"]

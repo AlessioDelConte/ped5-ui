@@ -78,7 +78,8 @@
                     </p>
                     <p>
                         <strong>Status:</strong>
-                        <span class="mx-2 badge bg-warning">
+                        <span class="mx-2 badge" 
+                            [ngClass]="{'bg-danger': draftObj.status === 'rejected', 'bg-success': draftObj.status === 'approved', 'bg-warning': draftObj.status === 'under_review', 'bg-dark': draftObj.status === 'published'}">
                             {{resultsService.parseDraftStatus(draftObj.status)}}
                         </span>
                         <strong class="ms-4">Creation Date:</strong>
@@ -98,6 +99,20 @@
                             {{draftObj.cover_letter}}
                         </span>
                     </p>
+                    <p *ngIf="draftObj.last_job_id">
+                        <strong>Last job:</strong>
+                        <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank"
+                            routerLink="/job/{{draftObj.last_job_id}}">
+                            {{draftObj.last_job_id}} <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                    </p>
+                    <p *ngIf="draftObj.pending_job_id">
+                        <strong>Pending job:</strong>
+                        <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank"
+                            routerLink="/job/{{draftObj.pending_job_id}}">
+                            {{draftObj.pending_job_id}} <i class="bi bi-box-arrow-up-right"></i>
+                        </a>
+                    </p>   
                 </div>
             </div>
 
@@ -126,13 +141,13 @@
                 </div>
 
                 <div class="row mb-2" *ngIf="['admin','editor'].includes(profileObj['role']) && draftObj.status==='under_review'">
-                    <button type="button" class="col btn btn-sm btn-success text-start">
+                    <button type="button" class="col btn btn-sm btn-success text-start" (click)="changeStatusDraft('approved')">
                         <i class="bi bi-check-lg me-2"></i> Approve draft
                     </button>
                 </div>
 
                 <div class="row mb-2" *ngIf="['admin','editor'].includes(profileObj['role']) && draftObj.status==='under_review'">
-                    <button type="button" class="col btn btn-sm btn-danger text-start">
+                    <button type="button" class="col btn btn-sm btn-danger text-start" (click)="changeStatusDraft('rejected')">
                         <i class="bi bi-x-lg me-2"></i> Reject draft
                     </button>
                 </div>

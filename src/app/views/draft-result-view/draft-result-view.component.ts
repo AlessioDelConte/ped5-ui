@@ -41,19 +41,25 @@ export class DraftResultViewComponent implements OnInit {
 
   }
 
-  assignEntryID() {
+  public assignEntryID() {
     this.internalService.patchDraft(this.resultsService.currentUUID, this.draftForm.value).subscribe(data => {
       window.location.reload()
     })
   }
 
-  generateToken(){
+  public changeStatusDraft(newStatus) {
+    this.internalService.patchDraft(this.resultsService.currentUUID, { status: newStatus}).subscribe(data => {
+      window.location.reload()
+    })
+  }
+
+  public generateToken(){
     this.internalService.generateDraftAccessToken(this.resultsService.currentUUID).subscribe(data => {
       this.shareLink = window.location.protocol + '//'+ window.location.host+ window.location.pathname + '?prepublication_access=' + data["token"]
     })
   }
 
-  formatTimestamp(tmstmp: string): string {
+  public formatTimestamp(tmstmp: string): string {
     return moment(tmstmp).format("dddd, MMMM Do YYYY, h:mm:ss a [GMT]Z")
   }
 }

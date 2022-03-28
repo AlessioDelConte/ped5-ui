@@ -66,12 +66,12 @@
                         </a>
                     </p>
                     <p *ngIf="jobObj.linked_draft_id">
-                        <strong>Draft id:</strong>
+                        <strong>Linked draft:</strong>
                         <a class="mx-2 badge bg-primary" style="cursor: pointer;" role="button" target="_blank"
                             routerLink="/draft/{{jobObj.linked_draft_id}}">
                             {{jobObj.linked_draft_id}} <i class="bi bi-box-arrow-up-right"></i>
                         </a>
-                        <strong>(Job already submitted!)</strong>
+                        <!-- <strong>(Job already submitted!)</strong> -->
                     </p>
                 </div>
             </div>
@@ -86,13 +86,13 @@
                 <div class="row" *ngIf="profileObj['role'] && jobObj.status==='done' && !jobObj.linked_draft_id">
                     <button  type="button" class="btn btn-sm btn-primary"
                         data-bs-toggle="modal" data-bs-target="#firstSubmitModal">
-                        Upgrade to draft
+                        <i class="bi bi-arrow-up-circle me-1"></i> Upgrade to draft
                     </button>
                 </div>
 
-                <div class="row" *ngIf="profileObj['role'] && jobObj.status==='done' && jobObj.linked_draft_id">
+                <div class="row" *ngIf="profileObj['role'] && jobObj.status==='done' && jobObj.linked_draft_id && canOverwrite">
                     <button type="button" class="btn btn-sm btn-primary" (click)="overwriteDraft()">
-                        Overwrite draft
+                        <i class="bi bi-file-arrow-up me-1"></i> Overwrite draft
                     </button>
                 </div>
 

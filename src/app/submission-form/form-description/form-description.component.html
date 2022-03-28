@@ -56,7 +56,7 @@
             <div class="col">
                 <div class="row mb-2">
                     <div class="col input-group">
-                        <label class="input-group-text">Name</label>
+                        <label class="input-group-text">Name*</label>
                         <input formControlName="name" type="text" class="form-control" placeholder="Author's name">
                         <label class="input-group-text">ORCID</label>
                         <input formControlName="orcid_id" type="text" class="form-control" placeholder="Author's ORCID">
@@ -65,7 +65,8 @@
                 <div class="row mb-2">
                     <div class="col input-group">
                         <label class="input-group-text">Role</label>
-                        <select formControlName="role" class="form-select">
+                        <select formControlName="role" class="form-select"
+                            [attr.disabled]="!['admin','editor'].includes(profileObj['role'])?true:null">
                             <option selected disabled [ngValue]="null">Choose...</option>
                             <option value="biocurator">Biocurator</option>
                             <option value="data_owner">Data owner</option>
@@ -153,7 +154,7 @@
     <div class="row mb-2">
         <div class="input-group col">
             <div class="input-group-text">Expression organism (NCBI Taxon ID)</div>
-            <input formControlName="expression_organism" type="number" class="form-control" placeholder="Organism ID"
+            <input formControlName="expression_organism" type="text" class="form-control" placeholder="Organism ID"
                 (change)="submissionService.getTaxonName()">
         </div>
         <div class="input-group col">
@@ -177,15 +178,15 @@
     <div class="row mb-2"
         *ngFor="let entryXRef of submissionService.form.get('entry_cross_reference').controls; let i=index;">
         <div [formGroup]="entryXRef" class="col input-group">
-            <div class="input-group-text">Cross-reference</div>
+            <div class="input-group-text">Cross-reference*</div>
             <select formControlName="db" class="form-select">
-                <option selected disabled [ngValue]="null">Choose database...</option>
+                <option selected disabled [ngValue]="null">Choose database...*</option>
                 <option value="pdb">PDB</option>
                 <option value="disprot">DisProt</option>
                 <option value="disprot.region">DisProt evidence</option>
                 <option value="intact">IntAct</option>
             </select>
-            <input formControlName="id" type="text" class="form-control" placeholder="DB identifier">
+            <input formControlName="id" type="text" class="form-control" placeholder="DB identifier*">
             <button (click)="submissionService.removeFormArrayElement('entry_cross_reference',i,false)" type="button"
                 class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash-fill"></i></button>
         </div>
@@ -204,13 +205,13 @@
     <div class="row mb-2"
         *ngFor="let experimentalXRef of submissionService.form.get('experimental_cross_reference').controls; let i=index;">
         <div [formGroup]="experimentalXRef" class="col input-group">
-            <div class="input-group-text">Cross-reference</div>
+            <div class="input-group-text">Cross-reference*</div>
             <select formControlName="db" class="form-select" id="inputGroupSelectrefr">
-                <option selected disabled [ngValue]="null">Choose database...</option>
+                <option selected disabled [ngValue]="null">Choose database...*</option>
                 <option value="bmrb">BMRB</option>
                 <option value="sasbdb">SASBDB</option>
             </select>
-            <input formControlName="id" type="text" class="form-control" placeholder="Experimental identifier">
+            <input formControlName="id" type="text" class="form-control" placeholder="Experimental identifier*">
             <button (click)="submissionService.removeFormArrayElement('experimental_cross_reference',i,false)"
                 type="button" class="btn btn-danger btn-sm" title="Delete"><i class="bi bi-trash-fill"></i></button>
         </div>

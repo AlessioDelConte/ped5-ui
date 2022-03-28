@@ -17,6 +17,8 @@ export class JobResultViewComponent implements OnInit {
   public jobObj;
   public profileObj;
 
+  public canOverwrite: boolean = false;
+
   public jobStatus = new BehaviorSubject<string>("created");
   public reloadSub: Subscription;
 
@@ -45,6 +47,11 @@ export class JobResultViewComponent implements OnInit {
     this.jobStatus.subscribe(val => {
       if (["done", "failed"].includes(this.jobStatus.value)) {
         this.reloadSub.unsubscribe();
+        if (this.jobObj.linked_draft_id) {
+          this.internalService.getDraft(this.jobObj.linked_draft_id).subscribe(data => {
+            if (data.pending_job_id === this.jobObj.job_id) this.canOverwrite = true;
+          })
+        }
       }
     })
 
@@ -55,6 +62,7 @@ export class JobResultViewComponent implements OnInit {
       this.jobStatus.next(this.jobObj["status"])
     });
 
+    // Init submit form
     this.firstSubmitForm.get("job_id").setValue(this.resultsService.currentUUID);
   }
 

@@ -90,7 +90,7 @@ export class SubmissionService {
             rows.push(this.fb.group({
                 "name": null,
                 "orcid_id": null,
-                "role": null,
+                "role": "data_owner",
                 "email": null,
                 "corresponding_author": false
             }, { emitEvent: emitEvent }))

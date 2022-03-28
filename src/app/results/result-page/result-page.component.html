@@ -13,7 +13,10 @@
                 <strong class="col-auto">Data owner</strong>
                 <div class="col-auto m-0 p-0 me-3" *ngFor="let author of entryObj['authors']">
                     <a *ngIf="author['role'] !== 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}"
-                        target="_blank" style="white-space: nowrap">{{author['name']}} <i *ngIf="author['corresponding_author']" class="bi bi-envelope-check-fill"></i></a>
+                        target="_blank" style="white-space: nowrap">{{author['name']}}
+                        <i *ngIf="author['corresponding_author']" class="bi bi-envelope-check-fill"
+                            title="Corresponding Author"></i>
+                    </a>
                 </div>
             </div>
         </div>
@@ -141,7 +144,8 @@
     </div>
 
     <!-- Cross Refs -->
-    <div class="row mb-2 mt-2" *ngIf="entryObj['entry_cross_reference'] && entryObj['entry_cross_reference'][0] && entryObj['entry_cross_reference'][0]['id']">
+    <div class="row mb-2 mt-2"
+        *ngIf="entryObj['entry_cross_reference'] && entryObj['entry_cross_reference'][0] && entryObj['entry_cross_reference'][0]['id']">
         <div class="col">
             <strong>Cross reference</strong> <span *ngFor="let currRef of entryObj['entry_cross_reference']">
                 <a *ngIf="currRef['db'] !== 'disprot'" class="badge bg-dark ms-2"

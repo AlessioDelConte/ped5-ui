@@ -18,7 +18,7 @@
             <div class="col">
                 <div class="row mb-2">
                     <div class="input-group">
-                        <div class="input-group-text">Chain name</div>
+                        <div class="input-group-text">Chain name*</div>
                         <input formControlName="chain_name" type="text" class="form-control" placeholder="Chain name">
                         <label class="input-group-text">Is fixed?</label>
                         <div class="input-group-text">
@@ -35,7 +35,7 @@
 
                 <div class="row mb-2">
                     <div class="input-group">
-                        <div class="input-group-text">Chain description</div>
+                        <div class="input-group-text">Chain description*</div>
                         <input formControlName="description" type="text" class="form-control"
                             placeholder="Chain description">
                     </div>
@@ -71,7 +71,7 @@
                             <div class="col">
                                 <div class="row mb-2">
                                     <div class="input-group">
-                                        <div class="input-group-text">Name</div>
+                                        <div class="input-group-text">Name*</div>
                                         <input formControlName="description" type="text" class="form-control"
                                             placeholder="Fragment name">
                                         <label class="input-group-text">Part of ensemble</label>
@@ -96,7 +96,7 @@
 
                                 <div class="row mb-2" *ngIf="fragment.get('definition_type').value==='Sequence'">
                                     <div class="input-group">
-                                        <div class="input-group-text">Sequence</div>
+                                        <div class="input-group-text">Sequence*</div>
                                         <textarea rows="2" class="form-control" formControlName="sequence"
                                             placeholder="Fragment sequence"></textarea>
                                     </div>
@@ -104,7 +104,7 @@
 
                                 <div class="row mb-2" *ngIf="fragment.get('definition_type').value==='Uniprot ACC'">
                                     <div class="input-group">
-                                        <div class="input-group-text">UniProt ACC</div>
+                                        <div class="input-group-text">UniProt ACC*</div>
                                         <input type="text" class="form-control" formControlName="uniprot_acc"
                                             placeholder="Uniprot acc">
                                     </div>
@@ -112,10 +112,10 @@
 
                                 <div class="row mb-2" *ngIf="fragment.get('definition_type').value==='Uniprot ACC'">
                                     <div class="input-group">
-                                        <div class="input-group-text">Position from</div>
+                                        <div class="input-group-text">Position from*</div>
                                         <input type="number" class="form-control"
                                             formControlName="uniprot_start_position" placeholder="Start position">
-                                        <div class="input-group-text">to</div>
+                                        <div class="input-group-text">to*</div>
                                         <input type="number" class="form-control" formControlName="uniprot_end_position"
                                             placeholder="End position">
                                     </div>

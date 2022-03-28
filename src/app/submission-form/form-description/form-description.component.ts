@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormGroup } from '@angular/forms';
 import { BehaviorSubject, combineLatest } from 'rxjs';
+import { AuthService } from 'src/app/services/auth.service';
 import { InternalService } from 'src/app/services/internal.service';
 import { SubmissionService } from 'src/app/services/submission.service';
 
@@ -12,9 +13,12 @@ import { SubmissionService } from 'src/app/services/submission.service';
 })
 export class FormDescriptionComponent implements OnInit {
 
-  constructor(public submissionService: SubmissionService, public internalService: InternalService) { }
+  public profileObj;
+
+  constructor(public submissionService: SubmissionService, public internalService: InternalService, private authService: AuthService) { }
 
   ngOnInit(): void {
+    this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
 
     let submissionForm: FormGroup = this.submissionService.form;
 

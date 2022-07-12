@@ -1,0 +1,27 @@
+<div class="container-fluid">
+  <nav class="navbar navbar-dark bg-nav navbar-expand-lg fixed-top" id="navbar">
+    <div class="container-xl">
+      <a class="navbar-brand" [class.]="url === 'about'" style="color: #ffffffcc" routerLink="/"><strong
+          style="color: #ffffffee">PED</strong><span style="font-weight: lighter">atabase</span></a>
+      <button class="navbar-toggler" type="button" (click)="closeMenu()" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText" (click)="closeMenu()">
+        <ul class="navbar-nav ">
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="url === 'help'" routerLink="/browse">Browse</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="url === 'help'" routerLink="/help">Help</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="url === 'help'" routerLink="/about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="url === 'help'" routerLink="/contact">Contact us</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>

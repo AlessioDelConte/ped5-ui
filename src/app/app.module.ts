@@ -6,9 +6,9 @@ import {CdkTableModule} from '@angular/cdk/table';
 import {HttpClientModule} from '@angular/common/http';
 
 import {AppComponent} from './app.component';
-import {NavbarComponent} from './navbar/navbar.component';
-import {FooterComponent} from './footer/footer.component';
-import {HomeComponent} from './home/home.component';
+import {NavbarComponent} from './core/navbar/navbar.component';
+import {FooterComponent} from './core/footer/footer.component';
+import {HomeComponent} from './views/home/home.component';
 import {PaginationModule} from 'ngx-bootstrap/pagination';
 import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
 import { SwaggerUiComponent } from './swagger-ui/swagger-ui.component';
@@ -22,8 +22,9 @@ import { LoginComponent } from './login/login.component';
 import { SubmissionResolver } from './submission.resolver';
 import { FormUploadComponent } from './submission-form/form-upload/form-upload.component';
 import { ResultPageComponent } from './results/result-page/result-page.component';
-import { BrowseComponent} from './browse/browse.component';
+import { BrowseComponent} from './views/browse/browse.component';
 import { EnsembleCardComponent } from './results/ensemble-card/ensemble-card.component';
+import { AboutComponent } from './views/about/about.component';
 
 
 
@@ -71,6 +72,7 @@ const appRoutes: Routes = [
     FormUploadComponent,
     ResultPageComponent,
     EnsembleCardComponent,
+    AboutComponent,
   ],
   imports: [
     RouterModule.forRoot(

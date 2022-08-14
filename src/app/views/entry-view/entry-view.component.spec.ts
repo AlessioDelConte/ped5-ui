@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { EnsembleCardComponent } from './ensemble-card.component';
+import { EntryViewComponent } from './entry-view.component';
 
-describe('EnsembleCardComponent', () => {
-  let component: EnsembleCardComponent;
-  let fixture: ComponentFixture<EnsembleCardComponent>;
+describe('EntryViewComponent', () => {
+  let component: EntryViewComponent;
+  let fixture: ComponentFixture<EntryViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ EnsembleCardComponent ]
+      declarations: [ EntryViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(EnsembleCardComponent);
+    fixture = TestBed.createComponent(EntryViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

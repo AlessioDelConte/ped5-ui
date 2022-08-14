@@ -11,28 +11,9 @@ export class InternalService {
     constructor(private http: HttpClient) {
     }
 
-    GetLogOut(): Observable<any> {
-        const url = environment.ws + 'logout';
-        return this.http.get(url, {responseType: 'json'});
-    }
-
-    GetAuth(): Observable<any> {
-        const url = environment.ws + 'profile';
-        return this.http.get(url, {responseType: 'json'});
-    }
-
     getServerName(): Observable<any> {
         const url = environment.ws;
         return this.http.get(url);
-    }
-
-    postSubmission(files): Observable<any> {
-        const url = environment.ws + 'submission';
-        return this.http.post(url, files,
-            {
-                reportProgress: true,
-                observe: 'events'
-            });
     }
 
     getEntry(params): Observable<any> {
@@ -44,25 +25,18 @@ export class InternalService {
     }
 
     getPublicEntry(entryIdentifier): Observable<any> {
-        const url = 'https://proteinensemble.org/api/' + entryIdentifier;
+        const url = environment.ws + 'entries/' + entryIdentifier;
         return this.http.get(url, {
             responseType: 'json'
         });
     }
 
-    sendTask(formData): Observable<any> {
-        const url = environment.submission_server + 'task/';
-        return this.http.post(url, formData,
-            {
-                reportProgress: true,
-                observe: 'events'
-            });
+    searchEntries(params): Observable<any> {
+        // TODO add params to query string
+        const url = environment.ws + 'entries/' /* Add query string */;
+        return this.http.get(url, {
+            responseType: 'json'
+        });
     }
-
-    getFile(submissionID, fileName): Observable<any> {
-        const url = environment.submission_server + 'task/' + submissionID + '/file/' + fileName;
-        return this.http.get(url, {responseType: 'json'});
-    }
-
 
 }

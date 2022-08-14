@@ -1,0 +1,180 @@
+<div class="container-xl" *ngIf="descriptionObj">
+
+    <h3 class="mb-3" *ngIf="descriptionObj['entry_id'] || descriptionObj['title']">
+        <span *ngIf="descriptionObj['entry_id']" class="badge bg-primary">
+            {{descriptionObj['entry_id']}}
+        </span>
+        {{descriptionObj['title']}}
+    </h3>
+
+    <!-- Data Owners & Report -->
+    <div class="row mb-2" *ngIf="descriptionObj['authors'] && descriptionObj['authors'][0]">
+        <div class="col">
+            <div class="row">
+                <strong class="col-auto">Data owner</strong>
+                <div class="col-auto m-0 p-0 me-3" *ngFor="let author of descriptionObj['authors']">
+                    <a *ngIf="author['role'] !== 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}"
+                        target="_blank" style="white-space: nowrap">{{author['name']}}
+                        <i *ngIf="author['corresponding_author']" class="bi bi-envelope-check-fill"
+                            title="Corresponding Author"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Biocurators -->
+    <!-- <div class="row mb-2" *ngIf="descriptionObj['authors'] && descriptionObj['authors'][0]">
+        <strong class="col-auto">Biocurated by</strong>
+        <div class="col-auto m-0 p-0 me-3" *ngFor="let author of descriptionObj['authors']">
+            <a *ngIf="author['role'] === 'biocurator'" href="https://orcid.org/{{author['orcid_id']}}" target="_blank"
+                style="white-space: nowrap">{{author['name']}}</a>
+        </div>
+    </div> -->
+
+    <!-- Expression organism -->
+    <div class="row mb-2" *ngIf="descriptionObj['expression_organism']">
+        <div class="col">
+            <span>
+                <strong>Expression organism</strong>
+                <a class="badge bg-dark ms-2"
+                    href="https://identifiers.org/taxonomy:{{descriptionObj['expression_organism']}}">
+                    taxonomy:{{descriptionObj['expression_organism']}}
+                    <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+
+    <!-- Raw data -->
+    <div class="row mb-2"
+        *ngIf="descriptionObj['experimental_cross_reference'] && descriptionObj['experimental_cross_reference'][0] && descriptionObj['experimental_cross_reference'][0]['id']">
+        <div class="col">
+            <strong>Experiment's raw data</strong>
+            <span *ngFor="let currRef of descriptionObj['experimental_cross_reference']">
+                <a *ngIf="currRef['db'] !== 'bmrb'" class="badge bg-dark ms-2"
+                    href="https://identifiers.org/{{currRef['db']}}:{{currRef['id']}}" target="_blank">
+                    {{currRef['db']}}:{{currRef['id']}} <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+                <a *ngIf="currRef['db'] === 'bmrb'" class="badge bg-dark ms-2"
+                    href="https://bmrb.io/data_library/summary/index.php?bmrbId={{currRef['id']}}" target="_blank">
+                    {{currRef['db']}}:{{currRef['id']}} <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+
+
+
+    <!-- Publication -->
+    <div class="row mb-2" *ngIf="descriptionObj['publication_identifier'] || descriptionObj['publication_html'] ">
+        <div class="col-auto pr-2">
+            <strong>Publication </strong>
+        </div>
+        <div class="col">
+            <span [innerHTML]="descriptionObj['publication_html']"></span>
+            <a *ngIf="descriptionObj['publication_source'] === 'pubmed'"
+                href="https://europepmc.org/article/MED/{{descriptionObj['publication_identifier']}}" target="_blank"
+                class="badge bg-dark ms-2">
+                pubmed:{{descriptionObj['publication_identifier']}} <i class="bi bi-box-arrow-up-right"></i>
+            </a>
+            <a *ngIf="descriptionObj['publication_source'] === 'doi'"
+                href="https://doi.org/{{descriptionObj['publication_identifier']}}" target="_blank"
+                class="badge bg-dark ms-2">
+                doi:{{descriptionObj['publication_identifier']}} <i class="bi bi-box-arrow-up-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <!-- Procedure details -->
+    <div *ngIf="(descriptionObj['experimental_procedure'] && descriptionObj['experimental_procedure'].length > 0) || (descriptionObj['ontology_terms'] && descriptionObj['ontology_terms'].length > 0)">
+        <p class="mb-1">
+            <strong>Experimental procedure</strong>
+            <ng-container *ngFor="let currTerm of descriptionObj['ontology_terms']">
+                <span class="badge bg-experiment ms-2"
+                    *ngIf="currTerm['namespace'] === 'Measurement method'">
+                    {{currTerm['name']}}
+                </span>
+            </ng-container>
+            <!-- <span class="badge bg-experiment ms-2"
+                *ngFor="let currTerm of descriptionObj['term_experimental_procedure']">
+                {{currTerm['name']}}
+            </span> -->
+        </p>
+        <ng-container>
+            <p id="textExperimentalProcedure" class="collapse-min text-justify small mb-0">
+                {{descriptionObj['experimental_procedure']}}
+            </p>
+            <!-- <span id="buttonExperimentalProcedure" class="text-primary" style="cursor: pointer;"
+                (click)="toogleCollapse('textExperimentalProcedure')">Read more</span> -->
+        </ng-container>
+    </div>
+
+    <div
+        *ngIf="(descriptionObj['structural_ensembles_calculation'] && descriptionObj['structural_ensembles_calculation'].length > 0) || (descriptionObj['ontology_terms'] && descriptionObj['ontology_terms'].length > 0)">
+        <p class="my-1">
+            <strong>Structural ensemble calculation</strong>
+            <ng-container *ngFor="let currTerm of descriptionObj['ontology_terms']">
+                <span class="badge bg-ensemble ms-2"
+                    *ngIf="currTerm['namespace'] === 'Ensemble generation method'">
+                    {{currTerm['name']}}
+                </span>
+            </ng-container>
+            <!-- <span class="badge bg-ensemble ms-2"
+                *ngFor="let currTerm of descriptionObj['term_structural_ensembles_calculation']">
+                {{currTerm['name']}}
+            </span> -->
+        </p>
+        <ng-container>
+            <p id="textStructuralEnsembles" class="collapse-min text-justify small mb-0">
+                {{descriptionObj['structural_ensembles_calculation']}}</p>
+            <!-- <span id="buttonStructuralEnsembles" class="text-primary" style="cursor: pointer;"
+                (click)="toogleCollapse('textStructuralEnsembles')">
+                Read more
+            </span> -->
+        </ng-container>
+
+    </div>
+
+    <div *ngIf="(descriptionObj['md_calculation'] && descriptionObj['md_calculation'].length > 0) || (descriptionObj['ontology_terms'] && descriptionObj['ontology_terms'].length > 0)">
+        <p class="my-1">
+            <strong>Molecular Dynamics</strong>
+            <ng-container *ngFor="let currTerm of descriptionObj['ontology_terms']">
+                <span class="badge bg-md ms-2"
+                    *ngIf="currTerm['namespace'] === 'Molecular dynamics'">
+                    {{currTerm['name']}}
+                </span>
+            </ng-container>
+            <!-- <span class="badge bg-md ms-2" *ngFor="let currTerm of descriptionObj['term_md_calculation']">
+                {{currTerm['name']}}
+            </span> -->
+        </p>
+        <ng-container>
+            <p id="textMolecularDynamics" class="collapse-min text-justify small mb-0">
+                {{descriptionObj['md_calculation']}}
+            </p>
+            <!-- <span id="buttonMolecularDynamics" class="text-primary" style="cursor: pointer;"
+                (click)="toogleCollapse('textMolecularDynamics')">
+                Read more
+            </span> -->
+        </ng-container>
+    </div>
+
+    <!-- Cross Refs -->
+    <div class="row mb-2 mt-2"
+        *ngIf="descriptionObj['entry_cross_reference'] && descriptionObj['entry_cross_reference'][0] && descriptionObj['entry_cross_reference'][0]['id']">
+        <div class="col">
+            <strong>Cross reference</strong> <span *ngFor="let currRef of descriptionObj['entry_cross_reference']">
+                <a *ngIf="currRef['db'] !== 'disprot'" class="badge bg-dark ms-2"
+                    href="https://identifiers.org/{{currRef['db']}}:{{currRef['id']}}" target="_blank">
+                    {{currRef['db']}}:{{currRef['id']}} <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+                <a *ngIf="currRef['db'] === 'disprot'" class="badge bg-dark ms-2"
+                    href="https://disprot.org/{{currRef['id']}}" target="_blank">
+                    {{currRef['db']}}:{{currRef['id']}} <i class="bi bi-box-arrow-up-right"></i>
+                </a>
+            </span>
+        </div>
+    </div>
+
+</div>

@@ -1,1 +1,88 @@
-<p>browse works!</p>
+<div class="container-xl">
+
+    <!-- Search bar -->
+    <div class="row mb-2">
+        <div class="input-group mb-3">
+            <select class="form-select border-primary">
+                <option value="free_text">Free text</option>
+                <option value="entry_id">Entry identifier</option>
+                <option value="acc">UniProt ACC</option>
+                <option value="term">Experimental tag</option>
+                <option value="data_owner">Data owner</option>
+                <option value="curator_name">Biocurator name</option>
+                <option value="protein_name">Protein name</option>
+                <option value="publication_identifier">Publication id</option>
+                <option value="publication_html">Publication title </option>
+                <option value="cross_ref">Cross-reference (PDB, BMRB, SASBDB)</option>
+            </select>
+            <input type="text" class="form-control w-50  border-primary" placeholder="e.g.: p53">
+            <button type="button" class="btn btn-success">Add</button>
+            <button type="button" class="btn btn-danger">Remove</button>
+        </div>
+    </div>
+
+    <!-- Content -->
+    <div class="row mb-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">UniProt ACC</th>
+                    <th scope="col">PED identifier</th>
+                    <th scope="col">Deposition title</th>
+                    <th scope="col">Experimental tags</th>
+                    <th scope="col">Number of ensembles</th>
+                    <th scope="col">Number of conformers</th>
+                    <th scope="col">Coverage (to UniProt)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a class="badge bg-primary" href="/entries/PED00001/">
+                            PED00001<i class="bi bi-link-45deg"></i>
+                        </a>
+                    </td>
+                    <td>
+                        <a class="badge bg-primary" href="/entries/PED00001/">
+                            PED00001<i class="bi bi-link-45deg"></i>
+                        </a>
+                    </td>
+                    <td>
+                        Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76,
+                        Ser80
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        1
+                    </td>
+                    <td>
+                        3
+                    </td>
+                    <td>
+
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Pagination -->
+    <div class="row mb-2">
+        <div class="col">
+            <pagination [totalItems]="1" [boundaryLinks]="true"></pagination>
+        </div>
+        <div class="col-auto">
+            Selected items <span class="badge bg-primary">1</span>
+        </div>
+        <div class="col-auto">
+            <p>Show
+                <span class="badge bg-primary ms-2">10</span>
+                <span class="badge bg-primary ms-2">20</span>
+                <span class="badge bg-primary ms-2">50</span>
+              </p>
+        </div>
+    </div>
+
+</div>

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FormDescriptionComponent } from './form-description.component';
+import { ProteinViewComponent } from './protein-view.component';
 
-describe('FormDescriptionComponent', () => {
-  let component: FormDescriptionComponent;
-  let fixture: ComponentFixture<FormDescriptionComponent>;
+describe('ProteinViewComponent', () => {
+  let component: ProteinViewComponent;
+  let fixture: ComponentFixture<ProteinViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FormDescriptionComponent ]
+      declarations: [ ProteinViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FormDescriptionComponent);
+    fixture = TestBed.createComponent(ProteinViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import { Dropdown, Collapse } from 'bootstrap';
-import { AuthService} from '../../services/auth.service';
 
 @Component({
   selector: 'app-navbar',
@@ -14,12 +13,10 @@ export class NavbarComponent implements OnInit {
   currentUser = {};
   previousPosition = 0;
 
-  constructor(private router: Router, private authService: AuthService) {
+  constructor(private router: Router) {
   }
 
   ngOnInit(): void {
-    this.authService.authentication();
-    this.authService.profileObj.subscribe(profileObj => this.profileObj = profileObj);
   }
 
   closeMenu(): void {

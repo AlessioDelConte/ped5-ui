@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
 import { InternalService } from 'src/app/services/internal.service';
 
@@ -12,12 +13,16 @@ export class EntryViewComponent implements OnInit {
   public entryID;
   public entryData;
 
-  constructor(private internalService: InternalService,
-    private route: ActivatedRoute) { }
-
-  ngOnInit(): void { 
+  constructor(private titleService: Title, private internalService: InternalService,
+    private route: ActivatedRoute) {
     this.entryID = this.route.snapshot.paramMap.get('identifier');
-    this.internalService.getPublicEntry(this.entryID).subscribe( data => {
+    this.titleService.setTitle(this.entryID);
+  }
+
+  ngOnInit(): void {
+
+    this.internalService.getPublicEntry(this.entryID).subscribe(data => {
+      console.log(data)
       this.entryData = data;
     })
   }

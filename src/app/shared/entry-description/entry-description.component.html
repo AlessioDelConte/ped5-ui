@@ -1,8 +1,8 @@
 <div class="container-xl" *ngIf="descriptionObj">
 
-    <h3 class="mb-3" *ngIf="descriptionObj['entry_id'] || descriptionObj['title']">
-        <span *ngIf="descriptionObj['entry_id']" class="badge bg-primary">
-            {{descriptionObj['entry_id']}}
+    <h3 class="mb-3" *ngIf="entryId || descriptionObj['title']">
+        <span *ngIf="entryId" class="badge bg-primary me-1">
+            {{entryId}}
         </span>
         {{descriptionObj['title']}}
     </h3>

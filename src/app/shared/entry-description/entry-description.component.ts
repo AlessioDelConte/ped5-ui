@@ -8,6 +8,7 @@ import { Collapse } from 'node_modules/bootstrap/dist/js/bootstrap.esm.min.js';
 })
 export class EntryDescriptionComponent implements OnInit {
 
+  @Input() entryId: string;
   @Input() descriptionObj: object;
 
   constructor() { }

@@ -1,5 +1,7 @@
 <div class="container-xl">
-    <app-entry-description *ngIf="entryData && entryData['description']" [descriptionObj]="entryData['description']">
+    <app-entry-description *ngIf="entryData && entryData['description']" [entryId]="entryData['entry_id']"
+        [descriptionObj]="entryData['description']">
     </app-entry-description>
+    <app-entry-tab-section [entryData]="entryData"></app-entry-tab-section>
 
 </div>

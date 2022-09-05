@@ -19,6 +19,11 @@ import { AboutComponent } from './views/about/about.component';
 import { EntryViewComponent } from './views/entry-view/entry-view.component';
 import { ProteinViewComponent } from './views/protein-view/protein-view.component';
 import { EntryDescriptionComponent } from './shared/entry-description/entry-description.component';
+import { EntryTabSectionComponent } from './shared/entry-tab-section/entry-tab-section.component';
+import { EntryConstructSectionComponent } from './shared/entry-construct-section/entry-construct-section.component';
+import { FvDraftAlignmentComponent } from './shared/fv-draft-alignment/fv-draft-alignment.component';
+import { EntryEnsemblesSectionComponent } from './shared/entry-ensembles-section/entry-ensembles-section.component';
+import { EntryDsspSectionComponent } from './shared/entry-dssp-section/entry-dssp-section.component';
 
 
 
@@ -53,7 +58,12 @@ const appRoutes: Routes = [
     EntryViewComponent,
     ProteinViewComponent,
     EntryDescriptionComponent,
-    BrowseComponent
+    BrowseComponent,
+    EntryTabSectionComponent,
+    EntryConstructSectionComponent,
+    FvDraftAlignmentComponent,
+    EntryEnsemblesSectionComponent,
+    EntryDsspSectionComponent
   ],
   imports: [
     RouterModule.forRoot(

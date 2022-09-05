@@ -1,0 +1,12 @@
+<div class="row mx-2 mb-4 p-2" *ngFor="let chain of constructData; let chainIdx = index;">
+    <div class="col">
+        <div class="row">
+            <p><strong>Chain name:</strong> {{chain.chain_name}}</p>
+        </div>
+        <div class="row mb-3">
+            <div class="col">
+                <app-fv-draft-alignment [fvId]="chain.chain_name" [chainData]="chain"></app-fv-draft-alignment>
+            </div>
+        </div>
+    </div>
+</div>

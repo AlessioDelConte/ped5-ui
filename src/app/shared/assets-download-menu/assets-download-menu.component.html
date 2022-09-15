@@ -1,0 +1,393 @@
+<div class="row">
+    <div class="col-auto mx-2">
+        <ul class="list-unstyled">
+            <li *ngFor="let category of menuData;">
+                <strong>{{category["category"]}}</strong>
+                <ul class="list-unstyled ms-3">
+                    <li *ngFor="let asset of category.assets | keyvalue">
+                        <a class="link-primary" [ngClass]="{'fw-bold': asset.key === selectedAsset}"
+                            style="cursor: pointer;" (click)="changeSelectedAsset(asset.key)">{{asset.key}}</a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+
+    </div>
+
+    <div class="col ms-2">
+        <h2>{{selectedAsset}}</h2>
+
+        <ng-container *ngIf="selectedAsset === 'PDB'">
+            <div class="row justify-content-center  align-items-center">
+                <div class="row ms-1 mb-2">
+                    Download the processed PDB structure used to analyze this ensemble.
+                </div>
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2" href="{{baseAssetURL + '/ensemble-pdb/'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>PDB
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'DSSP Consensus'">
+            <div class="row ms-1 mb-2">
+                Detailed DSSP output. The DSSP codes for secondary structure used here are:
+            </div>
+            <div class="row mx-4 mb-2">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">Structure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">H</th>
+                                <td>α-helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">B</th>
+                                <td>Isolated beta-bridge residue</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">E</th>
+                                <td>Strand</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">G</th>
+                                <td>3-10 helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">I</th>
+                                <td>π-helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">T</th>
+                                <td>Turn</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">S</th>
+                                <td>Bend</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">N</th>
+                                <td>No structure</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">R</th>
+                                <td>Right-handed helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">L</th>
+                                <td>Left-handed helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ASA</th>
+                                <td>Accessible surface area according to Sander and Rost 1994</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">phi</th>
+                                <td>Torsion angle around the N-Cα bond</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">psi</th>
+                                <td>Torsion angle around the Cα-C bond</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center  align-items-center">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dssp-consensus/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dssp-consensus/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'DSSP Data'">
+            <div class="row ms-1 mb-2">
+                DSSP output per residue. The DSSP codes for secondary structure used here are:
+            </div>
+            <div class="row mx-4 mb-2">
+                <div class="col">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col">Code</th>
+                                <th scope="col">Structure</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">H</th>
+                                <td>α-helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">B</th>
+                                <td>Isolated beta-bridge residue</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">E</th>
+                                <td>Strand</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">G</th>
+                                <td>3-10 helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">I</th>
+                                <td>π-helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">T</th>
+                                <td>Turn</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">S</th>
+                                <td>Bend</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">N</th>
+                                <td>No structure</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">R</th>
+                                <td>Right-handed helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">L</th>
+                                <td>Left-handed helix</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">ASA</th>
+                                <td>Accessible surface area according to Sander and Rost 1994</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">phi</th>
+                                <td>Torsion angle around the N-Cα bond</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">psi</th>
+                                <td>Torsion angle around the Cα-C bond</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row justify-content-center  align-items-center">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dssp-data/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dssp-data/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+
+        <ng-container *ngIf="selectedAsset === 'C-beta Deviations'">
+            <div class="row mx-1 mb-4">
+                Compute dihedral N—CA—CBideal and the deviation from the ideal position. It is an assessment of protein
+                backbone geometry. <br><br>
+                <i>Lovell, S. C., Davis, I. W., Arendall, W. B., de Bakker, P. I., Word, J. M., Prisant, M. G.,
+                    Richardson, J. S., & Richardson, D. C. (2003). Structure validation by Cα geometry: φ, ψ and Cβ
+                    deviation. Proteins: Structure, Function, and Bioinformatics, 50(3), 437-450.</i>
+            </div>
+            <div class="row justify-content-center  align-items-center">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/cb-dev/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/cb-dev/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'Clash Analysis'">
+            <div class="row mx-1 mb-4">
+                “Clash” analysis, steric overlaps of 0.4 Å or greater between non-bonded atoms.<br><br>
+                <i>Chen, V. B., Arendall, W. B., Headd, J. J., Keedy, D. A., Immormino, R. M., Kapral, G. J., Murray, L.
+                    W., Richardson, J. S., & Richardson, D. C. (2009). MolProbity: all-atom structure validation for
+                    macromolecular crystallography. Acta Crystallographica Section D: Biological Crystallography, 66(1),
+                    12-21.</i>
+            </div>
+            <div class="row justify-content-center  align-items-center">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/clash/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/clash/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'Geometry Bonds'">
+            <div class="row mx-1 mb-4">
+                <i>Engh, R. A., & Huber, R. (2001). Structure quality and target parameters. In International Tables for
+                    Crystallography Volume F: Crystallography of biological macromolecules (pp. 382-392).</i>
+            </div>
+            <div class="row mx-1 mb-2">
+                Residue angles (C-CA-CB, CA-C-N, CA-C-O,..) per residue.
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/geom-angles/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/geom-angles/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+            <div class="row mx-1 mb-2">
+                Bond angle (C–O, CA–C, CA–CB, N–CA, C–N,..) per residue.
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/geom-bonds/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/geom-bonds/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+            <div class="row mx-1 mb-2">
+                CA and CB value and sigma.
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/geom-carbons/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/geom-carbons/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'Ramachandran'">
+            <div class="row mx-1 mb-4">
+                Ramachandran phi/psi and evaluation per residue. If the combination of phi and psi is unusual, the
+                residue is considered an outlier.<br><br>
+                <i>Lovell, S. C., Davis, I. W., Arendall, W. B., de Bakker, P. I., Word, J. M., Prisant, M. G.,
+                    Richardson, J. S., & Richardson, D. C. (2003). Structure validation by Cα geometry: φ, ψ and Cβ
+                    deviation. Proteins: Structure, Function, and Bioinformatics, 50(3), 437-450.</i>
+            </div>
+            <div class="row justify-content-center  align-items-center">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/ramachandran/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/ramachandran/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'Rotamer'">
+            <div class="row mx-1 mb-4">
+                Protein sidechain geometry per residue with evaluation.<br><br>
+                <i>Richardson, J. S. & Headd, J. J. (2012). Fitting tip: Rotamer correction, with backrubs.
+                    Computational Crystallography Newsletter, 3, 29-30.</i>
+            </div>
+            <div class="row justify-content-center  align-items-center">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/rotamer/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/rotamer/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'Gyration'">
+            <div class="row mx-1 mb-2">
+                Radius of gyration (in nm) per chain
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/gyration-chains/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/gyration-chains/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+            <div class="row mx-1 mb-2">
+                Radius of gyration (in nm) per model.
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/gyration-global/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/gyration-global/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+        <ng-container *ngIf="selectedAsset === 'Maximum Diameter'">
+            <div class="row mx-1 mb-2">
+                Measure the maximum diameter of the chain in a single model in nm.
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dmax-data/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dmax-data/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+            <div class="row mx-1 mb-2">
+                Measure of the maximum diameter of the model in nm.
+            </div>
+            <div class="row justify-content-center align-items-center mb-4">
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dmax-global/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2"
+                    href="{{baseAssetURL + '/dmax-global/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>CSV
+                </a>
+            </div>
+        </ng-container>
+
+    </div>
+</div>

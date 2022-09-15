@@ -25,6 +25,7 @@ import { FvDraftAlignmentComponent } from './shared/fv-draft-alignment/fv-draft-
 import { EntryEnsemblesSectionComponent } from './shared/entry-ensembles-section/entry-ensembles-section.component';
 import { EntryDsspSectionComponent } from './shared/entry-dssp-section/entry-dssp-section.component';
 import { EnsembleInfoComponent } from './shared/ensemble-info/ensemble-info.component';
+import { AssetsDownloadMenuComponent } from './shared/assets-download-menu/assets-download-menu.component';
 
 
 
@@ -36,6 +37,10 @@ const appRoutes: Routes = [
   {
     path: 'browse',
     component: BrowseComponent
+  },
+  {
+    path: 'about',
+    component: AboutComponent
   },
   {path: 'api', component: SwaggerUiComponent},
   {path: 'api-form', component: SwaggerInternalComponent},
@@ -65,7 +70,8 @@ const appRoutes: Routes = [
     FvDraftAlignmentComponent,
     EntryEnsemblesSectionComponent,
     EntryDsspSectionComponent,
-    EnsembleInfoComponent
+    EnsembleInfoComponent,
+    AssetsDownloadMenuComponent
   ],
   imports: [
     RouterModule.forRoot(

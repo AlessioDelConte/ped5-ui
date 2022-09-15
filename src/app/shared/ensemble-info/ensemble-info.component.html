@@ -1,24 +1,47 @@
-<div class="mx-2 my-3">
-    <div class="row">
-        <div class="col-md">
-            <p>
-                <strong>Ensemble ID</strong> {{ensembleData['ensemble_id']}}
-            </p>
+<!-- Modal -->
+<ng-container *ngIf="ensembleData">
+    <div class="modal fade" [attr.id]=" 'downloadModal_' + ensembleData['ensemble_id'] " tabindex="-1"
+        aria-labelledby="downloadModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="downloadModalLabel">Ensemble {{ensembleData['ensemble_id']}} assets</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <app-assets-download-menu [entryId]="entryId" [ensembleId]="ensembleData['ensemble_id']">
+                    </app-assets-download-menu>
+                </div>
+            </div>
         </div>
-        <div class="col-md">
-            <p>
-                <strong class="pl-5 me-2">Number of models </strong> {{ensembleData['models']}}
-            </p>
+    </div>
+</ng-container>
+
+<!-- Main Content -->
+<div class="mx-2">
+    <div class="row mb-2 align-items-center">
+        <div class="col-auto">
+            <strong>Ensemble ID</strong> {{ensembleData['ensemble_id']}}
         </div>
-        <div class="col-auto me-0">
+        <div class="col-auto">
+            <strong class="pl-5 me-2">Number of models </strong> {{ensembleData['models']}}
+        </div>
+        <div class="col-auto">
             <span *ngFor="let currChain of chainNames" class="badge bg-secondary me-1"
                 [class.bg-primary]="currChain === currChainName.value"
                 [class.bg-hover]="currChain !== currChainName.value" (click)="currChainName.next(currChain)">
                 Chain: {{currChain}}
             </span>
         </div>
+        <div class="col" style="text-align:right;">
+            <button type="button" class="btn btn-sm btn-primary" data-bs-toggle="modal"
+                [attr.data-bs-target]=" '#downloadModal_' + ensembleData['ensemble_id'] ">
+                Download Assets
+            </button>
+        </div>
+
     </div>
-    <div class="row mb-2">
+    <div class="row mb-2 align-items-center">
         <div class="col-md"><span>
                 <strong>Secondary structure entropy </strong>
                 {{currStatData['entropy_dssp_mean'] | number:'1.2-2'}}</span></div>

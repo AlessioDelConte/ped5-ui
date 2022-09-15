@@ -7,6 +7,7 @@ import {Observable} from 'rxjs';
     providedIn: 'root'
 })
 export class InternalService {
+    public ws = environment.ws;
 
     constructor(private http: HttpClient) {
     }

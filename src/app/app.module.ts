@@ -24,6 +24,7 @@ import { EntryConstructSectionComponent } from './shared/entry-construct-section
 import { FvDraftAlignmentComponent } from './shared/fv-draft-alignment/fv-draft-alignment.component';
 import { EntryEnsemblesSectionComponent } from './shared/entry-ensembles-section/entry-ensembles-section.component';
 import { EntryDsspSectionComponent } from './shared/entry-dssp-section/entry-dssp-section.component';
+import { EnsembleInfoComponent } from './shared/ensemble-info/ensemble-info.component';
 
 
 
@@ -63,7 +64,8 @@ const appRoutes: Routes = [
     EntryConstructSectionComponent,
     FvDraftAlignmentComponent,
     EntryEnsemblesSectionComponent,
-    EntryDsspSectionComponent
+    EntryDsspSectionComponent,
+    EnsembleInfoComponent
   ],
   imports: [
     RouterModule.forRoot(

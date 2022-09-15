@@ -1,5 +1,3 @@
 <div class="row mx-2 mb-4 p-0 card" *ngFor="let ens of entryData['ensembles']">
-    <div class="col">
-        {{ens.ensemble_id}}
-    </div>
+    <app-ensemble-info [entryId]="entryData['entry_id']" [ensembleData]="ens"></app-ensemble-info>
 </div>

@@ -1,0 +1,45 @@
+<div class="mx-2 my-3">
+    <div class="row">
+        <div class="col-md">
+            <p>
+                <strong>Ensemble ID</strong> {{ensembleData['ensemble_id']}}
+            </p>
+        </div>
+        <div class="col-md">
+            <p>
+                <strong class="pl-5 me-2">Number of models </strong> {{ensembleData['models']}}
+            </p>
+        </div>
+        <div class="col-auto me-0">
+            <span *ngFor="let currChain of chainNames" class="badge bg-secondary me-1"
+                [class.bg-primary]="currChain === currChainName.value"
+                [class.bg-hover]="currChain !== currChainName.value" (click)="currChainName.next(currChain)">
+                Chain: {{currChain}}
+            </span>
+        </div>
+    </div>
+    <div class="row mb-2">
+        <div class="col-md"><span>
+                <strong>Secondary structure entropy </strong>
+                {{currStatData['entropy_dssp_mean'] | number:'1.2-2'}}</span></div>
+        <div class="col-md"><span>
+                <strong>Relative solvent accessibility </strong>
+                {{currStatData['relative_asa_mean'] | number:'1.2-2'}} </span></div>
+        <div class="col-md"><span>
+                <strong>Radius of gyration </strong>
+                {{currStatData['rg_mean'] | number:'1.2-2'}} </span></div>
+        <div class="col-lg-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-lg-4">
+            <div id="molstar{{ensembleData['ensemble_id']}}" style="overflow: hidden">
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <img src="{{currLinks.ramachandran_plot}}" width="100%">
+        </div>
+        <div class="col-lg-4">
+            <img src="{{currLinks.rg_boxplot}}" width="100%">
+        </div>
+    </div>
+</div>

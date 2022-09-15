@@ -17,7 +17,7 @@ export class InternalService {
     }
 
     getEntry(params): Observable<any> {
-        const url = environment.ws + 'entries';
+        const url = environment.ws + 'entries/';
         return this.http.get(url, {
             responseType: 'json',
             params: params
@@ -25,7 +25,7 @@ export class InternalService {
     }
 
     getPublicEntry(entryIdentifier): Observable<any> {
-        const url = environment.ws + 'entries/' + entryIdentifier;
+        const url = environment.ws + 'entries/' + entryIdentifier + "/";
         return this.http.get(url, {
             responseType: 'json'
         });

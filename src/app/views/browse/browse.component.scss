@@ -1,0 +1,13 @@
+@import 'variables';
+
+.my-pagination::ng-deep .pagination-page.page-item .page-link {
+    z-index: 1;
+    color: $primary;
+}
+
+.my-pagination::ng-deep .pagination-page.page-item.active .page-link {
+    z-index: 1;
+    color: #FFFFFF;
+    background-color:$primary !important;
+    border-color: $primary;
+}

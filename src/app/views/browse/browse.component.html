@@ -26,22 +26,18 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th scope="col">UniProt ACC</th>
                     <th scope="col">PED identifier</th>
                     <th scope="col">Deposition title</th>
+
                     <th scope="col">Experimental tags</th>
                     <th scope="col">Number of ensembles</th>
                     <th scope="col">Number of conformers</th>
-                    <th scope="col">Coverage (to UniProt)</th>
+                    <th scope="col">UniProt ACC</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>
-                        <a class="badge bg-primary" href="/proteins/uniprot/P38634/">
-                            P38634<i class="bi bi-link-45deg"></i>
-                        </a>
-                    </td>
+
                     <td>
                         <a class="badge bg-primary" href="/entries/PED00001/">
                             PED00001<i class="bi bi-link-45deg"></i>
@@ -51,17 +47,110 @@
                         Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76,
                         Ser80
                     </td>
-                    <td>
 
-                    </td>
+
                     <td>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            NMR<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            RDC<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            TraDES<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            CNS<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            ENSEMBLE<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            NMR<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            RDC<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            TraDES<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            CNS<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            ENSEMBLE<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            NMR<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            RDC<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            TraDES<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            CNS<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            ENSEMBLE<i class="bi bi-search ms-1"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">
                         1
                     </td>
-                    <td>
+                    <td class="text-center">
                         3
                     </td>
-                    <td>
+                    <td class="text-center">
+                        <a class="badge bg-primary" href="/proteins/uniprot/P38634/">
+                            P38634<i class="bi bi-link-45deg"></i>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
 
+                    <td>
+                        <a class="badge bg-primary" href="/entries/PED00006/">
+                            PED00006<i class="bi bi-link-45deg"></i>
+                        </a>
+                    </td>
+                    <td>
+                        Structural ensemble of hybrid beta synuclein G25E (1-72); alpha synuclein (73-83); beta
+                        synuclein (73-134)
+                    </td>
+
+                    <td>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            NMR<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-experiment me-1" href="/entries/PED00001/">
+                            RDC<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            TraDES<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            CNS<i class="bi bi-search ms-1"></i>
+                        </a>
+                        <a class="badge bg-ensemble me-1" href="/entries/PED00001/">
+                            ENSEMBLE<i class="bi bi-search ms-1"></i>
+                        </a>
+                    </td>
+                    <td class="text-center">
+                        1
+                    </td>
+                    <td class="text-center">
+                        576
+                    </td>
+
+                    <td class="text-center">
+                        <a class="badge bg-primary" href="/proteins/uniprot/P38634/">
+                            Q16143<i class="bi bi-link-45deg"></i>
+                        </a>
+                        <a class="badge bg-primary" href="/proteins/uniprot/P38634/">
+                            P37840<i class="bi bi-link-45deg"></i>
+                        </a>
                     </td>
                 </tr>
             </tbody>
@@ -71,7 +160,7 @@
     <!-- Pagination -->
     <div class="row mb-2">
         <div class="col">
-            <pagination [totalItems]="1" [boundaryLinks]="true"></pagination>
+            <pagination [totalItems]="30" [boundaryLinks]="true" class="my-pagination"></pagination>
         </div>
         <div class="col-auto">
             Selected items <span class="badge bg-primary">1</span>
@@ -81,7 +170,7 @@
                 <span class="badge bg-primary ms-2">10</span>
                 <span class="badge bg-primary ms-2">20</span>
                 <span class="badge bg-primary ms-2">50</span>
-              </p>
+            </p>
         </div>
     </div>
 

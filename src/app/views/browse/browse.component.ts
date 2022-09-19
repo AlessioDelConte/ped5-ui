@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
+import { PageChangedEvent } from 'ngx-bootstrap/pagination';
 import { InternalService } from 'src/app/services/internal.service';
 
 @Component({
@@ -9,31 +11,110 @@ import { InternalService } from 'src/app/services/internal.service';
   styleUrls: ['./browse.component.scss']
 })
 export class BrowseComponent implements OnInit {
+  public searchForm: FormGroup = new FormGroup({
+    params: new FormArray([])
+  });
 
-  public resultData = [
-    {
-      "entry_id": "PED00001",
-      "description": {
-        "title": "Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76, Ser80",
-        "ontology_terms": [{ "name": "NMR", "namespace": "Measurement method"}]
-      },
-      "construct_chains": [{ "chain_name": "A", "fragments": [{ "description": "tag", "source_sequence": "GS", "start_position": 1, "end_position": 2 }, { "description": "Protein SIC1", "source_sequence": "MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRTLFQFESHDNGTVREEQEPLGRVNRILFPTQQNVDIDAAEEEEEGEVLLPPSRPTSARQLHLSLERDEFDQTHRKKIIKDVPGTPSDKVITFELAKNWNNNSPKNDARSQESEDEEDIIINPVRVGKNPFASDELVTQEIRNERKRAMLRENPDIEDVITYVNKKGEVVEKRRLTDEEKRRFKPKALFQSRDQEH", "start_position": 1, "end_position": 90, "uniprot_acc": "P38634" }], "alignment": { "pdb_sequence": "GSMTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT", "fragments_sequence": "GSMTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT" }, "fragments_stats": [{ "sequence": "GS", "uniprot": null, "length_total_uniprot": 2, "length_total_pdb": 92, "length_frag_total_uniprot": 2, "start_position_alig": 0, "end_position_alig": 1, "start_position_pdb": -1, "end_position_pdb": 0, "length_frag_total_pdb": 2, "length_frag_nogaps_alig": 2, "cov_total_frag_pdb": 0.021739130434782608, "cov_nogaps_frag_pdb": 0.021739130434782608, "cov_total_frag_unip": 1, "cov_nogaps_frag_unip": 1 }, { "sequence": "MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT", "uniprot": "P38634", "length_total_uniprot": 284, "length_total_pdb": 92, "length_frag_total_uniprot": 90, "start_position_alig": 2, "end_position_alig": 91, "start_position_pdb": 1, "end_position_pdb": 90, "length_frag_total_pdb": 90, "length_frag_nogaps_alig": 90, "cov_total_frag_pdb": 0.9782608695652174, "cov_nogaps_frag_pdb": 0.9782608695652174, "cov_total_frag_unip": 0.31690140845070425, "cov_nogaps_frag_unip": 0.31690140845070425 }], "missings": [], "mutations": [], "modifications": [{ "chain": "A", "fragment": 2, "start_position_unip": 5, "uniprot": "P38634", "start_position_alig": 6, "start_position_pdb": 5, "aa": "T", "modification_code": "TPO" }, { "chain": "A", "fragment": 2, "start_position_unip": 33, "uniprot": "P38634", "start_position_alig": 34, "start_position_pdb": 33, "aa": "T", "modification_code": "TPO" }, { "chain": "A", "fragment": 2, "start_position_unip": 45, "uniprot": "P38634", "start_position_alig": 46, "start_position_pdb": 45, "aa": "T", "modification_code": "TPO" }, { "chain": "A", "fragment": 2, "start_position_unip": 69, "uniprot": "P38634", "start_position_alig": 70, "start_position_pdb": 69, "aa": "S", "modification_code": "SEP" }, { "chain": "A", "fragment": 2, "start_position_unip": 76, "uniprot": "P38634", "start_position_alig": 77, "start_position_pdb": 76, "aa": "S", "modification_code": "SEP" }, { "chain": "A", "fragment": 2, "start_position_unip": 80, "uniprot": "P38634", "start_position_alig": 81, "start_position_pdb": 80, "aa": "S", "modification_code": "SEP" }] }], 
-      "ensembles": [{ "ensemble_id": "e001", "models": 11, "chains": [{ "chain_name": "A", "rg_mean": 26.7439005864, "entropy_dssp_mean": 0.4023964281, "relative_asa_mean": 0.6879983572 }] }, { "ensemble_id": "e002", "models": 10, "chains": [{ "chain_name": "A", "rg_mean": 26.714687005, "entropy_dssp_mean": 0.3969717634, "relative_asa_mean": 0.7016040011 }] }, { "ensemble_id": "e003", "models": 11, "chains": [{ "chain_name": "A", "rg_mean": 28.1516697297, "entropy_dssp_mean": 0.4419606019, "relative_asa_mean": 0.7005979796 }] }],
-      "version": "v1"
-    }
-  ];
-  dummy = 'PED00001'
+  public resultData = [];
+  public itemsCount = 0;
+  public itemsPerPage = 20;
+  public curPageNum = 1;
 
   constructor(private titleService: Title, private internalService: InternalService,
-    public route: ActivatedRoute,
+    public route: ActivatedRoute, private fb: FormBuilder,
     public router: Router) {
     this.titleService.setTitle("PED - Browse");
   }
 
+  get searchParams() {
+    return this.searchForm.get("params") as FormArray;
+  }
+
   ngOnInit(): void {
-    this.internalService.searchEntries({}).subscribe(data => {
-      this.resultData = data;
+    this.addSearchField("free_text");
+
+    // Init entry search result
+    this.getEntries(0);
+
+    // this.updateQueryParams();
+    this.searchParams.valueChanges.subscribe(formData => {
+      let search_params = {};
+      formData.forEach(currItem => {
+        if (currItem.key) {
+          if (!search_params.hasOwnProperty(currItem.area)) {
+            search_params[currItem.area] = [];
+          }
+          search_params[currItem.area].push(currItem.key);
+        }
+      });
+      this.getEntries(0, search_params);
     })
   }
 
+  updateQueryParams() {
+    this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: {
+          limit: this.itemsPerPage,
+          page: this.curPageNum
+        }
+      });
+  }
+
+  addSearchField(area, key = null) {
+    this.searchParams.push(this.fb.group({
+      area: area,
+      key: key ? key: null
+    }));
+  }
+
+  removeSearchField(index) {
+    this.searchParams.removeAt(index);
+    if (this.searchParams.length === 0) {
+      this.addSearchField('free_text');
+    }
+  }
+
+  pageChanged(event: PageChangedEvent): void {
+    this.curPageNum = event.page;
+    this.getEntries((this.curPageNum - 1) * this.itemsPerPage)
+  }
+
+  getEntries(offset, params = {}) {
+    this.internalService.searchEntries({
+      offset: offset,
+      limit: this.itemsPerPage,
+      ...params
+    }).subscribe(responseData => {
+      console.log(responseData)
+      this.itemsCount = responseData["count"]
+      this.resultData = responseData["result"]
+    });
+  }
+
+  getProteinACCs(consructChains) {
+    let proteins = new Set();
+    for (let i = 0; i < consructChains.length; i++) {
+      const chain = consructChains[i];
+      for (let j = 0; j < chain["fragments"].length; j++) {
+        const fragment = chain["fragments"][j];
+        if (fragment['uniprot_acc']) proteins.add(fragment['uniprot_acc']);
+      }
+    }
+    return proteins;
+  }
+
+  getEnsNum(ensembles: Array<Object>): number {
+    return ensembles.length
+  }
+
+  getEnsConformers(ensembles: Array<Object>): number {
+    let count = 0;
+    ensembles.forEach(ens => {
+      count += ens['models'];
+    })
+    return count;
+  }
 }

@@ -35,8 +35,9 @@ export class InternalService {
     searchEntries(params): Observable<any> {
         // TODO add params to query string
         const url = environment.ws + 'entries/' /* Add query string */;
-        return this.http.get(url, {
-            responseType: 'json'
+        return this.http.get(url, { 
+            responseType: 'json',
+            params: params
         });
     }
 

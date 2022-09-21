@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProteinViewComponent } from './protein-view.component';
+import { UniprotProteinViewComponent } from './uniprot-protein-view.component';
 
-describe('ProteinViewComponent', () => {
-  let component: ProteinViewComponent;
-  let fixture: ComponentFixture<ProteinViewComponent>;
+describe('UniprotProteinViewComponent', () => {
+  let component: UniprotProteinViewComponent;
+  let fixture: ComponentFixture<UniprotProteinViewComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ ProteinViewComponent ]
+      declarations: [ UniprotProteinViewComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProteinViewComponent);
+    fixture = TestBed.createComponent(UniprotProteinViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

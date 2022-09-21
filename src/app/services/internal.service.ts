@@ -25,19 +25,25 @@ export class InternalService {
         });
     }
 
-    getPublicEntry(entryIdentifier): Observable<any> {
-        const url = environment.ws + 'entries/' + entryIdentifier + "/";
+    getPublicEntry(entryId): Observable<any> {
+        const url = environment.ws + 'entries/' + entryId + "/";
         return this.http.get(url, {
             responseType: 'json'
         });
     }
 
     searchEntries(params): Observable<any> {
-        // TODO add params to query string
         const url = environment.ws + 'entries/' /* Add query string */;
         return this.http.get(url, { 
             responseType: 'json',
             params: params
+        });
+    }
+
+    getDSSPConsensus(entryId, ensembleId, onlyFeatures=false){
+        const url = environment.ws + 'entries/' + entryId + "/ensembles/" + ensembleId + "/dssp-consensus/";
+        return this.http.get(url, {
+            responseType: 'json'
         });
     }
 

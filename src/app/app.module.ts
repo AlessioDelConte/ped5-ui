@@ -17,7 +17,6 @@ import { RecaptchaDirective } from './recaptcha.directive';
 import { BrowseComponent} from './views/browse/browse.component';
 import { AboutComponent } from './views/about/about.component';
 import { EntryViewComponent } from './views/entry-view/entry-view.component';
-import { ProteinViewComponent } from './views/protein-view/protein-view.component';
 import { EntryDescriptionComponent } from './shared/entry-description/entry-description.component';
 import { EntryTabSectionComponent } from './shared/entry-tab-section/entry-tab-section.component';
 import { EntryConstructSectionComponent } from './shared/entry-construct-section/entry-construct-section.component';
@@ -26,6 +25,8 @@ import { EntryEnsemblesSectionComponent } from './shared/entry-ensembles-section
 import { EntryDsspSectionComponent } from './shared/entry-dssp-section/entry-dssp-section.component';
 import { EnsembleInfoComponent } from './shared/ensemble-info/ensemble-info.component';
 import { AssetsDownloadMenuComponent } from './shared/assets-download-menu/assets-download-menu.component';
+import { FvDsspComponent } from './shared/fv-dssp/fv-dssp.component';
+import { UniprotProteinViewComponent } from './views/uniprot-protein-view/uniprot-protein-view.component';
 
 
 
@@ -33,6 +34,10 @@ const appRoutes: Routes = [
   {
     path: 'entries/:identifier',
     component: EntryViewComponent
+  },
+  {
+    path: 'proteins/uniprot/:identifier',
+    component: UniprotProteinViewComponent
   },
   {
     path: 'browse',
@@ -62,7 +67,6 @@ const appRoutes: Routes = [
     RecaptchaDirective,
     AboutComponent,
     EntryViewComponent,
-    ProteinViewComponent,
     EntryDescriptionComponent,
     BrowseComponent,
     EntryTabSectionComponent,
@@ -71,7 +75,9 @@ const appRoutes: Routes = [
     EntryEnsemblesSectionComponent,
     EntryDsspSectionComponent,
     EnsembleInfoComponent,
-    AssetsDownloadMenuComponent
+    AssetsDownloadMenuComponent,
+    FvDsspComponent,
+    UniprotProteinViewComponent
   ],
   imports: [
     RouterModule.forRoot(

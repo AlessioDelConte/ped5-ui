@@ -1,0 +1,45 @@
+<div class="container-xl">
+    <ng-container *ngIf="proteinData">
+        <h1 class="mb-3">
+            <span *ngIf="uniprotACC" class="badge bg-primary me-1">
+                {{uniprotACC}}
+            </span>
+            {{proteinData['name']}}
+        </h1>
+        <div class="row mb-2">
+            <div class="col">
+                <span>
+                    <strong>Organism: </strong>{{proteinData['organism_name']}}
+                    <strong class="ms-2">NCBI taxon ID: </strong>
+                    <a class="badge bg-dark"
+                        href="https://www.ncbi.nlm.nih.gov/Taxonomy/Browser/wwwtax.cgi?id={{proteinData['organism_taxon']}}">
+                        {{proteinData['organism_taxon']}} <i class="bi bi-box-arrow-up-right"></i>
+                    </a>
+                </span>
+            </div>
+        </div>
+        <div class="row mb-2" *ngIf="proteinData['function'] && proteinData['function'].length > 0">
+            <div class="col text-justify">
+                <span>
+                    <strong>Function: </strong>{{proteinData['function']}}
+                    <a href="https://uniprot.org/uniprot/{{uniprotACC}}"><i class="bi bi-box-arrow-up-right"></i></a>
+                </span>
+            </div>
+        </div>
+        <div class="row mb-2">
+            <div class="col">
+                <span>
+                    <strong>Cross reference: </strong>
+                </span>
+                <a class="badge bg-dark mx-1"
+                    *ngIf="disprotGeneralData && disprotGeneralData.hasOwnProperty('disprot_id')"
+                    href="https://disprot.org/{{disprotGeneralData['disprot_id']}}">DisProt:{{disprotGeneralData['disprot_id']}}
+                    <i class="bi bi-box-arrow-up-right"></i></a>
+                <a class="badge bg-dark mx-1" href="https://uniprot.org/uniprot/{{uniprotACC}}">UniProt:{{uniprotACC}}
+                    <i class="bi bi-box-arrow-up-right"></i></a>
+                <a class="badge bg-dark mx-1" href="https://mobidb.org/{{uniprotACC}}">MobiDB:{{uniprotACC}}
+                    <i class="bi bi-box-arrow-up-right"></i></a>
+            </div>
+        </div>
+    </ng-container>
+</div>

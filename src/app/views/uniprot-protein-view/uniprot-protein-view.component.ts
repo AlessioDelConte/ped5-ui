@@ -12,7 +12,8 @@ import { InternalService } from 'src/app/services/internal.service';
 export class UniprotProteinViewComponent implements OnInit {
   public uniprotACC;
   public proteinData;
-  disprotGeneralData;
+  public disprotGeneralData;
+  public entriesData = [];
 
   constructor(private externalService: ExternalService, private titleService: Title, private internalService: InternalService,
     private route: ActivatedRoute) {
@@ -61,6 +62,12 @@ export class UniprotProteinViewComponent implements OnInit {
       } else {
         // this.disprotData.next([]);
       }
+    });
+
+
+    // Get entries involved
+    this.internalService.searchEntries({ limit: 1000, uniprot_acc: this.uniprotACC}).subscribe( pedData => {
+      this.entriesData = pedData['result'];
     });
   }
 

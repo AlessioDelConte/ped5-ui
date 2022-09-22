@@ -27,6 +27,8 @@ import { EnsembleInfoComponent } from './shared/ensemble-info/ensemble-info.comp
 import { AssetsDownloadMenuComponent } from './shared/assets-download-menu/assets-download-menu.component';
 import { FvDsspComponent } from './shared/fv-dssp/fv-dssp.component';
 import { UniprotProteinViewComponent } from './views/uniprot-protein-view/uniprot-protein-view.component';
+import { ProteinCardComponent } from './shared/protein-card/protein-card.component';
+import { EnsembleCompactCardComponent } from './shared/ensemble-compact-card/ensemble-compact-card.component';
 
 
 
@@ -77,7 +79,9 @@ const appRoutes: Routes = [
     EnsembleInfoComponent,
     AssetsDownloadMenuComponent,
     FvDsspComponent,
-    UniprotProteinViewComponent
+    UniprotProteinViewComponent,
+    ProteinCardComponent,
+    EnsembleCompactCardComponent
   ],
   imports: [
     RouterModule.forRoot(

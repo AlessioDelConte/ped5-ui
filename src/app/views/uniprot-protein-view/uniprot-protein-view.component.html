@@ -1,11 +1,12 @@
 <div class="container-xl">
+
+    <h1 class="mb-3">
+        <span *ngIf="uniprotACC" class="badge bg-primary me-2">
+            {{uniprotACC}}
+        </span>
+        <ng-container *ngIf="proteinData">{{proteinData['name']}}</ng-container>
+    </h1>
     <ng-container *ngIf="proteinData">
-        <h1 class="mb-3">
-            <span *ngIf="uniprotACC" class="badge bg-primary me-1">
-                {{uniprotACC}}
-            </span>
-            {{proteinData['name']}}
-        </h1>
         <div class="row mb-2">
             <div class="col">
                 <span>
@@ -42,4 +43,8 @@
             </div>
         </div>
     </ng-container>
+
+    <div class="row mt-4" *ngFor="let entryData of entriesData;">
+        <app-protein-card [entryData]="entryData"></app-protein-card>
+    </div>
 </div>

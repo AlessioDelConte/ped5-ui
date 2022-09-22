@@ -1,0 +1,41 @@
+<div class="card p-3">
+    <div class="row mb-3 align-items-center">
+        <strong class="col-auto">Ensemble: </strong>
+        <span class="badge bg-primary col-auto">{{entryData["entry_id"] + ensData['ensemble_id']}}</span>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-sm-4">
+            <img class="p-2" style="max-width: 100%; max-height: 150px"
+                src="{{ws}}entries/{{entryData['entry_id']}}/ensembles/{{ensData['ensemble_id']}}/chains/{{curChain}}/ensemble-animation/">
+        </div>
+        <div class="col-sm-8">
+
+            <div class="row mb-2">
+                <span *ngFor="let chain of ensData['chains']" class="badge bg-dark col-auto">
+                    Chain: {{chain['chain_name']}}
+                </span>
+                <!-- <span *ngFor="let chain of ensData['chains']" class="badge bg-gray col-auto"
+                    style="cursor: pointer;">
+                    Chain: {{chain['chain_name']}}
+                </span>
+                <span *ngFor="let chain of ensData['chains']" class="badge bg-disabled col-auto">
+                    Chain: {{chain['chain_name']}}
+                </span> -->
+            </div>
+
+            <div class="row small">
+                <strong class="col">Secondary structure entropy</strong>
+                <div class="col-auto">{{curStats['entropy_dssp_mean'] | number:'1.2-2'}}</div>
+            </div>
+            <div class="row small">
+                <strong class="col">Relative solvent accessibility</strong>
+                <div class="col-auto">{{curStats['relative_asa_mean'] | number:'1.2-2'}}</div>
+            </div>
+            <div class="row small">
+                <strong class="col">Radius of gyration</strong>
+                <div class="col-auto">{{curStats['rg_mean'] | number:'1.2-2'}}</div>
+            </div>
+        </div>
+
+    </div>
+</div>

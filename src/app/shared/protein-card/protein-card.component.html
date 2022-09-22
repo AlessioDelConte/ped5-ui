@@ -1,0 +1,20 @@
+<div class="card py-3 px-4">
+    <div class="row mb-3 align-items-center">
+        <a class="col-auto badge bg-primary me-2" href="/entries/{{entryData['entry_id']}}/">
+            {{entryData["entry_id"]}} <i class="bi bi-link-45deg"></i>
+        </a>
+        <strong class="col">{{entryData["description"]["title"]}}</strong>
+    </div>
+    <div class="row mb-2 align-items-center">
+        <strong class="col-auto">Terms: </strong>
+        <a *ngFor="let term of entryData['description']['ontology_terms']" class="col-auto badge me-1"
+            [ngClass]="{'bg-experiment': term['namespace'] === 'Measurement method', 'bg-ensemble': term['namespace'] === 'Ensemble generation method', 'bg-md': term['namespace'] === 'Molecular dynamics'}">
+            {{term['name']}}
+        </a>
+    </div>
+    <div class="row align-items-center">
+        <div class="col-xl-4 p-1" *ngFor="let ensData of entryData['ensembles'];">
+            <app-ensemble-compact-card [entryData]="entryData" [ensData]="ensData"></app-ensemble-compact-card>
+        </div>
+    </div>
+</div>

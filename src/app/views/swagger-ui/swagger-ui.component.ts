@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import SwaggerUI from 'swagger-ui';
 
 @Component({
@@ -8,12 +9,14 @@ import SwaggerUI from 'swagger-ui';
 })
 export class SwaggerUiComponent implements OnInit {
 
-  constructor() { }
+  constructor(private titleService: Title) { 
+    this.titleService.setTitle("PED - API");
+  }
 
   ngOnInit(): void {
     SwaggerUI({
       domNode: document.getElementById('swagger-ui-item'),
-      url: '../assets/pedv2.json'
+      url: '../assets/ped_api_v1.json'
     });
   }
 

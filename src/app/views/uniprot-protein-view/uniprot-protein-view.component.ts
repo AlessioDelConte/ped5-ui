@@ -18,7 +18,7 @@ export class UniprotProteinViewComponent implements OnInit {
   constructor(private externalService: ExternalService, private titleService: Title, private internalService: InternalService,
     private route: ActivatedRoute) {
     this.uniprotACC = this.route.snapshot.paramMap.get('identifier');
-    this.titleService.setTitle("Protein - " + this.uniprotACC);
+    this.titleService.setTitle("Protein " + this.uniprotACC + " - PED");
 
   }
 

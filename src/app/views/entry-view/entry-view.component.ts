@@ -16,7 +16,7 @@ export class EntryViewComponent implements OnInit {
   constructor(private titleService: Title, private internalService: InternalService,
     private route: ActivatedRoute) {
     this.entryID = this.route.snapshot.paramMap.get('identifier');
-    this.titleService.setTitle("Entry - " + this.entryID);
+    this.titleService.setTitle("Entry " + this.entryID + " - PED");
   }
 
   ngOnInit(): void {

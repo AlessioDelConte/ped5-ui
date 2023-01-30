@@ -10,7 +10,7 @@ import SwaggerUI from 'swagger-ui';
 export class SwaggerUiComponent implements OnInit {
 
   constructor(private titleService: Title) { 
-    this.titleService.setTitle("PED - API");
+    this.titleService.setTitle("API - PED");
   }
 
   ngOnInit(): void {

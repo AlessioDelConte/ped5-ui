@@ -15,7 +15,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
   constructor(private titleService:Title, private router: Router, private internalService: InternalService
   ) {
-    this.titleService.setTitle("PED - Home");
+    this.titleService.setTitle("Home - PED");
   }
 
   ngOnInit(): void {

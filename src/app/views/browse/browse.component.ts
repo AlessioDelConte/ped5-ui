@@ -23,7 +23,7 @@ export class BrowseComponent implements OnInit {
   constructor(private titleService: Title, private internalService: InternalService,
     public route: ActivatedRoute, private fb: FormBuilder,
     public router: Router) {
-    this.titleService.setTitle("PED - Browse");
+    this.titleService.setTitle("Browse - PED");
   }
 
   get searchParams() {

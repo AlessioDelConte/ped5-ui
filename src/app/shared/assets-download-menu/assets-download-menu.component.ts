@@ -25,7 +25,7 @@ export class AssetsDownloadMenuComponent implements OnInit {
         "category": "General",
         "assets": {
           "PDB": {},
-          // "FASTA": {}
+          "Weights": {}
         }
       },
       {

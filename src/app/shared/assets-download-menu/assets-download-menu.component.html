@@ -28,6 +28,17 @@
                 </a>
             </div>
         </ng-container>
+        <ng-container *ngIf="selectedAsset === 'Weights'">
+            <div class="row justify-content-center  align-items-center">
+                <div class="row ms-1 mb-2">
+                    Download the weights assigned to the conformers of this ensemble.
+                </div>
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2" href="{{baseAssetURL + '/weights/'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Weights
+                </a>
+            </div>
+        </ng-container>
 
         <ng-container *ngIf="selectedAsset === 'DSSP Consensus'">
             <div class="row ms-1 mb-2">

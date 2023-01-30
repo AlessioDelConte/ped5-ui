@@ -56,7 +56,7 @@ export class FvDsspComponent implements OnInit {
           data: filteredRows.map(currRow => {
             return {
               x: parseInt(currRow.residue_number) - resNumOffset + 1,
-              y: parseFloat(currRow.entropy_merge_dssp)
+              y: parseFloat(currRow.merge_dssp_entropy)
             };
           }),
           subfeatures: [
@@ -115,7 +115,7 @@ export class FvDsspComponent implements OnInit {
           height: 1,
           color: '#2274a5',
           data: filteredRows.map(currRow => {
-            let y = parseFloat(currRow.mean_relative_ASA !== 'nan' ? currRow.mean_relative_ASA : '0');
+            let y = parseFloat(currRow.relative_ASA_mean !== 'nan' ? currRow.relative_ASA_mean : '0');
             if (parseInt(currRow.residue_number) === 0) {
               y = 0;
             }

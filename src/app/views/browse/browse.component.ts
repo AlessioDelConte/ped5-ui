@@ -86,6 +86,7 @@ export class BrowseComponent implements OnInit {
     this.internalService.searchEntries({
       offset: offset,
       limit: this.itemsPerPage,
+      sort_field: "entry_id",
       ...params
     }).subscribe(responseData => {
       console.log(responseData)

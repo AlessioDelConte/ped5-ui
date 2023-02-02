@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <nav class="navbar navbar-dark bg-nav navbar-expand-lg fixed-top" id="navbar">
     <div class="container-xl">
-      <a class="navbar-brand" [class.]="url === 'about'" style="color: #ffffffcc; line-height:18px" routerLink="/">
+      <a class="navbar-brand" style="color: #ffffffcc; line-height:18px" routerLink="/">
         <strong style="color: #ffffffee">P</strong><span style="font-weight: lighter">rotein</span><br><strong
           style="color: #ffffffee">E</strong><span style="font-weight: lighter">nsemble</span><br><strong
           style="color: #ffffffee">D</strong><span style="font-weight: lighter">atabase</span>
@@ -12,20 +12,20 @@
       <div class="collapse navbar-collapse" id="navbarText" (click)="closeMenu()">
         <ul class="navbar-nav ">
           <li class="nav-item">
-            <a class="nav-link" [class.active]="url === 'help'" routerLink="/browse">Browse</a>
+            <a class="nav-link" [class.active]="router.url.slice(0,7) === '/browse'" routerLink="/browse">Browse</a>
+          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url === 'help'" routerLink="/help">Help</a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url === '/about'" routerLink="/about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" [class.active]="url === 'help'" routerLink="/help">Help</a>
+            <a class="nav-link" [class.active]="router.url === '/api'" routerLink="/api">API</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="url === 'help'" routerLink="/about">About</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="url === 'api'" routerLink="/api">API</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" [class.active]="url === 'help'" routerLink="/contact">Contact us</a>
-          </li>
+          <!-- <li class="nav-item">
+            <a class="nav-link" [class.active]="router.url === 'contact'" routerLink="/contact">Contact us</a>
+          </li> -->
         </ul>
       </div>
     </div>

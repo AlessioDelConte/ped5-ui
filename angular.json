@@ -33,6 +33,7 @@
               "./node_modules/bootstrap-icons/font/bootstrap-icons.css",
               "./node_modules/proseqviewer/dist/assets/proseqviewer.css",
               "./node_modules/swagger-ui/dist/swagger-ui.css",
+              "./node_modules/angular-tree-component/dist/angular-tree-component.css",
               "src/styles/styles.scss",
               "./node_modules/feature-viewer-typescript/assets/fv.scss"
             ],

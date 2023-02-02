@@ -13,7 +13,7 @@ export class NavbarComponent implements OnInit {
   currentUser = {};
   previousPosition = 0;
 
-  constructor(private router: Router) {
+  constructor(public router: Router) {
   }
 
   ngOnInit(): void {

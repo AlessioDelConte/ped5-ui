@@ -29,6 +29,7 @@ import { FvDsspComponent } from './shared/fv-dssp/fv-dssp.component';
 import { UniprotProteinViewComponent } from './views/uniprot-protein-view/uniprot-protein-view.component';
 import { ProteinCardComponent } from './shared/protein-card/protein-card.component';
 import { EnsembleCompactCardComponent } from './shared/ensemble-compact-card/ensemble-compact-card.component';
+import { TreeModule } from 'angular-tree-component';
 
 
 
@@ -98,6 +99,7 @@ const appRoutes: Routes = [
     HttpClientModule,
     CdkTableModule,
     PaginationModule.forRoot(),
+    TreeModule.forRoot()
   ],
   providers: [],
   bootstrap: [AppComponent]

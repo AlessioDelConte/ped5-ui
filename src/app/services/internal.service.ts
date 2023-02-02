@@ -40,8 +40,15 @@ export class InternalService {
         });
     }
 
-    getDSSPConsensus(entryId, ensembleId, onlyFeatures=false){
+    getDSSPConsensus(entryId, ensembleId, onlyFeatures=false): Observable<any>{
         const url = environment.ws + 'entries/' + entryId + "/ensembles/" + ensembleId + "/dssp-consensus/";
+        return this.http.get(url, {
+            responseType: 'json'
+        });
+    }
+
+    getOntology(): Observable<any> {
+        const url = environment.ws + 'get_ontology/';
         return this.http.get(url, {
             responseType: 'json'
         });

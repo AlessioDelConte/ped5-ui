@@ -36,12 +36,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
   goToBrowsePage() {
     // check PED identifier
     if (/^PED\d{5}$|^PED\d{5}e\d{3}$/.test(this.searchFormControl.value)) {
-      this.router.navigate([this.searchFormControl.value]);
+      this.router.navigate(["entries/"+this.searchFormControl.value]);
       return 0;
     }
     // check UniProt ACC
     if (/^[OPQ][0-9][A-Z0-9]{3}[0-9]|[A-NR-Z][0-9]([A-Z][A-Z0-9]{2}[0-9]){1,2}$/.test(this.searchFormControl.value)) {
-      this.router.navigate([this.searchFormControl.value]);
+      this.router.navigate(["proteins/uniprot/"+this.searchFormControl.value]);
       return 0;
     }
     this.router.navigate(['browse'], {queryParams: {free_text: this.searchFormControl.value}});

@@ -31,42 +31,68 @@ export class BrowseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.addSearchField("free_text");
 
-    // Init entry search result
-    this.getEntries(0);
-
-    // this.updateQueryParams();
+    // // Init entry search subscription
     this.searchParams.valueChanges.subscribe(formData => {
-      let search_params = {};
+      console.log(formData)
+      let filter = {};
       formData.forEach(currItem => {
         if (currItem.key) {
-          if (!search_params.hasOwnProperty(currItem.area)) {
-            search_params[currItem.area] = [];
+          if (!filter.hasOwnProperty(currItem.area)) {
+            filter[currItem.area] = [];
           }
-          search_params[currItem.area].push(currItem.key);
+          filter[currItem.area].push(currItem.key);
         }
       });
-      this.getEntries(0, search_params);
+      this.curPageNum = 1;
+      this.getEntries((this.curPageNum - 1) * this.itemsPerPage, filter);
+      this.updateQueryParams(filter);
     })
+
+    // Parse query params
+    if (Object.keys(this.route.snapshot.queryParams).length > 0) {
+      const valid_areas = ["free_text","term","cross_ref","entry_id","uniprot_acc","protein_name","publication_identifier","publication_html","data_owner"];
+      Object.keys(this.route.snapshot.queryParams).forEach(param => {
+        if (valid_areas.includes(param)) {
+          this.searchParams.push(this.fb.group({
+            "area": param,
+            "key": this.route.snapshot.queryParams[param]
+          }), { emitEvent: false })
+        }
+        if(param === "limit") this.itemsPerPage = parseInt(this.route.snapshot.queryParams[param]);
+        if(param === "page") this.curPageNum = parseInt(this.route.snapshot.queryParams[param]);
+      })
+    }
+
+    // Make update
+    if (this.searchParams.length > 0) {
+      this.searchParams.updateValueAndValidity({ onlySelf: false, emitEvent: true }) // Force update
+    }else{
+      this.addSearchField("free_text");
+    }
   }
 
-  updateQueryParams() {
+  updateQueryParams(filter_params) {
+    filter_params = {
+      ...filter_params,
+      limit: this.itemsPerPage,
+      page: this.curPageNum,
+    }
+
+    console.log(filter_params)
+
     this.router.navigate(
       [],
       {
         relativeTo: this.route,
-        queryParams: {
-          limit: this.itemsPerPage,
-          page: this.curPageNum
-        }
+        queryParams: filter_params
       });
   }
 
   addSearchField(area, key = null) {
     this.searchParams.push(this.fb.group({
       area: area,
-      key: key ? key: null
+      key: key ? key : null
     }));
   }
 
@@ -78,8 +104,34 @@ export class BrowseComponent implements OnInit {
   }
 
   pageChanged(event: PageChangedEvent): void {
-    this.curPageNum = event.page;
-    this.getEntries((this.curPageNum - 1) * this.itemsPerPage)
+    // this.curPageNum = event.page;
+    let filter = {};
+    this.searchParams.value.forEach(currItem => {
+      if (currItem.key) {
+        if (!filter.hasOwnProperty(currItem.area)) {
+          filter[currItem.area] = [];
+        }
+        filter[currItem.area].push(currItem.key);
+      }
+    });
+    this.getEntries((event.page - 1) * this.itemsPerPage, filter)
+    this.updateQueryParams(filter);
+  }
+
+  changeLimit(new_limit){
+    this.curPageNum = 1;
+    this.itemsPerPage = new_limit;
+    let filter = {};
+    this.searchParams.value.forEach(currItem => {
+      if (currItem.key) {
+        if (!filter.hasOwnProperty(currItem.area)) {
+          filter[currItem.area] = [];
+        }
+        filter[currItem.area].push(currItem.key);
+      }
+    });
+    this.getEntries((this.curPageNum - 1) * this.itemsPerPage, filter)
+    this.updateQueryParams(filter);
   }
 
   getEntries(offset, params = {}) {

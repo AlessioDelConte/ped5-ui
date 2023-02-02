@@ -103,8 +103,9 @@ export class BrowseComponent implements OnInit {
     }
   }
 
-  pageChanged(event: PageChangedEvent): void {
-    // this.curPageNum = event.page;
+  pageChanged(event: PageChangedEvent|any): void {
+    this.curPageNum = event.page;
+    console.log("Page change event")
     let filter = {};
     this.searchParams.value.forEach(currItem => {
       if (currItem.key) {
@@ -118,9 +119,7 @@ export class BrowseComponent implements OnInit {
     this.updateQueryParams(filter);
   }
 
-  changeLimit(new_limit){
-    this.curPageNum = 1;
-    this.itemsPerPage = new_limit;
+  async changeLimit(new_limit){
     let filter = {};
     this.searchParams.value.forEach(currItem => {
       if (currItem.key) {
@@ -130,8 +129,21 @@ export class BrowseComponent implements OnInit {
         filter[currItem.area].push(currItem.key);
       }
     });
-    this.getEntries((this.curPageNum - 1) * this.itemsPerPage, filter)
-    this.updateQueryParams(filter);
+
+    let filter_params = {
+      ...filter,
+      limit: new_limit,
+      page: 1,
+    }
+
+    await this.router.navigate(
+      [],
+      {
+        relativeTo: this.route,
+        queryParams: filter_params
+      });
+    window.location.reload();
+
   }
 
   getEntries(offset, params = {}) {

@@ -92,13 +92,13 @@
         </div>
         <div class="col-auto">
             <p>Show
-                <span class="badge ms-2"
+                <span class="badge ms-2" style="cursor: pointer;"
                     [ngClass]="{'bg-primary': itemsPerPage === 10, 'bg-secondary': itemsPerPage !== 10}"
-                    (click)="changeLimit(10)">10</span>
-                <span class="badge ms-2"
+                    (click)="changeLimit(10)" >10</span>
+                <span class="badge ms-2" style="cursor: pointer;"
                     [ngClass]="{'bg-primary': itemsPerPage === 20, 'bg-secondary': itemsPerPage !== 20}"
                     (click)="changeLimit(20)">20</span>
-                <span class="badge ms-2"
+                <span class="badge ms-2" style="cursor: pointer;"
                     [ngClass]="{'bg-primary': itemsPerPage === 50, 'bg-secondary': itemsPerPage !== 50}"
                     (click)="changeLimit(50)">50</span>
             </p>

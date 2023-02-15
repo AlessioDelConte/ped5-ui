@@ -9,7 +9,8 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <app-assets-download-menu [entryId]="entryId" [ensembleId]="ensembleData['ensemble_id']" [ensembleData]="ensembleData">
+                    <app-assets-download-menu [entryId]="entryId" [ensembleId]="ensembleData['ensemble_id']"
+                        [ensembleData]="ensembleData">
                     </app-assets-download-menu>
                 </div>
             </div>
@@ -24,7 +25,10 @@
             <strong>Ensemble ID</strong> {{ensembleData['ensemble_id']}}
         </div>
         <div class="col-auto">
-            <strong class="pl-5 me-2">Number of models </strong> {{ensembleData['models']}}
+            <strong class="pl-5 me-2">Number of models </strong> {{ensembleData['models']}} <span class="text-warning"
+                placement="right" *ngIf="(ensembleData['models']) > 1000"
+                tooltip="This is a big ensemble (>1000 conformers). Molprobity analysis not available."> <strong><i
+                        class="bi bi-exclamation-circle-fill"></i></strong></span>
         </div>
         <div class="col-auto">
             <span *ngFor="let currChain of chainNames" class="badge bg-secondary me-1"

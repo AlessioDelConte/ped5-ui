@@ -9,7 +9,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <app-assets-download-menu [entryId]="entryId" [ensembleId]="ensembleData['ensemble_id']">
+                    <app-assets-download-menu [entryId]="entryId" [ensembleId]="ensembleData['ensemble_id']" [ensembleData]="ensembleData">
                     </app-assets-download-menu>
                 </div>
             </div>
@@ -58,10 +58,10 @@
             <div id="molstar{{ensembleData['ensemble_id']}}" style="overflow: hidden">
             </div>
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="(ensembleData['models']) <= 1000 && !(ensembleData['only_CA'])">
             <img src="{{currLinks.ramachandran_plot}}" width="100%">
         </div>
-        <div class="col-lg-4">
+        <div class="col-lg-4" *ngIf="!(ensembleData['only_CA'])">
             <img src="{{currLinks.rg_boxplot}}" width="100%">
         </div>
     </div>

@@ -9,6 +9,7 @@ import { InternalService } from 'src/app/services/internal.service';
 export class AssetsDownloadMenuComponent implements OnInit {
   @Input() entryId;
   @Input() ensembleId;
+  @Input() ensembleData;
 
   public selectedAsset = "PDB";
   public baseAssetURL;
@@ -27,32 +28,38 @@ export class AssetsDownloadMenuComponent implements OnInit {
           "PDB": {},
           "Weights": {}
         }
-      },
-      {
+      }
+    ];
+
+    if (!this.ensembleData["only_CA"]) {
+      this.menuData.push({
         "category": "Secondary Structure",
         "assets": {
           "DSSP Consensus": {},
           "DSSP Data": {}
         }
-      },
-      {
-        "category": "Molprobity",
-        "assets": {
-          "C-beta Deviations": {},
-          "Ramachandran": {},
-          "Clash Analysis": {},
-          "Geometry Bonds": {},
-          "Rotamer": {},
-        }
-      },
-      {
-        "category": "Other",
-        "assets": {
-          "Maximum Diameter": {},
-          "Gyration": {}
-        }
+      })
+      if (this.ensembleData["models"] <= 1000) {
+        this.menuData.push({
+          "category": "Molprobity",
+          "assets": {
+            "C-beta Deviations": {},
+            "Ramachandran": {},
+            "Clash Analysis": {},
+            "Geometry Bonds": {},
+            "Rotamer": {},
+          }
+        })
       }
-    ];
+    }
+
+    this.menuData.push({
+      "category": "Other",
+      "assets": {
+        "Maximum Diameter": {},
+        "Gyration": {}
+      }
+    })
 
   }
 

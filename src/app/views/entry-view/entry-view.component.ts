@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Block, Loading } from 'notiflix';
 import { InternalService } from 'src/app/services/internal.service';
 
 @Component({
@@ -20,10 +21,11 @@ export class EntryViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-
+    Block.standard("#result-view");
     this.internalService.getPublicEntry(this.entryID).subscribe(data => {
       console.log(data)
       this.entryData = data;
+      Block.remove("#result-view");
     })
   }
 

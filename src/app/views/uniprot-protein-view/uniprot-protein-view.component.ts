@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { ActivatedRoute } from '@angular/router';
+import { Block } from 'notiflix';
 import { ExternalService } from 'src/app/services/external.service';
 import { InternalService } from 'src/app/services/internal.service';
 
@@ -14,6 +15,7 @@ export class UniprotProteinViewComponent implements OnInit {
   public proteinData;
   public disprotGeneralData;
   public entriesData = [];
+  public entriesLoading = true;
 
   constructor(private externalService: ExternalService, private titleService: Title, private internalService: InternalService,
     private route: ActivatedRoute) {
@@ -23,6 +25,10 @@ export class UniprotProteinViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    Block.standard("#uniprot-summary")
+    Block.standard("#protein-entries")
+
+
     // Get Uniprot data
     this.externalService.getUniprotData(this.uniprotACC).subscribe(protein_raw_data => {
       let protein_data = {};
@@ -50,6 +56,7 @@ export class UniprotProteinViewComponent implements OnInit {
         }
       }
       this.proteinData = protein_data;
+      Block.remove("#uniprot-summary")
     });
 
 
@@ -68,6 +75,8 @@ export class UniprotProteinViewComponent implements OnInit {
     // Get entries involved
     this.internalService.searchEntries({ limit: 1000, uniprot_acc: this.uniprotACC}).subscribe( pedData => {
       this.entriesData = pedData['result'];
+      this.entriesLoading = false;
+      Block.remove("#protein-entries")
     });
   }
 

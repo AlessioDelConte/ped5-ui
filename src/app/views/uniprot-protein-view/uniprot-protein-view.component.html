@@ -1,6 +1,6 @@
 <div class="container-xl">
 
-    <h1 class="mb-3">
+    <h1 id="uniprot-summary" class="mb-3">
         <span *ngIf="uniprotACC" class="badge bg-primary me-2">
             {{uniprotACC}}
         </span>
@@ -44,7 +44,12 @@
         </div>
     </ng-container>
 
-    <div class="row mt-4" *ngFor="let entryData of entriesData;">
-        <app-protein-card [entryData]="entryData"></app-protein-card>
+    <div id="protein-entries">
+        <div class="row mt-4" *ngFor="let entryData of entriesData;">
+            <app-protein-card [entryData]="entryData"></app-protein-card>
+        </div>
+        <div *ngIf="entriesData.length <= 0 && !entriesLoading" class="row mt-4 pt-4 mb-2 justify-content-center fw-bold" style="color:gray" >
+            No entries found
+        </div>
     </div>
 </div>

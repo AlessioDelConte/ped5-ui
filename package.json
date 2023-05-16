@@ -6,8 +6,12 @@
     "start": "ng serve --port 4206",
     "start-prod": "ng serve --configuration production",
     "build": "rm -rf dist/* && ng build --configuration production --build-optimizer",
-    "deploy-dev": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build ...${colN} && npm run build && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5/ && echo ${colC}Done with deploy-dev!${colC})"
-  },
+    "build-dev": "rm -rf dist/* && ng build --configuration dev --build-optimizer",
+    "build-prod": "rm -rf dist/* && ng build --configuration production --build-optimizer",
+    "deploy-check": "(colR='\\033[0;91m';colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Checking repo in deploy-check...${colN}; { git diff --exit-code --stat|| { echo ${colR}There are local unstaged changes, fix with git add ...${colN} && false; }; } && { git diff --cached --exit-code --stat || { echo ${colR}There are uncommitted changes, fix with git commit ...${colN} && false; }; } && { git push --dry-run --porcelain >/dev/null|| { echo ${colR}There are remote changes, fix with git pull ...${colN} && false; }; } && { git push --dry-run --porcelain|grep -q 'up to date' || { git status; echo ${colR}There are unpublished local commits, fix with git push ...${colN} && false; }; } && { { { git remote update &>/dev/null && git status -uno; } |grep -q \"up to date\"; } || { echo ${colR}There are remote changes, fix with git pull ...${colN} && false; }; }; )",
+    "deploy-dev": "(colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build-dev ...${colN} && npm run build-dev && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5-dev/ && echo ${colC}Done with deploy-dev!${colC})",
+    "deploy-prod": "npm run deploy-check && (colC='\\033[0;36m';colN='\\033[0m'; echo ${colC}Running npm build-prod ...${colN} && npm run build-prod && echo ${colC}Rsyncing dist ...${colN} && rsync -avh --delete dist biocomp@persefone:/var/www/ped5/ && echo ${colC}Done with deploy-prod!${colC})"
+ },
   "private": true,
   "dependencies": {
     "@angular/animations": "~12.2.7",

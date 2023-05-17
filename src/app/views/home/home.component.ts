@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       // timeout: 10000,
       // clickToClose: true,
       closeButton: true,
+      showOnlyTheLastOne: true,
       useIcon: false,
       info: {
         background: "#6B3C77"

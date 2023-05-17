@@ -3,6 +3,7 @@ import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {InternalService} from '../../services/internal.service';
+import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,19 @@ export class HomeComponent implements OnInit, AfterViewInit {
   }
 
   ngOnInit(): void {
+    Notify.info('Welcome! You are on the new version of PED. You can access the legacy version at <a href="https://old.proteinensemble.org/" style="color: white"><strong>https://old.proteinensemble.org/</strong></a>.', {
+      position: "right-bottom",
+      plainText: false,
+      messageMaxLength: 1000, 
+      // timeout: 10000,
+      // clickToClose: true,
+      closeButton: true,
+      useIcon: false,
+      info: {
+        background: "#6B3C77"
+      }
+    })
+
     this.internalService.getServerName().subscribe(
       responseData => {
         this.serverName = responseData;

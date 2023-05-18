@@ -29,7 +29,9 @@ export class BrowseComponent implements OnInit {
     public route: ActivatedRoute, private fb: FormBuilder,
     public router: Router) {
     this.titleService.setTitle("Browse - PED");
+  }
 
+  ngOnInit(): void {
     this.route.queryParams.subscribe(new_params => {
       console.log("new_params")
       console.log(new_params)
@@ -43,9 +45,6 @@ export class BrowseComponent implements OnInit {
         this.addSearchField("free_text");
       }
     })
-  }
-
-  ngOnInit(): void {
   }
 
   parseParamsToForm(query_params) {

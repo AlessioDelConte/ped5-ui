@@ -30,7 +30,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
       showOnlyTheLastOne: true,
       useIcon: false,
       info: {
-        background: "#6B3C77"
+        background: "#2274a5"
       }
     })
 

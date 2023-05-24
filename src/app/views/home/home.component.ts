@@ -11,8 +11,9 @@ import { Notify } from 'notiflix/build/notiflix-notify-aio';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit, AfterViewInit {
-  searchFormControl = new FormControl();
-  serverName = null;
+  public searchFormControl = new FormControl();
+  public serverName = null;
+  public statsData = {};
 
   constructor(private titleService:Title, private router: Router, private internalService: InternalService
   ) {
@@ -42,6 +43,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
       },
       () => {
       });
+
+    this.internalService.getHomeStats().subscribe(
+      data => {
+        this.statsData = data;
+      }
+    )
   }
 
   ngAfterViewInit(): void {

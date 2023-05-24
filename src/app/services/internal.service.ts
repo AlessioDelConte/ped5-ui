@@ -17,6 +17,11 @@ export class InternalService {
         return this.http.get(url);
     }
 
+    getHomeStats(): Observable<any> {
+        const url = environment.ws + 'statistics/';
+        return this.http.get(url);
+    }
+
     getEntry(params): Observable<any> {
         const url = environment.ws + 'entries/';
         return this.http.get(url, {

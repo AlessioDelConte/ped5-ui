@@ -31,6 +31,8 @@ import { UniprotProteinViewComponent } from './views/uniprot-protein-view/unipro
 import { ProteinCardComponent } from './shared/protein-card/protein-card.component';
 import { EnsembleCompactCardComponent } from './shared/ensemble-compact-card/ensemble-compact-card.component';
 import { TreeModule } from 'angular-tree-component';
+import { EntryFvSectionComponent } from './shared/entry-fv-section/entry-fv-section.component';
+import { FvSequenceMergeComponent } from './shared/fv-sequence-merge/fv-sequence-merge.component';
 
 
 
@@ -83,7 +85,9 @@ const appRoutes: Routes = [
     FvDsspComponent,
     UniprotProteinViewComponent,
     ProteinCardComponent,
-    EnsembleCompactCardComponent
+    EnsembleCompactCardComponent,
+    EntryFvSectionComponent,
+    FvSequenceMergeComponent
   ],
   imports: [
     RouterModule.forRoot(

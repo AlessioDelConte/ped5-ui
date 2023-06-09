@@ -3,5 +3,7 @@
         [descriptionObj]="entryData['description']">
     </app-entry-description>
     <div class="mb-4"></div>
-    <app-entry-tab-section [entryData]="entryData"></app-entry-tab-section>
+    <!-- <app-entry-tab-section [entryData]="entryData"></app-entry-tab-section> -->
+    <app-entry-fv-section *ngIf="entryData" [entryData]="entryData"></app-entry-fv-section>
+    <app-entry-ensembles-section [entryData]="entryData"></app-entry-ensembles-section>
 </div>

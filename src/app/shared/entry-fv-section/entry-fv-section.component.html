@@ -6,8 +6,8 @@
             </div>
             <div class="row mb-3">
                 <div class="col">
-                    <app-fv-dssp [sequence]="chain.alignment.pdb_sequence" [fvId]="chain.chain_name + '_dssp'"
-                        [dsspData]="dsspData" [chainName]="chain.chain_name"></app-fv-dssp>
+                    <app-fv-sequence-merge [sequence]="chain.alignment.pdb_sequence" [fvId]="chain.chain_name + '_dssp'"
+                        [dsspData]="dsspData" [chainName]="chain.chain_name" [chainData]="chain"></app-fv-sequence-merge>
                 </div>
             </div>
         </div>

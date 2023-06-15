@@ -9,6 +9,7 @@ export class ProteinCardComponent implements OnInit {
   @Input() entryData;
   @Input() selectedProtein;
   public coverages = {};
+  public validChains = [];
 
   constructor() { }
 
@@ -18,7 +19,10 @@ export class ProteinCardComponent implements OnInit {
       let auxCoverages = chainData["fragments_stats"].filter(el => { return el.uniprot == this.selectedProtein }).map(el => {
         return el.cov_nogaps_frag_unip;
       })
-      if(auxCoverages.length > 0) this.coverages[chainData["chain_name"]] = auxCoverages;
+      if(auxCoverages.length > 0){
+        this.coverages[chainData["chain_name"]] = auxCoverages;
+        this.validChains.push(chainData["chain_name"])
+      }
     }
   }
 

@@ -9,6 +9,7 @@ import { InternalService } from 'src/app/services/internal.service';
 export class EnsembleCompactCardComponent implements OnInit {
   @Input() entryData;
   @Input() ensData;
+  @Input() validChains=[];
   ws;
   curChain = "A";
 
@@ -23,7 +24,7 @@ export class EnsembleCompactCardComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
+    this.validChains = ["A"]
     this.ensData["chains"].forEach(data => {
       if (data['chain_name'] == this.curChain){
         this.curStats.entropy_dssp_mean = data.entropy_dssp_mean;

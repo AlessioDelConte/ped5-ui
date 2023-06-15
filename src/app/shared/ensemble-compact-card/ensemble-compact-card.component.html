@@ -11,16 +11,16 @@
         <div class="col-sm-8">
 
             <div class="row mb-2">
-                <span *ngFor="let chain of ensData['chains']" class="badge bg-dark col-auto">
-                    Chain: {{chain['chain_name']}}
-                </span>
-                <!-- <span *ngFor="let chain of ensData['chains']" class="badge bg-gray col-auto"
-                    style="cursor: pointer;">
-                    Chain: {{chain['chain_name']}}
-                </span>
-                <span *ngFor="let chain of ensData['chains']" class="badge bg-disabled col-auto">
-                    Chain: {{chain['chain_name']}}
-                </span> -->
+                <ng-container *ngFor="let chain of ensData['chains']">
+                    <span *ngIf="validChains.includes(chain['chain_name'])" class="badge bg-dark col-auto me-1"
+                        [tooltip]="'Chain '+chain['chain_name']+' is selected'">
+                        Chain: {{chain['chain_name']}}
+                    </span>
+                    <span *ngIf="!validChains.includes(chain['chain_name'])" class="badge bg-gray col-auto me-1"
+                        [tooltip]="'Chain '+chain['chain_name']+' doesn\'t contain any fragment of this protein'">
+                        Chain: {{chain['chain_name']}}
+                    </span>
+                </ng-container>
             </div>
 
             <div class="row small">

@@ -9,7 +9,7 @@
         <p>
             <strong class="col-auto">Coverage (to UniProt): </strong><ng-container
                 *ngFor="let covData of coverages | keyvalue;"><strong> {{"Chain " + covData.key}}</strong><ng-container
-                    *ngFor="let cavVal of covData.value; last as isLast;"> {{cavVal | number:'1.2-2'}}<ng-container *ngIf="!isLast"> |</ng-container> </ng-container></ng-container>
+                    *ngFor="let cavVal of covData.value; last as isLast;"> {{cavVal | number:'1.2-3'}}<ng-container *ngIf="!isLast"> |</ng-container> </ng-container></ng-container>
 
         </p>
     </div>
@@ -22,7 +22,7 @@
     </div>
     <div class="row align-items-center">
         <div class="col-xl-4 p-1" *ngFor="let ensData of entryData['ensembles'];">
-            <app-ensemble-compact-card [entryData]="entryData" [ensData]="ensData"></app-ensemble-compact-card>
+            <app-ensemble-compact-card [entryData]="entryData" [ensData]="ensData" [validChains]="validChains"></app-ensemble-compact-card>
         </div>
     </div>
 </div>

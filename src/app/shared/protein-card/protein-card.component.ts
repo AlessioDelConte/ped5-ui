@@ -7,11 +7,19 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class ProteinCardComponent implements OnInit {
   @Input() entryData;
+  @Input() selectedProtein;
+  public coverages = {};
 
   constructor() { }
 
   ngOnInit(): void {
-
+    for (let i = 0; i < this.entryData['construct_chains'].length; i++) {
+      const chainData = this.entryData['construct_chains'][i];
+      let auxCoverages = chainData["fragments_stats"].filter(el => { return el.uniprot == this.selectedProtein }).map(el => {
+        return el.cov_nogaps_frag_unip;
+      })
+      if(auxCoverages.length > 0) this.coverages[chainData["chain_name"]] = auxCoverages;
+    }
   }
 
 }

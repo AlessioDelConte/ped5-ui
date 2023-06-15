@@ -5,6 +5,14 @@
         </a>
         <strong class="col">{{entryData["description"]["title"]}}</strong>
     </div>
+    <div class="row">
+        <p>
+            <strong class="col-auto">Coverage (to UniProt): </strong><ng-container
+                *ngFor="let covData of coverages | keyvalue;"><strong> {{"Chain " + covData.key}}</strong><ng-container
+                    *ngFor="let cavVal of covData.value; last as isLast;"> {{cavVal | number:'1.2-2'}}<ng-container *ngIf="!isLast"> |</ng-container> </ng-container></ng-container>
+
+        </p>
+    </div>
     <div class="row mb-2 align-items-center">
         <strong class="col-auto">Terms: </strong>
         <a *ngFor="let term of entryData['description']['ontology_terms']" class="col-auto badge me-1"

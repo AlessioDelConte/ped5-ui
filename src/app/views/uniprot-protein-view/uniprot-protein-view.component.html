@@ -46,7 +46,7 @@
 
     <div id="protein-entries">
         <div class="row mt-4" *ngFor="let entryData of entriesData;">
-            <app-protein-card [entryData]="entryData"></app-protein-card>
+            <app-protein-card [entryData]="entryData" [selectedProtein]="uniprotACC"></app-protein-card>
         </div>
         <div *ngIf="entriesData.length <= 0 && !entriesLoading" class="row mt-4 pt-4 mb-2 justify-content-center fw-bold" style="color:gray" >
             No entries found

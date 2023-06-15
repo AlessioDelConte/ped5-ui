@@ -23,7 +23,7 @@ export class EnsembleCompactCardComponent implements OnInit {
     this.ws = this.internalService.ws;
   }
 
-  ngOnInit(): void {
+  updateChainData(){
     this.ensData["chains"].forEach(data => {
       if (data['chain_name'] == this.curChain){
         this.curStats.entropy_dssp_mean = data.entropy_dssp_mean;
@@ -31,6 +31,15 @@ export class EnsembleCompactCardComponent implements OnInit {
         this.curStats.rg_mean = data.rg_mean;
       }
     });
+  }
+
+  ngOnInit(): void {
+    this.updateChainData()
+  }
+
+  assignChain(chainName){
+    this.curChain = chainName;
+    this.updateChainData()
   }
 
 }

@@ -12,11 +12,21 @@
 
             <div class="row mb-2">
                 <ng-container *ngFor="let chain of ensData['chains']">
-                    <span *ngIf="validChains.includes(chain['chain_name'])" class="badge bg-dark col-auto me-1"
+                    <span *ngIf="validChains.includes(chain['chain_name']) && curChain===chain['chain_name']" 
+                        class="badge bg-dark col-auto me-1"
+                        style="cursor: pointer;"
                         [tooltip]="'Chain '+chain['chain_name']+' is selected'">
                         Chain: {{chain['chain_name']}}
                     </span>
-                    <span *ngIf="!validChains.includes(chain['chain_name'])" class="badge bg-gray col-auto me-1"
+                    <span *ngIf="validChains.includes(chain['chain_name']) && curChain!==chain['chain_name']" 
+                        class="badge bg-gray col-auto me-1"
+                        style="cursor: pointer;"
+                        [tooltip]="'Select this chain'"
+                        (click)="assignChain(chain['chain_name'])">
+                        Chain: {{chain['chain_name']}}
+                    </span>
+                    <span *ngIf="!validChains.includes(chain['chain_name'])" 
+                        class="badge border bg-light text-dark col-auto me-1"
                         [tooltip]="'Chain '+chain['chain_name']+' doesn\'t contain any fragment of this protein'">
                         Chain: {{chain['chain_name']}}
                     </span>

@@ -33,6 +33,7 @@ import { EnsembleCompactCardComponent } from './shared/ensemble-compact-card/ens
 import { TreeModule } from 'angular-tree-component';
 import { EntryFvSectionComponent } from './shared/entry-fv-section/entry-fv-section.component';
 import { FvSequenceMergeComponent } from './shared/fv-sequence-merge/fv-sequence-merge.component';
+import { HelpComponent } from './views/help/help.component';
 
 
 
@@ -52,6 +53,10 @@ const appRoutes: Routes = [
   {
     path: 'about',
     component: AboutComponent
+  },
+  {
+    path: 'help',
+    component: HelpComponent
   },
   { path: 'api', component: SwaggerUiComponent },
   { path: 'api-form', component: SwaggerInternalComponent },
@@ -87,7 +92,8 @@ const appRoutes: Routes = [
     ProteinCardComponent,
     EnsembleCompactCardComponent,
     EntryFvSectionComponent,
-    FvSequenceMergeComponent
+    FvSequenceMergeComponent,
+    HelpComponent
   ],
   imports: [
     RouterModule.forRoot(

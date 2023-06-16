@@ -13,11 +13,13 @@ export class EntryViewComponent implements OnInit {
 
   public entryID;
   public entryData;
+  public downloadAllLink;
 
   constructor(private titleService: Title, private internalService: InternalService,
     private route: ActivatedRoute) {
     this.entryID = this.route.snapshot.paramMap.get('identifier');
     this.titleService.setTitle("Entry " + this.entryID + " - PED");
+    this.downloadAllLink = this.internalService.ws + 'entries/' + this.entryID + '/download-ensembles/';
   }
 
   ngOnInit(): void {

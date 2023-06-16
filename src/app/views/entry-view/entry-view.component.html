@@ -5,5 +5,18 @@
     <div class="mb-4"></div>
     <!-- <app-entry-tab-section [entryData]="entryData"></app-entry-tab-section> -->
     <app-entry-fv-section *ngIf="entryData" [entryData]="entryData"></app-entry-fv-section>
+
+    <div *ngIf="entryData" class="row align-items-center mt-4">
+        <div class="col">
+            <h4>Ensembles</h4>
+        </div>
+        <div class="col-auto">
+            <a role="button" class="btn btn-sm btn-success" href="{{downloadAllLink}}"><i
+                    class="bi bi-download"></i> Download All Ensembles</a>
+        </div>
+    </div>
+    <div *ngIf="entryData" class="mt-2">
+        <hr>
+    </div>
     <app-entry-ensembles-section [entryData]="entryData"></app-entry-ensembles-section>
 </div>

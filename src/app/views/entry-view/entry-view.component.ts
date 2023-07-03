@@ -28,7 +28,7 @@ export class EntryViewComponent implements OnInit {
       console.log(data)
       this.entryData = data;
       Block.remove("#result-view");
-    })
+    }, this.internalService.basicErrorHandler)
   }
 
 }

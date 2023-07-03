@@ -11,7 +11,6 @@ import { FooterComponent } from './core/footer/footer.component';
 import { HomeComponent } from './views/home/home.component';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
-import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { SwaggerUiComponent } from './views/swagger-ui/swagger-ui.component';
 import { SwaggerInternalComponent } from './views/swagger-internal/swagger-internal.component';
 import { RecaptchaDirective } from './recaptcha.directive';
@@ -34,6 +33,7 @@ import { TreeModule } from 'angular-tree-component';
 import { EntryFvSectionComponent } from './shared/entry-fv-section/entry-fv-section.component';
 import { FvSequenceMergeComponent } from './shared/fv-sequence-merge/fv-sequence-merge.component';
 import { HelpComponent } from './views/help/help.component';
+import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 
 
 
@@ -72,7 +72,6 @@ const appRoutes: Routes = [
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    PageNotFoundComponent,
     SwaggerUiComponent,
     SwaggerInternalComponent,
     RecaptchaDirective,

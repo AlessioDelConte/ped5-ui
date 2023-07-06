@@ -1,0 +1,49 @@
+<div class="container-xl">
+    <div class="row">
+        <div class="col-lg-3">
+            <div class="sticky-top">
+                <div class="sidebar-extra-height"></div>
+                <h6>
+                    <p (click)="scroll(top)" style="cursor: pointer;">Deposition</p>
+                </h6>
+                <ul>
+                    <li (click)="scroll(intro)" style="cursor: pointer;">
+                        <p>What is <strong>PED</strong><span style="font-weight: lighter">deposition</span> service?</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-lg-9">
+            <h1 #top>Deposition</h1>
+
+            <div class="row" #intro>
+                <div class="col">
+                    <h2 class="pt-3 pb-2">What is <strong>PED</strong><span
+                            style="font-weight: lighter">deposition</span> service?</h2>
+                    <p><strong>PED</strong><span style="font-weight: lighter">deposition</span> website is a tool that
+                        enables users to deposit the structural ensembles of
+                        proteins. Within the website you are able to define detailed descriptions about the experimental
+                        procedures and the computational methods used for the generation of conformational ensembles.
+                        Moreover, there is a possibility to cross-reference to other experimental and protein databases
+                        and add information about the expression organism.
+                    </p>
+                    <p>One of the major features of the <strong>PED</strong><span
+                            style="font-weight: lighter">deposition</span> tool is applying an automated pipeline to
+                        compute
+                        various characteristics of the ensembles such as, radius of gyration, secondary structural
+                        elements and relative solvent accessibility.
+                        Finally, after submitting an ensemble on the web server, our curators will be reviewing the
+                        information and the deposited entry will be published in the next release of Protein Ensemble
+                        Database (<strong>PED</strong>).
+                    </p>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-2">
+                <div class="col-auto">
+                    <a role="button" class="btn btn-lg text-white" style="background-color: #326951;" href="https://deposition.proteinensemble.org/">Go to <strong>PED</strong><span style="font-weight: lighter">deposition</span><i class="bi bi-arrow-right ms-2"></i></a>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

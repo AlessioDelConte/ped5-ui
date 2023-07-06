@@ -34,6 +34,7 @@ import { EntryFvSectionComponent } from './shared/entry-fv-section/entry-fv-sect
 import { FvSequenceMergeComponent } from './shared/fv-sequence-merge/fv-sequence-merge.component';
 import { HelpComponent } from './views/help/help.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+import { DepositionComponent } from './views/deposition/deposition.component';
 
 
 
@@ -57,6 +58,10 @@ const appRoutes: Routes = [
   {
     path: 'help',
     component: HelpComponent
+  },
+  {
+    path: 'deposition',
+    component: DepositionComponent
   },
   { path: 'api', component: SwaggerUiComponent },
   { path: 'api-form', component: SwaggerInternalComponent },
@@ -92,7 +97,8 @@ const appRoutes: Routes = [
     EnsembleCompactCardComponent,
     EntryFvSectionComponent,
     FvSequenceMergeComponent,
-    HelpComponent
+    HelpComponent,
+    DepositionComponent
   ],
   imports: [
     RouterModule.forRoot(

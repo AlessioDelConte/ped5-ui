@@ -9,7 +9,7 @@ import { Title } from '@angular/platform-browser';
 export class DepositionComponent implements OnInit {
 
   constructor(private titleService: Title) {
-    this.titleService.setTitle("Help - PED");
+    this.titleService.setTitle("Deposition - PED");
   }
 
   ngOnInit(): void {

@@ -1,217 +1,217 @@
 <div class="container-xl">
-    <div class="row mb-4 text-center">
-        <h3>Welcome to the <strong>Protein Ensemble Database</strong></h3>
-    </div>
+  <div class="row mb-4 text-center">
+    <h3>Welcome to the <strong>Protein Ensemble Database</strong></h3>
+  </div>
 
-    <div class="row mb-2">
-        <p class="text-justify small">
-            The <strong>Protein Ensemble Database (PED)</strong> is an open access database for the deposition of
-            structural ensembles,
-            including <em>intrinsically disordered proteins (IDPs)</em>. Manually curated data of structural ensembles
-            measured
-            with nuclear magnetic resonance spectroscopy, small-angle X-ray scattering, fluorescence resonance energy
-            transfer are annotated in PED. The deposition of structural coordinates can be used for the evaluation of
-            the
-            ensembles,
-            thus supporting the evolution of new modeling methods leading to much improved
-            skills of connecting the characteristic <em>"lack of structure"</em> of IDPs with function.
-            Each entry in PED corresponds to the primary experimental data and to the structural
-            ensembles associated with these data.
-        </p>
-    </div>
+  <div class="row mb-2">
+    <p class="text-justify small">
+      The <strong>Protein Ensemble Database (PED)</strong> is an open access database for the deposition of
+      structural ensembles,
+      including <em>intrinsically disordered proteins (IDPs)</em>. Manually curated data of structural ensembles
+      measured
+      with nuclear magnetic resonance spectroscopy, small-angle X-ray scattering, fluorescence resonance energy
+      transfer are annotated in PED. The deposition of structural coordinates can be used for the evaluation of
+      the
+      ensembles,
+      thus supporting the evolution of new modeling methods leading to much improved
+      skills of connecting the characteristic <em>"lack of structure"</em> of IDPs with function.
+      Each entry in PED corresponds to the primary experimental data and to the structural
+      ensembles associated with these data.
+    </p>
+  </div>
 
-    <!-- Search bar -->
-    <div class="row mb-2">
-        <div class="col-md-8 offset-md-2">
-            <strong>
-                Search in PED
-            </strong>
-            <div class="input-group">
-                <input id="searchform" class="form-control" placeholder="ex: PED00001, P38634, ..."
-                    [formControl]="searchFormControl" type="text">
-                <button class="btn btn-outline-primary btn-primary-dark" (click)="goToBrowsePage()">Search</button>
-            </div>
+  <!-- Search bar -->
+  <div class="row mb-2">
+    <div class="col-md-8 offset-md-2">
+      <strong>
+        Search in PED
+      </strong>
+      <div class="input-group">
+        <input id="searchform" class="form-control" placeholder="ex: PED00001, P38634, ..."
+               [formControl]="searchFormControl" type="text">
+        <button class="btn btn-outline-primary btn-primary-dark" (click)="goToBrowsePage()">Search</button>
+      </div>
+    </div>
+  </div>
+  <div class="row mb-4">
+    <div class="col-md-8 offset-md-2">
+      <strong class="ms-2 me-2">Examples</strong>
+      <a class="badge bg-primary me-2" routerLink="/proteins/uniprot/P38634">
+        Yeast SIC1 <i class="bi bi-link-45deg"></i>
+      </a>
+      <a class="badge bg-primary me-2" routerLink="/proteins/uniprot/Q89933">
+        MeV Nucleoprotein <i class="bi bi-link-45deg"></i>
+      </a>
+    </div>
+  </div>
+
+  <!-- How to cite -->
+  <div class="row mb-4">
+    <div class="col mb-0">
+      <div class="card text-left" style="border: none">
+        <div class="card-header">
+          How to cite
         </div>
-    </div>
-    <div class="row mb-4">
-        <div class="col-md-8 offset-md-2">
-            <strong class="ms-2 me-2">Examples</strong>
-            <a class="badge bg-primary me-2" routerLink="/proteins/uniprot/P38634">
-                Yeast SIC1 <i class="bi bi-link-45deg"></i>
+        <div class="card-body pb-0">
+          <p class="mb-1 py-0" style="text-align: center;">
+            <strong>PED in 2021: a major update of the Protein Ensemble Database for intrinsically
+              disordered
+              proteins</strong>
+            Lazar et al.,
+            (2021) <i>Nucleic Acids Research</i>, 49 (D1) pp. D404-D411.
+
+            <a href="https://www.ncbi.nlm.nih.gov/pubmed/33305318">
+              <strong>PubMed</strong><i class="bi bi-link-45deg"></i>
+            </a>,
+            <a href="https://academic.oup.com/nar/article/49/D1/D404/6030232">
+              <strong>NAR</strong><i class="bi bi-link-45deg"></i>
             </a>
-            <a class="badge bg-primary me-2" routerLink="/proteins/uniprot/Q89933">
-                MeV Nucleoprotein <i class="bi bi-link-45deg"></i>
-            </a>
+          </p>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+
+    <!-- Info -->
+    <div class="col">
+      <div class="card" style="border: none">
+        <div class="card-header">
+          <span class="card-title">Info</span>
+        </div>
+        <div class="card-body">
+          <div class="row mb-2">
+            Funding
+          </div>
+          <div class="row small mb-4 text-justify">
+            <div class="col">
+              This database is part of a project that has received funding from the European Union’s
+              Horizon
+              2020 research and innovation programme under grant agreement No 778247.
+            </div>
+          </div>
+
+          <div class="row align-items-center mb-4">
+            <div class="col-auto ">
+              <a href="https://elixir-europe.org/">
+                <img src="assets/logos/ELIXIR_logo.svg" style="width: 3em; height: 3em;"
+                     class="ml-3 p-1 img-logo align-self-center rounded-circle border border-dark shadow-logo"
+                     alt="ELIXIR logo">
+              </a>
+            </div>
+            <div class="col mx-0 px-0">
+              <p class="mt-0 mb-0 small">The PED is part of the <a
+                  href="https://elixir-europe.org/">ELIXIR
+                infrastructure</a> and a service of the <a
+                  href="https://elixir-europe.org/communities/intrinsically-disordered-proteins">
+                IDP Community</a>.
+              </p>
+            </div>
+          </div>
+
+          <div class="row mb-2">
+            API
+          </div>
+          <div class="row small mb-2">
+            <p>
+              REST API documentation <a routerLink="/help" fragment="api">here</a> (Version
+              <strong>4.1</strong>)
+            </p>
+          </div>
+
+          <div class="row mb-2">
+            Licence
+          </div>
+          <div class="row mb-4 small">
+            <div class="row align-items-center">
+              <div class="col-auto"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                <img alt="Creative Commons License" style="border-width:0"
+                     src="https://i.creativecommons.org/l/by/4.0/88x31.png"/>
+              </a></div>
+              <div class="col ps-0" style="text-align: justify">This work is licensed under a
+                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
+                  Creative Commons Attribution 4.0 International License</a>.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
     </div>
 
-    <!-- How to cite -->
-    <div class="row mb-4">
-        <div class="col mb-0">
-            <div class="card text-left" style="border: none">
-                <div class="card-header">
-                    How to cite
-                </div>
-                <div class="card-body pb-0">
-                    <p class="mb-1 py-0" style="text-align: center;">
-                        <strong>PED in 2021: a major update of the Protein Ensemble Database for intrinsically
-                            disordered
-                            proteins</strong>
-                        Lazar et al.,
-                        (2021) <i>Nucleic Acids Research</i>, 49 (D1) pp. D404-D411.
-
-                        <a href="https://www.ncbi.nlm.nih.gov/pubmed/33305318">
-                            <strong>PubMed</strong><i class="bi bi-link-45deg"></i>
-                        </a>,
-                        <a href="https://academic.oup.com/nar/article/49/D1/D404/6030232">
-                            <strong>NAR</strong><i class="bi bi-link-45deg"></i>
-                        </a>
-                    </p>
-                </div>
+    <!-- Statistics -->
+    <div class="col">
+      <div class="row">
+        <div class="card" style="border: none">
+          <div class="card-header"><span class="card-title">Statistics</span></div>
+          <div class="card-body">
+            <div class="row mb-2">
+              <div class="col">
+                <img style="width: 100%" src="/assets/nicoG_Rg.svg">
+              </div>
             </div>
-        </div>
-    </div>
 
-    <div class="row">
-
-        <!-- Info -->
-        <div class="col">
-            <div class="card" style="border: none">
-                <div class="card-header">
-                    <span class="card-title">Info</span>
-                </div>
-                <div class="card-body">
-                    <div class="row mb-2">
-                        Funding
-                    </div>
-                    <div class="row small mb-4 text-justify">
-                        <div class="col">
-                            This database is part of a project that has received funding from the European Union’s
-                            Horizon
-                            2020 research and innovation programme under grant agreement No 778247.
-                        </div>
-                    </div>
-
-                    <div class="row align-items-center mb-4">
-                        <div class="col-auto ">
-                            <a href="https://elixir-europe.org/">
-                                <img src="assets/logos/ELIXIR_logo.svg" style="width: 3em; height: 3em;"
-                                    class="ml-3 p-1 img-logo align-self-center rounded-circle border border-dark shadow-logo"
-                                    alt="ELIXIR logo">
-                            </a>
-                        </div>
-                        <div class="col mx-0 px-0">
-                            <p class="mt-0 mb-0 small">The PED is part of the <a
-                                    href="https://elixir-europe.org/">ELIXIR
-                                    infrastructure</a> and a service of the <a
-                                    href="https://elixir-europe.org/communities/intrinsically-disordered-proteins">
-                                    IDP Community</a>.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="row mb-2">
-                        API
-                    </div>
-                    <div class="row small mb-2">
-                        <p>
-                            REST API documentation <a routerLink="/help" fragment="api">here</a> (Version
-                            <strong>4.1</strong>)
-                        </p>
-                    </div>
-
-                    <div class="row mb-2">
-                        Licence
-                    </div>
-                    <div class="row mb-4 small">
-                        <div class="row align-items-center">
-                            <div class="col-auto"><a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                                    <img alt="Creative Commons License" style="border-width:0"
-                                        src="https://i.creativecommons.org/l/by/4.0/88x31.png" />
-                                </a></div>
-                            <div class="col ps-0" style="text-align: justify">This work is licensed under a
-                                <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">
-                                    Creative Commons Attribution 4.0 International License</a>.
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <!-- Statistics -->
-        <div class="col">
             <div class="row">
-                <div class="card" style="border: none">
-                    <div class="card-header"><span class="card-title">Statistics</span></div>
-                    <div class="card-body">
-                        <div class="row mb-2">
-                            <div class="col">
-                                <img style="width: 100%" src="/assets/nicoG_Rg.svg">
-                            </div>
-                        </div>
+              <div class="col text-md-left ">
+                <div class="col-12  small">
+                  <div class="row">
+                    <div class="col offset-lg-1 mr-auto">Number of proteins</div>
+                    <div class="col-auto">{{statsData["proteins"] || "-"}}</div>
+                    <div class="col-lg-1"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col offset-lg-1 mr-auto">Number of entries</div>
+                    <div class="col-auto">{{statsData["entries"] || "-"}}</div>
+                    <div class="col-lg-1"></div>
 
-                        <div class="row">
-                            <div class="col text-md-left ">
-                                <div class="col-12  small">
-                                    <div class="row">
-                                        <div class="col offset-lg-1 mr-auto">Number of proteins</div>
-                                        <div class="col-auto">{{statsData["proteins"] || "-"}}</div>
-                                        <div class="col-lg-1"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col offset-lg-1 mr-auto">Number of entries</div>
-                                        <div class="col-auto">{{statsData["entries"] || "-"}}</div>
-                                        <div class="col-lg-1"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col offset-lg-1 mr-auto">Number of ensembles</div>
+                    <div class="col-auto">{{statsData["ensembles"] || "-"}}</div>
+                    <div class="col-lg-1"></div>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col offset-lg-1 mr-auto">Number of ensembles</div>
-                                        <div class="col-auto">{{statsData["ensembles"] || "-"}}</div>
-                                        <div class="col-lg-1"></div>
+                  </div>
+                  <div class="row">
+                    <div class="col offset-lg-1 mr-auto">Number of conformers</div>
+                    <div class="col-auto">{{statsData["conformers"] || "-"}}</div>
+                    <div class="col-lg-1"></div>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col offset-lg-1 mr-auto">Number of conformers</div>
-                                        <div class="col-auto">{{statsData["conformers"] || "-"}}</div>
-                                        <div class="col-lg-1"></div>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col offset-lg-1 mr-auto">Last updated</div>
+                    <div class="col-auto">14. 09. 2023</div>
+                    <div class="col-lg-1"></div>
 
-                                    </div>
-                                    <div class="row mt-2">
-                                        <div class="col offset-lg-1 mr-auto">Last updated</div>
-                                        <div class="col-auto">15. 05. 2023</div>
-                                        <div class="col-lg-1"></div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-
-                    </div>
+                  </div>
                 </div>
-            </div>
-        </div>
+              </div>
 
-        <!-- Social Media -->
-        <div class="col">
-            <div class="card" style="border: none">
-                <div class="card-header">
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Social Media -->
+    <div class="col" style="max-height: 440px; overflow-y: scroll">
+      <div class="card" style="border: none">
+        <div class="card-header">
                     <span class="card-title">
                         Social media
                     </span>
-                </div>
-                <div class="card-body small">
-                    <img class="card-img" style="width: 1rem" src="/assets/icon_twitter.svg">
-                    <a href="https://twitter.com/proteinensemble"> @proteinEnsemble</a>
-                    <a class="twitter-timeline" href="https://twitter.com/proteinensemble"
-                        data-chrome="nofooter noheader noborders transparent" data-aria-polite="assertive"
-                        data-tweet-limit="1">
-                    </a>
-                </div>
-            </div>
         </div>
-
+        <div class="card-body small">
+          <img class="card-img" style="width: 1rem" src="/assets/x_logo.svg">
+          <a href="https://twitter.com/proteinensemble"> @proteinEnsemble</a>
+          <a class="twitter-timeline" href="https://twitter.com/proteinensemble"
+             data-chrome="nofooter noheader noborders transparent" data-aria-polite="assertive"
+             data-tweet-limit="1">
+          </a>
+        </div>
+      </div>
     </div>
+
+  </div>
 </div>

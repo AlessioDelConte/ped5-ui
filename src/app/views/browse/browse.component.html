@@ -90,7 +90,7 @@
     <div class="row mb-2">
         <div class="col">
             <pagination [totalItems]="itemsCount" [itemsPerPage]="itemsPerPage" [(ngModel)]="curPageNum"
-                (pageChanged)="pageChanged($event)" [boundaryLinks]="true" class="my-pagination"></pagination>
+                (pageChanged)="pageChanged($event)" [boundaryLinks]="true" [maxSize]="10" class="my-pagination"></pagination>
         </div>
         <div class="col-auto mx-2">
             Selected items <span class="badge bg-primary">{{itemsCount}}</span>

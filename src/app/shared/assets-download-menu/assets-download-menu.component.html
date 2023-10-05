@@ -14,8 +14,23 @@
 
     </div>
 
-    <div class="col ms-2">
+    <div class="col ms-2 overflow-hidden">
         <h2>{{selectedAsset}}</h2>
+
+        <ng-container *ngIf="selectedAsset === 'All'">
+            <div class="row justify-content-center  align-items-center">
+                <div class="row ms-1 mb-2">
+                    Download all the assets for the current ensemble.
+                </div>
+                <div class="col-auto"><strong>Download:</strong></div>
+                <a role="button" class="btn btn-primary col-auto ms-2" href="{{baseAssetURL + '/download-all-data/?response_format=json'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Archived JSON
+                </a>
+                <a role="button" class="btn btn-primary col-auto ms-2" href="{{baseAssetURL + '/download-all-data/?response_format=csv'}}">
+                    <i class="bi bi-file-earmark-arrow-down me-2"></i>Archived CSV
+                </a>
+            </div>
+        </ng-container>
 
         <ng-container *ngIf="selectedAsset === 'PDB'">
             <div class="row justify-content-center  align-items-center">

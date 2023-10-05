@@ -1,5 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { InternalService } from 'src/app/services/internal.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {InternalService} from 'src/app/services/internal.service';
 
 @Component({
   selector: 'app-assets-download-menu',
@@ -11,59 +11,66 @@ export class AssetsDownloadMenuComponent implements OnInit {
   @Input() ensembleId;
   @Input() ensembleData;
 
-  public selectedAsset = "PDB";
+  public selectedAsset = 'All';
   public baseAssetURL;
 
   public menuData = [];
 
-  constructor(public internalService: InternalService) { }
+  constructor(public internalService: InternalService) {
+  }
 
   ngOnInit(): void {
     this.baseAssetURL = this.internalService.ws + 'entries/' + this.entryId + '/ensembles/' + this.ensembleId;
 
-    this.menuData = [
-      {
-        "category": "General",
-        "assets": {
-          "PDB": {},
-          "Weights": {}
+    this.menuData.push({
+      category: 'All Assets',
+      assets: {
+        All: {},
+      }
+    });
+
+    this.menuData.push({
+        category: 'General',
+        assets: {
+          PDB: {},
+          Weights: {}
         }
       }
-    ];
+    );
 
-    if (!this.ensembleData["only_CA"]) {
+    if (!this.ensembleData.only_CA) {
       this.menuData.push({
-        "category": "Secondary Structure",
-        "assets": {
-          "DSSP Consensus": {},
-          "DSSP Data": {}
+        category: 'Secondary Structure',
+        assets: {
+          'DSSP Consensus': {},
+          'DSSP Data': {}
         }
-      })
-      if (this.ensembleData["models"] <= 1000) {
+      });
+      if (this.ensembleData.models <= 1000) {
         this.menuData.push({
-          "category": "Molprobity",
-          "assets": {
-            "C-beta Deviations": {},
-            "Ramachandran": {},
-            "Clash Analysis": {},
-            "Geometry Bonds": {},
-            "Rotamer": {},
+          category: 'Molprobity',
+          assets: {
+            'C-beta Deviations': {},
+            Ramachandran: {},
+            'Clash Analysis': {},
+            'Geometry Bonds': {},
+            Rotamer: {},
           }
-        })
+        });
       }
     }
 
     this.menuData.push({
-      "category": "Other",
-      "assets": {
-        "Maximum Diameter": {},
-        "Gyration": {}
+      category: 'Other',
+      assets: {
+        'Maximum Diameter': {},
+        Gyration: {}
       }
-    })
+    });
 
   }
 
-  public changeSelectedAsset(newAsset) {
+  public changeSelectedAsset(newAsset): void {
     this.selectedAsset = newAsset;
   }
 

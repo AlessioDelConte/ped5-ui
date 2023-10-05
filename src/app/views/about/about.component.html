@@ -315,10 +315,13 @@
                         <ng-template #treeNodeWrapperTemplate let-node let-index="index">
                             <div class="node-wrapper" [style.padding-left]="node.getNodePadding()">
                                 <tree-node-expander [node]="node"></tree-node-expander>
-                                <div class=" ml-2 my-1">
+                                <div class="my-1">
                                     <span style="color: #2E8BA2"><strong>{{node.data.name}}</strong></span>
                                     <span><strong> (IDPO:{{node.data.id}})</strong></span>
-                                    <span> {{node.data.def}}</span>
+                                    <ng-container *ngIf="node.data.def">
+                                        <br>
+                                        <span style="color: #6f7076; font-size: 14px"><i>{{node.data.def}}</i></span>
+                                    </ng-container>
                                 </div>
                             </div>
                         </ng-template>

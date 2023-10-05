@@ -25,9 +25,9 @@ export class AboutComponent implements OnInit {
   ontologyFilterFrom;
 
   constructor(private internalService: InternalService,
-    private fb: FormBuilder,
-    private titleService: Title) {
-    this.titleService.setTitle("About - PED");
+              private fb: FormBuilder,
+              private titleService: Title) {
+    this.titleService.setTitle('About - PED');
    }
 
    ngOnInit() {
@@ -39,19 +39,19 @@ export class AboutComponent implements OnInit {
 
       result.forEach((node) => {
         if ('is_a' in node) {
-          node['is_a'].forEach((parentId) => {
+          node.is_a.forEach((parentId) => {
             nodes_flat.push({
               id: node.id,
               name: node.name,
-              def: node.def,
-              parentId: parentId
+              def: node.definition,
+              parentId
             });
           });
         } else {
           nodes_flat.push({
             id: node.id,
             name: node.name,
-            def: node.def
+            def: node.definition
           });
         }
       });
@@ -124,7 +124,7 @@ export class AboutComponent implements OnInit {
 
   public scroll(el: HTMLElement) {
     const y = el.getBoundingClientRect().top + window.scrollY - 75;
-    window.scrollTo({ top: y, behavior: "smooth" })
+    window.scrollTo({ top: y, behavior: 'smooth' });
     // el.scrollIntoView(true);
   }
 

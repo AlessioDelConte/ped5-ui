@@ -1,0 +1,897 @@
+---
+openapi: 3.0.0
+info:
+  title: PED API
+  version: '1.0'
+  contact:
+    name: BioComputing UP lab
+    email: biocomp@bio.unipd.it
+    url: https://protein.bio.unipd.it/
+  description: The PED web server exposes RESTful endpoints for programmatic access
+    to retrieve a single entry, perform entries search and download assets.
+  license:
+    url: https://creativecommons.org/licenses/by/4.0/
+    name: Creative Commons Attribution 4.0 International License
+servers:
+  - url: https://deposition.proteinensemble.org/api/v1
+    description: PED API
+paths:
+  /entries:
+    get:
+      summary: Search Entries
+      operationId: search-entries
+      parameters:
+        - schema:
+            type: integer
+          in: query
+          name: limit
+          description: Number of entries to show
+        - schema:
+            type: integer
+          in: query
+          name: offset
+          description: Offset of results to skip (ideal for pagination)
+        - schema:
+            type: string
+          in: query
+          name: entry_id
+          description: PED Entry ID
+        - schema:
+            type: string
+          in: query
+          name: publication_identifier
+          description: Pubmed/DOI ID
+        - schema:
+            type: string
+          in: query
+          name: publication_html
+          description: Publication title
+        - schema:
+            type: string
+          in: query
+          name: data_owner
+          description: Data owner/Author
+        - schema:
+            type: string
+          in: query
+          name: uniprot_acc
+          description: UniProt ACC
+        - schema:
+            type: string
+          in: query
+          name: protein_name
+          description: Protein Name
+        - schema:
+            type: string
+          in: query
+          name: term
+          description: IDPO term
+        - schema:
+            type: string
+          in: query
+          name: cross_ref
+          description: DB or experimental cross-reference
+        - schema:
+            type: string
+          in: query
+          name: free_text
+          description: Free text search query
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  count:
+                    type: integer
+                  limit:
+                    type: integer
+                  offset:
+                    type: integer
+                  result:
+                    type: array
+                    items: { }
+                  params:
+                    type: array
+                    items:
+                      type: object
+              example:
+                value:
+                  count: 0
+                  limit: 0
+                  offset: 0
+                  result:
+                    - {
+                      "entry_id": "PED00001",
+                      "description": {
+                        "title": "Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76, Ser80",
+                        "authors": [
+                          {
+                            "name": "Tanja Mittag",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Joseph A. Marsh",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Alexander Grishaev",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Stephen Orlicky",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Hong Lin",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Frank Sicheri",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Mike Tyers",
+                            "orcid_id": null
+                          },
+                          {
+                            "name": "Julie D. Forman-Kay",
+                            "orcid_id": null
+                          }
+                        ],
+                        "entry_cross_reference": [
+                          {
+                            "db": "disprot",
+                            "id": "DP00631"
+                          }
+                        ],
+                        "experimental_cross_reference": [
+                          {
+                            "db": "bmrb",
+                            "id": "16659"
+                          }
+                        ],
+                        "ontology_terms": [
+                          {
+                            "name": "NMR",
+                            "namespace": "Measurement method",
+                            "id": "00120"
+                          },
+                          {
+                            "name": "RDC",
+                            "namespace": "Measurement method",
+                            "id": "00166"
+                          },
+                          {
+                            "name": "chemical shift",
+                            "namespace": "Measurement method",
+                            "id": "00167"
+                          },
+                          {
+                            "name": "relaxation",
+                            "namespace": "Measurement method",
+                            "id": "00168"
+                          },
+                          {
+                            "name": "T2 relaxation",
+                            "namespace": "Measurement method",
+                            "id": "00169"
+                          },
+                          {
+                            "name": "PRE",
+                            "namespace": "Measurement method",
+                            "id": "00171"
+                          },
+                          {
+                            "name": "SAXS",
+                            "namespace": "Measurement method",
+                            "id": "00125"
+                          },
+                          {
+                            "name": "TraDES",
+                            "namespace": "Ensemble generation method",
+                            "id": "00186"
+                          },
+                          {
+                            "name": "CNS",
+                            "namespace": "Ensemble generation method",
+                            "id": "00192"
+                          },
+                          {
+                            "name": "CRYSOL",
+                            "namespace": "Ensemble generation method",
+                            "id": "00208"
+                          },
+                          {
+                            "name": "ShiftX",
+                            "namespace": "Ensemble generation method",
+                            "id": "00210"
+                          },
+                          {
+                            "name": "SHIFTS",
+                            "namespace": "Ensemble generation method",
+                            "id": "00239"
+                          },
+                          {
+                            "name": "ENSEMBLE",
+                            "namespace": "Ensemble generation method",
+                            "id": "00216"
+                          }
+                        ]
+                      },
+                      "construct_chains": [
+                        {
+                          "chain_name": "A",
+                          "fragments": [
+                            {
+                              "description": "tag",
+                              "uniprot_acc": null
+                            },
+                            {
+                              "description": "Protein SIC1",
+                              "uniprot_acc": "P38634"
+                            }
+                          ],
+                          "fragments_stats": [
+                            {
+                              "uniprot": null,
+                              "cov_nogaps_frag_unip": 1
+                            },
+                            {
+                              "uniprot": "P38634",
+                              "cov_nogaps_frag_unip": 0.31690140845070425
+                            }
+                          ]
+                        }
+                      ],
+                      "ensembles": [
+                        {
+                          "ensemble_id": "e001",
+                          "models": 11,
+                          "chains": [
+                            {
+                              "chain_name": "A",
+                              "rg_mean": 26.7439005864,
+                              "entropy_dssp_mean": 0.4023964281,
+                              "relative_asa_mean": 0.6879983572
+                            }
+                          ]
+                        },
+                        {
+                          "ensemble_id": "e002",
+                          "models": 10,
+                          "chains": [
+                            {
+                              "chain_name": "A",
+                              "rg_mean": 26.714687005,
+                              "entropy_dssp_mean": 0.3969717634,
+                              "relative_asa_mean": 0.7016040011
+                            }
+                          ]
+                        },
+                        {
+                          "ensemble_id": "e003",
+                          "models": 11,
+                          "chains": [
+                            {
+                              "chain_name": "A",
+                              "rg_mean": 28.1516697297,
+                              "entropy_dssp_mean": 0.4419606019,
+                              "relative_asa_mean": 0.7005979796
+                            }
+                          ]
+                        }
+                      ]
+                    }
+      tags:
+        - Retrieve Entries
+  /entries/{identifier}:
+    get:
+      summary: Get Entry details
+      operationId: get-entry
+      description: Get the details of an entry
+      parameters:
+        - schema:
+            type: string
+          name: identifier
+          in: path
+          required: true
+          description: PED Entry identifier
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                example:
+                properties:
+                  entry_id:
+                    type: string
+                  version:
+                    type: integer
+                  creation_date:
+                    type: string
+                  description:
+                    "$ref": "#/components/schemas/EntryDescription"
+                  construct_chains:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/ConstructChain"
+                  ensembles:
+                    type: array
+                    items:
+                      "$ref": "#/components/schemas/EntryEnsemble"
+              example: {
+                "entry_id": "PED00001",
+                "version": 1,
+                "description": {
+                  "title": "Structural ensemble of pSic1 (1-90) with phosphorylations at Thr5, Thr33, Thr45, Ser69, Ser76, Ser80",
+                  "authors": [
+                    {
+                      "name": "Tanja Mittag",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Joseph A. Marsh",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Alexander Grishaev",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Stephen Orlicky",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Hong Lin",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Frank Sicheri",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Mike Tyers",
+                      "orcid_id": null
+                    },
+                    {
+                      "name": "Julie D. Forman-Kay",
+                      "orcid_id": null
+                    }
+                  ],
+                  "entry_cross_reference": [
+                    {
+                      "db": "disprot",
+                      "id": "DP00631"
+                    }
+                  ],
+                  "experimental_cross_reference": [
+                    {
+                      "db": "bmrb",
+                      "id": "16659"
+                    }
+                  ],
+                  "ontology_terms": [
+                    {
+                      "name": "NMR",
+                      "namespace": "Measurement method",
+                      "id": "00120"
+                    },
+                    {
+                      "name": "RDC",
+                      "namespace": "Measurement method",
+                      "id": "00166"
+                    },
+                    {
+                      "name": "chemical shift",
+                      "namespace": "Measurement method",
+                      "id": "00167"
+                    },
+                    {
+                      "name": "relaxation",
+                      "namespace": "Measurement method",
+                      "id": "00168"
+                    },
+                    {
+                      "name": "T2 relaxation",
+                      "namespace": "Measurement method",
+                      "id": "00169"
+                    },
+                    {
+                      "name": "PRE",
+                      "namespace": "Measurement method",
+                      "id": "00171"
+                    },
+                    {
+                      "name": "SAXS",
+                      "namespace": "Measurement method",
+                      "id": "00125"
+                    },
+                    {
+                      "name": "TraDES",
+                      "namespace": "Ensemble generation method",
+                      "id": "00186"
+                    },
+                    {
+                      "name": "CNS",
+                      "namespace": "Ensemble generation method",
+                      "id": "00192"
+                    },
+                    {
+                      "name": "CRYSOL",
+                      "namespace": "Ensemble generation method",
+                      "id": "00208"
+                    },
+                    {
+                      "name": "ShiftX",
+                      "namespace": "Ensemble generation method",
+                      "id": "00210"
+                    },
+                    {
+                      "name": "SHIFTS",
+                      "namespace": "Ensemble generation method",
+                      "id": "00239"
+                    },
+                    {
+                      "name": "ENSEMBLE",
+                      "namespace": "Ensemble generation method",
+                      "id": "00216"
+                    }
+                  ]
+                },
+                "construct_chains": [
+                  {
+                    "chain_name": "A",
+                    "fragments": [
+                      {
+                        "description": "tag",
+                        "uniprot_acc": null
+                      },
+                      {
+                        "description": "Protein SIC1",
+                        "uniprot_acc": "P38634"
+                      }
+                    ],
+                    "fragments_stats": [
+                      {
+                        "uniprot": null,
+                        "cov_nogaps_frag_unip": 1
+                      },
+                      {
+                        "uniprot": "P38634",
+                        "cov_nogaps_frag_unip": 0.31690140845070425
+                      }
+                    ]
+                  }
+                ],
+                "ensembles": [
+                  {
+                    "ensemble_id": "e001",
+                    "models": 11,
+                    "chains": [
+                      {
+                        "chain_name": "A",
+                        "rg_mean": 26.7439005864,
+                        "entropy_dssp_mean": 0.4023964281,
+                        "relative_asa_mean": 0.6879983572
+                      }
+                    ]
+                  },
+                  {
+                    "ensemble_id": "e002",
+                    "models": 10,
+                    "chains": [
+                      {
+                        "chain_name": "A",
+                        "rg_mean": 26.714687005,
+                        "entropy_dssp_mean": 0.3969717634,
+                        "relative_asa_mean": 0.7016040011
+                      }
+                    ]
+                  },
+                  {
+                    "ensemble_id": "e003",
+                    "models": 11,
+                    "chains": [
+                      {
+                        "chain_name": "A",
+                        "rg_mean": 28.1516697297,
+                        "entropy_dssp_mean": 0.4419606019,
+                        "relative_asa_mean": 0.7005979796
+                      }
+                    ]
+                  }
+                ]
+              }
+      tags:
+        - Retrieve Entries
+  /entries/{identifier}/ensembles/{ensemble_id}/{asset}:
+    get:
+      summary: Get Ensemble Asset
+      tags:
+        - Download Assets
+      responses: { }
+      operationId: get-entry-asset
+      parameters:
+        - schema:
+            type: string
+            enum:
+              - csv
+              - json
+          in: query
+          name: response_format
+          description: 'Response format. Only for the following assets: dssp-consensus,
+          dssp-data, cb-dev, clash, geom-angles, geom-bonds, geom-carbons, ramachandran,
+          rotamer, gyration-chains, gyration-global, dmax-data, dmax-global'
+        - schema:
+            type: boolean
+          in: query
+          name: only_features
+          description: Only features. Only for dssp-consensus
+    parameters:
+      - schema:
+          type: string
+        name: identifier
+        in: path
+        required: true
+        description: PED Entry identifier (e.g. PED00001)
+      - schema:
+          type: string
+          enum:
+            - ensemble-pdb
+            - ensemble-sample
+            - dssp-consensus
+            - dssp-data
+            - cb-dev
+            - clash
+            - geom-angles
+            - geom-bonds
+            - geom-carbons
+            - ramachandran
+            - rotamer
+            - gyration-chains
+            - gyration-global
+            - dmax-data
+            - dmax-global
+            - weights
+        name: asset
+        in: path
+        required: true
+        description: Asset Name
+      - schema:
+          type: string
+        name: ensemble_id
+        in: path
+        required: true
+        description: Ensemble ID (e.g. e001)
+  /entries/{identifier}/ensembles/{ensemble_id}/download-all-data/:
+    get:
+      summary: Download all assets data
+      tags:
+        - Download Assets
+      operationId: download-all-data
+      description: Download all assets data in a single tar.gz file. The files inside the tar.gz can be requested as
+        JSON or CSV using the `response_format` query parameter.
+      parameters:
+        - schema:
+            type: string
+          in: path
+          name: identifier
+          description: PED Entry identifier (e.g. PED00001)
+        - schema:
+            type: string
+          in: path
+          name: ensemble_id
+          description: Ensemble ID (e.g. e001)
+        - schema:
+            type: string
+            enum:
+              - csv
+              - json
+          in: query
+          name: response_format
+          description: 'Response format. Only for the following assets: dssp-consensus,
+          dssp-data, cb-dev, clash, geom-angles, geom-bonds, geom-carbons, ramachandran,
+          rotamer, gyration-chains, gyration-global, dmax-data, dmax-global'
+
+      responses:
+        '200':
+          description: Tar file with all assets data is returned
+          content:
+            application/tar+gzip:
+              schema:
+                  type: string
+                  format: binary
+  /entries/{identifier}/ensembles/{ensemble_id}/chains/{chain}/{asset}:
+    parameters:
+      - schema:
+          type: string
+        name: identifier
+        in: path
+        required: true
+        description: PED Entry identifier (e.g. PED00001)
+      - schema:
+          type: string
+          enum:
+            - ensemble-animation
+            - ramachandran-plot
+            - rg-boxplot
+        name: asset
+        in: path
+        required: true
+        description: Asset Name
+      - schema:
+          type: string
+        name: chain
+        in: path
+        required: true
+        description: Chain Name
+      - schema:
+          type: string
+        name: ensemble_id
+        in: path
+        required: true
+        description: Ensemble ID (e.g. e001)
+    get:
+      summary: Get Ensemble Chain Asset
+      tags:
+        - Download Assets
+      responses: { }
+      operationId: get-entry-chain-asset
+components:
+  schemas:
+    Author:
+      type: object
+      properties:
+        name:
+          type: string
+        orcid_id:
+          type: string
+        corresponding_author:
+          type: boolean
+        email:
+          type: string
+      x-examples:
+        Example 1:
+          name: Luiggi Tenorio-Ku
+          orcid_id: 0000-0001-6086-9494
+          corresponding_author: false
+          email: biocomp@bio.unipd.it
+    ExperimentalTag:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        is_a:
+          type: array
+          items:
+            type: string
+        id:
+          type: string
+        definition:
+          type: string
+        alias:
+          type: array
+          items:
+            type: string
+      x-examples:
+        Example 1:
+          name: NMR
+          namespace: Measurement method
+          is_a:
+            - '00230'
+          id: '00120'
+          definition: NMR spectroscopy is based upon the principle of nuclear spins
+            and nuclei are electrically charged, the intrinsic magnetic moment of
+            atomic nuclei such as that of 1 H, 13 C, and 15 N. When an external magnetic
+            field an energy transfer between two states is induced.
+          alias:
+            - nuclear magnetic resonance
+    CrossReference:
+      type: object
+      x-examples:
+        example-1:
+          db: string
+          id: string
+      properties:
+        db:
+          type: string
+        id:
+          type: string
+    EntryDescription:
+      title: EntryDescription
+      x-stoplight:
+        id: 1rcbpq229tgjm
+      type: object
+      x-examples:
+        example-1:
+          title: string
+          authors:
+            - name: string
+              orcid_id: string
+              corresponding_author: true
+              email: string
+          publication_status: string
+          publication_source: string
+          publication_identifier: string
+          publication_html: string
+          expression_organism: string
+          expression_organism_name: string
+          experimental_procedure: string
+          structural_ensembles_calculation: string
+          md_calculation: string
+          ontology_terms:
+            - name: string
+              namespace: string
+              is_a:
+                - string
+              id: string
+              definition: string
+              alias:
+                - string
+          entry_cross_reference:
+            - db: string
+              id: string
+          experimental_cross_reference:
+            - db: string
+              id: string
+      properties:
+        title:
+          type: string
+        authors:
+          type: array
+          items:
+            "$ref": "#/components/schemas/Author"
+        publication_status:
+          type: string
+        publication_source:
+          type: string
+        publication_identifier:
+          type: string
+        publication_html:
+          type: string
+        expression_organism:
+          type: string
+        expression_organism_name:
+          type: string
+        experimental_procedure:
+          type: string
+        structural_ensembles_calculation:
+          type: string
+        md_calculation:
+          type: string
+        ontology_terms:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ExperimentalTag"
+        entry_cross_reference:
+          type: array
+          items:
+            "$ref": "#/components/schemas/CrossReference"
+        experimental_cross_reference:
+          type: array
+          items:
+            "$ref": "#/components/schemas/CrossReference"
+    ConstructFragment:
+      type: object
+      x-examples:
+        Example 1:
+          description: Protein SIC1
+          source_sequence: MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRTLFQFESHDNGTVREEQEPLGRVNRILFPTQQNVDIDAAEEEEEGEVLLPPSRPTSARQLHLSLERDEFDQTHRKKIIKDVPGTPSDKVITFELAKNWNNNSPKNDARSQESEDEEDIIINPVRVGKNPFASDELVTQEIRNERKRAMLRENPDIEDVITYVNKKGEVVEKRRLTDEEKRRFKPKALFQSRDQEH
+          start_position: 1
+          end_position: 90
+          uniprot_acc: P38634
+          uniprot_info:
+      properties:
+        description:
+          type: string
+        source_sequence:
+          type: string
+        start_position:
+          type: integer
+        end_position:
+          type: integer
+        uniprot_acc:
+          type: string
+          nullable: true
+        uniprot_info:
+          nullable: true
+    ConstructChain:
+      title: ConstructChain
+      x-stoplight:
+        id: yskxxl0su6705
+      type: object
+      properties:
+        chain_name:
+          type: string
+        fragments:
+          type: array
+          items:
+            "$ref": "#/components/schemas/ConstructFragment"
+        alignment:
+          type: object
+          properties:
+            pdb_sequence:
+              type: string
+            fragments_sequence:
+              type: string
+        fragments_stats:
+          type: array
+          items:
+            type: object
+        missings:
+          type: array
+          items:
+            type: object
+        mutations:
+          type: array
+          items:
+            type: object
+        modifications:
+          type: array
+          items:
+            type: object
+      x-examples:
+        example-1:
+          chain_name: string
+          fragments:
+            - description: string
+              source_sequence: string
+              start_position: 0
+              end_position: 0
+              uniprot_acc: string
+              uniprot_info:
+          alignment:
+            pdb_sequence: string
+            fragments_sequence: string
+          fragments_stats:
+            - { }
+          missings:
+            - { }
+          mutations:
+            - { }
+          modifications:
+            - { }
+    EntryEnsembleChain:
+      type: object
+      properties:
+        chain_name:
+          type: string
+        rg_mean:
+          type: number
+        entropy_dssp_mean:
+          type: number
+        relative_asa_mean:
+          type: number
+      x-examples:
+        Example 1:
+          chain_name: A
+          rg_mean: 26.7439005864
+          entropy_dssp_mean: 0.4023964281
+          relative_asa_mean: 0.6879983572
+    EntryEnsemble:
+      type: object
+      x-examples:
+        Example 1:
+          ensemble_id: e001
+          models: 11
+          chains:
+            - chain_name: A
+              rg_mean: 26.7439005864
+              entropy_dssp_mean: 0.4023964281
+              relative_asa_mean: 0.6879983572
+      properties:
+        ensemble_id:
+          type: string
+        models:
+          type: integer
+        chains:
+          type: array
+          items:
+            "$ref": "#/components/schemas/EntryEnsembleChain"

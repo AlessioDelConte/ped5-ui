@@ -9,14 +9,14 @@ import SwaggerUI from 'swagger-ui';
 })
 export class SwaggerUiComponent implements OnInit {
 
-  constructor(private titleService: Title) { 
-    this.titleService.setTitle("API - PED");
+  constructor(private titleService: Title) {
+    this.titleService.setTitle('API - PED');
   }
 
   ngOnInit(): void {
     SwaggerUI({
       domNode: document.getElementById('swagger-ui-item'),
-      url: '../assets/ped_api_v1.json'
+      url: '../assets/openapi.yaml'
     });
   }
 

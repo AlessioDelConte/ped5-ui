@@ -12,15 +12,15 @@ export class FvSequenceMergeComponent implements OnInit {
   @Input() fvId: string;
   @Input() dsspData;
   @Input() chainName: string;
-  @Input() chainData: object;
+  @Input() chainData: any;
 
   fv;
   constructor() { }
 
   ngOnInit(): void {
-    console.log(this.fvId)
-    console.log(this.chainName)
-    console.log(this.dsspData)
+    console.log(this.fvId);
+    console.log(this.chainName);
+    console.log(this.dsspData);
   }
 
   ngAfterViewInit() {
@@ -44,10 +44,10 @@ export class FvSequenceMergeComponent implements OnInit {
     let index_color = 0;
     const protein_row = {
       type: 'rect',
-      id: 'Construct' + this.chainData['chain_name'],
-      label: 'Chain ' + this.chainData['chain_name'],
-      data: this.chainData['fragments'].map((currFragment, indexCurrConstruct) => {
-        let currFragmentStats = this.chainData['fragments_stats'][indexCurrConstruct]
+      id: 'Construct' + this.chainData.chain_name,
+      label: 'Chain ' + this.chainData.chain_name,
+      data: this.chainData.fragments.map((currFragment, indexCurrConstruct) => {
+        const currFragmentStats = this.chainData.fragments_stats[indexCurrConstruct];
         index_color += 1;
         const start = currFragmentStats.start_position_alig + 1;
         position = currFragmentStats.end_position_alig + 1;
@@ -77,7 +77,7 @@ export class FvSequenceMergeComponent implements OnInit {
     let data_mutations = [];
     console.log('this.chain', this.chainData);
     if (this.chainData.hasOwnProperty('mutations')) {
-      data_mutations = data_mutations.concat(this.chainData['mutations'].map(currItem => {
+      data_mutations = data_mutations.concat(this.chainData.mutations.map(currItem => {
         return {
           x: currItem.start_position_alig + 1,
           y: currItem.end_position_alig + 1,
@@ -86,7 +86,7 @@ export class FvSequenceMergeComponent implements OnInit {
       }));
     }
     if (this.chainData.hasOwnProperty('missings')) {
-      data_mutations = data_mutations.concat(this.chainData['missings'].map(currItem => {
+      data_mutations = data_mutations.concat(this.chainData.missings.map(currItem => {
         return {
           x: currItem.start_position_alig + 1,
           y: currItem.end_position_alig + 1,
@@ -97,7 +97,7 @@ export class FvSequenceMergeComponent implements OnInit {
     if (data_mutations.length > 0) {
       this.fv.addFeatures([{
         type: 'rect',
-        id: this.chainData['chain_name'] + 'mutation',
+        id: this.chainData.chain_name + 'mutation',
         label: 'Mutation',
         color: '#84716a',
         data: data_mutations
@@ -108,7 +108,7 @@ export class FvSequenceMergeComponent implements OnInit {
     let data_ptm = [];
     if (this.chainData.hasOwnProperty('modifications')) {
       // console.log('this.chain[\'modifications\']', this.chain['modifications']);
-      data_ptm = data_ptm.concat(this.chainData['modifications'].map(currItem => {
+      data_ptm = data_ptm.concat(this.chainData.modifications.map(currItem => {
         // console.log('this.chain[\'modifications\']   currItem', currItem);
 
         return {
@@ -121,7 +121,7 @@ export class FvSequenceMergeComponent implements OnInit {
     if (data_ptm.length > 0) {
       this.fv.addFeatures([{
         type: 'unique',
-        id: this.chainData['chain_name'] + 'ptm',
+        id: this.chainData.chain_name + 'ptm',
         label: 'PTMs',
         color: '#84716a',
         data: data_ptm
@@ -130,15 +130,15 @@ export class FvSequenceMergeComponent implements OnInit {
 
     // DSSP Data
 
-    let ensNames = Object.keys(this.dsspData)
+    const ensNames = Object.keys(this.dsspData);
 
     ensNames.forEach(ensembleId => {
       const flagID = ensembleId + '_' + this.chainName;
       const filteredRows = this.dsspData[ensembleId].filter(
         currRow => currRow.chain === this.chainName).sort((a, b) => a.residue_number > b.residue_number ? 1 : -1);
-      let resNumOffset = filteredRows[0]["residue_number"];
+      const resNumOffset = filteredRows[0].residue_number;
 
-      let fvOnj = [
+      const fvOnj = [
         {
           type: 'curve',
           id: 'sec_struct' + flagID,
@@ -221,11 +221,10 @@ export class FvSequenceMergeComponent implements OnInit {
 
         }
       ];
-      console.log("fvOnj: ", fvOnj);
       this.fv.addFeatures(
         fvOnj
       );
-    })
+    });
 
 
   }

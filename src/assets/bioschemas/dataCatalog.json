@@ -1,0 +1,106 @@
+{
+  "@context": "https://schema.org/",
+  "@type": "DataCatalog",
+  "@id": "https://proteinensemble.org/#DataCatalog",
+  "http://purl.org/dc/terms/conformsTo": {
+    "@type": "CreativeWork",
+    "@id": "https://bioschemas.org/profiles/DataCatalog/0.3-RELEASE-2019_07_01"
+  },
+  "sameAs": "https://registry.identifiers.org/registry/ped",
+  "url": "https://proteinensemble.org/",
+  "identifier": "https://registry.identifiers.org/registry/ped",
+  "name": "The Protein Ensemble Database",
+  "alternateName": "PED",
+  "description": "The Protein Ensemble Database is an open access database for the deposition of structural ensembles, including intrinsically disordered proteins.",
+  "datePublished": "2020-10",
+  "dateModified": "2022-02-03",
+  "citation": {
+    "@type": "ScholarlyArticle",
+    "@id": "https://doi.org/10.1093/nar/gkaa1021",
+    "name": "PED in 2021: a major update of the protein ensemble database for intrinsically disordered proteins",
+    "url": "https://doi.org/10.1093/nar/gkaa1021",
+    "sameAs": [
+      "https://academic.oup.com/nar/article/49/D1/D404/6030232",
+      "https://pubmed.ncbi.nlm.nih.gov/33305318/"
+    ]
+  },
+  "keywords": [
+    "IDP",
+    "IDPs",
+    "PED",
+    "structural ensemble",
+    "protein ensemble",
+    "protein disorder",
+    "structural conformations"
+  ],
+  "sourceOrganization": [
+    {
+      "@type": "Organization",
+      "@id": "https://biocomputingup.it/#Organization",
+      "http://purl.org/dc/terms/conformsTo": {
+        "@id": "https://bioschemas.org/profiles/Organization/0.2-DRAFT-2019_07_19",
+        "@type": "CreativeWork"
+      },
+      "description": "University of Padua, Department of Biomedical Sciences, BioComputing UP laboratory",
+      "name": "BioComputing UP, Department of Biomedical Sciences, University of Padua",
+      "legalName": "University of Padua",
+      "sameAs": "https://biocomputingup.it"
+    }
+  ],
+  "provider": [
+    {
+      "@type": "Person",
+      "givenName": "Silvio",
+      "familyName": "Tosatto",
+      "identifier": "https://orcid.org/0000-0003-4525-7793",
+      "name": "Silvio Tosatto",
+      "email": "silvio.tosatto@unipd.it",
+      "url": "https://biocomputingup.it/people/silvio"
+    }
+  ],
+  "encodingFormat": [
+    "text/html",
+    "application/json"
+  ],
+  "license": {
+    "@type": "CreativeWork",
+    "@id": "https://creativecommons.org/licenses/by/4.0/",
+    "name": "Creative Commons CC4 Attribution",
+    "url": "https://creativecommons.org/licenses/by/4.0/"
+  },
+  "dataset": {
+    "@type": "Dataset",
+    "@id": "https://proteinensemble.org/#2022-02",
+    "http://purl.org/dc/terms/conformsTo": {
+      "@id": "https://bioschemas.org/profiles/Dataset/0.3-RELEASE-2019_06_14",
+      "@type": "CreativeWork"
+    },
+    "includedInDataCatalog": {
+      "@id": "https://proteinensemble.org/#DataCatalog"
+    },
+    "url": "https://proteinensemble.org/",
+    "dateModified": "2022-02-03",
+    "version": "4.1",
+    "name": "The Protein Ensemble Database (February 2022)",
+    "description": "The Protein Ensemble Database is an open access database for the deposition of structural ensembles, including intrinsically disordered proteins.",
+    "identifier": "https://proteinensemble.org/#2022-02",
+    "keywords": [
+      "IDP",
+      "IDPs",
+      "PED",
+      "structural ensemble",
+      "protein ensemble",
+      "protein disorder",
+      "structural conformations"
+    ],
+    "creator": {
+      "@id": "https://biocomputingup.it/#Organization"
+    },
+    "license": {
+      "@type": "CreativeWork",
+      "@id": "https://creativecommons.org/licenses/by/4.0/",
+      "name": "Creative Commons CC4 Attribution",
+      "url": "https://creativecommons.org/licenses/by/4.0/"
+    }
+  }
+}

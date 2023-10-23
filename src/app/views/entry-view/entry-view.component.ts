@@ -48,10 +48,10 @@ export class EntryViewComponent implements OnInit {
           name : 'Term',
           value : {
             '@type' : 'DefinedTerm',
-            '@id' : 'https://disprot.org/assets/data/IDPO_v0.2.owl#IDPO:' + term.id,
+            '@id' : 'https://disprot.org/IDPO/IDPO:' + term.id,
             inDefinedTermSet : {
               '@type' : 'DefinedTermSet',
-              '@id' : 'https://disprot.org/assets/data/IDPO_v0.2.owl',
+              '@id' : 'https://disprot.org/assets/data/IDPO_v0.3.0.owl',
               name : 'IDP ontology',
             },
             termCode : 'IDPO:' + term.id,
@@ -93,7 +93,7 @@ export class EntryViewComponent implements OnInit {
                           currChain.chain_name + '-' + indexCurrFragment + '_sequence-location.' + currFragment.start_position +
                           '_' + currFragment.end_position,
                         'http://purl.org/dc/terms/conformsTo' : {
-                          '@id' : 'https://bioschemas.org/profiles/SequenceRange/0.1-DRAFT',
+                          '@id' : 'https://bioschemas.org/profiles/SequenceRange/0.2-DRAFT',
                           '@type' : 'CreativeWork',
                         },
                         rangeStart : currFragment.start_position,

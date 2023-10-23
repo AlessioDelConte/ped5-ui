@@ -1,6 +1,6 @@
 {
   "@context": "https://schema.org",
-  "includedInDataset": "https://proteinensemble.org/#2022-02",
+  "includedInDataset": "https://proteinensemble.org/#2023-09",
   "@type": "CollectionPage",
   "@id": "https://proteinensemble.org/PED00014",
   "identifier": "https://identifiers.org/ped:PED00014",
@@ -21,7 +21,7 @@
           "@type": "CreativeWork"
         },
         "identifier": "https://identifiers.org/ped:PED00014",
-        "sameAs": "http://purl.uniprot.org/uniprot/P38634",
+        "sameAs": "http://purl.uniprot.org/isoforms/P38634-1",
         "name": "Structural ensemble of pSic1 (1-90) phosphorylated at Thr5, Thr33, Thr45, Ser69, Ser76 and Ser80, in complex with SKP1 (4-186) and CDC4 (270-744)",
         "hasBioPolymerSequence": "MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT",
         "hasSequenceAnnotation": [
@@ -36,7 +36,7 @@
               "@type": "SequenceRange",
               "@id": "https://proteinensemble.org/PED00014#P38634-A-1_sequence-location.1_90",
               "http://purl.org/dc/terms/conformsTo": {
-                "@id": "https://bioschemas.org/profiles/SequenceRange/0.1-DRAFT",
+                "@id": "https://bioschemas.org/profiles/SequenceRange/0.2-DRAFT",
                 "@type": "CreativeWork"
               },
               "rangeStart": 1,
@@ -48,10 +48,10 @@
                 "name": "Term",
                 "value": {
                   "@type": "DefinedTerm",
-                  "@id": "https://disprot.org/assets/data/IDPO_v0.2.owl#IDPO:00120",
+                  "@id": "https://disprot.org/IDPO/IDPO:00120",
                   "inDefinedTermSet": {
                     "@type": "DefinedTermSet",
-                    "@id": "https://disprot.org/assets/data/IDPO_v0.2.owl",
+                    "@id": "https://disprot.org/assets/data/IDPO_v0.3.0.owl",
                     "name": "IDP ontology"
                   },
                   "termCode": "IDPO:00120",

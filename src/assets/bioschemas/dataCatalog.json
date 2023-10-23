@@ -70,18 +70,18 @@
   },
   "dataset": {
     "@type": "Dataset",
-    "@id": "https://proteinensemble.org/#2022-02",
+    "@id": "https://proteinensemble.org/#2023-09",
     "http://purl.org/dc/terms/conformsTo": {
-      "@id": "https://bioschemas.org/profiles/Dataset/0.3-RELEASE-2019_06_14",
+      "@id": "https://bioschemas.org/profiles/Dataset/1.0-RELEASE",
       "@type": "CreativeWork"
     },
     "includedInDataCatalog": {
       "@id": "https://proteinensemble.org/#DataCatalog"
     },
     "url": "https://proteinensemble.org/",
-    "dateModified": "2022-02-03",
-    "version": "4.1",
-    "name": "The Protein Ensemble Database (February 2022)",
+    "dateModified": "2023-09-14",
+    "version": "5.0",
+    "name": "The Protein Ensemble Database",
     "description": "The Protein Ensemble Database is an open access database for the deposition of structural ensembles, including intrinsically disordered proteins.",
     "identifier": "https://proteinensemble.org/#2022-02",
     "keywords": [
@@ -101,6 +101,15 @@
       "@id": "https://creativecommons.org/licenses/by/4.0/",
       "name": "Creative Commons CC4 Attribution",
       "url": "https://creativecommons.org/licenses/by/4.0/"
+    },
+    "maintainer": {
+      "@type": "Person",
+      "email": "alexander.monzon@unipd.it",
+      "familyName": "Monzon",
+      "givenName": "Alexander",
+      "identifier": "https://orcid.org/0000-0003-0362-8218",
+      "name": "Alexander Miguel Monzon",
+      "url": "https://biocomputingup.it/people"
     }
   }
 }

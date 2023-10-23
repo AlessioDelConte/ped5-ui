@@ -2,7 +2,7 @@
 openapi: 3.0.0
 info:
   title: PED API
-  version: '1.0'
+  version: '5.0'
   contact:
     name: BioComputing UP lab
     email: biocomp@bio.unipd.it

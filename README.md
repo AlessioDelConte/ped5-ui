@@ -1,10 +1,12 @@
-# Fuzdb2Ui
+# PED 5-UI
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.11.
+This is the UI for the proteinensemble.org website.
+
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.7.
 
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+Run `ng serve` for a dev server. Navigate to `http://localhost:4206/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 

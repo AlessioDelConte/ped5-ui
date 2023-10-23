@@ -1,19 +1,16 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Title } from '@angular/platform-browser';
 import {Router} from '@angular/router';
 import {InternalService} from '../../services/internal.service';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
-import dataCatalog from '../../../assets/bioschemas/dataCatalog.json';
-
-
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements OnInit, AfterViewInit {
+export class HomeComponent implements OnInit {
   public searchFormControl = new FormControl();
   public serverName = null;
   public statsData = {};
@@ -52,17 +49,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         this.statsData = data;
       }
     );
-
-    const scriptTag = document.createElement('script'); // creates the script tag
-    scriptTag.text = JSON.stringify(dataCatalog); // sets the source (insert url in between quotes)
-    scriptTag.type = 'application/ld+json'; // set the script type
-    scriptTag.id = 'ld+json'; // set the script type
-    scriptTag.async = true; // makes script run asynchronously
-    document.getElementsByTagName('head')[0].appendChild(scriptTag);
-  }
-
-  ngAfterViewInit(): void {
-
   }
 
   goToBrowsePage(): number {

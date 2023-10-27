@@ -27,7 +27,11 @@
             "tsConfig": "tsconfig.app.json",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/robots.txt",
+              "src/sitemap.xml",
+              "src/sitemap1.xml.gz",
+              "src/sitemap2.xml.gz"
             ],
             "styles": [
               "./node_modules/pdbe-molstar/build/pdbe-molstar-1.2.1.css",

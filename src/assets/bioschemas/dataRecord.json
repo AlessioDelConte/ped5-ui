@@ -1,69 +1,76 @@
 {
-  "@context": "https://schema.org",
-  "includedInDataset": "https://proteinensemble.org/#2023-09",
-  "@type": "CollectionPage",
-  "@id": "https://proteinensemble.org/PED00014",
-  "identifier": "https://identifiers.org/ped:PED00014",
-  "name": "Structural ensemble...",
-  "citation": {
-    "@type": "ScholarlyArticle",
-    "@id": "https://identifiers.org/pubmed:20399186"
+  "@context": [
+    "https://schema.org/",
+    {
+      "dc": "http://purl.org/dc/terms/",
+      "ped": "https://proteinensemble.org/entries/",
+      "idpregistry": "https://idpregistry.org/"
+    }
+  ],
+  "includedInDataset": "ped:#2023-09",
+  "@type": "Study",
+  "@id": "ped:PED00014",
+  "dc:conformsTo": {
+    "@id": "https://bioschemas.org/profiles/Study/0.3-DRAFT",
+    "@type": "CreativeWork"
   },
-  "mainEntity": {
-    "@type": "ItemList",
-    "numberOfItems": 1,
-    "itemListElement": [
-      {
-        "@type": "Protein",
-        "@id": "https://proteinensemble.org/PED00014#P38634-A-1",
-        "http://purl.org/dc/terms/conformsTo": {
-          "@id": "https://bioschemas.org/profiles/Protein/0.11-RELEASE",
-          "@type": "CreativeWork"
+  "identifier": "https://identifiers.org/ped:PED00014",
+  "studyDomain": "http://edamontology.org/topic_0121",
+  "datePublished": "2010-04-15",
+  "name": "PED00014",
+  "description": "Structural ensemble of Protein enhancer of sevenless 2B (1-59)",
+  "subjectOf": [
+    {
+      "@type": "ScholarlyArticle",
+      "@id": "https://identifiers.org/pubmed:20399186"
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://bmrb.io/data_library/summary/index.php?bmrbId=17407",
+      "url": "https://bmrb.io/data_library/summary/index.php?bmrbId=17407"
+    }
+  ],
+  "studySubject": [
+    {
+      "@type": "BioChemEntity",
+      "@id": "ped:PED00014#A",
+      "dc:conformsTo": {
+        "@id": "https://bioschemas.org/types/BioChemEntity/0.8-DRAFT",
+        "@type": "CreativeWork"
+      },
+      "identifier": "ped:PED00014#e001",
+      "hasBioChemEntityPart": [
+        {
+          "@type": "Protein",
+          "@id": "ped:PED00014#P38634",
+          "dc:conformsTo": {
+            "@id": "https://bioschemas.org/profiles/Protein/0.12-DRAFT",
+            "@type": "CreativeWork"
+          },
+          "sameAs": "http://purl.uniprot.org/isoforms/P38634-1",
+          "hasBioPolymerSequence": "MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT"
+        }
+      ]
+    }
+  ],
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "NMR",
+      "value": "NMR",
+      "valueReference": {
+        "@type": "DefinedTerm",
+        "@id": "https://disprot.org/IDPO/IDPO:00120",
+        "inDefinedTermSet": {
+          "@type": "DefinedTermSet",
+          "@id": "https://disprot.org/assets/data/IDPO_v0.3.0.owl",
+          "name": "IDP ontology"
         },
-        "identifier": "https://identifiers.org/ped:PED00014",
-        "sameAs": "http://purl.uniprot.org/isoforms/P38634-1",
-        "name": "Structural ensemble of pSic1 (1-90) phosphorylated at Thr5, Thr33, Thr45, Ser69, Ser76 and Ser80, in complex with SKP1 (4-186) and CDC4 (270-744)",
-        "hasBioPolymerSequence": "MTPSTPPRSRGTRYLAQPSGNTSSSALMQGQKTPQKPSQNLVPVTPSTTKSFKNAPLLAPPNSNMGMTSPFNGLTSPQRSPFPKSSVKRT",
-        "hasSequenceAnnotation": [
-          {
-            "@type": "SequenceAnnotation",
-            "@id": "https://proteinensemble.org/PED00014#P38634-A-1_sequence-annotation",
-            "http://purl.org/dc/terms/conformsTo": {
-              "@id": "https://bioschemas.org/profiles/SequenceAnnotation/0.7-DRAFT",
-              "@type": "CreativeWork"
-            },
-            "sequenceLocation": {
-              "@type": "SequenceRange",
-              "@id": "https://proteinensemble.org/PED00014#P38634-A-1_sequence-location.1_90",
-              "http://purl.org/dc/terms/conformsTo": {
-                "@id": "https://bioschemas.org/profiles/SequenceRange/0.2-DRAFT",
-                "@type": "CreativeWork"
-              },
-              "rangeStart": 1,
-              "rangeEnd": 90
-            },
-            "additionalProperty": [
-              {
-                "@type": "PropertyValue",
-                "name": "Term",
-                "value": {
-                  "@type": "DefinedTerm",
-                  "@id": "https://disprot.org/IDPO/IDPO:00120",
-                  "inDefinedTermSet": {
-                    "@type": "DefinedTermSet",
-                    "@id": "https://disprot.org/assets/data/IDPO_v0.3.0.owl",
-                    "name": "IDP ontology"
-                  },
-                  "termCode": "IDPO:00120",
-                  "name": "NMR"
-                }
-              }
-            ]
-          }
-        ]
+        "termCode": "IDPO:00120",
+        "name": "NMR"
       }
-    ]
-  }
+    }
+  ]
 }
 
 

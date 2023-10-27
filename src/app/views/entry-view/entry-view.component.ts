@@ -39,14 +39,15 @@ export class EntryViewComponent implements OnInit {
       document.getElementById('dataRecord').remove();
     }
 
-    const listFragments = [];
     let listTerms = [];
     if (Array.isArray(entryObj.description.ontology_terms)) {
       listTerms = listTerms.concat(entryObj.description.ontology_terms.map(term => {
         return {
           '@type' : 'PropertyValue',
-          name : 'Term',
-          value : {
+          '@id' : 'https://proteinensemble.org/#IDPO:' + term.id,
+          name : term.name,
+          value : term.name,
+          valueReference : {
             '@type' : 'DefinedTerm',
             '@id' : 'https://disprot.org/IDPO/IDPO:' + term.id,
             inDefinedTermSet : {
@@ -60,69 +61,73 @@ export class EntryViewComponent implements OnInit {
         };
       }));
     }
+
+    dataRecord.additionalProperty = listTerms;
+
+    const studySubjects = [];
     if (Array.isArray(entryObj.construct_chains)) {
       entryObj.construct_chains.forEach(currChain => {
+        const listFragments = [];
         if (Array.isArray(currChain.fragments)) {
-          currChain.fragments.forEach((currFragment, indexCurrFragment) => {
+          currChain.fragments.forEach(currFragment => {
             if (currFragment.uniprot_acc?.length > 0) {
-              listFragments.push(
-                {
-                  '@type' : 'Protein',
-                  '@id' : 'https://proteinensemble.org/' + entryObj.entry_id + '#' + currFragment.uniprot_acc + '-' + currChain.chain_name + '-' + indexCurrFragment,
-                  'http://purl.org/dc/terms/conformsTo' : {
-                    '@id' : 'https://bioschemas.org/profiles/Protein/0.11-RELEASE',
-                    '@type' : 'CreativeWork',
-                  },
-                  identifier : 'https://identifiers.org/uniprot:' + currFragment.uniprot_acc,
-                  sameAs : 'http://purl.uniprot.org/isoforms/' + (currFragment.uniprot_acc.includes('-') ?
-                            currFragment.uniprot_acc : currFragment.uniprot_acc + '-1'),
-                  name : currFragment.description,
-                  hasBioPolymerSequence : currFragment.source_sequence,
-                  hasSequenceAnnotation : [
-                    {
-                      '@type' : 'SequenceAnnotation',
-                      '@id' : 'https://proteinensemble.org/' + entryObj.entry_id + '#' + currFragment.uniprot_acc + '-' +
-                        currChain.chain_name + '-' + indexCurrFragment + '_sequence-annotation',
-                      'http://purl.org/dc/terms/conformsTo' : {
-                        '@id' : 'https://bioschemas.org/profiles/SequenceAnnotation/0.7-DRAFT',
-                        '@type' : 'CreativeWork',
-                      },
-                      sequenceLocation : {
-                        '@type' : 'SequenceRange',
-                        '@id' : 'https://proteinensemble.org/' + entryObj.entry_id + '#' + currFragment.uniprot_acc + '-' +
-                          currChain.chain_name + '-' + indexCurrFragment + '_sequence-location.' + currFragment.start_position +
-                          '_' + currFragment.end_position,
-                        'http://purl.org/dc/terms/conformsTo' : {
-                          '@id' : 'https://bioschemas.org/profiles/SequenceRange/0.2-DRAFT',
-                          '@type' : 'CreativeWork',
-                        },
-                        rangeStart : currFragment.start_position,
-                        rangeEnd : currFragment.end_position,
-                      },
-                      additionalProperty : listTerms,
+              if (!listFragments.find(frag => frag['@id'] === `ped:${entryObj.entry_id}#${currFragment.uniprot_acc}`)) {
+                listFragments.push(
+                  {
+                    '@type' : 'Protein',
+                    '@id' : `ped:${entryObj.entry_id}#${currFragment.uniprot_acc}`,
+                    'dc:conformsTo' : {
+                      '@id' : 'https://bioschemas.org/profiles/Protein/0.11-RELEASE',
+                      '@type' : 'CreativeWork',
                     },
-                  ],
-                },
-              );
+                    identifier : 'https://identifiers.org/uniprot:' + currFragment.uniprot_acc,
+                    sameAs : 'http://purl.uniprot.org/isoforms/' + (currFragment.uniprot_acc.includes('-') ?
+                      currFragment.uniprot_acc : currFragment.uniprot_acc + '-1'),
+                    hasBioPolymerSequence : currFragment.source_sequence,
+                  },
+                );
+              }
             }
           });
         }
+        studySubjects.push({
+          '@type' : 'BioChemEntity',
+          '@id' : 'ped:' + entryObj.entry_id + '#' + currChain.chain_name,
+          'dc:conformsTo' : {
+            '@id' : 'https://bioschemas.org/types/BioChemEntity/0.8-DRAFT',
+            '@type' : 'CreativeWork',
+          },
+          identifier : `ped:PED00014#${currChain.chain_name}`,
+          hasBioChemEntityPart : listFragments,
+        });
       });
     }
 
-    dataRecord['@id'] = 'https://proteinensemble.org/' + entryObj.entry_id;
+    dataRecord['@id'] = 'ped:' + entryObj.entry_id;
     dataRecord.identifier = 'https://identifiers.org/ped:' + entryObj.entry_id;
-    dataRecord.name = entryObj.description.title;
-    if (entryObj.description.publication_source === 'pubmed') {
-      dataRecord.citation['@id'] = 'https://identifiers.org/pubmed:' + entryObj.description.publication_identifier;
-    } else if (entryObj.publication_source === 'doi') {
-      dataRecord.citation['@id'] = 'https://doi.org/' + entryObj.publication_identifier;
-    } else {
-      delete dataRecord.citation;
-    }
-    dataRecord.mainEntity.numberOfItems = listFragments.length;
-    dataRecord.mainEntity.itemListElement = listFragments;
+    dataRecord.name = entryObj.entry_id;
+    dataRecord.datePublished = entryObj.creation_date;
+    dataRecord.description = entryObj.description.title;
+    dataRecord.studySubject = studySubjects;
 
+    dataRecord.subjectOf = [];
+    if (entryObj.description.publication_source !== null) {
+      dataRecord.subjectOf.push({
+        '@id' : (entryObj.description.publication_source === 'pubmed' ?
+          'https://identifiers.org/pubmed:' : 'https://doi.org/') + entryObj.description.publication_identifier,
+        '@type' : 'ScholarlyArticle',
+      });
+    }
+    entryObj.description.experimental_cross_reference?.forEach(currRef => {
+      dataRecord.subjectOf.push({
+        '@id' : currRef.db === 'bmrb' ? `https://bmrb.io/data_library/summary/index.php?bmrbId=${currRef.id}` :
+          ('https://identifiers.org/' + currRef.db + ':' + currRef.id),
+        '@type' : 'WebPage',
+      });
+    });
+    if (dataRecord.subjectOf.length === 0) {
+      delete dataRecord.subjectOf;
+    }
 
     const scriptTag = document.createElement('script'); // creates the script tag
     scriptTag.text = JSON.stringify(dataRecord); // sets the source (insert url in between quotes)

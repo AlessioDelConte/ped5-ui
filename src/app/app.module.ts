@@ -34,88 +34,100 @@ import {FvSequenceMergeComponent} from './shared/fv-sequence-merge/fv-sequence-m
 import {HelpComponent} from './views/help/help.component';
 import {PageNotFoundComponent} from './views/page-not-found/page-not-found.component';
 import {DepositionComponent} from './views/deposition/deposition.component';
-
+import {MatomoModule} from "ngx-matomo";
 
 const appRoutes: Routes = [
-  {
-    path: 'entries/:identifier',
-    component: EntryViewComponent
-  },
-  {
-    path: 'proteins/uniprot/:identifier',
-    component: UniprotProteinViewComponent
-  },
-  {
-    path: 'browse',
-    component: BrowseComponent
-  },
-  {
-    path: 'about',
-    component: AboutComponent
-  },
-  {
-    path: 'help',
-    component: HelpComponent
-  },
-  {
-    path: 'deposition',
-    component: DepositionComponent
-  },
-  {path: 'api', component: SwaggerUiComponent},
-  {path: '', component: HomeComponent},
-  {path: '**', component: PageNotFoundComponent}
+    {
+        path: 'entries/:identifier',
+        component: EntryViewComponent
+    },
+    {
+        path: 'proteins/uniprot/:identifier',
+        component: UniprotProteinViewComponent
+    },
+    {
+        path: 'browse',
+        component: BrowseComponent
+    },
+    {
+        path: 'about',
+        component: AboutComponent
+    },
+    {
+        path: 'help',
+        component: HelpComponent
+    },
+    {
+        path: 'deposition',
+        component: DepositionComponent
+    },
+    {path: 'api', component: SwaggerUiComponent},
+    {path: '', component: HomeComponent},
+    {path: '**', component: PageNotFoundComponent}
 ];
 
 
 // @ts-ignore
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavbarComponent,
-    FooterComponent,
-    HomeComponent,
-    SwaggerUiComponent,
-    RecaptchaDirective,
-    AboutComponent,
-    EntryViewComponent,
-    EntryDescriptionComponent,
-    BrowseComponent,
-    EntryTabSectionComponent,
-    EntryConstructSectionComponent,
-    FvDraftAlignmentComponent,
-    EntryEnsemblesSectionComponent,
-    EntryDsspSectionComponent,
-    EnsembleInfoComponent,
-    AssetsDownloadMenuComponent,
-    FvDsspComponent,
-    UniprotProteinViewComponent,
-    ProteinCardComponent,
-    EnsembleCompactCardComponent,
-    EntryFvSectionComponent,
-    FvSequenceMergeComponent,
-    HelpComponent,
-    DepositionComponent
-  ],
-  imports: [
-    RouterModule.forRoot(
-      appRoutes, {
-        scrollPositionRestoration: 'enabled',
-        anchorScrolling: 'enabled',
-        scrollOffset: [0, 150]
-      }
-      // { enableTracing: true } // <-- debugging purposes only
-    ),
-    BrowserModule,
-    ReactiveFormsModule,
-    FormsModule,
-    HttpClientModule,
-    CdkTableModule,
-    PaginationModule.forRoot(),
-    TooltipModule.forRoot(),
-    TreeModule.forRoot()
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        NavbarComponent,
+        FooterComponent,
+        HomeComponent,
+        SwaggerUiComponent,
+        RecaptchaDirective,
+        AboutComponent,
+        EntryViewComponent,
+        EntryDescriptionComponent,
+        BrowseComponent,
+        EntryTabSectionComponent,
+        EntryConstructSectionComponent,
+        FvDraftAlignmentComponent,
+        EntryEnsemblesSectionComponent,
+        EntryDsspSectionComponent,
+        EnsembleInfoComponent,
+        AssetsDownloadMenuComponent,
+        FvDsspComponent,
+        UniprotProteinViewComponent,
+        ProteinCardComponent,
+        EnsembleCompactCardComponent,
+        EntryFvSectionComponent,
+        FvSequenceMergeComponent,
+        HelpComponent,
+        DepositionComponent
+    ],
+    imports: [
+        RouterModule.forRoot(
+            appRoutes, {
+                scrollPositionRestoration: 'enabled',
+                anchorScrolling: 'enabled',
+                scrollOffset: [0, 150]
+            }
+            // { enableTracing: true } // <-- debugging purposes only
+        ),
+        BrowserModule,
+        ReactiveFormsModule,
+        FormsModule,
+        HttpClientModule,
+        CdkTableModule,
+        PaginationModule.forRoot(),
+        TooltipModule.forRoot(),
+        TreeModule.forRoot(),
+        MatomoModule.forRoot({
+            scriptUrl: 'https://matomo.biocomputingup.it/matomo.js',
+            trackers: [
+                {
+                    trackerUrl: 'https://matomo.biocomputingup.it/matomo.php',
+                    siteId: 2,
+                },
+            ],
+            routeTracking: {
+                enable: true,
+            },
+        })
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

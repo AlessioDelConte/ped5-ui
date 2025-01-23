@@ -21,19 +21,19 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    Notify.info('Welcome! You are on the new version of PED. You can access the legacy version at <a href="https://old.proteinensemble.org/" style="color: white"><strong>https://old.proteinensemble.org/</strong></a>.', {
-      position: 'right-bottom',
-      plainText: false,
-      messageMaxLength: 1000,
-      // timeout: 10000,
-      // clickToClose: true,
-      closeButton: true,
-      showOnlyTheLastOne: true,
-      useIcon: false,
-      info: {
-        background: '#2274a5'
-      }
-    });
+    // Notify.info('Welcome! You are on the new version of PED. You can access the legacy version at <a href="https://old.proteinensemble.org/" style="color: white"><strong>https://old.proteinensemble.org/</strong></a>.', {
+    //   position: 'right-bottom',
+    //   plainText: false,
+    //   messageMaxLength: 1000,
+    //   // timeout: 10000,
+    //   // clickToClose: true,
+    //   closeButton: true,
+    //   showOnlyTheLastOne: true,
+    //   useIcon: false,
+    //   info: {
+    //     background: '#2274a5'
+    //   }
+    // });
 
     this.internalService.getServerName().subscribe(
       responseData => {
